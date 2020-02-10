@@ -61,10 +61,22 @@
                            </tr>
                        </tbody>
                    </table>
+                   <div class="replyDiv">
+                    <form action="" method="">					
+                        <table align="center">
+                            <tr>
+                                <td>댓글 작성</td>
+                                <td><textArea rows="3" cols="120" id="replyContent" name="replyContent"></textArea></td>
+                                <td><button type="submit" id="addReply">댓글 등록</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
                    <div class="list">
                        <input type="button" value="목록" onclick="location.href='qna_5.html'">
                    </div>
             </div>
+            
             
     </div>
 

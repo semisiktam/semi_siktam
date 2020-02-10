@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css" type="text/css"/>
+    <link rel="stylesheet" href="/siktam/resources/css/header_idpw.css" type="text/css"/>
     <link rel="stylesheet" href="/siktam/resources/css/FindPassword_1.css" type="text/css"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <title>Find Id</title>
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <%@ include file="common/header.jsp" %>
+    <%@ include file="common/header_idpw.jsp" %>
 
     <!-- 여기부터 -->
     <div id="container">

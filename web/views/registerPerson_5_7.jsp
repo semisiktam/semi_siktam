@@ -53,7 +53,7 @@
          
                 </table><br>
                 <input type="submit" class="btn" value="수정" onclick="return check();">
-                <input type="reset" class="btn" value="취소" onclick="location.href = 'mypagePerson_5.jsp'">
+                <input type="reset" class="btn" value="탈퇴" onclick="location.href = 'mypagePerson_5.jsp'">
 
                 <br><br>
             </div>
