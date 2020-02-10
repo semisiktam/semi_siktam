@@ -8,6 +8,8 @@
     <title>상세페이지</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/productDetailPage_6.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <!-- 지도 설치 스크립트 -->
     
     <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
@@ -23,6 +25,26 @@
     <div id="detailbox">
         <!-- 메인 이미지 -->
         <div class="pagemainimg"></div>
+        
+        <!-- 2020.02.10 수정 시작(현희) < 즐겨찾기 추가 > -->
+
+        <div class="bookmark">
+            <p id="star">★</a>
+        </div>
+   
+        <script>
+            $(document).ready(function(){
+                $('#star').toggle(function(){
+                    $(this).css({'color':'rgb(255, 184, 53)'});
+                },function(){
+                    $(this).css({'color':'#eee'});
+                });
+            })
+        </script>
+    
+        <!-- 2020.02.10 수정 끝 (현희) -->
+
+        
         <div class="pageselect">
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
