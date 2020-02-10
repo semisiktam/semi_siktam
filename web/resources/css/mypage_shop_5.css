@@ -210,7 +210,7 @@
 #modal1 {
     display: none;
     position:relative;
-    width:100%;
+    width:105%;
     height:100%;
     z-index:1;
   }
@@ -386,4 +386,5 @@ td input{
   color: white;
   font-weight: bold;
 }
+
 

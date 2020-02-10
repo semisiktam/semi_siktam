@@ -45,6 +45,7 @@
                             <th>예약 메뉴</th> 
                             <th>예약 시간</th> 
                             <th>결제 금액</th> 
+                            <th colspan="2">예약 수락/거절</th>  
                          </tr>
                     </thead>
                     <tbody>
@@ -56,6 +57,8 @@
                             <td>김치우동 1</td>
                             <td>12:00~13:00</td>
                             <td>3,500원</td>
+                            <td><input type="button" value="수락" class="confirm" id="change"> &nbsp;
+                                <input type="button" value="거절" class="confirm" id="cancel"></td>
                         </tr>
                         <tr class="reservationTr">
                             <td>곱창이야기</td>
@@ -65,6 +68,8 @@
                             <td>곱창모듬 1</td>
                             <td>18:00~19:00</td>
                             <td>11,000원</td>
+                            <td><input type="button" value="수락" class="confirm" id="change"> &nbsp;
+                                <input type="button" value="거절" class="confirm" id="cancel"></td>
                         </tr>
                         <tr class="reservationTr">
                             <td>역전우동</td>
@@ -74,6 +79,8 @@
                             <td>어묵우동 1</td>
                             <td>12:00~13:00</td>
                             <td>4,000원</td>
+                            <td><input type="button" value="수락" class="confirm" id="change"> &nbsp;
+                                <input type="button" value="거절" class="confirm" id="cancel"></td>
                         </tr>
                         <tr class="reservationTr">
                             <td>싸움의고수</td>
@@ -83,6 +90,8 @@
                             <td>보쌈정식XL 1</td>
                             <td>13:00~14:00</td>
                             <td>7,000원</td>
+                            <td><input type="button" value="수락" class="confirm" id="change"> &nbsp;
+                                <input type="button" value="거절" class="confirm" id="cancel"></td>
                         </tr>
                         <tr class="reservationTr">
                             <td>곱창이야기</td>
@@ -92,6 +101,8 @@
                             <td>소막창 1</td>
                             <td>18:00~19:00</td>
                             <td>11,000원</td>
+                            <td><input type="button" value="수락" class="confirm" id="change"> &nbsp;
+                                <input type="button" value="거절" class="confirm" id="cancel"></td>
                         </tr>
                         <tr class="reservationTr">
                             <td>싸움의고수</td>
@@ -101,6 +112,8 @@
                             <td>족발정식XL 1</td>
                             <td>13:00~14:00</td>
                             <td>8,000원</td>
+                            <td><input type="button" value="수락" class="confirm" id="change"> &nbsp;
+                                <input type="button" value="거절" class="confirm" id="cancel"></td>
                         </tr>
                         <tr class="reservationTr">
                             <td>역전우동</td>
@@ -110,6 +123,8 @@
                             <td>토마토찍먹우동 1</td>
                             <td>11:00~12:00</td>
                             <td>7,000원</td>
+                            <td><input type="button" value="수락" class="confirm" id="change"> &nbsp;
+                                <input type="button" value="거절" class="confirm" id="cancel"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -405,3 +420,4 @@
     <%@ include file="common/footer.jsp" %>
 </body>
 </html>
+
