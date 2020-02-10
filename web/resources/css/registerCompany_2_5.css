@@ -156,6 +156,15 @@ table {
     font-size:12px;
 }
 
+#remenu{
+    background: rgb(13, 78, 100);
+    height: 35px;
+    width: 100px;
+    color: white;
+    font-weight: bold;
+    font-size:12px;
+}
+
 html{
     height:100%;
 }
@@ -324,3 +333,109 @@ th{
     vertical-align:-2px;
     
 } */
+
+/* 모달 */
+
+ #modal1 {
+    display: none;
+    position:relative;
+    width:100%;
+    height:100%;
+    z-index:1;
+    padding-top:300px;
+    padding-bottom:300px;
+  }
+  
+  #modal1 h2 {
+    margin:0;   
+  }
+  
+  #modal1 button {
+    display:inline-block;
+    width:100px;
+    margin-left:calc(100% - 100px - 10px);
+    background: rgb(13, 78, 100);
+    height: 35px;
+    width: 100px;
+    color: white;
+    font-weight: bold;
+  }
+  
+  #modal1 .modal_content {
+    width:100%;
+    height: 100%;
+    margin:0 auto;
+    padding:20px 10px;
+    background:#fff;
+    border:2px solid #666;
+  }
+  
+  #modal1 .modal_layer {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0, 0, 0, 0.5);
+    z-index:-1;
+  }
+
+#modal1 #reservationTb1{
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-spacing: 1px;
+    width: 100%;
+    border-top: 1px solid #ccc;
+}
+
+#modal1 tr{
+    text-align: center;
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto;
+}
+
+#modal1 td{
+    text-align: center;
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto;
+}
+
+#modal1 thead th{
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    color: #369;
+    border-bottom: 3px solid #036;
+    margin: 0 auto;
+}
+
+#modal1 th{
+    text-align: center;
+    padding: 16px;
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+    margin: 0 auto;
+}
+
+#modal1 tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#modal1 td input{
+  background: rgb(13, 78, 100);
+  height: 35px;
+  width: 55px;
+  color: white;
+  font-weight: bold;
+}
+ 
+#modal1 input[type="text"]{
+	background:white;
+	height: 35px;
+	width: 150px;
+	color: black;
+	text-align:center;
+}
+ 
+

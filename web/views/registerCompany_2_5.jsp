@@ -17,7 +17,7 @@
 
     <!-- 이 안에 작업하기 -->
     <input type="file" id="file" style="display:none;">
-    <form action="" method="post">
+    <form action="" method="post" id="form">
         <div class="wrap" align="center">
             <h1 align="center">업체정보 수정</h1>
             <h4 align="center">수정정보 입력</h4><br>
@@ -35,7 +35,7 @@
                         
                     </div><!--평소에는 보이지 않다가 사진을 등록하면 script를 통해 div를 추가시킬 예정-->
                     <!-- <input type="file" style="width: 100px; height: 45px; background: gray; color:white;" value="매장 사진 추가하기"> -->
-                    <button id="upload" type="button" onclick="oncolick=document.all.file.click()">매장 사진 등록하기</button>
+                    <button id="upload" type="button" onclick="oncolick=document.all.file.click()">매장 사진 수정하기</button>
                     <!--버튼 클릭시 파일을 삽입할 수 있도록 할 예정-->
                 </td>   
             </tr>  
@@ -99,11 +99,13 @@
                         <h4>가격<br></h4>
                         <input type="text" class="form-control" name="tel"><br>
                         
-                        <h4>기타설명<br></h4>
+                        <h4>설명<br></h4>
                         <input type="text" class="form-control" name="tel"><br><br>
                         
-                        <button type="button" id="menu"><h3>메뉴 등록</h3></button><!--메뉴등록 버튼을 누르면 등록한 사진과 value를 바탕으로 하단에 메뉴 생성-->
+                        <button type="button" id="menu"><h3>메뉴 등록</h3></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" id="remenu" onclick="noneForm();"><h3>메뉴 수정</h3></button>
                         
+                        <!--메뉴등록 버튼을 누르면 등록한 사진과 value를 바탕으로 하단에 메뉴 생성-->
                         <div id="uploadpic2" style="width: 100px; height: auto; background: white; color:black; margin-top:10px;">
                            <!--이미지를 디코드 할 방법 모색이 필요해 보임 size를 설정해도 div 태그를 넘어감-->
                         </div><!--메뉴명의 vaule와 등록한 사진 경로로 이미지 등록할 예정-->
@@ -114,11 +116,10 @@
             <tr>
                 <th align="left">테이블형태</th>
                 <td><div id="tableForm">
-                    <input type="checkbox" id="t1"><label for="t1">1인석</label>
-                    <input type="checkbox" id="t2"><label for="t2">2인식</label>
-                    <input type="checkbox" id="t3"><label for="t3">칸막이</label>
-                    <input type="checkbox" id="t4"><label for="t4">바테이블</label>
-                    <input type="checkbox" id="t5"><label for="t5">셀프주문</label>
+                    <input type="checkbox" id="x"><label for="x">바 테이블</label>
+                    <input type="checkbox" id="y"><label for="y">칸막이</label>
+                    <input type="checkbox" id="z"><label for="z">2인석</label>
+                    <input type="checkbox" id="k"><label for="k">셀프주문</label>
                 </div></td>
             </tr>
             
@@ -131,6 +132,56 @@
         
     </form>
         
+    <div id="modal1">
+            <div class="modal_content">
+                <h2>업체 정보 수정</h2>
+                <br><br>
+                <table id="reservationTb1">
+                    <thead>
+                        <tr class="reservationTr">
+                            <th>메뉴명</th>
+                            <th>메뉴 사진</th> 
+                            <th>메뉴 가격</th> 
+                            <th>설명</th> 
+                            <th colspan="2">정보 수정/삭제</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="reservationTr">
+                            <td><input type="text" placeholder="아이스크림"></td>
+                            <td>사진이다</td>
+                            <td><input type="text" placeholder="2000">&nbsp;원</td>
+                            <td><input type="text" placeholder="차갑다"></td>
+                            <td><input type="button" value="수정" class="confirm" id="change" onclick="location.href='registerCompany_2_5.jsp'">
+                                <input type="button" value="삭제" class="confirm" id="cancel"></td>
+                        </tr>
+                        <tr class="reservationTr">
+                            <td><input type="text" placeholder="해물순듀뷰"></td>
+                            <td>사진</td>
+                            <td><input type="text" placeholder="7000">&nbsp;원</td>
+                            <td><input type="text" placeholder="순듀뷰와 해물"></td>
+                            <td><input type="button" value="수정" class="confirm" id="change" onclick="location.href='registerCompany_2_5.jsp'">
+                                <input type="button" value="삭제" class="confirm" id="cancel"></td>
+                        </tr>
+                        <tr class="reservationTr">
+                            <td><input type="text" placeholder="곱창"></td>
+                            <td>사진이라고</td>
+                            <td><input type="text" placeholder="22000">&nbsp;원</td>
+                            <td><input type="text" placeholder="이탐희 최애"></td>
+                            <td><input type="button" value="수정" class="confirm" id="change" onclick="location.href='registerCompany_2_5.jsp'">
+                                <input type="button" value="삭제" class="confirm" id="cancel"></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                <br><br>
+                <button id="modal_close_btn3" onclick="test6();">창 닫기</button>
+            </div>
+            <div class="modal_layer"></div>
+        </div>  
+        
+        
+      
         <script>
             $("#upload").click(function(){
                 $("#uploadpic1").css("display","block");
@@ -141,8 +192,17 @@
                 
                 console.log("aaaa")
             });
+            function noneForm(){
+            	document.getElementById('form').style.display = "none";
+            	document.getElementById('modal1').style.display = "block";
+            }
+            
+           	function test6(){
+           		document.getElementById('form').style.display = "block";
+            	document.getElementById('modal1').style.display = "none";
+           	}
         </script>
-    </div>
+    
     <!-- 푸터 시작 -->
     <%@ include file="common/footer.jsp" %>
 </body>
