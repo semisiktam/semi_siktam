@@ -12,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/siktam/resources/css/searchConditions_4.css">
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
+    
 </head>
 <body>
     <!-- 헤더  -->
@@ -28,25 +29,43 @@
             </a>
         </div>
     
-        <table class="table-all table table-condensed" id="table1">
+        <table id="table1">
             <!-- border="1px solid black" -->
-            <tr>
+            <tr id="tr1">
                 <td class="table-rowName">테이블</td>
-                <td><input type="checkbox" value="1인테이블" id='a1' class="table-check" onclick='check();'><label for='a1'>1인테이블</label></td>
-                <td><input type="checkbox" value="2인테이블" id='a2' class="table-check" onclick='check();'><label for='a2'>2인테이블</label></td>
+                <td><input type="checkbox" value="1인석" id='a1' class="table-check" onclick='check();'><label for='a1'>1인석</label></td>
+                <td><input type="checkbox" value="2인석" id='a2' class="table-check" onclick='check();'><label for='a2'>2인석</label></td>
+                <td><input type="checkbox" value="칸막이" id='a3' class="table-check" onclick='check();'><label for='a3'>칸막이</label></td>
                 <td><input type="checkbox" value="바테이블" id='a3' class="table-check" onclick='check();'><label for='a3'>바테이블</label></td>
-                <td></td>
-                <td></td>
+                <td><input type="checkbox" value="셀프주문" id='a3' class="table-check" onclick='check();'><label for='a3'>셀프주문</label></td>
+                
             </tr>
-            <tr>
+            <tr id="tr2">
                 <td class="table-rowName">음식</td>
                 <td><input type="checkbox" value="한식" id='b1' class="table-check" onclick='check();'><label for='b1'>한식</label></td>
                 <td><input type="checkbox" value="중식" id='b2' class="table-check" onclick='check();'><label for='b2'>중식</label></td>
-                <td><input type="checkbox" value="일식" id='b3' class="table-check" onclick='check();'><label for='b3'>일식</label></td>
-                <td><input type="checkbox" value="아시안" id='b4' class="table-check" onclick='check();'><label for='b4'>아시안</label></td>
-                <td><input type="checkbox" value="이탈리안" id='b5' class="table-check" onclick='check();'><label for='b5'>이탈리안</label></td>
+                <td><input type="checkbox" value="분식" id='b3' class="table-check" onclick='check();'><label for='b3'>분식</label></td>
+                <td><input type="checkbox" value="양식" id='b4' class="table-check" onclick='check();'><label for='b4'>양식</label></td>
+                <td><input type="checkbox" value="일식" id='b5' class="table-check" onclick='check();'><label for='b5'>일식</label></td>
             </tr>
             <tr>
+            	<td></td>
+                <td><input type="checkbox" value="카페/디저트" id='b6' class="table-check" onclick='check();'><label for='b6'>카페/디저트</label></td>
+                <td><input type="checkbox" value="치킨" id='b7' class="table-check" onclick='check();'><label for='b7'>치킨</label></td>
+                <td><input type="checkbox" value="피자" id='b8' class="table-check" onclick='check();'><label for='b8'>피자</label></td>
+                <td><input type="checkbox" value="족발/보쌈" id='b9' class="table-check" onclick='check();'><label for='b9'>족발/보쌈</label></td>
+                <td><input type="checkbox" value="도시락" id='b10' class="table-check" onclick='check();'><label for='b10'>도시락</label></td>
+            </tr>
+            <tr>
+            	<td></td>
+                <td><input type="checkbox" value="찜/탕" id='b11' class="table-check" onclick='check();'><label for='b11'>찜/탕</label></td>
+                <td><input type="checkbox" value="프랜차이즈" id='b12' class="table-check" onclick='check();'><label for='b12'>프랜차이즈</label></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr id="tr3">
                 <td class="table-rowName">가격대</td>
                 <td><input type="checkbox" value="~10,000원" id='c1' class="table-check" onclick='check();'><label for='c1'>10,000원 이하</label></td>
                 <td><input type="checkbox" value="10,000~20,000원" id='c2' class="table-check" onclick='check();'><label for='c2'>10,000 ~ 20,000원</label></td>
@@ -58,7 +77,7 @@
         
         <br>
 
-        <table class="table-all" id="table2">
+        <table id="table2">
             <!-- class="table table-condensed" -->
             <tr>
                 <td class="table-rowName"><h5>선택내용</h5></td>

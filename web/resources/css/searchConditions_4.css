@@ -61,9 +61,6 @@
 }
 /* --------------------------------------------------- */
 /* 테이블,음식,가격대 table */
-.table-all{
-
-}
 
 
 /* 테이블,음식,가격대 table 행이름*/
@@ -135,4 +132,13 @@ td{
     border: 5px solid #d9d9d9;
     width: 100%;
     background: #d9d9d9;        
+}
+
+#tr1, #tr2, #tr3{
+	border-top: 1px solid #d9d9d9;
+}
+	
+#table1{
+	width: 100%;
+	margin: auto;
 }
