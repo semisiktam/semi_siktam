@@ -1,4 +1,3 @@
-@charset "UTF-8";
 *{
     list-style: none;
 }
@@ -106,8 +105,9 @@
     position: relative;
 }
 #registStore li{
-    /* border: 1px solid black; */
     display: inline-block;
+    position: relative;
+    top: -10px;
 }
 
 /* 내가 등록한 업체 큰 틀 div */
@@ -144,6 +144,33 @@
     overflow: hidden;
     margin-left: 8px;
 }
+
+
+/* 2020.02.10 수정 시작(현희) < 즐겨찾기 추가 >  */
+
+
+.bookmark{
+    position: absolute;
+    background: white;
+    z-index: 3000;
+    top: 15px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+.bookmark p{
+    color: #eee;
+    font-size: 18px;
+    
+}
+
+
+/* 2020.02.10 수정 끝 (현희) */
+
+
 
 /* 내가 등록한 업체 사진 */
 .registStoreImg{

@@ -7,6 +7,8 @@
     <title>마이페이지(개인)</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/mypage_person_5.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 </head>
 <body>
     <!-- 헤더 시작 -->
@@ -43,6 +45,7 @@
                             <th>예약시간</th> 
                             <th>예약메뉴</th> 
                             <th colspan="2">예약 변경/취소</th> 
+                            <th>예약상태</th>
                          </tr>
                     </thead>
                     <tbody>
@@ -52,8 +55,9 @@
                             <td>13:00~14:00</td>
                             <td>김치우동 1</td>
                             <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
-                            <td><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.jsp'"> &nbsp;
-                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.jsp'"></td>
+                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
+                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
+                            <td>대기중</td>
                         </tr>
                         <tr class="reservationTr">
                             <td>청목</td>
@@ -61,8 +65,9 @@
                             <td>17:00~18:00</td>
                             <td>오늘의메뉴 1</td>
                             <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
-                            <td><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.jsp'"> &nbsp;
-                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.jsp'"></td>
+                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
+                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
+                            <td>대기중</td>
                         </tr>
                         <tr class="reservationTr">
                             <td>곱창이야기</td>
@@ -70,8 +75,9 @@
                             <td>18:00~19:00</td>
                             <td>소막창 1</td>
                             <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
-                            <td><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.jsp'"> &nbsp;
-                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.jsp'"></td>
+                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
+                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
+                            <td>대기중</td>
                         </tr>
                         <tr class="reservationTr">
                             <td>싸움의고수</td>
@@ -79,8 +85,9 @@
                             <td>13:00~14:00</td>
                             <td>보쌈정식XL 1</td>
                             <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
-                            <td><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.jsp'"> &nbsp;
-                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.jsp'"></td>
+                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
+                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
+                            <td>대기중</td>
                         </tr>
                         
                         
@@ -183,6 +190,29 @@
                             <h4 align="center">역전우동</h4>
                             <p align="center"><small>서울 강남구 테헤란로10길 25</small></p>
                         </div>
+                        
+                        
+                         <!-- 2020.02.10 수정 시작(현희) -->
+
+                        <div class="bookmark">
+                        <p id="star">★</a>
+
+                        </div>
+
+                        <script>
+                            $(document).ready(function(){
+                                $('#star').toggle(function(){
+                                    $(this).css({'color':'rgb(255, 184, 53)'});
+                                },function(){
+                                    $(this).css({'color':'#eee'});
+                                });
+                            })
+                        </script>
+                        
+
+                        <!-- 2020.02.10 수정 끝 (현희) -->
+
+                        
                     </li>
                     <li>
                         <div class="registStore2" onclick="location.href=''">
