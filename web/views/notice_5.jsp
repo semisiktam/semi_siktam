@@ -55,8 +55,20 @@
             </fieldset>
     </div>
 
-
-
+	<script>  
+		$(function(){
+			
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"black"});
+			}).click(function(){
+				//console.log($(this).parent().children().eq(0).text());
+				var nno = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
+			});
+		});
+	</script>
 
 
 
