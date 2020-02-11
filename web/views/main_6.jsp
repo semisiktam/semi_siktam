@@ -74,18 +74,18 @@
     <!-- 검색창 -->
     <div id="div1">
         <img src="/siktam/resources/images/searchbar.png" alt="">
-        <input id="searchtext" type="text" placeholder="지역을 입력해주세요" id="searchcontent">
-        <a href="searchConditions_4.jsp">
+        <input id="searchtext" type="text" placeholder="지역을 입력해주세요">
+        <!-- <a href="searchConditions_4.jsp"> -->
         <!-- 2020-02-11 현희 수정(서치기능) -->
         <button id="searchbtn" onclick="search();">
         <span class="glyphicon glyphicon-search"></span>
-        </button></a>
-        <!-- 2020-02-11 현희 수정(서치기능) 끝 -->
+        </button>
+        <!-- </a> -->
     </div>
 	
 	<script>
 		function search(){
-			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#keyword').val();
+			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#searchtext').val();
 		}
 	</script>
 	<!-- 2020-02-11 현희 수정(서치기능) 끝 -->

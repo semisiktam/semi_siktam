@@ -53,12 +53,18 @@ public class ShopDao {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
+		}catch(Exception e){
+			System.out.println("SQL이외의 에러발생");
+			e.printStackTrace();
 		}finally {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println(list);
 		
 		return list;
+		
+		
 	}
   
 }

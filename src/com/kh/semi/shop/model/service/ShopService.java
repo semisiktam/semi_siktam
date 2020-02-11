@@ -25,6 +25,7 @@ public class ShopService {
 		ArrayList<Shop> list = null;
 		
 		if(keyword.length() > 0) {
+			list=new ArrayList<Shop>();
 			list = sDao.searchMain(con,keyword);
 			
 		}else {
@@ -35,7 +36,7 @@ public class ShopService {
 		
 		close(con);
 		
-		return null;
+		return list;
 	}
  
 } 
