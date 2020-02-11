@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.semi.notice.model.vo.*"%>
+    
+<%
+	Notice n = (Notice)request.getAttribute("notice");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,7 @@
                        <thead>
                         <tr>
                             <th>
-                                <div class="tb-center">결제 관련 공지</div>
+                                <div class="tb-center"><%= n.getnTitle() %></div>
                             </th>
                         </tr>
                        </thead>
@@ -34,19 +38,19 @@
                                        <div>
                                            <span>
                                                <em>작성일 :</em>
-                                               "2020/01/25"
+                                               <%= n.getnDate() %>
                                            </span>
                                        </div>
                                        <div>
                                            <span>
                                                <em>작성자 : </em>
-                                               "관리자"
+                                               <%= n.getnWriter() %>
                                            </span>
                                        </div>
                                        <div class="hit">
                                            <span>
                                                <em>조회수 : </em>
-                                               "155"
+                                               <%= n.getnCount() %>
                                            </span>
                                        </div>
                                    </div>
@@ -55,14 +59,14 @@
                            <tr>
                                <td>
                                    <div class="data-cont">
-                                       결제 관련 내용 삽입
+                                       <%= n.getnContext() %>
                                    </div>
                                </td>
                            </tr>
                        </tbody>
                    </table>
                    <div class="list">
-                       <input type="button" value="목록" onclick="location.href='notice_5.jsp'">
+                       <input type="button" value="목록" onclick="location.href='selectList.no'">
                    </div>
             </div>
             

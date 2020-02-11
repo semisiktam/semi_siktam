@@ -12,6 +12,7 @@ public class Qna implements Serializable{
 	private String qTitle   ; //글제목
 	private String qContext ; //글내용
 	private String qReply   ; //답변
+	
 	public Qna() {
 		super();
 		// TODO Auto-generated constructor stub
