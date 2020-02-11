@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.semi.menu.model.vo.*"%>
+ 
+ <%ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("list");%>  
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,13 +67,13 @@
     <div id="date-time">
         <div id="date">
             <p><span class="glyphicon glyphicon-calendar"></span> 예약 일자</p>    
-            <p><input type="date" value="2020-01-16" min="2020-01-16" max="2020-03-31"></p>
+            <p><input name="date" type="date" value="" min="" max=""></p>
             <!-- <input type="text" id="datepicker1" placeholder="예약 일자"> -->
         </div>
         
         <div id="time">
             <p><span class="glyphicon glyphicon-time"></span> 예약 시간</p>
-            <p><input type="time" value="14:00"></p>
+            <p><input name="time" type="time" value="14:00"></p>
             <!-- <input type="text" class='timepicker' placeholder="예약 시간"> -->
         </div>
     </div>
@@ -81,8 +84,8 @@
         <div id="menuType">
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">치킨</li>
-                <li class="tab-link" data-tab="tab-2">피자</li>
-                <li class="tab-link" data-tab="tab-3">짜장면</li>
+                <!--<li class="tab-link" data-tab="tab-2">피자</li>
+                <li class="tab-link" data-tab="tab-3">짜장면</li>-->
             </ul>
         </div>
         <div id="tab-1" class="tab-content current">
@@ -346,6 +349,12 @@
         </div>
     </div>
     </form>
+    
+    <!-- 날짜 -->
+    <script>
+    	$("")
+    	
+    </script>
 
     <!-- 메뉴 수량 -->
     <script>
