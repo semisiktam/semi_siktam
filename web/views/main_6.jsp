@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.semi.member.model.vo.*"%>
- 
+<%
+	 Member m = (Member)session.getAttribute("member");
+%>
+
 <!DOCTYPE html>
 <html>
 <head> 
@@ -51,41 +54,41 @@
     </style>
 </head>
 <body>
-	<!-- (테스트) 값  넘어가는지 체크용 -->
-    <!-- 헤더 시작 -->
-    <!-- 로고 / 로그인 -->
-    <header>
-        <%@ include file="common/header.jsp" %>
-        <nav>
-            <div id="nav">
-                <div id="logodiv"><a href="main_6.jsp"><img id="logo" src="/siktam/resources/images/KakaoTalk_20200101_193858750.png" alt=""></a></div>
-                <div id="navp">
-                    <a class="navp" href="notice_5.jsp"><span>공지사항</span></a>
-                    <a class="navp" href="notice_5.jsp"><span>문의사항</span></a>
-                    <a class="navp" href="mypagePerson_5.jsp"><span>마이페이지</span></a>
-                    <a class="navp" href="/siktam/views/login_2.jsp"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100);">로그인</span></a>
-                </div> 
-            </div>
-        </nav>
-    </header>
+	<nav>
+        <div id="nav">
+            <div id="logodiv"><a href="main_6.jsp"><img id="logo" src="/siktam/resources/images/KakaoTalk_20200101_193858750.png" alt=""></a></div>
+            <div id="navp">
+	            <% if(m!=null && m.getUserId().equals("4dich")){ %>
+	            	<a class="navp" href="admin_main_4.jsp"><span>관리자</span></a>
+	            <% } %>
+                <a class="navp" href="/siktam/selectList.no"><span>공지사항</span></a>
+                <a class="navp" href="notice_5.jsp"><span>문의사항</span></a>
+                <a class="navp" href="mypagePerson_5.jsp"><span>마이페이지</span></a>
+                <% if(m==null){ %>
+					<a class="navp" href="/siktam/views/login_2.jsp"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100);">로그인</span></a>
+                <% }else{ %>
+                	<a class="navp" onclick="location.href='/siktam/logout.do'; alert('로그아웃되었습니다')"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100);">로그아웃</span></a>
+                <% } %>
+            </div> 
+        </div>
+    </nav>
 
-    <hr shadow><br>
 
     <!-- 검색창 -->
     <div id="div1">
         <img src="/siktam/resources/images/searchbar.png" alt="">
-        <input id="searchtext" type="text" placeholder="지역을 입력해주세요" id="searchcontent">
-        <a href="searchConditions_4.jsp">
+        <input id="searchtext" type="text" placeholder="지역을 입력해주세요">
+        <!-- <a href="searchConditions_4.jsp"> -->
         <!-- 2020-02-11 현희 수정(서치기능) -->
         <button id="searchbtn" onclick="search();">
         <span class="glyphicon glyphicon-search"></span>
-        </button></a>
-        <!-- 2020-02-11 현희 수정(서치기능) 끝 -->
+        </button>
+        <!-- </a> -->
     </div>
 	
 	<script>
 		function search(){
-			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#keyword').val();
+			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#searchtext').val();
 		}
 	</script>
 	<!-- 2020-02-11 현희 수정(서치기능) 끝 -->

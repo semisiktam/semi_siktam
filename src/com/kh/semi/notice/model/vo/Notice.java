@@ -8,16 +8,26 @@ public class Notice implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6910103580620084685L;
+	
 	private int nNo     ; //notice번호
 	private String nTitle  ; //제목
 	private String nWriter ; //작성자
 	private Date nDate   ; //작성일
 	private int nCount  ; //조회수
 	private String nContext; //글내용
+	
+	
 	public Notice() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
+	/**
+	 * 전체 생성자
+	 * @param nNo
+	 * @param nTitle
+	 * @param nWriter
+	 * @param nDate
+	 * @param nCount
+	 * @param nContext
+	 */
 	public Notice(int nNo, String nTitle, String nWriter, Date nDate, int nCount, String nContext) {
 		super();
 		this.nNo = nNo;
@@ -26,6 +36,22 @@ public class Notice implements Serializable{
 		this.nDate = nDate;
 		this.nCount = nCount;
 		this.nContext = nContext;
+	}
+	/**
+	 * 공지사항 띄우기용
+	 * @param nNo
+	 * @param nTitle
+	 * @param nWriter
+	 * @param nDate
+	 * @param nCount
+	 */
+	public Notice(int nNo, String nTitle, String nWriter, Date nDate, int nCount) {
+		super();
+		this.nNo = nNo;
+		this.nTitle = nTitle;
+		this.nWriter = nWriter;
+		this.nDate = nDate;
+		this.nCount = nCount;
 	}
 	public int getnNo() {
 		return nNo;

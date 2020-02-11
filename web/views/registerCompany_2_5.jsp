@@ -116,10 +116,9 @@
             <tr>
                 <th align="left">테이블형태</th>
                 <td><div id="tableForm">
-                    <input type="checkbox" id="x"><label for="x">1인석</label>
-                    <input type="checkbox" id="z"><label for="z">2인석</label>
+                    <input type="checkbox" id="x"><label for="x">바 테이블</label>
                     <input type="checkbox" id="y"><label for="y">칸막이</label>
-                    <input type="checkbox" id="r"><label for="r">바테이블</label>
+                    <input type="checkbox" id="z"><label for="z">2인석</label>
                     <input type="checkbox" id="k"><label for="k">셀프주문</label>
                 </div></td>
             </tr>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.semi.notice.model.vo.*"%>
+    
+<% ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,62 +34,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                              <td>08</td>
-                              <td><a href="notice2_5.jsp">결제 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>07</td>
-                              <td><a href="notice2_5.jsp">적립금 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>06</td>
-                              <td><a href="notice2_5.jsp">쿠폰 지급 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>05</td>
-                              <td><a href="notice2_5.jsp">결제 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>04</td>
-                              <td><a href="notice2_5.jsp">결제 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>03</td>
-                              <td><a href="notice2_5.jsp">결제 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>02</td>
-                              <td><a href="notice2_5.jsp">결제 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>01</td>
-                              <td><a href="notice2_5.jsp">결제 관련 안내</a></td>
-                              <td>관리자</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
+                            <% for(Notice n : list){ %>
+							<tr>
+								<td><%= n.getnNo() %></td>
+								<td><%= n.getnTitle() %></td>
+								<td><%= n.getnWriter() %></td>
+								<td><%= n.getnDate() %></td>
+								<td><%= n.getnCount() %></td>
+							</tr>
+							<% } %>
                         </tbody>
                     </table>
             </div>
@@ -99,8 +55,20 @@
             </fieldset>
     </div>
 
-
-
+	<script>  
+		$(function(){
+			
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"black"});
+			}).click(function(){
+				//console.log($(this).parent().children().eq(0).text());
+				var nno = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
+			});
+		});
+	</script>
 
 
 
