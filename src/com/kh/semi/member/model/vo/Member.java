@@ -63,6 +63,18 @@ public class Member implements Serializable{
 		this.enrolldate = enrolldate;
 	}
 
+	
+	
+	public Member(String userId, String password, String addr, String name, String pid, String phone) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.addr = addr;
+		this.name = name;
+		this.pid = pid;
+		this.phone = phone;
+	}
+
 	public String getUserId() {
 		return userId;
 	}
