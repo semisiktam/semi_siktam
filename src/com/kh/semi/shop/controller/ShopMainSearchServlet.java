@@ -41,7 +41,7 @@ public class ShopMainSearchServlet extends HttpServlet {
 		ShopService ss = new ShopService();
 		
 		list = ss.searchMain(keyword);
-		
+		  
 		String page ="";
 		if(list != null) { 
 			page = "views/searchConditions_4.jsp";

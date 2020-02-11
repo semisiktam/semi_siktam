@@ -3,7 +3,7 @@
  
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
     <meta charset="UTF-8">
     <title>식탐메인</title>
     <!-- <script src="/siktam/resources/js/jquery-3.4.1.min.js"></script> -->
