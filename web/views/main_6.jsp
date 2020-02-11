@@ -94,7 +94,7 @@
 			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#keyword').val();
 		}
 	</script>
-	
+	<!-- 2020-02-11 현희 수정(서치기능) 끝 -->
 	
     <!-- 이벤트배너 -->
     <div class="container">

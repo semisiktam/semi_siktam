@@ -9,5 +9,5 @@ public class ShopService {
 	public ArrayList<Shop> searchMain(String keyword) {
 		return null;
 	}
-
+ 
 }
