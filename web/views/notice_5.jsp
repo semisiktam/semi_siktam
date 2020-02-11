@@ -23,7 +23,7 @@
                 <h1>공지사항</h1>
             </div>
             <div class="tableDiv">
-                    <table>
+                    <table id="listArea">
                         <thead>
                             <tr>
                               <th>번호</th>
@@ -59,9 +59,9 @@
 		$(function(){
 			
 			$("#listArea td").mouseenter(function(){
-				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
+				$(this).parent().css({"background":"lightgray", "cursor":"pointer"});
 			}).mouseout(function(){
-				$(this).parent().css({"background":"black"});
+				$(this).parent().css({"background":"white"});
 			}).click(function(){
 				//console.log($(this).parent().children().eq(0).text());
 				var nno = $(this).parent().children().eq(0).text();

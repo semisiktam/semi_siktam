@@ -1,4 +1,4 @@
-package com.kh.semi.notice.controller;
+package com.kh.semi.member.controller;
 
 import java.io.IOException;
 
@@ -7,21 +7,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.kh.semi.notice.model.service.NoticeService;
-import com.kh.semi.notice.model.vo.Notice;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class NoticeSelect
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/selectOne.no")
-public class NoticeSelect extends HttpServlet {
+@WebServlet("/logout.do")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelect() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +28,13 @@ public class NoticeSelect extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno = Integer.parseInt(request.getParameter("nno"));
+		HttpSession session = request.getSession(false);
 		
-		NoticeService ns = new NoticeService();
-		
-		Notice n = ns.selectOne(nno);
-		
-		String page="";
-		if(n != null) {
-			// 값이 있을 경우 페이지로
-			page = "views/notice2_5.jsp";
-			request.setAttribute("notice", n);
-		}else {
-			// 없을 경우 에러페이지로
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세보기 실패");
+		if(session != null) {
+			session.invalidate();
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		  
+		response.sendRedirect("/siktam/views/main_6.jsp");
 	}
 
 	/**

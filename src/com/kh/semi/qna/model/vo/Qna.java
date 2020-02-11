@@ -8,12 +8,14 @@ public class Qna implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5783420113925221129L;
+
 	private String qNo      ; // qna글번호
 	private String userId   ; // 사용자아이디
 	private String qTitle   ; // 글제목
 	private String qContext ; // 글내용
 	private String qReply   ; // 답변
 	private Date qDate;		  // 작성일
+
 	public Qna() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -1,6 +1,7 @@
-package com.kh.semi.notice.controller;
+package com.kh.semi.shop.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.notice.model.service.NoticeService;
-import com.kh.semi.notice.model.vo.Notice;
+import com.kh.semi.shop.model.service.ShopService;
+import com.kh.semi.shop.model.vo.Shop;
 
 /**
- * Servlet implementation class NoticeSelect
+ * Servlet implementation class ShopSearchConditionServlet
  */
-@WebServlet("/selectOne.no")
-public class NoticeSelect extends HttpServlet {
+@WebServlet("/SearchCondition.sc")
+public class ShopSearchConditionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelect() {
+    public ShopSearchConditionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +31,18 @@ public class NoticeSelect extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int nno = Integer.parseInt(request.getParameter("nno"));
+		// 1. 인코딩
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		
-		NoticeService ns = new NoticeService();
+		String tableType = request.getParameter("table");
+		String category = request.getParameter("category");
 		
-		Notice n = ns.selectOne(nno);
+		System.out.println(tableType);
+		System.out.println(category);
 		
-		String page="";
-		if(n != null) {
-			// 값이 있을 경우 페이지로
-			page = "views/notice2_5.jsp";
-			request.setAttribute("notice", n);
-		}else {
-			// 없을 경우 에러페이지로
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세보기 실패");
-		}
+		ArrayList<Shop> list = new ShopService().SeachCondition(tableType,category);
 		
-		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

@@ -26,6 +26,29 @@ public class NoticeService {
 		
 		return list;
 	}
+
+	/**
+	 * 공지사항 상세 보기용
+	 * @param nno
+	 * @return
+	 */
+	public Notice selectOne(int nno) {
+		
+		Connection con = getConnection();
+		
+		Notice n = nDao.selectOne(con,nno);
+		
+		if(n != null) {
+			int result = nDao.updateReadCount(con,nno);
+			
+			if(result > 0) commit(con);
+			else rollback(con);
+		}
+		close(con);
+		
+		return n;
+		
+	}
 	
 	
 	

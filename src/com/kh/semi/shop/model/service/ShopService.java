@@ -38,5 +38,10 @@ public class ShopService {
 		
 		return list;
 	}
+
+	public ArrayList<Shop> SeachCondition(String tableType, String category) {
+		// TODO Auto-generated method stub
+		return null;
+	}
  
 } 

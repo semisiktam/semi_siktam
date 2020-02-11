@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.semi.shop.model.vo.*"%>
+ <%-- <%ArrayList<Shop> list = (ArrayList<Shop>)request.getAttribute("list"); %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
             <input type="text" placeholder="위치를 입력해주세요" id="search-text" class="form-control" style="display: inline-block;">
             
             <a href="#" class="btn btn-default btn-lg" id="searchbtn">
-                <span class="glyphicon glyphicon-ok"></span> 검색
+                <span class="glyphicon glyphicon-ok" onclick='search();'></span> 검색
             </a>
         </div>
     
@@ -33,33 +34,33 @@
             <!-- border="1px solid black" -->
             <tr id="tr1">
                 <td class="table-rowName">테이블</td>
-                <td><input type="checkbox" value="1인석" id='a1' class="table-check" onclick='check();'><label for='a1'>1인석</label></td>
-                <td><input type="checkbox" value="2인석" id='a2' class="table-check" onclick='check();'><label for='a2'>2인석</label></td>
-                <td><input type="checkbox" value="칸막이" id='a3' class="table-check" onclick='check();'><label for='a3'>칸막이</label></td>
-                <td><input type="checkbox" value="바테이블" id='a3' class="table-check" onclick='check();'><label for='a3'>바테이블</label></td>
-                <td><input type="checkbox" value="셀프주문" id='a3' class="table-check" onclick='check();'><label for='a3'>셀프주문</label></td>
+                <td><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" onclick='check();'><label for='a1'>1인석</label></td>
+                <td><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" onclick='check();'><label for='a2'>2인석</label></td>
+                <td><input type="checkbox" value="칸막이" id='a3' class="table-check" name="table" onclick='check();'><label for='a3'>칸막이</label></td>
+                <td><input type="checkbox" value="바테이블" id='a4' class="table-check" name="table" onclick='check();'><label for='a4'>바테이블</label></td>
+                <td><input type="checkbox" value="셀프주문" id='a5' class="table-check" name="table" onclick='check();'><label for='a5'>셀프주문</label></td>
                 
             </tr>
             <tr id="tr2">
                 <td class="table-rowName">음식</td>
-                <td><input type="checkbox" value="한식" id='b1' class="table-check" onclick='check();'><label for='b1'>한식</label></td>
-                <td><input type="checkbox" value="중식" id='b2' class="table-check" onclick='check();'><label for='b2'>중식</label></td>
-                <td><input type="checkbox" value="분식" id='b3' class="table-check" onclick='check();'><label for='b3'>분식</label></td>
-                <td><input type="checkbox" value="양식" id='b4' class="table-check" onclick='check();'><label for='b4'>양식</label></td>
-                <td><input type="checkbox" value="일식" id='b5' class="table-check" onclick='check();'><label for='b5'>일식</label></td>
+                <td><input type="checkbox" value="한식" id='b1' class="table-check" name="category" onclick='check();'><label for='b1'>한식</label></td>
+                <td><input type="checkbox" value="중식" id='b2' class="table-check" name="category" onclick='check();'><label for='b2'>중식</label></td>
+                <td><input type="checkbox" value="분식" id='b3' class="table-check" name="category" onclick='check();'><label for='b3'>분식</label></td>
+                <td><input type="checkbox" value="양식" id='b4' class="table-check" name="category" onclick='check();'><label for='b4'>양식</label></td>
+                <td><input type="checkbox" value="일식" id='b5' class="table-check" name="category" onclick='check();'><label for='b5'>일식</label></td>
             </tr>
             <tr>
             	<td></td>
-                <td><input type="checkbox" value="카페/디저트" id='b6' class="table-check" onclick='check();'><label for='b6'>카페/디저트</label></td>
-                <td><input type="checkbox" value="치킨" id='b7' class="table-check" onclick='check();'><label for='b7'>치킨</label></td>
-                <td><input type="checkbox" value="피자" id='b8' class="table-check" onclick='check();'><label for='b8'>피자</label></td>
-                <td><input type="checkbox" value="족발/보쌈" id='b9' class="table-check" onclick='check();'><label for='b9'>족발/보쌈</label></td>
-                <td><input type="checkbox" value="도시락" id='b10' class="table-check" onclick='check();'><label for='b10'>도시락</label></td>
+                <td><input type="checkbox" value="카페/디저트" id='b6' class="table-check" name="category" onclick='check();'><label for='b6'>카페/디저트</label></td>
+                <td><input type="checkbox" value="치킨" id='b7' class="table-check" name="category" onclick='check();'><label for='b7'>치킨</label></td>
+                <td><input type="checkbox" value="피자" id='b8' class="table-check" name="category" onclick='check();'><label for='b8'>피자</label></td>
+                <td><input type="checkbox" value="족발/보쌈" id='b9' class="table-check" name="category" onclick='check();'><label for='b9'>족발/보쌈</label></td>
+                <td><input type="checkbox" value="도시락" id='b10' class="table-check" name="category" onclick='check();'><label for='b10'>도시락</label></td>
             </tr>
             <tr>
             	<td></td>
-                <td><input type="checkbox" value="찜/탕" id='b11' class="table-check" onclick='check();'><label for='b11'>찜/탕</label></td>
-                <td><input type="checkbox" value="프랜차이즈" id='b12' class="table-check" onclick='check();'><label for='b12'>프랜차이즈</label></td>
+                <td><input type="checkbox" value="찜/탕" id='b11' class="table-check" name="category" onclick='check();'><label for='b11'>찜/탕</label></td>
+                <td><input type="checkbox" value="프랜차이즈" id='b12' class="table-check" name="category" onclick='check();'><label for='b12'>프랜차이즈</label></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -67,10 +68,10 @@
             
             <tr id="tr3">
                 <td class="table-rowName">가격대</td>
-                <td><input type="checkbox" value="~10,000원" id='c1' class="table-check" onclick='check();'><label for='c1'>10,000원 이하</label></td>
-                <td><input type="checkbox" value="10,000~20,000원" id='c2' class="table-check" onclick='check();'><label for='c2'>10,000 ~ 20,000원</label></td>
-                <td><input type="checkbox" value="20,000~30,000원" id='c3' class="table-check" onclick='check();'><label for='c3'>20,000 ~ 30,000원</label></td>
-                <td><input type="checkbox" value="30,000원~" id='c4' class="table-check" onclick='check();'><label for='c4'>30,000원 이상</label></td>
+                <td><input type="checkbox" value="~10,000원" id='c1' class="table-check" name="price" onclick='check();'><label for='c1'>10,000원 이하</label></td>
+                <td><input type="checkbox" value="10,000~20,000원" id='c2' class="table-check" name="price" onclick='check();'><label for='c2'>10,000 ~ 20,000원</label></td>
+                <td><input type="checkbox" value="20,000~30,000원" id='c3' class="table-check" name="price" onclick='check();'><label for='c3'>20,000 ~ 30,000원</label></td>
+                <td><input type="checkbox" value="30,000원~" id='c4' class="table-check" name="price" onclick='check();'><label for='c4'>30,000원 이상</label></td>
                 <td></td>
             </tr>
         </table>
@@ -102,18 +103,22 @@
     <hr>
 
     <div id="result">
+            <%-- <% for(Shop s : list){ %> --%>
             <table border="1px" id="tbl">
                 <tr onclick="location.href='productDetailPage_6.jsp'">
-                    <td id="img"><img src="/siktam/resources/images/조건_역전우동.png"  style="width:100%" alt="Image" class="img-thumbnail"></td>
+                    <td id="img"><img src="/siktam/resources/images/조건_역전우동.png<%-- <%= s.getShopImg() %> --%>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
                     <td id="txt"  style="word-break:break-all">
-                        <h4><b>역전 우동</b></h4>
+                        <h4><b><%-- <%= s.getShopName() %>> --%></b></h4>
                         <ul>
                             <li><span class="star">★ 4.1</span><span class="review_num">리뷰 187</span><span class="reserve_num">예약 200</span></li>
-                            <li><span class="area">강남</span><span class="tableInfo">1인 테이블</span><span class="sectors">한식</span></li>
+                            <li><span class="area">강남</span><span class="tableInfo">1<%-- <%= s.getTableType()%> --%></span><span class="sectors">2<%-- <%= s.getMenuCategory() %> --%></span></li>
                             <li><span class="mainMenu">대표메뉴 : 역전우동, 김치우동, 어묵우동 등</span></li>
                         </ul>
                     </td>
                 </tr>
+            </table>
+           <%--  <% } %> --%>
+            <%--
                 <tr onclick="location.href='productDetailPage_6.jsp'">
                     <td id="img"><img src="/siktam/resources/images/진씨화로.jpg"  style="width:100%" alt="Image" class="img-thumbnail"></td>
                     <td id="txt"  style="word-break:break-all">
@@ -146,10 +151,13 @@
                             <li><span class="mainMenu">대표메뉴 : 양지쌀국수, 분짜 등</span></li>
                         </ul>
                     </td>
-                </tr>
-            </table>
+                </tr> --%>
     </div>
-
+	<script>
+		function search(){
+			<%-- location.href="<%=request.getContextPath() %>/searchMain.sc?keyword="$('#search-text').val(); --%>
+		}
+	</script>
     <script>
         function check(){
             var result = document.getElementById('table-result');
@@ -160,8 +168,33 @@
                 if(tableCheck[i].checked==true){
                     result.innerHTML += "<label for='" + tableCheck[i].id + "'>" + tableCheck[i].value + "</label>&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
-            }
+            }            
         }
+    </script>
+    <script>
+    	$('.table-check').click(function(){
+    		$.ajax({
+    			url:"/ajax/SearchCondition.sc",
+    			type:"get",
+    			data:{
+    				table : $('.table-check').val()
+    			},success:function(data){
+    				console.log(data);
+    			}
+    		});
+    	});
+    	
+    	$('input[name=category]').click(function(){
+    		$.ajax({
+    			url:"/ajax/SearchCondition.sc",
+    			type:"get",
+    			data:{
+    				category : $('input[name=category]').val()
+    			},success:function(data){
+    				
+    			}
+    		});
+    	});
     </script>
     </div>
 </div>
