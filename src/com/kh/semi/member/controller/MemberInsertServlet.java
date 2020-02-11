@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.member.model.dao.MemberDao;
+import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
 
 /**
@@ -33,13 +35,14 @@ public class MemberInsertServlet extends HttpServlet {
       String userId = request.getParameter("id");
       String password = request.getParameter("pass1");
       String addr = request.getParameter("address");
-      String name = request.getParameter("userName");
+      String name = request.getParameter("name");
       String pid = request.getParameter("pid1")+"-"+request.getParameter("pid2");
       String phone = request.getParameter("tel");
       
       Member m = new Member(userId, password, addr, name, pid, phone);
       
       System.out.println("가입 회원 정보 확인 : " + m);
+      new MemberService().insertMember(m);
       
       
    }
