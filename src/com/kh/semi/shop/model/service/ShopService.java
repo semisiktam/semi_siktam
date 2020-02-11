@@ -21,7 +21,7 @@ public class ShopService {
 	 */
 	public ArrayList<Shop> searchMain(String keyword) {
 		Connection con = getConnection();
-		
+		 
 		ArrayList<Shop> list = null;
 		
 		if(keyword.length() > 0) {

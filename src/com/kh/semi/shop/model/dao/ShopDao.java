@@ -14,7 +14,7 @@ import com.kh.semi.shop.model.vo.Shop;
 public class ShopDao {
 	
 	private Properties prop;
-
+ 
 	public ArrayList<Shop> searchMain(Connection con, String keyword) {
 		ArrayList<Shop> list = null;
 		PreparedStatement pstmt = null;
