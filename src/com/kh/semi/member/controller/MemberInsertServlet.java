@@ -34,7 +34,9 @@ public class MemberInsertServlet extends HttpServlet {
       // 1. 사용자페이지(회원가입페이지)에서 전달받은 값을 가져오기
       String userId = request.getParameter("id");
       String password = request.getParameter("pass1");
-      String addr = request.getParameter("address");
+      String addr = request.getParameter("zipCode")+", "
+				+ request.getParameter("address1")+", "
+				+ request.getParameter("address2");
       String name = request.getParameter("name");
       String pid = request.getParameter("pid1")+"-"+request.getParameter("pid2");
       String phone = request.getParameter("tel");
