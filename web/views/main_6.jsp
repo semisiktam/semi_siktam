@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%
-	String id = request.getParameter("id");
-	String pwd = request.getParameter("pwd");
-%>
-    
+    pageEncoding="UTF-8" import="com.kh.semi.member.model.vo.*"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,11 +52,10 @@
 </head>
 <body>
 	<!-- (테스트) 값  넘어가는지 체크용 -->
-	아이디 : <%= id %>
-	비밀번호 : <%= pwd %>
     <!-- 헤더 시작 -->
     <!-- 로고 / 로그인 -->
     <header>
+        <%@ include file="common/header.jsp" %>
         <nav>
             <div id="nav">
                 <div id="logodiv"><a href="main_6.jsp"><img id="logo" src="/siktam/resources/images/KakaoTalk_20200101_193858750.png" alt=""></a></div>
@@ -69,8 +63,8 @@
                     <a class="navp" href="notice_5.jsp"><span>공지사항</span></a>
                     <a class="navp" href="notice_5.jsp"><span>문의사항</span></a>
                     <a class="navp" href="mypagePerson_5.jsp"><span>마이페이지</span></a>
-                    <a class="navp" href="login_2.jsp"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100);">로그인</span></a>
-                </div>
+                    <a class="navp" href="/siktam/views/login_2.jsp"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100);">로그인</span></a>
+                </div> 
             </div>
         </nav>
     </header>

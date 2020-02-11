@@ -14,7 +14,7 @@
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
-            <form action="" method="post">
+            <form action="/siktam/mInsert.me" method="get">
                 <div class="wrap" align="center">
                     <h1 align="center">회원가입</h1>
                     <h4 align="center">회원정보 입력</h4><br>
@@ -44,8 +44,8 @@
                      
                     <tr>
                         <th align="left">주민번호 </th>
-                        <td><input type="text" class="form-control" id="pid1" name="pid" maxlength="6"> - 
-                        <input type="text" class="form-control" id="pid2" name="pid" maxlength="1"> ******
+                        <td><input type="text" class="form-control" id="pid1" name="pid1" maxlength="6"> - 
+                        <input type="text" class="form-control" id="pid2" name="pid2" maxlength="1"> ******
                         </td>      
                     </tr>
 

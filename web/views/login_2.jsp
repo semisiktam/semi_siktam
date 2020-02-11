@@ -23,9 +23,9 @@
             <form action="/siktam/login.do" method="get">     	  
 	            <div class="form">
 	            	
-		            <input type="text" placeholder="아이디를 입력해주세요!" name="id" class="info" />
+		            <input type="text" placeholder="아이디를 입력해주세요!" name="userId" class="info" />
 		            <hr>
-		            <input type="password" placeholder="비밀번호를 입력해 주세요!" name="pwd" class="info" />
+		            <input type="password" placeholder="비밀번호를 입력해 주세요!" name="password" class="info" />
 		            <hr>
 		            <button type="submit">Login</button>
 		            
