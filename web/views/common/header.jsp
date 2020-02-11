@@ -13,9 +13,6 @@
     	<a class="navp" href="/siktam/views/qna_5.jsp"><span>문의사항</span></a>
         <a class="navp" href="/siktam/views/login_2.jsp"><span>로그인</span></a>
         <a class="navp" href="/siktam/views/mypagePerson_5.jsp"><span>마이페이지</span></a>
-        <% if(m != null && m.getUserId().equals("admin")){ %>
-        	<button style="background:rgb(13, 78, 100); color:white" onclick="location.href='views/admin_main_4.jsp'">관리자</button>
-        <% } %>
     </div>
     </nav>
 </header>
