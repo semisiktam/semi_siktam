@@ -29,7 +29,7 @@ public class ShopService {
 			
 		}else {
 			
-			// 모든 shop리스트  조회
+			// 모든 shop리스트 조회
 //			list = sDao.selectList(con);
 		}
 		

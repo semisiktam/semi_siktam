@@ -18,7 +18,7 @@ import com.kh.semi.shop.model.vo.Shop;
 @WebServlet("/searchMain.sc")
 public class ShopMainSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-        
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
