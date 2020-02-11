@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.semi.qna.model.vo.*"%>
+    
+<% ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list"); %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,66 +29,17 @@
                               <th style="width:70%">제목</th>
                               <th>작성자</th>
                               <th>작성일</th>
-                              <th>조회</th>
                             </tr>
                         </thead>
                         <tbody>
+                        	<% for(Qna q : list){ %>
                             <tr>
-                              <td>08</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
+                              <td><%= q.getqNo() %></td>
+                              <td><%= q.getqTitle() %></td>
+                              <td><%= q.getUserId() %></td>
+                              <td><%= q.getqDate() %></td>
                             </tr>
-                            <tr>
-                              <td>07</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>06</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>05</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>04</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>03</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>02</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
-                            <tr>
-                              <td>01</td>
-                              <td><a href="">결제 문의</a></td>
-                              <td>이탐희</td>
-                              <td>2020/01/25</td>
-                              <td>151</td>
-                            </tr>
+                            <% } %>
                             
                         </tbody>
                     </table>

@@ -1,28 +1,37 @@
 package com.kh.semi.qna.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Qna implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5783420113925221129L;
-	private String qNo      ; //qna글번호
-	private String userId   ; //사용자아이디
-	private String qTitle   ; //글제목
-	private String qContext ; //글내용
-	private String qReply   ; //답변
+	private String qNo      ; // qna글번호
+	private String userId   ; // 사용자아이디
+	private String qTitle   ; // 글제목
+	private String qContext ; // 글내용
+	private String qReply   ; // 답변
+	private Date qDate;		  // 작성일
 	public Qna() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Qna(String qNo, String userId, String qTitle, String qContext, String qReply) {
+	public Qna(String qNo, String userId, String qTitle, String qContext, String qReply, Date qDate) {
 		super();
 		this.qNo = qNo;
 		this.userId = userId;
 		this.qTitle = qTitle;
 		this.qContext = qContext;
 		this.qReply = qReply;
+		this.qDate = qDate;
+	}
+	public Date getqDate() {
+		return qDate;
+	}
+	public void setqDate(Date qDate) {
+		this.qDate = qDate;
 	}
 	public String getqNo() {
 		return qNo;
