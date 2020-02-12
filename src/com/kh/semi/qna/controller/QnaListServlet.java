@@ -1,6 +1,7 @@
 package com.kh.semi.qna.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -8,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.qna.model.service.QnaService;
 import com.kh.semi.qna.model.vo.Qna;
 
@@ -41,20 +44,21 @@ public class QnaListServlet extends HttpServlet {
 		list = qs.selectList();
 		
 		String page = "";
+		HttpSession session = request.getSession();
+        Member mem = (Member)session.getAttribute("member");
 		
-		if(list != null) {
-			
-			page = "views/qna_5.jsp";
-			
-			request.setAttribute("list", list);
+        if(list != null) {
+        if(mem != null) {
+				page = "views/qna_5.jsp";
+				request.setAttribute("list", list);
+			}else {
+				request.setAttribute("msg", "공지사항 목록 불러오기 에러 ");
+			}
 		}else {
-			request.setAttribute("msg", "공지사항 목록 불러오기 에러 ");
+			page = "views/login_2.jsp";
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
-	
-	
+        request.getRequestDispatcher(page).forward(request, response);
+
 	}
 
 	/**
