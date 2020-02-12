@@ -17,6 +17,7 @@
 
     <!-- 이 안에 작업하기 -->
     <div class="wrap" align="center">
+    
             <div class="noticeTitle">
                 <h1>문의사항</h1>
             </div>

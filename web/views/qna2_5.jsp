@@ -78,7 +78,7 @@
                     </form>
                 	</div> -->
                    <div class="list">
-                       <input type="button" value="목록" onclick="location.href='/views/qna_5.jsp'">
+                       <input type="button" value="목록" onclick="location.href='QnaListServlet'">
                    </div>
             </div>
             

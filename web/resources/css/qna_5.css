@@ -46,7 +46,14 @@
         width:17%;
         height:30px;
     }
-
+	#insertBtn{
+        background: rgb(13, 78, 100);
+        width:60px;
+        height: 35px;
+        color: white;
+        font-weight: bold;
+        font-size:14px;
+	}
     #searchBtn{
         background: rgb(13, 78, 100);
         width:60px;
