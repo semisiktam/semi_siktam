@@ -49,6 +49,22 @@ public class NoticeService {
 		return n;
 		
 	}
+
+	public ArrayList<Notice> searchNotice(String category, String keyword) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Notice> list = null;
+		
+		if(category.length() > 0) {
+			list = nDao.searchNotice(con,category,keyword);
+		}else {
+			list = nDao.selectList(con);
+		}
+		
+		
+		return list;
+	}
 	
 	
 	

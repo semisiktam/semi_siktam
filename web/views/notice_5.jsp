@@ -47,10 +47,16 @@
                     </table>
             </div>
             <fieldset>
-                <label for="name"><input type="radio" name="search" id="name">이름</label>
-                <label for="title"><input type="radio" name="search" id="title">제목</label>
-                <label for="text"><input type="radio" name="search" id="text">내용</label>
-                <input type="text" id="searchTxt">
+                <!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
+                <label for="title"><input type="radio" name="search" value="title">제목</label>
+                <label for="text"><input type="radio" name="search" value="text">내용</label>  -->
+                <select id="searchCondition">
+                	<option>---</option>
+                	<option value="writer">작성자</option>
+                	<option value="title">제목</option>
+                	<option value="context">내용</option>
+                </select>
+                <input type="text" id="keyword">
                 <input type="button" id="searchBtn" value="검색">
             </fieldset>
     </div>
@@ -67,6 +73,10 @@
 				var nno = $(this).parent().children().eq(0).text();
 				location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
 			});
+		});
+		
+		$('#searchBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/searchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 		});
 	</script>
 
