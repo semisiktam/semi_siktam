@@ -22,7 +22,7 @@
                 <h1>문의사항</h1>
             </div>
             <div class="tableDiv">
-                    <table>
+                    <table id="listArea">
                         <thead>
                             <tr>
                               <th>번호</th>
@@ -50,11 +50,28 @@
                 <label for="text"><input type="radio" name="search" id="text">내용</label>
                 <input type="text" id="searchTxt">
                 <input type="button" id="searchBtn" value="검색">
-                <input type="button" id="writeBtn" value="작성하기" onclick="location.href='qna_form_5.html'">
+                <input type="button" id="writeBtn" value="작성하기" onclick="location.href='views/qna_form_5.jsp'">
             </fieldset>
     </div>
 
-
+	<script>  
+		$(function(){
+			
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"lightgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				//console.log($(this).parent().children().eq(0).text());
+				var qno = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/qSelectOne.qn?qno=" + qno;
+			});
+		});
+		
+		<%-- $('#searchBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/searchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		}); --%>
+	</script>
 
 
 

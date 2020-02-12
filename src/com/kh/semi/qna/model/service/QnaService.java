@@ -25,4 +25,16 @@ public class QnaService {
 		return list;
 	}
 
+	public Qna qSelectOne(int qno) {
+		Connection con = getConnection();
+		
+		Qna q = qDao.qSelectOne(con,qno);
+		
+		// 카운트
+		
+		close(con);
+		
+		return q;
+	}
+
 }
