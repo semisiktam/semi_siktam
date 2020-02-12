@@ -35,5 +35,15 @@ public class MemberService {
 		return result;
 	}
 
+	public int idDupCheck(String id) {
+		con = getConnection();
+		
+		int result = mDao.idDupCheck(con,id);
+		
+		close(con);
+		
+		return result;
+	}
+
 
 }
