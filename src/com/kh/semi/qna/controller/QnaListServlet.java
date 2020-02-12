@@ -31,19 +31,22 @@ public class QnaListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// DB에 sql구문을 전달해서 받아온 결과를 받을 변수를 지정
 		ArrayList<Qna> list = new ArrayList<Qna>();
 		
+		// QnA의 내용을 검색하기 위해서 Service호출
 		QnaService qs = new QnaService();
 		
+		// Sevice-> Dao를 거쳐서 QnA에 결과물을 실행하고 받아오기
 		list = qs.selectList();
 		
 		String page = "";
 		
 		if(list != null) {
-			page = "views/QnaList.jsp";
+			page = "views/qna_5.jsp";
 			request.setAttribute("list", list);
 		}else {
-			page = "views/common/errorPage.jsp";
+//			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "공지사항 목록 불러오기 에러 ");
 		}
 		
