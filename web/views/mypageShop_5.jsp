@@ -21,10 +21,10 @@
             <div id="storeInfo1">
                 <ul class="storeInfo2">
                     <li id="userName"><b>유승제</b>님 안녕하세요</li>
-                    <li><b>내 프로필</b>
-                    <input type="button" class="btn1" value="수정하기" onclick="test5();"></li><hr>
+                    <li><b>내가 등록한 업체</b>
+                    <input type="button" class="btn1" value="확인하기" onclick="test5();"></li><hr>
                     <li><b>예약 내역</b>
-                    <input type="button" class="btn1" value="수정하기" onclick="test1();"></li><hr>
+                    <input type="button" class="btn1" value="확인하기" onclick="test1();"></li><hr>
                     <li><b>결제 내역</b>
                     <input type="button" class="btn1" value="확인하기" onclick="test3();"></li><hr>
                 </ul>
@@ -292,27 +292,27 @@
         <div class ="content" id="content2">
 
 
-            <h3 id="contentTxt" align="left">내가 등록한 업체</h3>
+            <h3 id="contentTxt" align="left">메뉴 등록</h3>
 
 
             <div id="registStore">
                 <ul>
                     <li>
-                        <div class="registStore2">
+                        <div class="registStore2" onclick="location.href='registerMenu_5.jsp'">
                             <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
                             <h4 align="center">역전우동</h4>
                             <p align="center"><small>서울 강남구 테헤란로10길 25</small></p>
                         </div>
                     </li>
                     <li>
-                        <div class="registStore2">
+                        <div class="registStore2" onclick="location.href='registerMenu_5.jsp'">
                             <img src="/siktam/resources/images/곱창이야기.png" class="registStoreImg" alt="곱창이야기" width="170px" height="120px"><br>
                             <h4 align="center">곱창이야기</h4>
                             <p align="center"><small>서울 서초구 강남대로69길 10</small></p>
                         </div>
                     </li>
                     <li>
-                        <div class="registStore2">
+                        <div class="registStore2" onclick="location.href='registerMenu_5.jsp'">
                             <img src="/siktam/resources/images/싸움의고수.png" class="registStoreImg" alt="싸움의고수" width="170px" height="120px"><br>
                             <h4 align="center">싸움의고수</h4>
                             <p align="center"><small>서울 서대문구 명물길 20</small></p>
