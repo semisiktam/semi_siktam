@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.semi.member.model.vo.*"%>
 <%
-	 Member m = (Member)session.getAttribute("member");
+/* 	 Member m = (Member)session.getAttribute("member"); */
 %>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
         .carousel-inner > .item > a > img {
             width: 521px;
             height: 196px;
-            margin: auto;
+            margin: auto; 
         }
 
         .carousel-control {
@@ -50,26 +50,50 @@
             font-family: '배달의민족 주아';
             font-size: 18px;
         }
-
+        
+        header{
+			display: none;
+		}
+		
+		#logoMain{
+		    height: 130px;
+		    width: 130px; 
+		}
+		
+		#navdiv1, #navdiv2{
+			width: 70%;
+		    margin: 0 auto;
+		    margin-top: 30px;
+		    margin-bottom: 30px;
+		    text-align: center;
+		}
+		
+		#navdiv1{
+			text-align: right;
+		}
+		
     </style>
 </head>
 <body>
+	<%@ include file="common/header.jsp" %>
 	<nav>
-        <div id="nav">
-            <div id="logodiv"><a href="main_6.jsp"><img id="logo" src="/siktam/resources/images/KakaoTalk_20200101_193858750.png" alt=""></a></div>
-            <div id="navp">
-	            <% if(m!=null && m.getUserId().equals("4dich")){ %>
-	            	<a class="navp" href="admin_main_4.jsp"><span>관리자</span></a>
-	            <% } %>
-                <a class="navp" href="/siktam/selectList.no"><span>공지사항</span></a>
-                <a class="navp" href="notice_5.jsp"><span>문의사항</span></a>
-                <a class="navp" href="mypagePerson_5.jsp"><span>마이페이지</span></a>
-                <% if(m==null){ %>
-					<a class="navp" href="/siktam/views/login_2.jsp"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100);">로그인</span></a>
-                <% }else{ %>
-                	<a class="navp" onclick="location.href='/siktam/logout.do'; alert('로그아웃되었습니다')"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100);">로그아웃</span></a>
-                <% } %>
-            </div> 
+        <div id="navdiv1">
+         <% if(m!=null && m.getUserId().equals("4dich")){ %>
+         	<a class="navpMain" href="admin_main_4.jsp"><span>관리자</span></a>
+         <% } %>
+            <a class="navpMain" href="/siktam/selectList.no"><span>공지사항</span></a>
+            <a class="navpMain" href="notice_5.jsp"><span>문의사항</span></a>
+            <a class="navpMain" href="mypagePerson_5.jsp"><span>마이페이지</span></a>
+            
+            <% if(m==null){ %>
+			<a class="navpMain" href="/siktam/views/login_2.jsp"><span style="border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100); padding:5px">로그인</span></a>
+            <% }else{ %>
+            	<a class="navpMain" onclick="location.href='/siktam/logout.do'; alert('로그아웃되었습니다')"><span style="cursor: pointer; border: 2px solid rgb(13, 78, 100); color:white; background-color: rgb(13, 78, 100); padding:5px">로그아웃</span></a>
+            <% } %>
+            
+        </div>
+        <div id="navdiv2">
+            <div id="logodivMain"><a href="main_6.jsp"><img id="logoMain" src="/siktam/resources/images/KakaoTalk_20200101_193858750.png" alt=""></a></div>
         </div>
     </nav>
 
