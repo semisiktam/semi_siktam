@@ -75,18 +75,18 @@
             <tr>
                 <th align="left">메뉴 카테고리 </th>
                 <td><div id="category">
-                    <input type="checkbox" name="eatType" id="a"><label for="a">한식</label>
-                    <input type="checkbox" name="eatType" id="b"><label for="b">중식</label>
-                    <input type="checkbox" name="eatType" id="c"><label for="c">분식</label>
-                    <input type="checkbox" name="eatType" id="d"><label for="d">양식</label>
-                    <input type="checkbox" name="eatType" id="e"><label for="e">일식</label><br>
-                    <input type="checkbox" name="eatType" id="f"><label for="f">카페/디저트</label>&nbsp;
-                    <input type="checkbox" name="eatType" id="g"><label for="g">치킨</label>
-                    <input type="checkbox" name="eatType" id="h"><label for="h">피자</label>
-                    <input type="checkbox" name="eatType" id="i"><label for="i">족발/보쌈</label><br>
-                    <input type="checkbox" name="eatType" id="j"><label for="j">도시락</label>
-                    <input type="checkbox" name="eatType" id="k"><label for="k">찜/탕</label>
-                    <input type="checkbox" name="eatType" id="l"><label for="l">프랜차이즈</label>
+                    <input type="checkbox" name="eatType" id="a" value="한식"><label for="a">한식</label>
+                    <input type="checkbox" name="eatType" id="b" value="중식"><label for="b">중식</label>
+                    <input type="checkbox" name="eatType" id="c" value="분식"><label for="c">분식</label>
+                    <input type="checkbox" name="eatType" id="d" value="양식"><label for="d">양식</label>
+                    <input type="checkbox" name="eatType" id="e" value="일식"><label for="e">일식</label><br>
+                    <input type="checkbox" name="eatType" id="f" value="카페/디저트"><label for="f">카페/디저트</label>&nbsp;
+                    <input type="checkbox" name="eatType" id="g" value="치킨"><label for="g">치킨</label>
+                    <input type="checkbox" name="eatType" id="h" value="피자"><label for="h">피자</label>
+                    <input type="checkbox" name="eatType" id="i" value="족발/보쌈"><label for="i">족발/보쌈</label><br>
+                    <input type="checkbox" name="eatType" id="j" value="도시락"><label for="j">도시락</label>
+                    <input type="checkbox" name="eatType" id="k" value="찜/탕"><label for="k">찜/탕</label>
+                    <input type="checkbox" name="eatType" id="l" value="프랜차이즈"><label for="l">프랜차이즈</label>
                 </div></td>
                 <!-- <td><input type="tel" class="form-control" name="tel"></td> -->
                 <!-- <td><button id="confirm">휴대폰인증</button></td> -->
@@ -116,11 +116,11 @@
             <tr>
                 <th align="left">테이블형태</th>
                 <td><div id="tableForm">
-                    <input type="checkbox" name="table" id="t1"><label for="t1">1인석</label>
-                    <input type="checkbox" name="table" id="t2"><label for="t2">2인식</label>
-                    <input type="checkbox" name="table" id="t3"><label for="t3">칸막이</label>
-                    <input type="checkbox" name="table" id="t4"><label for="t4">바테이블</label>
-                    <input type="checkbox" name="table" id="t5"><label for="t5">셀프주문</label>
+                    <input type="checkbox" name="table" id="t1" value="1인석"><label for="t1">1인석</label>
+                    <input type="checkbox" name="table" id="t2" value="2인석"><label for="t2">2인석</label>
+                    <input type="checkbox" name="table" id="t3" value="칸막이"><label for="t3">칸막이</label>
+                    <input type="checkbox" name="table" id="t4" value="바테이블"><label for="t4">바테이블</label>
+                    <input type="checkbox" name="table" id="t5" value="셀프주문"><label for="t5">셀프주문</label>
                 </div></td>
             </tr>
             
