@@ -112,4 +112,69 @@ public class ShopDao {
 		return result;
 	}
 
+	public ArrayList<Shop> SearchCondition(Connection con, String[] table, String[] category, String[] price) {
+		ArrayList<Shop> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SearchCondition");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			for(int i=0; i<table.length; i++) {
+				pstmt.setString(i+1, table[i]);
+			}
+			
+			for(int j=0; j<category.length; j++) {
+				pstmt.setString(j+6, category[j] );
+			}
+			
+			for(int k=0; k<price.length; k++) {
+				if(price[k].equals("10000")) {
+					pstmt.setInt(18, 10000);
+				}if(price[k].equals("10000~20000")) {
+					pstmt.setInt(19, 10000);
+					pstmt.setInt(20, 20000);
+				}if(price[k].equals("20000~30000")) {
+					pstmt.setInt(21, 20000);
+					pstmt.setInt(22, 30000);
+				}if(price[k].equals("30000")) {
+					pstmt.setInt(23, 30000);
+				}	
+			}
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<Shop>();
+			
+			while(rset.next()) {
+				Shop s = new Shop();
+				
+				s.setShopPid(rset.getString("shop_Pid"));
+				s.setUserId(rset.getString("userId"));
+				s.setShopName(rset.getString("shop_Name"));
+				s.setShopImg(rset.getString("shop_Img"));
+				s.setsAddr(rset.getString("shop_Addr"));
+				s.setsPhone(rset.getString("shop_Phone"));
+				s.setsInfo(rset.getString("shop_Info"));
+				s.setOwnerId(rset.getString("owner_Id"));
+				s.setsTime(rset.getDate("shop_starytime"));
+				s.seteTime(rset.getDate("shop_endtime"));
+				s.setShopDay(rset.getString("shop_Day"));
+				s.setMenuCategory(rset.getString("menu_Category"));
+				s.setTableType(rset.getString("table_Type"));
+				s.setAvgPay(rset.getInt("avg_Pay"));
+				s.setOutYn(rset.getString("out_Yn"));
+
+				list.add(s);
+			}
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(con);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }

@@ -15,7 +15,7 @@ import com.kh.semi.notice.model.vo.Notice;
 /**
  * Servlet implementation class NoticeSearchServlet
  */
-@WebServlet("/searchNotice.no")
+@WebServlet("/nsearchNotice.no")
 public class NoticeSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
