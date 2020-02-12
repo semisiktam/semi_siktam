@@ -3,6 +3,7 @@ package com.kh.semi.qna.model.dao;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,7 +23,7 @@ public class QnaDao {
 	public QnaDao() {
 		prop = new Properties();
 		
-		String filePath = Notice.class.getResource("/config/notice-query.properties").getPath();
+		String filePath = Notice.class.getResource("/config/qna-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(filePath));
@@ -53,7 +54,7 @@ public class QnaDao {
 				Qna q = new Qna();
 				
 				// rset.getString("DB의 컬럼명:대소문자상관없음.)
-				q.setqNo(rset.getString("QNO")); 
+				q.setqNo(rset.getInt(1)); 
 				q.setUserId(rset.getString("QWRITER"));
 				q.setqTitle(rset.getString("QTITLE"));
 				q.setqContext(rset.getString("QCONTEXT"));
@@ -72,6 +73,41 @@ public class QnaDao {
 		
 		
 		return list;	
+	}
+
+	public Qna qSelectOne(Connection con, int qno) {
+
+		Qna q = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("qSelectOne");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, qno);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				q = new Qna();
+				
+				q.setqNo(rset.getInt("QNO"));
+				q.setUserId(rset.getString("QWRITER"));
+				q.setqDate(rset.getDate("QDATE"));
+				q.setqTitle(rset.getString("QTITLE"));
+				q.setqContext(rset.getString("QCONTEXT"));
+				q.setqReply(rset.getString("QREPLY"));
+				
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return q;
 	}
 
 }

@@ -42,9 +42,13 @@ public class ShopService {
 		return list;
 	}
 
-	public ArrayList<Shop> SeachCondition(String tableType, String category) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Shop> SearchCondition(String[] table, String[] category, String[] price) {
+		Connection con = getConnection();
+		
+		ArrayList<Shop> list = sDao.SearchCondition(con,table,category,price);
+		
+		close(con);
+		return list;
 	}
 
 	public void insertShop(Shop s) {
