@@ -14,7 +14,7 @@ import com.kh.semi.notice.model.vo.Notice;
 /**
  * Servlet implementation class NoticeSelect
  */
-@WebServlet("/selectOne.no")
+@WebServlet("/nselectOne.no")
 public class NoticeSelect extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

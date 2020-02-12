@@ -22,7 +22,7 @@
                 <h1>문의사항</h1>
             </div>
             <div class="tableDiv">
-                    <table>
+                    <table id="listArea">
                         <thead>
                             <tr>
                               <th>번호</th>
@@ -45,16 +45,36 @@
                     </table>
             </div>
             <fieldset>
-                <label for="name"><input type="radio" name="search" id="name">이름</label>
-                <label for="title"><input type="radio" name="search" id="title">제목</label>
-                <label for="text"><input type="radio" name="search" id="text">내용</label>
-                <input type="text" id="searchTxt">
+                <select id="searchCondition">
+                	<option>---</option>
+                	<option value="writer">작성자</option>
+                	<option value="title">제목</option>
+                	<option value="context">내용</option>
+                </select>
+                <input type="text" id="keyword">
                 <input type="button" id="searchBtn" value="검색">
-                <input type="button" id="writeBtn" value="작성하기" onclick="location.href='qna_form_5.html'">
+                <input type="button" id="insertBtn" value="글쓰기" onclick="location.href='views/qna_form_5.jsp'">
             </fieldset>
     </div>
 
-
+	<script>  
+		$(function(){
+			
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"lightgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				//console.log($(this).parent().children().eq(0).text());
+				var qno = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/qSelectOne.qn?qno=" + qno;
+			});
+		});
+		
+		$('#searchBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/searchQno.qo?qon="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		});
+	</script>
 
 
 

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.kh.semi.qna.model.vo.*"%>
+    
+    <%
+    	Qna q = (Qna)request.getAttribute("qna");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +27,7 @@
                        <thead>
                         <tr>
                             <th>
-                                <div class="tb-center">결제 문의</div>
+                                <div class="tb-center"><%= q.getqTitle() %></div>
                             </th>
                         </tr>
                        </thead>
@@ -34,19 +38,19 @@
                                        <div>
                                            <span>
                                                <em>작성일 :</em>
-                                               "2020/01/25"
+                                               <%=q.getqDate() %>
                                            </span>
                                        </div>
                                        <div>
                                            <span>
                                                <em>작성자 : </em>
-                                               "이탐희"
+                                               <%=q.getUserId() %>
                                            </span>
                                        </div>
                                        <div class="hit">
                                            <span>
-                                               <em>조회수 : </em>
-                                               "155"
+                                               <!-- <em>조회수 : </em> -->
+                                               
                                            </span>
                                        </div>
                                    </div>
@@ -55,13 +59,14 @@
                            <tr>
                                <td>
                                    <div class="data-cont">
-                                       문의 내용
+                                     	<%=q.getqContext() %>
                                    </div>
                                </td>
                            </tr>
                        </tbody>
                    </table>
-                   <div class="replyDiv">
+                   <!-- 댓글달기 -->
+                   <!-- <div class="replyDiv">
                     <form action="" method="">					
                         <table align="center">
                             <tr>
@@ -71,9 +76,9 @@
                             </tr>
                         </table>
                     </form>
-                </div>
+                	</div> -->
                    <div class="list">
-                       <input type="button" value="목록" onclick="location.href='qna_5.html'">
+                       <input type="button" value="목록" onclick="location.href='QnaListServlet'">
                    </div>
             </div>
             

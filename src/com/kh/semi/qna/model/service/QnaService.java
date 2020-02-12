@@ -25,4 +25,38 @@ public class QnaService {
 		return list;
 	}
 
+	public Qna qSelectOne(int qno) {
+		Connection con = getConnection();
+		
+		Qna q = qDao.qSelectOne(con,qno);
+		
+		// 카운트
+		
+		close(con);
+		
+		return q;
+	}
+
+	public ArrayList<Qna> searchQna(String category, String keyword) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Qna> list = null;
+		
+		if(category.length()>0) {
+			list = qDao.searchQna(con,category,keyword);
+		}else {
+			list = qDao.selectList(con);
+		}
+		
+		return list;
+	}
+
 }
+
+
+
+
+
+
+

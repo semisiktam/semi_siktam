@@ -1,4 +1,4 @@
-package com.kh.semi.notice.controller;
+package com.kh.semi.qna.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.notice.model.service.NoticeService;
-import com.kh.semi.notice.model.vo.Notice;
+import com.kh.semi.qna.model.service.QnaService;
+import com.kh.semi.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class NoticeSearchServlet
+ * Servlet implementation class QnaSearchServlet
  */
-@WebServlet("/nsearchNotice.no")
-public class NoticeSearchServlet extends HttpServlet {
+@WebServlet("/searchQno.qo")
+public class QnaSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSearchServlet() {
+    public QnaSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,25 +31,26 @@ public class NoticeSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String category = request.getParameter("con");
+		String category = request.getParameter("qon");
 		String keyword = request.getParameter("keyword");
 		
-		ArrayList<Notice> list = new ArrayList<>();
+		ArrayList<Qna> list = new ArrayList<>();
 		
-		NoticeService ns = new NoticeService();
+		QnaService qs = new QnaService();
 		
-		list = ns.searchNotice(category,keyword);
+		list = qs.searchQna(category,keyword);
 		
 		String page = "";
 		
 		if(list != null) {
-			page = "views/notice_5.jsp";
+			page = "views/qna_5.jsp";
 			request.setAttribute("list", list);
 		}else {
-			request.setAttribute("msg", "공지사항 검색 에러 ");
+			request.setAttribute("msg", "문의사항 검색 에러");
 		}
+		
 		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**

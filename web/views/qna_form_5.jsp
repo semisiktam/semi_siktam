@@ -17,17 +17,18 @@
 
     <!-- 이 안에 작업하기 -->
     <div class="wrap" align="center">
+    
             <div class="noticeTitle">
                 <h1>문의사항</h1>
             </div>
             <div class="qnaDiv">
-                <form action="">
+                <form action="<%= request.getContextPath() %>/qInsert.qn" method="post">
                     <div id="qna_write">
                         <table class="qna_tab">
                             <tbody>
                                 <tr>
                                     <td class="qna_write_td">작성자</td>
-                                    <td >이탐희</td>
+                                    <td ><%=m.getName() %></td>
                                 </tr>
                                 <tr>
                                     <td class="qna_write_td">제목</td>
@@ -44,7 +45,7 @@
                             </tbody>
                         </table>
                         <div id="confirm">
-                            <input type="submit" id="submitBtn" value="등록하기" onclick="return check();">
+                            <input type="submit" id="submitBtn" value="등록하기">
                         </div>
                     </div>
                 </form>

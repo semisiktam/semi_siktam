@@ -140,6 +140,13 @@ public class NoticeDao {
 		return result;
 	}
 
+	/**
+	 * 공지사항 검색용
+	 * @param con
+	 * @param category
+	 * @param keyword
+	 * @return
+	 */
 	public ArrayList<Notice> searchNotice(Connection con, String category, String keyword) {
 		
 		ArrayList<Notice> list = null;
@@ -183,8 +190,6 @@ public class NoticeDao {
 			close(rset);
 			close(pstmt);
 		}
-		
-		System.out.println(list);
 		
 		return list;
 	}
