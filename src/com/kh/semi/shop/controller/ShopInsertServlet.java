@@ -1,12 +1,6 @@
 package com.kh.semi.shop.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.glass.ui.Pixels.Format;
-
-import sun.text.resources.bg.FormatData_bg;
+import com.kh.semi.shop.model.service.ShopService;
+import com.kh.semi.shop.model.vo.Shop;
 
 /**
  * Servlet implementation class ShopInsertServlet
@@ -37,22 +30,20 @@ public class ShopInsertServlet extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String shopPid = request.getParameter("shopName"); //매장명
+      String shopName = request.getParameter("shopName"); //매장명
       String shopImg = request.getParameter("shopImg"); //매장사진
       String sAddr = request.getParameter("address"); //매장주소
       String sPhone = request.getParameter("phone"); //매장전화번호
+      String sInfo="정말 맛있는 식당!";
       String ownerId = request.getParameter("pid"); //사업자번호
-      
-//      영업  시간 / 종료 시간 
-      String startTime = request.getParameter("startTime"); //영업시작시간
-      String endTime = request.getParameter("endTime"); //영업종료시간
-      System.out.println(startTime);
-      
+      String startTime = request.getParameter("startTime"); //영업시작시간-->10:00
+      String endTime = request.getParameter("endTime"); //영업종료시간-->22:00
       String shopDay = request.getParameter("Day"); //휴무일
-      
       String menuCategory = String.join(", ", request.getParameterValues("eatType")); //메뉴카테고리
-      
       String tableType = String.join(", ", request.getParameter("table")); //테이블형태
+      Shop s=new Shop(shopName,shopImg,sAddr,sPhone,sInfo,ownerId,shopDay,menuCategory,tableType);
+      System.out.println(s);
+      new ShopService().insertShop(s);
       
    }
 

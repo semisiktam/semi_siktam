@@ -34,33 +34,33 @@
             <!-- border="1px solid black" -->
             <tr id="tr1">
                 <td class="table-rowName">테이블</td>
-                <td><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" onclick='check();'><label for='a1'>1인석</label></td>
-                <td><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" onclick='check();'><label for='a2'>2인석</label></td>
-                <td><input type="checkbox" value="칸막이" id='a3' class="table-check" name="table" onclick='check();'><label for='a3'>칸막이</label></td>
-                <td><input type="checkbox" value="바테이블" id='a4' class="table-check" name="table" onclick='check();'><label for='a4'>바테이블</label></td>
-                <td><input type="checkbox" value="셀프주문" id='a5' class="table-check" name="table" onclick='check();'><label for='a5'>셀프주문</label></td>
+                <td><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" ><label for='a1'>1인석</label></td>
+                <td><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" ><label for='a2'>2인석</label></td>
+                <td><input type="checkbox" value="칸막이" id='a3' class="table-check" name="table" ><label for='a3'>칸막이</label></td>
+                <td><input type="checkbox" value="바테이블" id='a4' class="table-check" name="table" ><label for='a4'>바테이블</label></td>
+                <td><input type="checkbox" value="셀프주문" id='a5' class="table-check" name="table" ><label for='a5'>셀프주문</label></td>
                 
             </tr>
             <tr id="tr2">
                 <td class="table-rowName">음식</td>
-                <td><input type="checkbox" value="한식" id='b1' class="table-check" name="category" onclick='check();'><label for='b1'>한식</label></td>
-                <td><input type="checkbox" value="중식" id='b2' class="table-check" name="category" onclick='check();'><label for='b2'>중식</label></td>
-                <td><input type="checkbox" value="분식" id='b3' class="table-check" name="category" onclick='check();'><label for='b3'>분식</label></td>
-                <td><input type="checkbox" value="양식" id='b4' class="table-check" name="category" onclick='check();'><label for='b4'>양식</label></td>
-                <td><input type="checkbox" value="일식" id='b5' class="table-check" name="category" onclick='check();'><label for='b5'>일식</label></td>
+                <td><input type="checkbox" value="한식" id='b1' class="table-check" name="category" ><label for='b1'>한식</label></td>
+                <td><input type="checkbox" value="중식" id='b2' class="table-check" name="category" ><label for='b2'>중식</label></td>
+                <td><input type="checkbox" value="분식" id='b3' class="table-check" name="category" ><label for='b3'>분식</label></td>
+                <td><input type="checkbox" value="양식" id='b4' class="table-check" name="category" ><label for='b4'>양식</label></td>
+                <td><input type="checkbox" value="일식" id='b5' class="table-check" name="category" ><label for='b5'>일식</label></td>
             </tr>
             <tr>
             	<td></td>
-                <td><input type="checkbox" value="카페/디저트" id='b6' class="table-check" name="category" onclick='check();'><label for='b6'>카페/디저트</label></td>
-                <td><input type="checkbox" value="치킨" id='b7' class="table-check" name="category" onclick='check();'><label for='b7'>치킨</label></td>
-                <td><input type="checkbox" value="피자" id='b8' class="table-check" name="category" onclick='check();'><label for='b8'>피자</label></td>
-                <td><input type="checkbox" value="족발/보쌈" id='b9' class="table-check" name="category" onclick='check();'><label for='b9'>족발/보쌈</label></td>
-                <td><input type="checkbox" value="도시락" id='b10' class="table-check" name="category" onclick='check();'><label for='b10'>도시락</label></td>
+                <td><input type="checkbox" value="카페/디저트" id='b6' class="table-check" name="category" ><label for='b6'>카페/디저트</label></td>
+                <td><input type="checkbox" value="치킨" id='b7' class="table-check" name="category" ><label for='b7'>치킨</label></td>
+                <td><input type="checkbox" value="피자" id='b8' class="table-check" name="category" ><label for='b8'>피자</label></td>
+                <td><input type="checkbox" value="족발/보쌈" id='b9' class="table-check" name="category" ><label for='b9'>족발/보쌈</label></td>
+                <td><input type="checkbox" value="도시락" id='b10' class="table-check" name="category" ><label for='b10'>도시락</label></td>
             </tr>
             <tr>
             	<td></td>
-                <td><input type="checkbox" value="찜/탕" id='b11' class="table-check" name="category" onclick='check();'><label for='b11'>찜/탕</label></td>
-                <td><input type="checkbox" value="프랜차이즈" id='b12' class="table-check" name="category" onclick='check();'><label for='b12'>프랜차이즈</label></td>
+                <td><input type="checkbox" value="찜/탕" id='b11' class="table-check" name="category" ><label for='b11'>찜/탕</label></td>
+                <td><input type="checkbox" value="프랜차이즈" id='b12' class="table-check" name="category" ><label for='b12'>프랜차이즈</label></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -68,10 +68,10 @@
             
             <tr id="tr3">
                 <td class="table-rowName">가격대</td>
-                <td><input type="checkbox" value="~10,000원" id='c1' class="table-check" name="price" onclick='check();'><label for='c1'>10,000원 이하</label></td>
-                <td><input type="checkbox" value="10,000~20,000원" id='c2' class="table-check" name="price" onclick='check();'><label for='c2'>10,000 ~ 20,000원</label></td>
-                <td><input type="checkbox" value="20,000~30,000원" id='c3' class="table-check" name="price" onclick='check();'><label for='c3'>20,000 ~ 30,000원</label></td>
-                <td><input type="checkbox" value="30,000원~" id='c4' class="table-check" name="price" onclick='check();'><label for='c4'>30,000원 이상</label></td>
+                <td><input type="checkbox" value="~10,000원" id='c1' class="table-check" name="price" ><label for='c1'>10,000원 이하</label></td>
+                <td><input type="checkbox" value="10,000~20,000원" id='c2' class="table-check" name="price" ><label for='c2'>10,000 ~ 20,000원</label></td>
+                <td><input type="checkbox" value="20,000~30,000원" id='c3' class="table-check" name="price" ><label for='c3'>20,000 ~ 30,000원</label></td>
+                <td><input type="checkbox" value="30,000원~" id='c4' class="table-check" name="price" ><label for='c4'>30,000원 이상</label></td>
                 <td></td>
             </tr>
         </table>
@@ -159,7 +159,7 @@
 		}
 	</script>
     <script>
-        function check(){
+       /*  function check(){
             var result = document.getElementById('table-result');
             var tableCheck = document.getElementsByClassName("table-check");
             result.innerHTML = "";
@@ -169,32 +169,84 @@
                     result.innerHTML += "<label for='" + tableCheck[i].id + "'>" + tableCheck[i].value + "</label>&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
             }            
-        }
+        } */
     </script>
     <script>
-    	$('.table-check').click(function(){
-    		$.ajax({
-    			url:"/ajax/SearchCondition.sc",
-    			type:"get",
-    			data:{
-    				table : $('.table-check').val()
-    			},success:function(data){
-    				console.log(data);
-    			}
-    		});
-    	});
-    	
-    	$('input[name=category]').click(function(){
-    		$.ajax({
-    			url:"/ajax/SearchCondition.sc",
-    			type:"get",
-    			data:{
-    				category : $('input[name=category]').val()
-    			},success:function(data){
-    				
-    			}
-    		});
-    	});
+    $('.table-check').click(function(){
+        var tlist = [];
+         $('.table-check:checked').each(function(i){
+            tlist.push($(this).val());
+         });   
+         console.log(tlist);
+         $.ajax({
+            url:"/siktam/SearchCondition.sc",
+            type:"get",
+            traditional : true, 
+            data:{
+               "tlist" : tlist
+            },success:function(data){
+               console.log(data);
+            },error:function(){
+            }
+          }); 
+     });
+     /*
+     $("input[name='table']").click(function(){
+        var tlist = [];
+         $("input[name='table']:checked").each(function(i){
+            tlist.push($(this).val());
+         });   
+         console.log(tlist);
+         $.ajax({
+            url:"/siktam/SearchCondition.sc",
+            type:"get",
+            traditional : true,
+            data:{
+               "tlist" : tlist
+            },success:function(data){
+               console.log(data);
+            },error:function(){
+            }
+          }); 
+     });
+     
+     $("input[name='category']").click(function(){
+        var clist = [];
+         $("input[name='category']:checked").each(function(i){
+            clist.push($(this).val());
+         });   
+         console.log(clist);
+         $.ajax({
+            url:"/siktam/SearchCondition.sc",
+            type:"get",
+            traditional : true,
+            data:{
+               "clist" : clist
+            },success:function(data){
+               console.log(data);
+            },error:function(){
+            }
+          }); 
+     });
+     
+     $("input[name='price']").click(function(){
+        var plist = [];
+         $("input[name='price']:checked").each(function(i){
+            plist.push($(this).val());
+         });   
+         console.log(plist);
+         $.ajax({
+            url:"/siktam/SearchCondition.sc",
+            type:"get",
+            traditional : true,
+            data:{
+               "plist" : plist
+            },success:function(data){
+               console.log(data);
+            },error:function(){
+            }
+          }); 
+     });*/
     </script>
     </div>
 </div>

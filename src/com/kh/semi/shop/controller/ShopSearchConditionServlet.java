@@ -35,13 +35,23 @@ public class ShopSearchConditionServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		
-		String tableType = request.getParameter("table");
-		String category = request.getParameter("category");
+		String[] tlist = request.getParameterValues("tlist");
 		
-		System.out.println(tableType);
-		System.out.println(category);
+		for(int i=0; i<tlist.length; i++) {
+			if(tlist[i].equals("1인석")||tlist[i].equals("2인석")||tlist[i].equals("칸막이")||tlist[i].equals("")) {
+				
+			}
+		}
+		String[] table = new String[5];
+		String[] category = new String[12];
+		String[] price = new String[4];
 		
-		ArrayList<Shop> list = new ShopService().SeachCondition(tableType,category);
+		
+		System.out.println(tlist);
+		
+//		ArrayList<Shop> list = new ShopService().SeachCondition();
+		
+		response.getWriter().print(tlist);
 		
 	}
 
