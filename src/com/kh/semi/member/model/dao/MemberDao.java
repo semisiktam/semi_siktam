@@ -56,11 +56,11 @@ public class MemberDao {
 				result.setName(rset.getString("name"));
 				result.setPid(rset.getString("pid"));
 				result.setPhone(rset.getString("phone"));
-				result.setShopYN(rset.getString("shopyn"));
+				result.setShopYN(rset.getString("shop_yn"));
 				result.setMileage(rset.getInt("mileage"));
-				result.setCouponNo(rset.getInt("couponno"));
-				result.setBlackYN(rset.getString("blackyn"));
-				result.setOutYN(rset.getString("outyn"));
+				result.setCouponNo(rset.getInt("COUPON_NO"));
+				result.setBlackYN(rset.getString("BLACK_YN"));
+				result.setOutYN(rset.getString("OUT_YN"));
 			}
 			
 		}catch(SQLException e) {

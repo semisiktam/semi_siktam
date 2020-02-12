@@ -32,8 +32,12 @@ public class QnaDao {
 	}
 	
 	public ArrayList<Qna> selectList(Connection con) {
+		// Select문을 실행하고 Java에서 사용할 객체를 선언
 		ArrayList<Qna> list = null;
+		// 검색 쿼리를 담을 객체를 선언한것(Statement를 사용한 이유는 where절이 없기때문일듯?)
 		Statement stmt = null;
+		// sql쿼리문을 Statement 객체에 담아서 실행하고 DB에서 전달받은 받을 변수
+		// (select절을 사용할 경우 반환형은 ResultSet 타입으로 넘어오니깐 java에서도 ResultSet 타입으로 선언하고 받을 준비)
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
@@ -48,12 +52,13 @@ public class QnaDao {
 			while(rset.next()) {
 				Qna q = new Qna();
 				
-				q.setqNo(rset.getString("qNo"));
-				q.setUserId(rset.getString("userId"));
-				q.setqTitle(rset.getString("qTitle"));
-				q.setqContext(rset.getString("qContext"));
-				q.setqReply(rset.getString("qReply"));
-				q.setqDate(rset.getDate("qDate"));
+				// rset.getString("DB의 컬럼명:대소문자상관없음.)
+				q.setqNo(rset.getString("QNO")); 
+				q.setUserId(rset.getString("QWRITER"));
+				q.setqTitle(rset.getString("QTITLE"));
+				q.setqContext(rset.getString("QCONTEXT"));
+				q.setqReply(rset.getString("QREPLY"));
+				q.setqDate(rset.getDate("QDATE"));
 				
 				list.add(q);
 			}

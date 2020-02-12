@@ -21,7 +21,7 @@
         .carousel-inner > .item > a > img {
             width: 521px;
             height: 196px;
-            margin: auto;
+            margin: auto; 
         }
 
         .carousel-control {
