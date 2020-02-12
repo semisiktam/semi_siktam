@@ -47,8 +47,8 @@ public class QnaListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
         Member mem = (Member)session.getAttribute("member");
 		
-        if(list != null) {
         if(mem != null) {
+        	if(list != null) {
 				page = "views/qna_5.jsp";
 				request.setAttribute("list", list);
 			}else {
