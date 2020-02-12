@@ -1,7 +1,6 @@
-package com.kh.semi.qna.controller;
+package com.kh.semi.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.qna.model.service.QnaService;
-import com.kh.semi.qna.model.vo.Qna;
+import com.kh.semi.member.model.service.MemberService;
 
 /**
- * Servlet implementation class QnaListServlet
+ * Servlet implementation class MemberIdDuplicateServlet
  */
-@WebServlet("/QnaListServlet")
-public class QnaListServlet extends HttpServlet {
+@WebServlet("/idDup.me")
+public class MemberIdDuplicateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaListServlet() {
+    public MemberIdDuplicateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,29 +29,13 @@ public class QnaListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// DB에 sql구문을 전달해서 받아온 결과를 받을 변수를 지정
-		ArrayList<Qna> list = new ArrayList<Qna>();
+		String id = request.getParameter("id");
 		
-		// QnA의 내용을 검색하기 위해서 Service호출
-		QnaService qs = new QnaService();
+		MemberService ms = new MemberService();
 		
-		// Sevice-> Dao를 거쳐서 QnA에 결과물을 실행하고 받아오기
-		list = qs.selectList();
+		int result = ms.idDupCheck(id);
 		
-		String page = "";
-		
-		if(list != null) {
-			page = "views/qna_5.jsp";
-			request.setAttribute("list", list);
-		}else {
-//			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 목록 불러오기 에러 ");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
-		
-	
+		response.getWriter().print((result>0)? "no":"ok");
 	}
 
 	/**

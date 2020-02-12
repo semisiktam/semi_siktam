@@ -56,11 +56,11 @@ public class MemberDao {
 				result.setName(rset.getString("name"));
 				result.setPid(rset.getString("pid"));
 				result.setPhone(rset.getString("phone"));
-				result.setShopYN(rset.getString("shopyn"));
+				result.setShopYN(rset.getString("shop_yn"));
 				result.setMileage(rset.getInt("mileage"));
-				result.setCouponNo(rset.getInt("couponno"));
-				result.setBlackYN(rset.getString("blackyn"));
-				result.setOutYN(rset.getString("outyn"));
+				result.setCouponNo(rset.getInt("COUPON_NO"));
+				result.setBlackYN(rset.getString("BLACK_YN"));
+				result.setOutYN(rset.getString("OUT_YN"));
 			}
 			
 		}catch(SQLException e) {
@@ -90,6 +90,31 @@ public class MemberDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int idDupCheck(Connection con, String id) {
+		int result = -1;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("idDupCheck");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
 			close(pstmt);
 		}
 		return result;

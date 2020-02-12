@@ -16,23 +16,24 @@
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
-            <form action="/siktam/mInsert.me" method="get">
+            <form action="/siktam/mInsert.me" method="post">
                 <div class="wrap" align="center">
                     <h1 align="center">회원가입</h1>
                     <h4 align="center">회원정보 입력</h4><br>
                 <table class="regist">
                     <tr>
                         <th align="left">아이디 </th>
-                        <td><input type="text" class="form-control" name="id" placeholder="아이디를 입력해주세요"></td>  
-                        <td><button id="confirm">중복 확인</button></td>      
+                        <td><input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력해주세요"></td>  
+                        <td><button id="confirm" class="idCheck" type="button">중복 확인</button></td>      
                     </tr>
                     <tr>
                         <th align="left">비밀번호 </th>
-                        <td><input type="password" class="form-control" name="pass1" placeholder="비밀번호를 입력해주세요"></td>      
+                        <td><input type="password" id="password1" class="form-control" name="pass1" placeholder="비밀번호를 입력해주세요"></td>      
                     </tr>  
                     <tr>
                         <th align="left">비밀번호 확인 </th>
-                        <td><input type="password" class="form-control" name="pass2" placeholder="비밀번호를 다시 입력해주세요"></td>        
+                        <td><input type="password" id="password2" onkeyup="passwordCheckFunction();" class="form-control" name="pass2" placeholder="비밀번호를 다시 입력해주세요"></td>        
+                    	<td><span id="checkMessage" style="color:red;font-weight:bold"></span></td>
                     </tr> 
                     <tr>
                         <th align="left">우편번호검색 </th>
@@ -182,6 +183,38 @@
 		            }
 		        }).open();
 		    };
+		    
+		    $('.idCheck').click(function(){
+		    	$.ajax({
+		    		url:"/siktam/idDup.me",
+		    		type:"post",
+		    		data:{
+		    			id:$('#id').val()
+		    		},
+		    		success:function(data){
+		    			console.log(data);
+		    			
+		    			if(data=='ok'){
+		    				alert("사용 가능한 아이디입니다.");
+		    			}else{
+		    				alert("이미 사용중인 아이디입니다.");
+		    				$('#id').select();
+		    			}
+		    		},error:function(){
+		    			console.log("---ERROR---");
+		    		}
+		    	});
+		    });
+		    
+		    function passwordCheckFunction(){
+				var password1 = $("#password1").val();
+				var password2 = $("#password2").val();
+				if(password1 != password2){
+					$("#checkMessage").html("비밀번호 불일치");
+				} else {
+					$("#checkMessage").html("비밀번호 일치");
+				}
+			}
         </script>
 
     
