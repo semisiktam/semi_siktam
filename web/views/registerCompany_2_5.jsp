@@ -89,11 +89,11 @@
                 <!-- <td><input type="tel" class="form-control" name="tel"></td> -->
                 <!-- <td><button id="confirm">휴대폰인증</button></td> -->
             </tr>
-                <tr>
+                <!-- <tr>
                     <th align="left">메뉴 등록 </th>
                     <td>
                         <h4>메뉴명<br></h4><input type="text" class="form-control" name="tel"><br>
-                        <h4>사진등록<br></h4><input type="text" class="form-control" name="tel"><!--등록한 사진의 경로를 표시-->
+                        <h4>사진등록<br></h4><input type="text" class="form-control" name="tel">등록한 사진의 경로를 표시
                         &nbsp;
                         <button type="button" id="upload" onclick="document.all.file.click();">메뉴사진등록</button><br>
                         <h4>가격<br></h4>
@@ -105,12 +105,12 @@
                         <button type="button" id="menu"><h3>메뉴 등록</h3></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button type="button" id="remenu" onclick="noneForm();"><h3>메뉴 수정</h3></button>
                         
-                        <!--메뉴등록 버튼을 누르면 등록한 사진과 value를 바탕으로 하단에 메뉴 생성-->
+                        메뉴등록 버튼을 누르면 등록한 사진과 value를 바탕으로 하단에 메뉴 생성
                         <div id="uploadpic2" style="width: 100px; height: auto; background: white; color:black; margin-top:10px;">
-                           <!--이미지를 디코드 할 방법 모색이 필요해 보임 size를 설정해도 div 태그를 넘어감-->
-                        </div><!--메뉴명의 vaule와 등록한 사진 경로로 이미지 등록할 예정-->
+                           이미지를 디코드 할 방법 모색이 필요해 보임 size를 설정해도 div 태그를 넘어감
+                        </div>메뉴명의 vaule와 등록한 사진 경로로 이미지 등록할 예정
                     </td>
-                </tr>
+                </tr> -->
 
 
             <tr>
