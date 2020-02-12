@@ -81,7 +81,7 @@
          <% if(m!=null && m.getUserId().equals("4dich")){ %>
          	<a class="navpMain" href="admin_main_4.jsp"><span>관리자</span></a>
          <% } %>
-            <a class="navpMain" href="/siktam/selectList.no"><span>공지사항</span></a>
+            <a class="navpMain" href="/siktam/nselectList.no"><span>공지사항</span></a>
             <a class="navpMain" href="notice_5.jsp"><span>문의사항</span></a>
             <a class="navpMain" href="mypagePerson_5.jsp"><span>마이페이지</span></a>
             

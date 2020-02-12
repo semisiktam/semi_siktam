@@ -71,12 +71,12 @@
 			}).click(function(){
 				//console.log($(this).parent().children().eq(0).text());
 				var nno = $(this).parent().children().eq(0).text();
-				location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
+				location.href="<%=request.getContextPath()%>/nselectOne.no?nno=" + nno;
 			});
 		});
 		
 		$('#searchBtn').click(function(){
-			location.href="<%=request.getContextPath()%>/searchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+			location.href="<%=request.getContextPath()%>/nsearchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 		});
 	</script>
 
