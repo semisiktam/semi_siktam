@@ -126,9 +126,9 @@
             
  
         </table><br>
-        
-        <button class="button" type="button"  onclick="csdsd();">업체 등록 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="button" type="reset">업체 등록 취소</button>
+        </form>
+        <button class="button" type="submit">업체 등록 완료</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="main_6.jsp"><button class="button" type="button">업체 등록 취소</button></a>
         
         <script>
             $("#upload").click(function(){

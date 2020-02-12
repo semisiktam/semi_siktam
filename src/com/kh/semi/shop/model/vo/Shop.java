@@ -47,6 +47,19 @@ public class Shop implements Serializable{
 		this.avgPay = avgPay;
 		this.outYn = outYn;
 	}
+	public Shop(String shopName, String shopImg, String sAddr, String sPhone, String sInfo, String ownerId,
+			String shopDay, String menuCategory, String tableType) {
+		super();
+		this.shopName = shopName;
+		this.shopImg = shopImg;
+		this.sAddr = sAddr;
+		this.sPhone = sPhone;
+		this.sInfo = sInfo;
+		this.ownerId = ownerId;
+		this.shopDay = shopDay;
+		this.menuCategory = menuCategory;
+		this.tableType = tableType;
+	}
 	public String getShopPid() {
 		return shopPid;
 	}

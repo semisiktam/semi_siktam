@@ -12,7 +12,10 @@ import static com.kh.semi.common.JDBCTemplate.*;
 
 public class ShopService {
 	
-	private ShopDao sDao = new ShopDao();
+	private ShopDao sDao;
+	public ShopService(){
+		sDao=new ShopDao();
+	}
 
 	/**
 	 * 메인 페이지 검색
@@ -42,6 +45,18 @@ public class ShopService {
 	public ArrayList<Shop> SeachCondition(String tableType, String category) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void insertShop(Shop s) {
+		int result=0;
+		Connection con= getConnection();
+		result=sDao.insertShop(con,s);
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
 	}
  
 } 
