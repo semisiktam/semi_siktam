@@ -37,4 +37,26 @@ public class QnaService {
 		return q;
 	}
 
+	public ArrayList<Qna> searchQna(String category, String keyword) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Qna> list = null;
+		
+		if(category.length()>0) {
+			list = qDao.searchQna(con,category,keyword);
+		}else {
+			list = qDao.selectList(con);
+		}
+		
+		return list;
+	}
+
 }
+
+
+
+
+
+
+
