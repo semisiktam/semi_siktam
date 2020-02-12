@@ -5,7 +5,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">식탐</a>
+        <a class="navbar-brand" href="/siktam/views/main_6.jsp">식탐</a>
       </div>
       <ul class="nav navbar-nav">
         <li class=""><a href="admin_main_4.jsp">메인</a></li>

@@ -94,6 +94,28 @@ public class MemberDao {
 		}
 		return result;
 	}
+	
+	public int insertMember2(Connection con, Member m) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("insertMember2");
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getPassword());
+			pstmt.setString(3, m.getAddr());
+			pstmt.setString(4, m.getName());
+			pstmt.setString(5, m.getPid());
+			pstmt.setString(6, m.getPhone());
+			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public int idDupCheck(Connection con, String id) {
 		int result = -1;

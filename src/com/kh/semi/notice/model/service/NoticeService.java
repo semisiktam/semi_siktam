@@ -50,6 +50,12 @@ public class NoticeService {
 		
 	}
 
+	/**
+	 * 공지사항 검색용
+	 * @param category
+	 * @param keyword
+	 * @return
+	 */
 	public ArrayList<Notice> searchNotice(String category, String keyword) {
 		
 		Connection con = getConnection();
