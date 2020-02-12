@@ -22,7 +22,7 @@ public class QnaDao {
 	public QnaDao() {
 		prop = new Properties();
 		
-		String filePath = Notice.class.getResource("/config/notice-query.properties").getPath();
+		String filePath = Notice.class.getResource("/config/qna-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(filePath));
@@ -53,7 +53,7 @@ public class QnaDao {
 				Qna q = new Qna();
 				
 				// rset.getString("DB의 컬럼명:대소문자상관없음.)
-				q.setqNo(rset.getString("QNO")); 
+				q.setqNo(rset.getInt(1)); 
 				q.setUserId(rset.getString("QWRITER"));
 				q.setqTitle(rset.getString("QTITLE"));
 				q.setqContext(rset.getString("QCONTEXT"));

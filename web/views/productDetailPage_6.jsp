@@ -5,6 +5,7 @@
 <% 
 	Shop s = (Shop)request.getAttribute("shop");
 	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("menu");
+	Member mem = (Member)request.getAttribute("member");
 %>
 <!DOCTYPE html>
 <html>
@@ -113,7 +114,7 @@
             <div id="addressspan">상세 주소</div><div id="addresshr"><hr></div>
             <div id="addinfo">
                 <p><%=s.getsAddr() %></p>
-                <p class="infop">대표자명 : </p> <p class="infop2">안도건</p><br>
+                <p class="infop">대표자명 : </p> <p class="infop2"><%=mem.getName() %></p><br>
                 <p class="infop">사업자 등록번호 : </p> <p class="infop2"><%=s.getOwnerId() %></p><br>
             </div>
             <div id="daumRoughmapContainer1578697903624" 

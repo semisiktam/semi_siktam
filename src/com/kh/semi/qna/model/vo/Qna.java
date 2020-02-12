@@ -9,7 +9,7 @@ public class Qna implements Serializable{
 	 */
 	private static final long serialVersionUID = -5783420113925221129L;
 
-	private String qNo      ; // qna글번호
+	private int qNo; // qna글번호
 	private String userId   ; // 사용자아이디
 	private String qTitle   ; // 글제목
 	private String qContext ; // 글내용
@@ -20,7 +20,7 @@ public class Qna implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Qna(String qNo, String userId, String qTitle, String qContext, String qReply, Date qDate) {
+	public Qna(int qNo, String userId, String qTitle, String qContext, String qReply, Date qDate) {
 		super();
 		this.qNo = qNo;
 		this.userId = userId;
@@ -35,10 +35,10 @@ public class Qna implements Serializable{
 	public void setqDate(Date qDate) {
 		this.qDate = qDate;
 	}
-	public String getqNo() {
+	public int getqNo() {
 		return qNo;
 	}
-	public void setqNo(String qNo) {
+	public void setqNo(int qNo) {
 		this.qNo = qNo;
 	}
 	public String getUserId() {

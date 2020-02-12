@@ -43,16 +43,17 @@ public class QnaListServlet extends HttpServlet {
 		String page = "";
 		
 		if(list != null) {
+			
 			page = "views/qna_5.jsp";
+			
 			request.setAttribute("list", list);
 		}else {
-//			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "공지사항 목록 불러오기 에러 ");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		
-		
+	
 	
 	}
 

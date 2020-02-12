@@ -32,14 +32,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                        	<% for(Qna q : list){ %>
+                        <% for(Qna q : list){ %>
                             <tr>
                               <td><%= q.getqNo() %></td>
                               <td><%= q.getqTitle() %></td>
                               <td><%= q.getUserId() %></td>
                               <td><%= q.getqDate() %></td>
                             </tr>
-                            <% } %>
+                         <% } %>
                             
                         </tbody>
                     </table>
