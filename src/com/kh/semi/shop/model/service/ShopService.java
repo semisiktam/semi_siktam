@@ -42,10 +42,10 @@ public class ShopService {
 		return list;
 	}
 
-	public ArrayList<Shop> SearchCondition(String[] table, String[] category, String[] price) {
+	public ArrayList<Shop> SearchCondition(String[] tlist, String[] clist, String[] plist) {
 		Connection con = getConnection();
 		
-		ArrayList<Shop> list = sDao.SearchCondition(con,table,category,price);
+		ArrayList<Shop> list = sDao.SearchCondition(con,tlist,clist,plist);
 		
 		close(con);
 		return list;
