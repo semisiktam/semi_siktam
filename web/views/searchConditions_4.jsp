@@ -192,8 +192,8 @@
             type:"get",
             traditional : true, 
             data:{
-               "tlist" : tlist
-               "clist" : clist
+               "tlist" : tlist,
+               "clist" : clist,
                "plist" : plist
             },success:function(data){
                console.log(data);
