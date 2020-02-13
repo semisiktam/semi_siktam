@@ -5,10 +5,13 @@
 
 <%
 	Member m = (Member)session.getAttribute("member");
+	ArrayList<Shop> slist=new ArrayList<Shop>();
 	if(m!=null&&m.getShopYN().equals("Y")){
-		ArrayList<Shop> slist=(ArrayList<Shop>)session.getAttribute("shop");
+		slist=(ArrayList<Shop>)session.getAttribute("shop");		
+	}else{
+		slist=null;
 	}
-		
+	
 %>
 
 <header>
