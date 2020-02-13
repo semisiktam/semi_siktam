@@ -297,8 +297,10 @@
 	            }
 	            
 	            // 주민번호 뒷자리 유효성 검사
-	            if (pid2.value < 1 || pid2.value > 4) { 
-	            	return '주민등록번호 뒷자리를 다시 입력하세요.'; 
+	            if ((pid2.value) < 1 || (pid2.value) > 4) { 
+	            	alert("주민등록번호 뒷자리를 다시 입력하세요.");
+	            	pid2.focus();
+	            	return false; 
 	            }
 	            
 	            // 주민번호 미입력시 알림
