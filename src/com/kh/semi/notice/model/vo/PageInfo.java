@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class PageInfo implements Serializable {
 
-   private int currentPage;
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4955876119727597777L;
+private int currentPage;
    private int listCount;
    private int limit;
    private int maxPage;

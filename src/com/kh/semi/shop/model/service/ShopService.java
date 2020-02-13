@@ -1,14 +1,15 @@
 package com.kh.semi.shop.model.service;
 
+import static com.kh.semi.common.JDBCTemplate.close;
+import static com.kh.semi.common.JDBCTemplate.commit;
 import static com.kh.semi.common.JDBCTemplate.getConnection;
+import static com.kh.semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.semi.shop.model.dao.ShopDao;
 import com.kh.semi.shop.model.vo.Shop;
-
-import static com.kh.semi.common.JDBCTemplate.*;
 
 public class ShopService {
 	
@@ -62,5 +63,16 @@ public class ShopService {
 		}
 		
 	}
+
+	public ArrayList<Shop> selectList(String userId) {
+		
+		Connection con=getConnection();
+		
+		ArrayList<Shop> s=new ShopDao().selectList(con,userId);
+		close(con);
+		return s;
+	}
+
+	
  
 } 
