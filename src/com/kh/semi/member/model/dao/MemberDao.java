@@ -145,12 +145,12 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<Member> selectMemberList(Connection con, int currentPage, int limit) {
-		ArrayList<Member> mlist = null;
+	public ArrayList<Member> selectList(Connection con, int currentPage, int limit) {
+		ArrayList<Member> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectMemberList");
+		String sql = prop.getProperty("selectList");
 		try {
 			pstmt = con.prepareStatement(sql);
 			int startRow = (currentPage-1)*limit+1; // 1  11
@@ -161,7 +161,7 @@ public class MemberDao {
 			
 			rset = pstmt.executeQuery();
 			
-			mlist = new ArrayList<Member>();
+			list = new ArrayList<Member>();
 			
 			while(rset.next()) {
 				Member m = new Member();
@@ -178,7 +178,7 @@ public class MemberDao {
 				m.setOutYN(rset.getString("out_yn"));
 				m.setEnrolldate(rset.getDate("enrolldate"));
 				
-				mlist.add(m);
+				list.add(m);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -187,14 +187,14 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
-		return mlist;
+		return list;
 	}
 
-	public int getMemberListCount(Connection con) {
-		int memberListCount = 0;
+	public int getListCount(Connection con) {
+		int listCount = 0;
 		Statement stmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("memberListCount");
+		String sql = prop.getProperty("listCount");
 		
 		
 		try {
@@ -202,7 +202,7 @@ public class MemberDao {
 			rset = stmt.executeQuery(sql);
 			
 			if(rset.next()) {
-				memberListCount = rset.getInt(1);
+				listCount = rset.getInt(1);
 			}
 			
 		}catch(SQLException e) {
@@ -212,6 +212,6 @@ public class MemberDao {
 			close(stmt);
 		}
 		
-		return memberListCount;
+		return listCount;
 	}
 }

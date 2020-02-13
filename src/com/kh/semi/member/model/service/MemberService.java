@@ -59,22 +59,22 @@ public class MemberService {
 		return result;
 	}
 
-	public ArrayList<Member> selectMemberList(int currentPage, int limit) {
+	public ArrayList<Member> selectList(int currentPage, int limit) {
 		Connection con = getConnection();
 		
-		ArrayList<Member> mlist = mDao.selectMemberList(con, currentPage, limit);
+		ArrayList<Member> list = mDao.selectList(con, currentPage, limit);
 		
 		close(con);
 
-		return mlist;
+		return list;
 	}
 
-	public int getMemberListCount() {
+	public int getListCount() {
 		Connection con = getConnection();
-		int memberListCount = mDao.getMemberListCount(con);
+		int listCount = mDao.getListCount(con);
 		
 		close(con);
-		return memberListCount;
+		return listCount;
 	}
 
 
