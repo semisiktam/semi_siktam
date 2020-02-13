@@ -30,26 +30,112 @@ public class NoticeDao {
 		}
 		
 	}
-
+	
+	public int getListCount(Connection con) {
+		
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return listCount;
+	}
+	
+	/**
+	 * 리스트 출력용
+	 * @param con
+	 * @return
+	 */
 	public ArrayList<Notice> selectList(Connection con) {
+	      
+	      ArrayList<Notice> list = null;
+	      Statement stmt = null;
+	      ResultSet rset = null;
+	      
+	      String sql = prop.getProperty("selectListAll");
+	      
+	      try {
+	         stmt = con.createStatement();
+	         
+	         rset = stmt.executeQuery(sql);
+	         
+	         list = new ArrayList<Notice>();
+	         
+	         while(rset.next()) {
+	            Notice n = new Notice();
+	            
+	            n.setnNo(rset.getInt(1));
+	            n.setnTitle(rset.getString("ntitle"));
+	            n.setnWriter(rset.getString("nwriter"));
+	            n.setnDate(rset.getDate("ndate"));
+	            n.setnCount(rset.getInt("ncount"));
+	            n.setnContext(rset.getString("ncontext"));
+	            
+	            list.add(n);
+	         }
+	         
+	      }catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rset);
+	         close(stmt);
+	      }
+	      
+	      
+	      return list;
+	   }
+	 	
+	
+	
+	/**
+	 * 페이징 처리용 전체 조회
+	 * @param con
+	 * @param currentPage
+	 * @param limit
+	 * @return
+	 */
+	public ArrayList<Notice> selectList(Connection con, int currentPage, int limit) {
 		
 		ArrayList<Notice> list = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
 		
 		try {
-			stmt = con.createStatement();
+			pstmt = con.prepareStatement(sql);
 			
-			rset = stmt.executeQuery(sql);
+			int startRow = (currentPage-1)*limit+1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			
+			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Notice>();
 			
 			while(rset.next()) {
 				Notice n = new Notice();
 				
-				n.setnNo(rset.getInt(1));
+				n.setnNo(rset.getInt("nno"));
 				n.setnTitle(rset.getString("ntitle"));
 				n.setnWriter(rset.getString("nwriter"));
 				n.setnDate(rset.getDate("ndate"));
@@ -63,7 +149,7 @@ public class NoticeDao {
 			e.printStackTrace();
 		}finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		
@@ -127,7 +213,6 @@ public class NoticeDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, nno);
 			
-			
 			result = pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
@@ -147,7 +232,7 @@ public class NoticeDao {
 	 * @param keyword
 	 * @return
 	 */
-	public ArrayList<Notice> searchNotice(Connection con, String category, String keyword) {
+	public ArrayList<Notice> searchNotice(Connection con, String category, String keyword, int currentPage, int limit) {
 		
 		ArrayList<Notice> list = null;
 		PreparedStatement pstmt = null;
@@ -163,9 +248,14 @@ public class NoticeDao {
 		
 		try {
 			
+			int startRow = (currentPage-1)*limit+1;
+			int endRow = startRow + limit -1;
+			
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, keyword);
+			pstmt.setInt(2, endRow);
+			pstmt.setInt(3, startRow);
 			
 			rset = pstmt.executeQuery();
 			
