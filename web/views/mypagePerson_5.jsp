@@ -22,7 +22,7 @@
             <div id="imgDiv"><div id="storeImg"></div></div>
             <div id="storeInfo1">
                 <ul class="storeInfo2">
-                    <li id="userName"><b>유승제</b>님 안녕하세요</li>
+                    <li id="userName"><b><%= m.getName() %></b>님 안녕하세요</li>
                     <li><b>내 프로필</b>
                     <a href="registerPerson_5_7.jsp"><input type="button" class="btn1" value="수정하기"></a></li><hr>
                     <li><b>예약 내역</b>
