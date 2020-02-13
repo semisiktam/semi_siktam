@@ -40,7 +40,7 @@ public class MemberInsertServlet2 extends HttpServlet {
 				+ request.getParameter("address2");
       String name = request.getParameter("name");
       String pid = request.getParameter("pid1")+"-"+request.getParameter("pid2");
-      String phone = request.getParameter("tel");
+      String phone = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
       
       Member m = new Member(userId, password, addr, name, pid, phone);
       
