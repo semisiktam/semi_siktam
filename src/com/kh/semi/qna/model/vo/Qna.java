@@ -18,8 +18,14 @@ public class Qna implements Serializable{
 
 	public Qna() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
+	public Qna(String userId,String qTitle, String qContext) {
+		this.userId = userId;
+		this.qTitle = qTitle;
+		this.qContext = qContext;
+	}
+	
 	public Qna(int qNo, String userId, String qTitle, String qContext, String qReply, Date qDate) {
 		super();
 		this.qNo = qNo;

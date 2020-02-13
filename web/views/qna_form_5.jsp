@@ -28,7 +28,7 @@
                             <tbody>
                                 <tr>
                                     <td class="qna_write_td">작성자</td>
-                                    <td ><%=m.getName() %></td>
+                                    <td><input type="text" name="writer" value="<%=m.getUserId() %>"></td>
                                 </tr>
                                 <tr>
                                     <td class="qna_write_td">제목</td>

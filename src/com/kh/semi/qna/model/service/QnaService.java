@@ -52,7 +52,48 @@ public class QnaService {
 		return list;
 	}
 
+	public int insertQna(Qna q) {
+		
+		Connection con = getConnection();
+		int result = qDao.insertQna(con,q);
+		
+		if(result >=1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
