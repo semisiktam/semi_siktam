@@ -58,7 +58,7 @@ public class NoticeListServlet extends HttpServlet {
 		
 		maxPage = (int)((double)listCount/limit+0.9);
 		
-		startPage = ((int)((double)currentPage/limit+0.9)-1)*limit+1;
+		startPage = ((currentPage-1)/limit)*limit+1;// ((int)((double)currentPage/limit+0.9)-1)*limit+1;
 		
 		endPage = startPage + limit - 1;
 		
@@ -80,12 +80,14 @@ public class NoticeListServlet extends HttpServlet {
 			if(mem != null && mem.getUserId().equals("4dich")) {
 				page = "views/admin_notice_4.jsp";
 				request.setAttribute("list", list);
+				limit=list.size();
 				
 				PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
 				request.setAttribute("pi", pi);
 			}else {
 				page = "views/notice_5.jsp";
 				request.setAttribute("list", list);
+				limit=list.size();
 				
 				PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
 				request.setAttribute("pi", pi);

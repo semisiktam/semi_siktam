@@ -66,7 +66,7 @@
                        </tbody>
                    </table>
                    <div class="list">
-                       <input type="button" value="목록" onclick="location.href='nselectList.no'">
+                       <input type="button" value="목록" onclick="location.href='nselectList.no?currentPage=1'">
                    </div>
             </div>
             
