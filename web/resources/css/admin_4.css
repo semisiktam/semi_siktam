@@ -3,7 +3,7 @@
 }
 
 .navbar .active>a {
-  background: firebrick !important;
+  background: rgb(110, 0, 0) !important;
 }
 
 .navbar .open .dropdown-toggle{
@@ -65,10 +65,10 @@
 }
 
 .container-fluid {
-  padding-right: 10%;
-  padding-left: 10%;
-  margin-right: auto;
-  margin-left: auto;
+  padding: 10px;
+  padding-right: 15%;
+  padding-left: 15%;
+  height: 70px;
 }
 
 .tbl{
@@ -96,7 +96,7 @@
 }
 
 .container{
-  width: 80%;
+  width: 70%;
 }
 
 .pagesearch{
@@ -150,3 +150,4 @@ a:link, a:visited, a:hover { color: black; text-decoration: none;}
 .modal-content{
   text-align: left;
 }
+

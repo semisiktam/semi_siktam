@@ -13,7 +13,7 @@
 	        <% if(m!=null && m.getUserId().equals("4dich")){ %>
 	        	<a class="navp" href="/siktam/views/admin_main_4.jsp"><span>관리자</span></a>
 	        <% } %>
-            <a class="navp" href="/siktam/selectList.no"><span>공지사항</span></a>
+            <a class="navp" href="/siktam/nselectList.no"><span>공지사항</span></a>
             <a class="navp" href="/siktam/QnaListServlet"><span>문의사항</span></a>
             <a class="navp" href="/siktam/views/mypagePerson_5.jsp"><span>마이페이지</span></a>
             
