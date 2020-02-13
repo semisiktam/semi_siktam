@@ -1,5 +1,7 @@
 package com.kh.semi.member.model.dao;
 
+import static com.kh.semi.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,10 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.semi.member.model.vo.Member;
-import static com.kh.semi.common.JDBCTemplate.*;
 
 public class MemberDao {
 	
@@ -165,5 +168,75 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	public ArrayList<Member> selectMemberList(Connection con, int currentPage, int limit) {
+		ArrayList<Member> mlist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberList");
+		try {
+			pstmt = con.prepareStatement(sql);
+			int startRow = (currentPage-1)*limit+1; // 1  11
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			
+			rset = pstmt.executeQuery();
+			
+			mlist = new ArrayList<Member>();
+			
+			while(rset.next()) {
+				Member m = new Member();
+				m.setUserId(rset.getString("userid"));
+				m.setPassword(rset.getString("password"));
+				m.setAddr(rset.getString("addr"));
+				m.setName(rset.getString("name"));
+				m.setPid(rset.getString("pid"));
+				m.setPhone(rset.getString("phone"));
+				m.setShopYN(rset.getString("shop_yn"));
+				m.setMileage(rset.getInt("mileage"));
+				m.setCouponNo(rset.getInt("coupon_no"));
+				m.setBlackYN(rset.getString("black_yn"));
+				m.setOutYN(rset.getString("out_yn"));
+				m.setEnrolldate(rset.getDate("enrolldate"));
+				
+				mlist.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mlist;
+	}
+
+	public int getMemberListCount(Connection con) {
+		int memberListCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("memberListCount");
+		
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				memberListCount = rset.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return memberListCount;
 	}
 }

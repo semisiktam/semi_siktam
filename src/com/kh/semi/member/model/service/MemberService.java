@@ -3,6 +3,7 @@ package com.kh.semi.member.model.service;
 import static com.kh.semi.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.semi.member.model.dao.MemberDao;
 import com.kh.semi.member.model.vo.Member;
@@ -73,6 +74,21 @@ public class MemberService {
 		
 		return result;
 	}
+	public ArrayList<Member> selectMemberList(int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<Member> mlist = mDao.selectMemberList(con, currentPage, limit);
+		
+		close(con);
 
+		return mlist;
+	}
 
+	public int getMemberListCount() {
+		Connection con = getConnection();
+		int memberListCount = mDao.getMemberListCount(con);
+		
+		close(con);
+		return memberListCount;
+	}
 }
