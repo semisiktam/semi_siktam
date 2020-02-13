@@ -65,6 +65,29 @@ public class QnaService {
 		return result;
 	}
 
+	public int updateQna(Qna q) {
+		Connection con = getConnection();
+		int result = qDao.updateQna(con,q);
+		
+		if(result >=1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		
+		return result;
+	}
+
+	public Qna updateList(int qno) {
+		Connection con = getConnection();
+		
+		Qna q = qDao.qSelectOne(con, qno);
+		
+		close(con);
+		
+		return q;
+	}
+
 }
 
 
