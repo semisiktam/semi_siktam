@@ -20,7 +20,7 @@
             <div id="imgDiv"><div id="storeImg"></div></div>
             <div id="storeInfo1">
                 <ul class="storeInfo2">
-                    <li id="userName"><b>유승제</b>님 안녕하세요</li>
+                    <li id="userName"><b><%=m.getName() %></b>님 안녕하세요</li>
                     <li><b>내가 등록한 업체</b>
                     <input type="button" class="btn1" value="확인하기" onclick="test5();"></li><hr>
                     <li><b>예약 내역</b>
