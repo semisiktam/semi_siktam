@@ -38,7 +38,7 @@
             </div>
 
             <div id="store"><!--업체-->
-            <a href="registerCompany_2.jsp"><img src="/siktam/resources/images/noun_Store_850694.png">
+            <a href="registerPerson_comp.jsp"><img src="/siktam/resources/images/noun_Store_850694.png">
             <p>기업으로 가입하기</p></a>
         </div>
         </div>
