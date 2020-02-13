@@ -49,9 +49,11 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("member", mem);
-			
+			if(mem.getShopYN().equals("Y"))
+				request.getRequestDispatcher("/sSelectList.sh").forward(request, response);
 			// forword, sendredirect
-			response.sendRedirect("/siktam/views/main_6.jsp");
+			else
+				response.sendRedirect("/siktam/views/main_6.jsp");
 		} catch (Exception e) {// 에러가 났을때
 			request.setAttribute("msg", "회원 로그인 실패!");
 			request.setAttribute("exception", e);
