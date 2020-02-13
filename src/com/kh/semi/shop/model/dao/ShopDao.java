@@ -59,8 +59,8 @@ public class ShopDao {
 				s.setsPhone(rset.getString("sPhone"));
 				s.setsInfo(rset.getString("sInfo"));
 				s.setOwnerId(rset.getString("ownerId"));
-				s.setsTime(rset.getDate("sTime"));
-				s.seteTime(rset.getDate("eTime"));
+				s.setsTime(rset.getString("sTime"));
+				s.seteTime(rset.getString("eTime"));
 				s.setShopDay(rset.getString("shopDay"));
 				s.setMenuCategory(rset.getString("menuCategory"));
 				s.setTableType(rset.getString("tableType"));
@@ -166,8 +166,8 @@ public class ShopDao {
 				s.setsPhone(rset.getString("SHOP_PHONE"));
 				s.setsInfo(rset.getString("SHOP_INFO"));
 				s.setOwnerId(rset.getString("OWNER_ID"));
-				s.setsTime(rset.getDate("SHOP_STARTTIME"));
-				s.seteTime(rset.getDate("SHOP_ENDTIME"));
+				s.setsTime(rset.getString("SHOP_STARTTIME"));
+				s.seteTime(rset.getString("SHOP_ENDTIME"));
 				s.setShopDay(rset.getString("SHOP_DAY"));
 				s.setMenuCategory(rset.getString("MENU_CATEGORY"));
 				s.setTableType(rset.getString("TABLE_TYPE"));

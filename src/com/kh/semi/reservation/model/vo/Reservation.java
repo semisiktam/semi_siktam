@@ -12,7 +12,7 @@ public class Reservation implements Serializable {
 	private String userId        ; //사용자아이디
 	private String shopPid      ; //매장등록번호
 	private Date rDate  ;//예약날짜
-	private Date rTime  ;//예약시간
+	private String rTime  ;//예약시간
 	private int mNo       ;//메뉴번호
 //	private int mprice    ;//메뉴가격
 	private char acceptYN     ;//수락여부
@@ -20,7 +20,7 @@ public class Reservation implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Reservation(String resNo, String userId, String shopPid, Date rDate, Date rTime, int mNo, char acceptYN) {
+	public Reservation(String resNo, String userId, String shopPid, Date rDate, String rTime, int mNo, char acceptYN) {
 		super();
 		this.resNo = resNo;
 		this.userId = userId;
@@ -54,10 +54,10 @@ public class Reservation implements Serializable {
 	public void setrDate(Date rDate) {
 		this.rDate = rDate;
 	}
-	public Date getrTime() {
+	public String getrTime() {
 		return rTime;
 	}
-	public void setrTime(Date rTime) {
+	public void setrTime(String rTime) {
 		this.rTime = rTime;
 	}
 	public int getmNo() {
