@@ -16,8 +16,8 @@ public class Shop implements Serializable{
 	private String sPhone    ;
 	private String sInfo     ;
 	private String ownerId      ;
-	private Date sTime     ;//매장시작시간
-	private Date eTime	   ;//매장종료시간
+	private String sTime     ;//매장시작시간
+	private String eTime	   ;//매장종료시간
 	private String shopDay ;//휴무일
 	private String menuCategory ;
 	private String tableType    ;
@@ -28,7 +28,7 @@ public class Shop implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	public Shop(String shopPid, String userId, String shopName, String shopImg, String sAddr, String sPhone,
-			String sInfo, String ownerId, Date sTime, Date eTime, String shopDay, String menuCategory, String tableType,
+			String sInfo, String ownerId, String sTime, String eTime, String shopDay, String menuCategory, String tableType,
 			int avgPay, String outYn) {
 		super();
 		this.shopPid = shopPid;
@@ -47,10 +47,11 @@ public class Shop implements Serializable{
 		this.avgPay = avgPay;
 		this.outYn = outYn;
 	}
-	public Shop(String shopName, String shopImg, String sAddr, String sPhone, String sInfo, String ownerId,
+	public Shop(String shopName,String userId, String shopImg, String sAddr, String sPhone, String sInfo, String ownerId,
 			String shopDay, String menuCategory, String tableType) {
 		super();
 		this.shopName = shopName;
+		this.userId=userId;
 		this.shopImg = shopImg;
 		this.sAddr = sAddr;
 		this.sPhone = sPhone;
@@ -108,16 +109,16 @@ public class Shop implements Serializable{
 	public void setOwnerId(String ownerId) {
 		this.ownerId = ownerId;
 	}
-	public Date getsTime() {
+	public String getsTime() {
 		return sTime;
 	}
-	public void setsTime(Date sTime) {
+	public void setsTime(String sTime) {
 		this.sTime = sTime;
 	}
-	public Date geteTime() {
+	public String geteTime() {
 		return eTime;
 	}
-	public void seteTime(Date eTime) {
+	public void seteTime(String eTime) {
 		this.eTime = eTime;
 	}
 	public String getShopDay() {

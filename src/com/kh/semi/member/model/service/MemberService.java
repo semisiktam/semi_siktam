@@ -34,6 +34,19 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	public int insertMember2(Member m) {
+		con = getConnection();
+		// 연결객체와 member객체 넘기기
+		int result = mDao.insertMember2(con,m);
+		
+		if(result>0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 
 	public int idDupCheck(String id) {
 		con = getConnection();

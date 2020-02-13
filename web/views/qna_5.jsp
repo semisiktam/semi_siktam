@@ -45,12 +45,15 @@
                     </table>
             </div>
             <fieldset>
-                <label for="name"><input type="radio" name="search" id="name">이름</label>
-                <label for="title"><input type="radio" name="search" id="title">제목</label>
-                <label for="text"><input type="radio" name="search" id="text">내용</label>
-                <input type="text" id="searchTxt">
+                <select id="searchCondition">
+                	<option>---</option>
+                	<option value="writer">작성자</option>
+                	<option value="title">제목</option>
+                	<option value="context">내용</option>
+                </select>
+                <input type="text" id="keyword">
                 <input type="button" id="searchBtn" value="검색">
-                <input type="button" id="writeBtn" value="작성하기" onclick="location.href='views/qna_form_5.jsp'">
+                <input type="button" id="insertBtn" value="글쓰기" onclick="location.href='views/qna_form_5.jsp'">
             </fieldset>
     </div>
 
@@ -68,9 +71,9 @@
 			});
 		});
 		
-		<%-- $('#searchBtn').click(function(){
-			location.href="<%=request.getContextPath()%>/searchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}); --%>
+		$('#searchBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/searchQno.qo?qon="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		});
 	</script>
 
 

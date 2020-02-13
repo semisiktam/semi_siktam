@@ -14,7 +14,13 @@
 .form-control{
     /* 회원가입 폼 input태그들 */
     height:30px;
-    width:250px
+    width:250px;
+}
+
+.tel-control{
+	/* 전화번호 input 태그 */
+    height:30px;
+    width:69px;
 }
 #pid1{
     /* 회원가입 폼 주민번호 앞자리 */
@@ -103,3 +109,5 @@ label{
     vertical-align:-2px;
     
 }
+
+

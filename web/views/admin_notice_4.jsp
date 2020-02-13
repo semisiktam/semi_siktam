@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.notice.model.vo.*"%>
 
+<<<<<<< HEAD
 <% 
 ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -10,6 +11,8 @@ int maxPage = pi.getMaxPage();
 int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 %>
+
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -32,6 +35,7 @@ int endPage = pi.getEndPage();
 
 <%@ include file="common/admin_header.jsp" %>
 
+<<<<<<< HEAD
 <div class="wrap" align="center">
             <div class="noticeTitle">
                 <h1>공지사항</h1>
@@ -88,6 +92,36 @@ int endPage = pi.getEndPage();
 			
 		</div>
             
+=======
+	<div class="wrap" align="center">
+            <div class="noticeTitle">
+                <h1>공지사항</h1>
+            </div>
+            <div class="tableDiv">
+                    <table id="listArea">
+                        <thead>
+                            <tr>
+                              <th>번호</th>
+                              <th style="width:70%">제목</th>
+                              <th>작성자</th>
+                              <th>작성일</th>
+                              <th>조회</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(Notice n : list){ %>
+							<tr>
+								<td><%= n.getnNo() %></td>
+								<td><%= n.getnTitle() %></td>
+								<td><%= n.getnWriter() %></td>
+								<td><%= n.getnDate() %></td>
+								<td><%= n.getnCount() %></td>
+							</tr>
+							<% } %>
+                        </tbody>
+                    </table>
+            </div>
+
             <fieldset>
                 <!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
                 <label for="title"><input type="radio" name="search" value="title">제목</label>
@@ -113,6 +147,7 @@ int endPage = pi.getEndPage();
 			}).click(function(){
 				//console.log($(this).parent().children().eq(0).text());
 				var nno = $(this).parent().children().eq(0).text();
+
 				location.href="<%=request.getContextPath()%>/nselectOne.no?nno=" + nno;
 			});
 		});
@@ -122,6 +157,17 @@ int endPage = pi.getEndPage();
 		});
 	</script>
 <!-- class container -->
+=======
+				location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
+			});
+		});
+		
+		$('#searchBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/searchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		});
+	</script>
+
+>>>>>>> branch 'master' of https://github.com/semisiktam/semi_siktam.git
 
 
 

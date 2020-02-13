@@ -110,4 +110,57 @@ public class QnaDao {
 		return q;
 	}
 
+	public ArrayList<Qna> searchQna(Connection con, String category, String keyword) {
+
+		ArrayList<Qna> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = null;
+		
+		switch(category) {
+		case "writer" : sql = prop.getProperty("searchWriterQna"); break;
+		case "title" : sql = prop.getProperty("searchTitleQna"); break;
+		case "context" : sql = prop.getProperty("searchContextQna"); break;
+		}
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Qna>();
+			
+			while(rset.next()) {
+				Qna q = new Qna();
+				
+				q.setqNo(rset.getInt("QNO"));
+				q.setUserId(rset.getString("QWRITER"));
+				q.setqDate(rset.getDate("QDATE"));
+				q.setqTitle(rset.getString("QTITLE"));
+				q.setqContext(rset.getString("QCONTEXT"));
+				q.setqReply(rset.getString("QREPLY"));
+				
+				list.add(q);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+
+	
+	
+	
+	
+	
 }

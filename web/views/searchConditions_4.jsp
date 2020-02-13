@@ -68,10 +68,10 @@
             
             <tr id="tr3">
                 <td class="table-rowName">가격대</td>
-                <td><input type="checkbox" value="~10,000원" id='c1' class="table-check" name="price" ><label for='c1'>10,000원 이하</label></td>
-                <td><input type="checkbox" value="10,000~20,000원" id='c2' class="table-check" name="price" ><label for='c2'>10,000 ~ 20,000원</label></td>
-                <td><input type="checkbox" value="20,000~30,000원" id='c3' class="table-check" name="price" ><label for='c3'>20,000 ~ 30,000원</label></td>
-                <td><input type="checkbox" value="30,000원~" id='c4' class="table-check" name="price" ><label for='c4'>30,000원 이상</label></td>
+                <td><input type="checkbox" value="10000" id='c1' class="table-check" name="price" ><label for='c1'>10,000원 이하</label></td>
+                <td><input type="checkbox" value="10000~20000" id='c2' class="table-check" name="price" ><label for='c2'>10,000 ~ 20,000원</label></td>
+                <td><input type="checkbox" value="20000~30000" id='c3' class="table-check" name="price" ><label for='c3'>20,000 ~ 30,000원</label></td>
+                <td><input type="checkbox" value="30000" id='c4' class="table-check" name="price" ><label for='c4'>30,000원 이상</label></td>
                 <td></td>
             </tr>
         </table>
@@ -174,9 +174,18 @@
     <script>
     $('.table-check').click(function(){
         var tlist = [];
-         $('.table-check:checked').each(function(i){
+        var clist = [];
+        var plist = [];
+        $("input[name='table']:checked").each(function(i){
             tlist.push($(this).val());
-         });   
+         });
+        $("input[name='category']:checked").each(function(i){
+            clist.push($(this).val());
+         });
+        $("input[name='price']:checked").each(function(i){
+            plist.push($(this).val());
+         });
+        
          console.log(tlist);
          $.ajax({
             url:"/siktam/SearchCondition.sc",
@@ -184,14 +193,16 @@
             traditional : true, 
             data:{
                "tlist" : tlist
+               "clist" : clist
+               "plist" : plist
             },success:function(data){
                console.log(data);
             },error:function(){
             }
           }); 
-     });
-     /*
-     $("input[name='table']").click(function(){
+     }); 
+     
+/*      $("input[name='table']").click(function(){
         var tlist = [];
          $("input[name='table']:checked").each(function(i){
             tlist.push($(this).val());
@@ -246,7 +257,7 @@
             },error:function(){
             }
           }); 
-     });*/
+     }); */
     </script>
     </div>
 </div>
