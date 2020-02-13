@@ -78,6 +78,8 @@
                     </form>
                 	</div> -->
                    <div class="list">
+                       <input type="button" value="수정" onclick="location.href='QnaListServlet'">
+                       <input type="button" value="삭제" onclick="location.href='QnaListServlet'">
                        <input type="button" value="목록" onclick="location.href='QnaListServlet'">
                    </div>
             </div>

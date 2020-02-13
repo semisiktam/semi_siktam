@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.notice.model.vo.*"%>
     
-<% ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list"); %>
+<% 
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 
 <!DOCTYPE html>
 <html>
@@ -46,6 +54,33 @@
                         </tbody>
                     </table>
             </div>
+            
+            <div class="pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath() %>/nselectList.no?currentPage=1'"><<</button>
+			<%  if(currentPage <= 1){  %>
+			<button disabled><</button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/nselectList.no?currentPage=<%=currentPage - 1 %>'"><</button>
+			<%  } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+					if(p == currentPage){	
+			%>
+				<button disabled><%= p %></button>
+			<%      }else{ %>
+				<button onclick="location.href='<%= request.getContextPath() %>/nselectList.no?currentPage=<%= p %>'"><%= p %></button>
+			<%      } %>
+			<% } %>
+				
+			<%  if(currentPage >= maxPage){  %>
+			<button disabled>></button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/nselectList.no?currentPage=<%=currentPage + 1 %>'">></button>
+			<%  } %>
+			<button onclick="location.href='<%= request.getContextPath() %>/nselectList.no?currentPage=<%= maxPage %>'">>></button>
+			
+		</div>
+            
             <fieldset>
                 <!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
                 <label for="title"><input type="radio" name="search" value="title">제목</label>

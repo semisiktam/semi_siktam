@@ -92,15 +92,16 @@ public class ShopDao {
 		String sql=prop.getProperty("insertShop");
 		try {
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, s.getShopName());
-			pstmt.setString(2, s.getShopImg());
-			pstmt.setString(3, s.getsAddr());
-			pstmt.setString(4, s.getsPhone());
-			pstmt.setString(5, s.getsInfo());
-			pstmt.setString(6, s.getOwnerId());
-			pstmt.setString(7, s.getShopDay());
-			pstmt.setString(8, s.getMenuCategory());
-			pstmt.setString(9, s.getTableType());
+			pstmt.setString(1, s.getUserId());
+			pstmt.setString(2, s.getShopName());
+			pstmt.setString(3, s.getShopImg());
+			pstmt.setString(4, s.getsAddr());
+			pstmt.setString(5, s.getsPhone());
+			pstmt.setString(6, s.getsInfo());
+			pstmt.setString(7, s.getOwnerId());
+			pstmt.setString(8, s.getShopDay());
+			pstmt.setString(9, s.getMenuCategory());
+			pstmt.setString(10, s.getTableType());
 
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {

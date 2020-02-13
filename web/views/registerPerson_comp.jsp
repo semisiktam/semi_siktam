@@ -4,9 +4,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>회원가입(개인)</title>
-    <link rel="stylesheet" href="/siktam/resources/css/register_person_5.css">
+    <title>회원가입(업체)</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
+    <link rel="stylesheet" href="/siktam/resources/css/register_person_5.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
     
@@ -16,14 +16,14 @@
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
-            <form action="/siktam/mInsert.me" method="post" onsubmit="return validate();">
+            <form action="/siktam/mInsert2.me" method="post" onsubmit="return validate();">
                 <div class="wrap" align="center">
                     <h1 align="center">회원가입</h1>
                     <h4 align="center">회원정보 입력</h4><br>
                 <table class="regist">
                     <tr>
                         <th align="left">아이디 </th>
-                        <td><input type="text" class="form-control" name="id" id="id" placeholder="영어 소문자+숫자 4~12자리 입력해주세요"></td>  
+                        <td><input type="text" class="form-control" name="id" id="id" placeholder="아이디를 입력해주세요"></td>  
                         <td><button id="confirm" class="idCheck" type="button">중복 확인</button></td>      
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                     </tr>                     
                     <tr>
                         <th align="left">이름 </th>
-                        <td><input type="text" class="form-control" id="name" name="name"></td>       
+                        <td><input type="text" class="form-control" name="name"></td>       
                     </tr>
                      
                     <tr>
@@ -71,7 +71,6 @@
                     <tr>
                         <th align="left">인증번호 입력 </th>
                         <td><input type="tel" class="form-control" id="tel4" name="tel4"></td>
-                        
                         
                     </tr>
          
@@ -129,7 +128,7 @@
                     </div>
                     
                 </div>
-                <input type="submit" class="btn" value="회원가입">
+                <input type="submit" class="btn" value="업체등록하러가기">
                 
                 
                 <!-- <input type="reset" class="btn" value="취소"> -->

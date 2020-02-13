@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.semi.member.model.dao.MemberDao;
 import com.kh.semi.member.model.service.MemberService;
@@ -15,14 +16,14 @@ import com.kh.semi.member.model.vo.Member;
 /**
  * Servlet implementation class MemberInsertServlet
  */
-@WebServlet("/mInsert.me")
-public class MemberInsertServlet extends HttpServlet {
+@WebServlet("/mInsert2.me")
+public class MemberInsertServlet2 extends HttpServlet {
    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberInsertServlet() {
+    public MemberInsertServlet2() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,9 +45,14 @@ public class MemberInsertServlet extends HttpServlet {
       Member m = new Member(userId, password, addr, name, pid, phone);
       
       System.out.println("가입 회원 정보 확인 : " + m);
-      new MemberService().insertMember(m);
-      
-      
+      int result=new MemberService().insertMember2(m);
+      if(result>0) {
+    	  HttpSession sessionId=request.getSession();
+    	  sessionId.setAttribute("userId", userId);
+    	  request.getRequestDispatcher("/views/registerCompany_2.jsp").forward(request, response);
+      }else {
+    	  response.sendRedirect("/index.jsp");
+      }
    }
 
    /**

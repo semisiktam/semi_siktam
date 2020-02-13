@@ -158,6 +158,31 @@ public class QnaDao {
 		return list;
 	}
 
+	public int insertQna(Connection con, Qna q) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertQna");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, q.getUserId());
+			pstmt.setString(2, q.getqTitle());
+			pstmt.setString(3, q.getqContext());
+			
+			result = pstmt.executeUpdate();
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
 	
 	
 	

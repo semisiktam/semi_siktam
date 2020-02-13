@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	String userId=(String)session.getAttribute("userId");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>회원가입(개인)</title>
+    <title>회원가입(업체)</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/registerCompany_2.css">
     <script src="/siktam/resources/js/jquery-3.4.1.min.js"></script>
@@ -20,7 +23,7 @@
     <form action="/siktam/sInsert.sh" method="get">
         <div class="wrap" align="center">
             <h1 align="center">업체등록</h1>
-            <h4 align="center">식탐과 함께 할 매장을 등록해주세요!</h4><br>
+            <h4 align="center"><b><%=userId %></b>님! 식탐과 함께 할 매장을 등록해주세요!</h4><br>
         <table class="regist">
             <tr>
                 <th align="left">매장명 </th>
