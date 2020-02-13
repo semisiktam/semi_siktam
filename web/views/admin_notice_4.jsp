@@ -72,7 +72,7 @@ int endPage = pi.getEndPage();
 			<%
 				if (currentPage <= 1) {
 			%>
-			<button disabled><</button>
+			<button disabled></button>
 			<%
 				} else {
 			%>

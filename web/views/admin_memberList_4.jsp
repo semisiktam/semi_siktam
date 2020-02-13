@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.semi.member.model.vo.*, java.util.*"%>
 
 <% 
-	ArrayList<Member> mlist = (ArrayList<Member>)request.getAttribute("mlist"); 
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list"); 
 	MemberPageInfo mpi = (MemberPageInfo)request.getAttribute("mpi");
 	int listCount = mpi.getListCount();
 	int currentPage = mpi.getCurrentPage();
@@ -32,7 +32,7 @@
 
 	<div class="wrap" align="center">
             <div class="noticeTitle">
-                <h1>공지사항</h1>
+                <h1>회원리스트</h1>
             </div>
             <div class="tableDiv">
                     <table id="listArea">
@@ -53,7 +53,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% for(Member mem : mlist){ %>
+                            <% for(Member mem : list){ %>
 							<tr>
 								<td><%= mem.getUserId() %></td>
 								<td><%= mem.getPassword() %></td>
@@ -75,15 +75,15 @@
             
             <%-- 페이지 처리 --%>
 			<div class="pagingArea" align="center">
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=1'"></button>
+				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=1'"><<</button>
 				<%  if(currentPage <= 1){  %>
 				<button disabled></button>
 				<%  }else{ %>
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage - 1 %>'"></button>
+				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage - 1 %>'"><</button>
 				<%  } %>
 				
 				<% for(int p = startPage; p <= endPage; p++){
-						if(p == currentPage){	
+						if(p == currentPage){
 				%>
 					<button disabled><%= p %></button>
 				<%      }else{ %>
@@ -94,9 +94,9 @@
 				<%  if(currentPage >= maxPage){  %>
 				<button disabled>></button>
 				<%  }else{ %>
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>'"></button>
+				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage + 1 %>'">></button>
 				<%  } %>
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%= maxPage %>'"></button>
+				<button onclick="location.href='<%= request.getContextPath() %>/selectList.,me?currentPage=<%= maxPage %>'">>></button>
 				
 			</div>
             
