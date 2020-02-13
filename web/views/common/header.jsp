@@ -1,8 +1,17 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.semi.shop.model.vo.Shop"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.semi.member.model.vo.*"%>
 
 <%
-	 Member m = (Member)session.getAttribute("member");
+	Member m = (Member)session.getAttribute("member");
+	ArrayList<Shop> slist=new ArrayList<Shop>();
+	if(m!=null&&m.getShopYN().equals("Y")){
+		slist=(ArrayList<Shop>)session.getAttribute("shop");		
+	}else{
+		slist=null;
+	}
+	
 %>
 
 <header>
