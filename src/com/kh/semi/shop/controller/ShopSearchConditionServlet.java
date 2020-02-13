@@ -35,13 +35,10 @@ public class ShopSearchConditionServlet extends HttpServlet {
 				request.setCharacterEncoding("UTF-8");
 				response.setContentType("application/json; charset=UTF-8");
 				
+				String keyword = request.getParameter("keyword");
 				String[] tlist = request.getParameterValues("tlist");
 				String[] clist = request.getParameterValues("clist");
-				String[] plist = request.getParameterValues("plist");
-				
-				System.out.println(tlist);
-				System.out.println(clist);
-				System.out.println(plist);
+				String[] plist = request.getParameterValues("plist");			
 				
 				ArrayList<Shop> list = new ShopService().SearchCondition(tlist, clist, plist);
 				

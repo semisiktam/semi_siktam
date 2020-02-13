@@ -12,12 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.semi.common.SelectQueryMaker;
 import com.kh.semi.member.model.dao.MemberDao;
 import com.kh.semi.shop.model.vo.Shop;
-
 public class ShopDao {
-
+	
 	private Properties prop;
+	
 	public ShopDao() {
 		prop = new Properties();
 
@@ -113,45 +114,90 @@ public class ShopDao {
 		return result;
 	}
 
-	public ArrayList<Shop> SearchCondition(Connection con, String[] table, String[] category, String[] price) {
+	public ArrayList<Shop> SearchCondition(Connection con, String[] tlist, String[] clist, String[] plist) {
 		ArrayList<Shop> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("SearchCondition");
+		String sql =null;
+		SelectQueryMaker query = null;
+		
+		String avgPay1 = null;
+		String avgPay2 = null;
+		String avgPay3 = null;
+		String avgPay4 = null;
+		String avgPay5 = null;
+		String avgPay6 = null;
+		
+		if(plist == null) {
+			avgPay1 = "0";
+			avgPay2 = "0";
+			avgPay3 = "1";
+			avgPay4 = "0";
+			avgPay5 = "0";
+			avgPay6 = "0";
+		}else {
+			for(int i=0; i<plist.length; i++) {
+				if(plist[i].equals("10000")) {
+					avgPay1 = "10000";
+				}else {
+					avgPay1 = "0";
+				}if(plist[i].equals("10000~20000")) {
+					avgPay2 = "10000";
+					avgPay3 = "20000";
+				}else {
+					avgPay2 = "0";
+					avgPay3 = "1";
+				}if(plist[i].equals("20000~30000")) {
+					avgPay4 = "20000";
+					avgPay5 = "30000";
+				}else {
+					avgPay4 = "0";
+					avgPay5 = "1";
+				}if(plist[i].equals("30000")){
+					avgPay6 = "30000";
+				}else {
+					avgPay6 = "99999999";
+				}
+			}
+		}
+		
+		if(tlist == null) {
+			query = new SelectQueryMaker.Builder()
+					.select().column("*").enter()
+					.from().tableName("Shop").enter()
+					.where().column("MENU_CATEGORY").in().condition(clist).enter()
+					.and().column("AVG_PAY").space().inequalityRigth(avgPay1).enter()
+					.or().column("AVG_PAY").space().betweenAnd(avgPay2, avgPay3).enter()
+					.or().column("AVG_PAY").space().betweenAnd(avgPay4, avgPay5).enter()
+					.or().column("AVG_PAY").space().inequalityLeft(avgPay6)
+					.build();
+		}else if(clist == null) {
+			query = new SelectQueryMaker.Builder()
+					.select().column("*").enter()
+					.from().tableName("Shop").enter()
+					.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+					.and().column("AVG_PAY").inequalityRigth(avgPay1).enter()
+					.or().column("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+					.or().column("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+					.or().column("AVG_PAY").inequalityLeft(avgPay6)
+					.build();
+		}if(plist == null){
+			
+			query = new SelectQueryMaker.Builder()
+					.select().column("*").enter()
+					.from().tableName("Shop").enter()
+					.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+					.and().column("MENU_CATEGORY").in().condition(clist).enter()
+					.build();
+		}
+		
+	
+		System.out.println(query.getQuery());
+				
+		sql = query.getQuery().toString();
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			for(int i=0; i<table.length; i++) {
-				pstmt.setString(i+1, table[i]);
-			}
-			
-			for(int j=0; j<category.length; j++) {
-				pstmt.setString(j+6, category[j] );
-			}
-			
-			for(int k=0; k<price.length; k++) {
-				if(price[k].equals("10000")) {
-					pstmt.setInt(18, 10000);
-				}else {
-					pstmt.setInt(18, 0);
-				}if(price[k].equals("10000~20000")) {
-					pstmt.setInt(19, 10000);
-					pstmt.setInt(20, 20000);
-				}else {
-					pstmt.setInt(19, 0);
-					pstmt.setInt(20, 0);
-				}if(price[k].equals("20000~30000")) {
-					pstmt.setInt(21, 20000);
-					pstmt.setInt(22, 30000);
-				}else {
-					pstmt.setInt(21, 0);
-					pstmt.setInt(22, 0);
-				}if(price[k].equals("30000")) {
-					pstmt.setInt(23, 30000);
-				}else {
-					pstmt.setInt(23, 0);
-				}
-			}
 			
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Shop>();
