@@ -7,6 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.kh.semi.shop.model.service.ShopService;
 import com.kh.semi.shop.model.vo.Shop;
@@ -30,8 +32,11 @@ public class ShopInsertServlet extends HttpServlet {
     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String shopName = request.getParameter("shopName"); //매장명
+      HttpSession session=request.getSession();
+      
+	  String shopName = request.getParameter("shopName"); //매장명
       String shopImg = request.getParameter("shopImg"); //매장사진
+      String userId=(String)session.getAttribute("userId");
       String sAddr = request.getParameter("address"); //매장주소
       String sPhone = request.getParameter("phone"); //매장전화번호
       String sInfo="정말 맛있는 식당!";
@@ -41,9 +46,11 @@ public class ShopInsertServlet extends HttpServlet {
       String shopDay = request.getParameter("Day"); //휴무일
       String menuCategory = String.join(", ", request.getParameterValues("eatType")); //메뉴카테고리
       String tableType = String.join(", ", request.getParameter("table")); //테이블형태
-      Shop s=new Shop(shopName,shopImg,sAddr,sPhone,sInfo,ownerId,shopDay,menuCategory,tableType);
+      Shop s=new Shop(shopName,userId,shopImg,sAddr,sPhone,sInfo,ownerId,shopDay,menuCategory,tableType);
       System.out.println(s);
+      
       new ShopService().insertShop(s);
+      response.sendRedirect("views/main_6.jsp");
       
    }
 
