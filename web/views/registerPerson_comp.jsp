@@ -16,7 +16,7 @@
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
-            <form action="/siktam/mInsert2.me" method="get">
+            <form action="/siktam/mInsert2.me" method="post" onsubmit="return validate();">
                 <div class="wrap" align="center">
                     <h1 align="center">회원가입</h1>
                     <h4 align="center">회원정보 입력</h4><br>
@@ -62,12 +62,15 @@
 
                     <tr>
                         <th align="left">휴대폰 번호 </th>
-                        <td><input type="tel" class="form-control" name="tel"></td>
+                        <td><input type="text" class="tel-control" id="tel1" name="tel1" maxlength="3"> -
+                        <input type="text" class="tel-control" id="tel2" name="tel2" maxlength="4"> -
+                        <input type="text" class="tel-control" id="tel3" name="tel3" maxlength="4">
+                        </td>
                         <td><button id="confirm">휴대폰인증</button></td>
                     </tr>
                     <tr>
                         <th align="left">인증번호 입력 </th>
-                        <td><input type="tel" class="form-control" name="tel"></td>
+                        <td><input type="tel" class="form-control" id="tel4" name="tel4"></td>
                         
                     </tr>
          
@@ -215,6 +218,114 @@
 					$("#checkMessage").html("비밀번호 일치");
 				}
 			}
+		    
+		    function validate(){
+		    	var id = document.getElementById("id");
+		    	var pass1 = document.getElementById("password1");
+		    	var pass2 = document.getElementById("password2");
+		    	var zipCode = document.getElementById("zipCode");
+		    	var address1 = document.getElementById("address1");
+		    	var address2 = document.getElementById("address2");
+		    	var name = document.getElementById("name");
+		    	var pid1 = document.getElementById("pid1");
+		    	var pid2 = document.getElementById("pid2");
+		    	var tel1 = document.getElementById("tel1");
+		    	var tel2 = document.getElementById("tel2");
+		    	var tel3 = document.getElementById("tel3");
+		    	
+		    	// 아이디 미입력시 알림
+		    	if ((id.value) == ""){
+		            alert("아이디를 입력하지 않았습니다.");
+		            id.focus();
+		            return false;
+		        }
+		    	
+		    	// 비밀번호 미입력시 알림
+		    	if ((pass1.value) == "" || (pass2.value)==""){
+		            alert("비밀번호를 입력하지 않았습니다.");
+		            pass1.focus();
+		            return false;
+		        }
+		    	
+		    	// 주소 미입력시 알림
+		    	if ((zipCode.value) == "" || (address1.value)=="" || (address2.value)==""){
+		            alert("주소를 입력하지 않았습니다.");
+		            zipCode.focus();
+		            return false;
+		        }
+		    		    	
+		    	// 아이디 유효성 검사
+		    	if(!chk(/^[a-z][a-z\d]{3,11}$/,id,"아이디의 첫글자는 영문 소문자, 4~12자 입력하세요!")){
+	                return false;
+	            }
+	            if(!chk(/[0-9]/,id,"아이디에 숫자 하나 이상 포함")){
+	                return false;
+	            }
+	            
+	            // 이름 미입력시 알림	            
+	            if ((name.value) == ""){
+		            alert("이름을 입력하지 않았습니다.");
+		            name.focus();
+		            return false;
+		        }            
+	       
+	            // 이름 유효성 검사	    
+	            if(!chk(/^[가-힣]{2,}/,name,"이름은 한글로 2글자 이상을 넣으세요!")){
+	                return false;
+	            }
+	            
+	         	// 전화번호 미입력시 알림	            
+	            if ((tel1.value) == "" || (tel2.value) == "" || (tel3.value) == ""){
+		            alert("전화번호를 입력하지 않았습니다.");
+		            tel1.focus();
+		            return false;
+		        } 
+	         
+	            // 전화번호 유효성 검사
+	            if(!chk(/^0(2|1[01679])$/,tel1,"지역번호 2자리 이상 입력"))
+	                return false;
+	            if(!chk(/^[0-9]{3,}$/,tel2,"국번 3자리 이상 입력"))
+	                        // 위에 maxlength로 4까지 주었기 때문에 {3,}로 가능
+	                return false;
+	            if(!chk(/^[0-9]{4}$/,tel3,"전화번호 뒷 4자리 입력"))
+	                return false;
+	            
+	            // 주민번호 앞자리 유효성 검사
+	            if(!chk(/([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/,pid1,"주민번호 앞자리를 다시 입력해주세요")){
+	            	return false;
+	            }
+	            
+	            // 주민번호 뒷자리 유효성 검사
+	            if ((pid2.value) < 1 || (pid2.value) > 4) { 
+	            	alert("주민등록번호 뒷자리를 다시 입력하세요.");
+	            	pid2.focus();
+	            	return false; 
+	            }
+	            
+	            // 주민번호 미입력시 알림
+	            if((pid1.value)=="" || (pid2.value)==""){
+	            	alert("주민등록번호를 입력하지 않았습니다.");
+		            pid1.focus();
+		            return false;
+	            }
+	            	
+
+	            
+
+	            		
+	            
+	            
+		    	
+		    }
+		    
+		    function chk(re, ele, msg){
+	            if(!re.test(ele.value)){ 
+	                alert(msg);
+	                ele.select();
+	                return false;
+	            }
+	            return true;
+	        }
         </script>
 
     
