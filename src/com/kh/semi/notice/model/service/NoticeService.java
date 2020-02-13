@@ -12,15 +12,26 @@ public class NoticeService {
 
 	private NoticeDao nDao = new NoticeDao();
 
+	public int getListCount() {
+		
+		Connection con = getConnection();
+		int listCount = nDao.getListCount(con);
+		
+		close(con);
+		
+		return listCount;
+	}
+	
+	
 	/**
 	 * 공지 사항 조회용
 	 * @return
 	 */
-	public ArrayList<Notice> selectList() {
+	public ArrayList<Notice> selectList(int currentPage, int limit) {
 		
 		Connection con = getConnection();
 		
-		ArrayList<Notice> list = nDao.selectList(con);
+		ArrayList<Notice> list = nDao.selectList(con,currentPage,limit);
 		
 		close(con);
 		
@@ -56,14 +67,14 @@ public class NoticeService {
 	 * @param keyword
 	 * @return
 	 */
-	public ArrayList<Notice> searchNotice(String category, String keyword) {
+	public ArrayList<Notice> searchNotice(String category, String keyword, int currentPage, int limit) {
 		
 		Connection con = getConnection();
 		
 		ArrayList<Notice> list = null;
 		
 		if(category.length() > 0) {
-			list = nDao.searchNotice(con,category,keyword);
+			list = nDao.searchNotice(con,category,keyword,currentPage,limit);
 		}else {
 			list = nDao.selectList(con);
 		}
