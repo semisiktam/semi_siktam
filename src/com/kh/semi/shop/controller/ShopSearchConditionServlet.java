@@ -36,45 +36,48 @@ public class ShopSearchConditionServlet extends HttpServlet {
 				response.setContentType("application/json; charset=UTF-8");
 				
 				String[] tlist = request.getParameterValues("tlist");
-				String[] table = new String[5];
-				String[] category = new String[12];
-				String[] price = new String[4];
+				String[] clist = request.getParameterValues("clist");
+				String[] plist = request.getParameterValues("plist");
 				
-				for(int i=0; i<tlist.length; i++) {
-					if(tlist[i].equals("1인석")||tlist[i].equals("2인석")||
-							tlist[i].equals("칸막이")||tlist[i].equals("바테이블")||tlist[i].equals("셀프주문")) {
-							table[i] = tlist[i];
-							System.out.print(table[i]);
-					}
-					
-					if(tlist[i].equals("한식")||tlist[i].equals("중식")||tlist[i].equals("분식")||tlist.equals("양식")
-							||tlist[i].equals("일식")||tlist[i].equals("카페/디저트")||tlist[i].equals("치킨")||
-							tlist[i].equals("피자")||tlist[i].equals("족발/보쌈")||tlist[i].equals("도시락")||
-							tlist[i].equals("찜/탕")||tlist[i].equals("프랜차이즈")) {
-						category[i] = tlist[i];
-						System.out.print(category[i]);
-					}
-					
-					if(tlist[i].equals("10000")||tlist[i].equals("10000~20000")
-							||tlist.equals("20000~30000")||tlist.equals("30000")) {
-						price[i] = tlist[i];
-						System.out.print(price[i]);
-					}
-				}
+				System.out.println(tlist);
+				System.out.println(clist);
+				System.out.println(plist);
 				
-				ArrayList<Shop> list = new ShopService().SearchCondition(table,category,price);
+//				for(int i=0; i<tlist.length; i++) {
+//					if(tlist[i].equals("1인석")||tlist[i].equals("2인석")||
+//							tlist[i].equals("칸막이")||tlist[i].equals("바테이블")||tlist[i].equals("셀프주문")) {
+//							table[i] = tlist[i];
+//							System.out.print(table[i]);
+//					}
+//					
+//					if(tlist[i].equals("한식")||tlist[i].equals("중식")||tlist[i].equals("분식")||tlist[i].equals("양식")
+//							||tlist[i].equals("일식")||tlist[i].equals("카페/디저트")||tlist[i].equals("치킨")||
+//							tlist[i].equals("피자")||tlist[i].equals("족발/보쌈")||tlist[i].equals("도시락")||
+//							tlist[i].equals("찜/탕")||tlist[i].equals("프랜차이즈")) {
+//						category[i] = tlist[i];
+//						System.out.print(category[i]);
+//					}
+//					
+//					if(tlist[i].equals("10000")||tlist[i].equals("10000~20000")
+//							||tlist[i].equals("20000~30000")||tlist[i].equals("30000")) {
+//						price[i] = tlist[i];
+//						System.out.print(price[i]);
+//					}
+//				}
+				
+				/*ArrayList<Shop> list = new ShopService().SearchCondition(table,category,price);
 				
 				String page="";
 				
 				if(list != null) {
-					page = "view/searchCondition";
+					page = "view/searchCondition.jsp";
 					request.setAttribute("list", list);
 					
 				}else {
 					
-				}
+				}*/
 				
-				request.getRequestDispatcher(page).forward(request, response);
+//				request.getRequestDispatcher(page).forward(request, response);
 				response.getWriter().print(tlist);
 				
 			}

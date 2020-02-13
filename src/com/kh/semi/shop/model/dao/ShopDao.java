@@ -59,8 +59,8 @@ public class ShopDao {
 				s.setsPhone(rset.getString("sPhone"));
 				s.setsInfo(rset.getString("sInfo"));
 				s.setOwnerId(rset.getString("ownerId"));
-				s.setsTime(rset.getDate("sTime"));
-				s.seteTime(rset.getDate("eTime"));
+				s.setsTime(rset.getString("sTime"));
+				s.seteTime(rset.getString("eTime"));
 				s.setShopDay(rset.getString("shopDay"));
 				s.setMenuCategory(rset.getString("menuCategory"));
 				s.setTableType(rset.getString("tableType"));
@@ -132,15 +132,25 @@ public class ShopDao {
 			for(int k=0; k<price.length; k++) {
 				if(price[k].equals("10000")) {
 					pstmt.setInt(18, 10000);
+				}else {
+					pstmt.setInt(18, 0);
 				}if(price[k].equals("10000~20000")) {
 					pstmt.setInt(19, 10000);
 					pstmt.setInt(20, 20000);
+				}else {
+					pstmt.setInt(19, 0);
+					pstmt.setInt(20, 0);
 				}if(price[k].equals("20000~30000")) {
 					pstmt.setInt(21, 20000);
 					pstmt.setInt(22, 30000);
+				}else {
+					pstmt.setInt(21, 0);
+					pstmt.setInt(22, 0);
 				}if(price[k].equals("30000")) {
 					pstmt.setInt(23, 30000);
-				}	
+				}else {
+					pstmt.setInt(23, 0);
+				}
 			}
 			
 			rset = pstmt.executeQuery();
@@ -149,25 +159,27 @@ public class ShopDao {
 			while(rset.next()) {
 				Shop s = new Shop();
 				
-				s.setShopPid(rset.getString("shop_Pid"));
-				s.setUserId(rset.getString("userId"));
-				s.setShopName(rset.getString("shop_Name"));
-				s.setShopImg(rset.getString("shop_Img"));
-				s.setsAddr(rset.getString("shop_Addr"));
-				s.setsPhone(rset.getString("shop_Phone"));
-				s.setsInfo(rset.getString("shop_Info"));
-				s.setOwnerId(rset.getString("owner_Id"));
-				s.setsTime(rset.getDate("shop_starytime"));
-				s.seteTime(rset.getDate("shop_endtime"));
-				s.setShopDay(rset.getString("shop_Day"));
-				s.setMenuCategory(rset.getString("menu_Category"));
-				s.setTableType(rset.getString("table_Type"));
-				s.setAvgPay(rset.getInt("avg_Pay"));
-				s.setOutYn(rset.getString("out_Yn"));
+				s.setShopPid(rset.getString("SHOP_PID"));
+				s.setUserId(rset.getString("USERID"));
+				s.setShopName(rset.getString("SHOP_NAME"));
+				s.setShopImg(rset.getString("SHOP_IMG"));
+				s.setsAddr(rset.getString("SHOP_ADDR"));
+				s.setsPhone(rset.getString("SHOP_PHONE"));
+				s.setsInfo(rset.getString("SHOP_INFO"));
+				s.setOwnerId(rset.getString("OWNER_ID"));
+				s.setsTime(rset.getString("SHOP_STARTTIME"));
+				s.seteTime(rset.getString("SHOP_ENDTIME"));
+				s.setShopDay(rset.getString("SHOP_DAY"));
+				s.setMenuCategory(rset.getString("MENU_CATEGORY"));
+				s.setTableType(rset.getString("TABLE_TYPE"));
+				s.setAvgPay(rset.getInt("AVG_PAY"));
+				s.setOutYn(rset.getString("OUT_YN"));
 
 				list.add(s);
 			}
 			
+				System.out.println(list);
+				
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
