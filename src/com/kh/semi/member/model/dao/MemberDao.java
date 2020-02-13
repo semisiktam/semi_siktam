@@ -141,4 +141,29 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+	public int upDateMember(Connection con, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("upDateMember");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getPassword());
+			pstmt.setString(2, m.getAddr());
+			pstmt.setString(3, m.getName());
+			pstmt.setString(4, m.getPhone());
+			pstmt.setString(5, m.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
