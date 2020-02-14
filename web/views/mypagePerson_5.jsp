@@ -32,7 +32,8 @@
                 </ul>
             </div>
         </div>
-
+		
+		<form action="/siktam/selectUserReserv.re" method="post" >
         <div id="modal1">
             <div class="modal_content">
                 <h2>예약 내역</h2>
@@ -98,6 +99,7 @@
             </div>
             <div class="modal_layer"></div>
         </div>
+        </form>
 
         <div id="modal2">
             <div class="modal_content">
