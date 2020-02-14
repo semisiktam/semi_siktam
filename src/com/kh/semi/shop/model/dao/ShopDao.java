@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.semi.common.SelectQueryMaker;
 import com.kh.semi.member.model.dao.MemberDao;
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.shop.model.vo.Shop;
 public class ShopDao {
 	
@@ -235,5 +236,38 @@ public class ShopDao {
 		}
 		
 		return list;
+	}
+
+
+	public ArrayList<Shop> selectList(Connection con, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rset=null;
+		ArrayList<Shop> s=null;
+		String sql=prop.getProperty("selectList");
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				s=new ArrayList<Shop>();
+				Shop shop=new Shop(rset.getString("SHOP_PID"),rset.getString("USERID"),
+									rset.getString("SHOP_NAME"),rset.getString("SHOP_IMG"),
+									rset.getString("SHOP_ADDR"),
+									rset.getString("SHOP_PHONE"),rset.getString("SHOP_INFO"),
+									rset.getString("OWNER_ID"),rset.getString("SHOP_STARTTIME"),
+									rset.getString("SHOP_ENDTIME"),rset.getString("SHOP_DAY"),
+									rset.getString("MENU_CATEGORY"),rset.getString("TABLE_TYPE"),
+									rset.getInt("AVG_PAY"),rset.getString("OUT_YN")
+									);
+				s.add(shop);
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return s;
 	}
 }

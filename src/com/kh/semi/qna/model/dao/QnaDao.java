@@ -1,5 +1,7 @@
 package com.kh.semi.qna.model.dao;
 
+import static com.kh.semi.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -156,6 +158,56 @@ public class QnaDao {
 		
 		
 		return list;
+	}
+
+	public int insertQna(Connection con, Qna q) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertQna");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, q.getUserId());
+			pstmt.setString(2, q.getqTitle());
+			pstmt.setString(3, q.getqContext());
+			
+			result = pstmt.executeUpdate();
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	
+	public int updateQna(Connection con, Qna q) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("qnaUpdate");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, q.getqTitle());
+			pstmt.setString(2, q.getqContext());
+			pstmt.setInt(3, q.getqNo());
+
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	

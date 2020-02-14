@@ -78,6 +78,10 @@
                     </form>
                 	</div> -->
                    <div class="list">
+                   <% if(m != null && m.getUserId().equals(q.getUserId())){ %>
+                       <input type="button" value="수정" onclick="location.href='qUpdateList.qn?qno=<%=q.getqNo() %>'">
+                       <input type="button" value="삭제" onclick="location.href='qDelete.qn'">
+                   <% } %>   
                        <input type="button" value="목록" onclick="location.href='QnaListServlet'">
                    </div>
             </div>

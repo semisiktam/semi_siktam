@@ -22,7 +22,7 @@
             <div id="imgDiv"><div id="storeImg"></div></div>
             <div id="storeInfo1">
                 <ul class="storeInfo2">
-                    <li id="userName"><b>유승제</b>님 안녕하세요</li>
+                    <li id="userName"><b><%= m.getName() %></b>님 안녕하세요</li>
                     <li><b>내 프로필</b>
                     <a href="registerPerson_5_7.jsp"><input type="button" class="btn1" value="수정하기"></a></li><hr>
                     <li><b>예약 내역</b>
@@ -32,7 +32,8 @@
                 </ul>
             </div>
         </div>
-
+		
+		<form action="/siktam/selectUserReserv.re" method="post" >
         <div id="modal1">
             <div class="modal_content">
                 <h2>예약 내역</h2>
@@ -98,6 +99,7 @@
             </div>
             <div class="modal_layer"></div>
         </div>
+        </form>
 
         <div id="modal2">
             <div class="modal_content">

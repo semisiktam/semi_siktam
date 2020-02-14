@@ -221,6 +221,7 @@
 			}
 		    
 		    function validate(){
+		    	console.log('test3');
 		    	var id = document.getElementById("id");
 		    	var pass1 = document.getElementById("password1");
 		    	var pass2 = document.getElementById("password2");
@@ -323,6 +324,7 @@
 	            if(!re.test(ele.value)){ 
 	                alert(msg);
 	                ele.select();
+	                console.log("ttses2");
 	                return false;
 	            }
 	            return true;

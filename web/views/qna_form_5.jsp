@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>문의사항 폼</title>
+    <title>문의사항 수정</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/qna_form_5.css">
     <script src="/siktam/resources/js/jquery-3.4.1.min.js"></script>
@@ -28,7 +28,7 @@
                             <tbody>
                                 <tr>
                                     <td class="qna_write_td">작성자</td>
-                                    <td ><%=m.getName() %></td>
+                                    <td><input type="text" name="writer" value="<%=m.getUserId() %>"></td>
                                 </tr>
                                 <tr>
                                     <td class="qna_write_td">제목</td>

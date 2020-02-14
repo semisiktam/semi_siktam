@@ -16,14 +16,14 @@
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
-            <form action="" method="post">
+            <form action="/siktam/mUpdate.me" method="post" onsubmit="return validate();">
                 <div class="wrap" align="center">
                     <h1 align="center">회원정보 수정</h1>
                     <h4 align="center">수정정보 입력</h4><br>
                 <table class="regist">
                     <tr>
                         <th align="left">아이디 </th>
-                        <td><input type="text" class="form-control" name="id" value="tamhee0110" disabled></td>      
+                        <td><input type="text" class="form-control" name="id" value="<%=m.getUserId() %>" disabled></td>      
                     </tr>
                     <tr>
                         <th align="left">비밀번호 </th>
@@ -50,12 +50,15 @@
                      
                     <tr>
                         <th align="left">이름 </th>
-                        <td><input type="text" class="form-control" name="name" value="이탐희"></td>       
+                        <td><input type="text" class="form-control" name="name" value="<%=m.getName()%>"></td>       
                     </tr>
 
                     <tr>
                         <th align="left">휴대폰 번호 </th>
-                        <td><input type="tel" class="form-control" name="tel" value="01012345678" disabled></td>
+                        <td><input type="text" class="tel-control" id="tel1" name="tel1" maxlength="3"> -
+                        <input type="text" class="tel-control" id="tel2" name="tel2" maxlength="4"> -
+                        <input type="text" class="tel-control" id="tel3" name="tel3" maxlength="4">
+                        </td>
                         <!-- <td><button id="confirm">휴대폰인증</button></td> -->
                     </tr>
                     <!-- <tr>
@@ -64,13 +67,28 @@
                     </tr> -->
          
                 </table><br>
-                <input type="submit" class="btn" value="수정" onclick="return check();">
+                <input type="submit" class="btn" value="수정">
                 <input type="reset" class="btn" value="탈퇴" onclick="location.href = 'mypagePerson_5.jsp'">
 
                 <br><br>
             </div>
        </form>
        <script>
+       
+       $(function(){
+    	   var addressArr = '<%= m.getAddr() %>'.split(', ');
+			
+			$('#zipCode').val(addressArr[0]);
+			$('#address1').val(addressArr[1]);
+			$('#address2').val(addressArr[2]);
+			
+			var phoneArr = '<%= m.getPhone()%>'.split('-');
+			
+			$('#tel1').val(phoneArr[0]);
+			$('#tel2').val(phoneArr[1]);
+			$('#tel3').val(phoneArr[2]);
+			
+       })
     // 참조 API : http://postcode.map.daum.net/guide
 		function addrSearch() {
 	        new daum.Postcode({

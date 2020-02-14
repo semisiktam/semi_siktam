@@ -1,6 +1,7 @@
 package com.kh.semi.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.member.model.dao.MemberDao;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
 
@@ -44,9 +44,16 @@ public class MemberInsertServlet extends HttpServlet {
       Member m = new Member(userId, password, addr, name, pid, phone);
       
       System.out.println("가입 회원 정보 확인 : " + m);
-      new MemberService().insertMember(m);
       
+     int result =  new MemberService().insertMember(m);
       
+      if(result > 0) {
+    	  response.sendRedirect("views/main_6.jsp");
+      }else{
+    	  request.setAttribute("msg", "회원가입실패!");
+    	  PrintWriter out = response.getWriter();
+    	  out.println("<script>alert('error');</script>");
+      }
    }
 
    /**

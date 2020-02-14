@@ -39,7 +39,7 @@
         <li class="dropdown active">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">회원관리 <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/siktam/views/admin_memberList_4.jsp">회원리스트</a></li>
+            <li><a href="/siktam/selectList.me">회원리스트</a></li>
             <li><a href="/siktam/views/admin_storeList_4.jsp">업체리스트</a></li>
             <li><a href="/siktam/views/admin_blackList_4.jsp">블랙리스트</a></li>
             <li><a href="/siktam/views/admin_storeRegister_4.jsp">업체등록관리</a></li>
