@@ -208,29 +208,6 @@ public class QnaDao {
 	}
 
 	
-	public int updateQna(Connection con, Qna q) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("qnaUpdate");
-		
-		try {
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, q.getqTitle());
-			pstmt.setString(2, q.getqContext());
-			pstmt.setInt(3, q.getqNo());
-
-			result = pstmt.executeUpdate();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
 
 	
 	
