@@ -66,6 +66,9 @@
                        </tbody>
                    </table>
                    <div class="list">
+                   		<% if(m != null && m.getUserId().equals("4dich")){ %>
+                   	   <input type="button" value="수정" onclick="location.href='nUpView.no?nno=<%=n.getnNo()%>'">
+                   	   <% } %>
                        <input type="button" value="목록" onclick="location.href='nselectList.no?currentPage=1'">
                    </div>
             </div>

@@ -79,21 +79,12 @@ public class NoticeSearchServlet extends HttpServlet {
 		
 		if(list != null) {
 			
-			if(mem != null && mem.getUserId().equals("4dich")) {
-				page = "views/admin_notice_4.jsp";
-				request.setAttribute("list", list);
-				limit=list.size();
-				PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
-				System.out.println(pi);
-				request.setAttribute("pi", pi);
-			}else {
-				page = "views/notice_5.jsp";
-				request.setAttribute("list", list);
-				limit=list.size();
-				PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
-		
-				request.setAttribute("pi", pi);
-			}
+			page = "views/notice_5.jsp";
+			request.setAttribute("list", list);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
+			request.setAttribute("pi", pi);
+			
 		}else {
 			request.setAttribute("msg", "공지사항 검색 에러 ");
 		}
