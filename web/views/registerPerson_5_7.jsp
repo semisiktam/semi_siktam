@@ -16,7 +16,7 @@
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
-            <form action="/siktam/mUpdate.me" method="post">
+            <form action="/siktam/mUpdate.me" method="post" onsubmit="return validate();">
                 <div class="wrap" align="center">
                     <h1 align="center">회원정보 수정</h1>
                     <h4 align="center">수정정보 입력</h4><br>
@@ -67,7 +67,7 @@
                     </tr> -->
          
                 </table><br>
-                <input type="submit" class="btn" value="수정" onclick="return check();">
+                <input type="submit" class="btn" value="수정">
                 <input type="reset" class="btn" value="탈퇴" onclick="location.href = 'mypagePerson_5.jsp'">
 
                 <br><br>

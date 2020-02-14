@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.*,com.kh.semi.qna.model.vo.*"%>
+    
+    <%
+    	Qna q = (Qna)request.getAttribute("qna");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>문의사항 수정</title>
+    <title>문의사항 폼</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/qna_form_5.css">
     <script src="/siktam/resources/js/jquery-3.4.1.min.js"></script>
@@ -14,7 +18,9 @@
 <body>
     <!-- 헤더 시작 -->
     <%@ include file="common/header.jsp" %>
-
+    
+	<% if(m != null && m.getUserId().equals(q.getUserId())){ %>
+	
     <!-- 이 안에 작업하기 -->
     <div class="wrap" align="center">
     
@@ -22,37 +28,50 @@
                 <h1>문의사항</h1>
             </div>
             <div class="qnaDiv">
-                <form action="<%= request.getContextPath() %>/qInsert.qn" method="post">
+                <form id="updateForm" method="post">
                     <div id="qna_write">
                         <table class="qna_tab">
                             <tbody>
                                 <tr>
+                                	<input type="hidden" name="qno" value="<%=q.getqNo() %>">
                                     <td class="qna_write_td">작성자</td>
-                                    <td><input type="text" name="writer" value="<%=m.getUserId() %>"></td>
+                                    <td><input type="text" name="writer" value="<%=q.getUserId()%>" disabled="disabled"></td>
                                 </tr>
                                 <tr>
                                     <td class="qna_write_td">제목</td>
                                     <td>
-                                        <input type="text" name="qtitle" id="qna_write_title_input">
+                                        <input type="text" name="qtitle" id="qna_write_title_input" value="<%=q.getqTitle()%>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="qna_write_td">내용</td>
                                     <td>
-                                        <textarea name="qcontext" class="qna_write_textarea"></textarea>
+                                        <textarea name="qcontext" class="qna_write_textarea"><%=q.getqContext() %></textarea>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div id="confirm">
-                            <input type="submit" id="submitBtn" value="등록하기">
+                            <input type="submit" id="submitBtn" onclick="complete();" value="작성완료">
                         </div>
+                        <script>
+                        
+							function complete(){
+								$("#updateForm").attr("action","<%=request.getContextPath() %>/qUpdate.qn");
+								
+							}
+							
+					
+						</script>
+                   
                     </div>
                 </form>
             </div>
             
     </div>
-
+	<% } else {
+		request.setAttribute("msg", "관계자 외에 접근이 불가능한 페이지입니다.");
+	 } %>
 
 
 

@@ -1,7 +1,8 @@
-package com.kh.semi.shop.controller;
+package com.kh.semi.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.shop.model.service.ShopService;
-import com.kh.semi.shop.model.vo.Shop;
+import com.kh.semi.member.model.service.MemberService;
 
 /**
- * Servlet implementation class ShopSearchConditionServlet
+ * Servlet implementation class selectUserReservServlet
  */
-@WebServlet("/SearchCondition.sc")
-public class ShopSearchConditionServlet extends HttpServlet {
+@WebServlet("/selectUserReserv.re")
+public class selectUserReservServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopSearchConditionServlet() {
+    public selectUserReservServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +31,14 @@ public class ShopSearchConditionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 인코딩
-				request.setCharacterEncoding("UTF-8");
-				response.setContentType("application/json; charset=UTF-8");
-				
-				String keyword = request.getParameter("keyword");
-				String[] tlist = request.getParameterValues("tlist");
-				String[] clist = request.getParameterValues("clist");
-				String[] plist = request.getParameterValues("plist");			
-				
-				ArrayList<Shop> list = new ShopService().SearchCondition(tlist, clist, plist);
-				
-				
-				response.getWriter().print(tlist);
-				
-			}
-
+		Map<String,Object> hmap = new HashMap<String,Object>();
+		
+		MemberService ms = new MemberService();
+		
+//		hmap = ms.selectUserReserve();
+		
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

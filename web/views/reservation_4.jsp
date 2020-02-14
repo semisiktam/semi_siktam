@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="java.util.*, com.kh.semi.menu.model.vo.*"%>
+	pageEncoding="UTF-8" import="java.util.*, com.kh.semi.reservation.model.vo.*"%>
 
-<%ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("list");%>
+<%ArrayList<Reservation> list = (ArrayList<Reservation>)request.getAttribute("list");%>
 
 <!DOCTYPE html>
 <html>

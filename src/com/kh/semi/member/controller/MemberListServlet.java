@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.member.model.vo.MemberPageInfo;
 
 /**
  * Servlet implementation class MemberListServlet
@@ -31,7 +32,7 @@ public class MemberListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Member> mlist = null;
+		ArrayList<Member> list = new ArrayList<Member>();
 		MemberService ms = new MemberService();
 		
 		int startPage;
@@ -46,22 +47,26 @@ public class MemberListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		int memberListCount = ms.getMemberListCount();
+		int listCount = ms.getListCount();
 		
-		System.out.println("총 페이지 수 : " + memberListCount);
+		System.out.println("총 페이지 수 : " + listCount);
 		
-		maxPage = (int)((double)memberListCount/limit + 0.9);
+		maxPage = (int)((double)listCount/limit + 0.9);
 		startPage = ((int)((double)currentPage / limit + 0.9) - 1) * limit + 1;
 		endPage = startPage + limit - 1;
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
 		
-		mlist = ms.selectMemberList(currentPage, limit);
+		list = ms.selectList(currentPage, limit);
 		
 		String page = "";
-		if(mlist!=null) {
+		if(list!=null) {
 			page="views/admin_memberList_4.jsp";
+			request.setAttribute("list", list);
+			
+			MemberPageInfo mpi = new MemberPageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
+			request.setAttribute("mpi", mpi);
 		}else {
 			page="views/common/errorPage.jsp";
 			request.setAttribute("msg", "회원 목록 조회 실패");

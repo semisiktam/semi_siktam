@@ -20,7 +20,7 @@
             <div id="imgDiv"><div id="storeImg"></div></div>
             <div id="storeInfo1">
                 <ul class="storeInfo2">
-                    <li id="userName"><b>유승제</b>님 안녕하세요</li>
+                    <li id="userName"><b><%=m.getName() %></b>님 안녕하세요</li>
                     <li><b>내가 등록한 업체</b>
                     <input type="button" class="btn1" value="확인하기" onclick="test5();"></li><hr>
                     <li><b>예약 내역</b>
@@ -50,7 +50,7 @@
                     </thead>
                     <tbody>
                         <tr class="reservationTr">
-                            <td>역전우동</td>
+                            <td></td>
                             <td>안도건</td>
                             <td>010-2222-3333</td>
                             <td>1인 테이블</td>
@@ -223,16 +223,18 @@
                          </tr>
                     </thead>
                     <tbody>
+                    <%for(Shop s: slist){%>
                         <tr class="reservationTr">
-                            <td>역전우동</td>
-                            <td>605-55-12354</td>
-                            <td>한식</td>
-                            <td>02-1234-5678</td>
-                            <td>서울 강남구 테헤란로10길 25</td>
+                            <td><%=s.getShopName() %></td>
+                            <td><%=s.getOwnerId() %></td>
+                            <td><%=s.getMenuCategory() %></td>
+                            <td><%=s.getsPhone() %></td>
+                            <td><%=s.getsAddr() %></td>
                             <td><input type="button" value="수정" class="confirm" id="change" onclick="location.href='registerCompany_2_5.jsp'">
                                 <input type="button" value="삭제" class="confirm" id="cancel"></td>
                         </tr>
-                        <tr class="reservationTr">
+                        <%} %>
+                        <!-- <tr class="reservationTr">
                             <td>곱창이야기</td>
                             <td>645-88-44154</td>
                             <td>한식</td>
@@ -249,7 +251,7 @@
                             <td>서울 서대문구 명물길 20</td>
                             <td><input type="button" value="수정" class="confirm" id="change" onclick="location.href='registerCompany_2_5.jsp'">
                                 <input type="button" value="삭제" class="confirm" id="cancel"></td>
-                        </tr>
+                        </tr> -->
                         
                     </tbody>
                 </table>

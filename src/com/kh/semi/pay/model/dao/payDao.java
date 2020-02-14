@@ -41,7 +41,6 @@ public class payDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, "P1");
 			rset = pstmt.executeQuery();
-			System.out.println(p);
 			
 			if(rset.next()) {
 				p = new Pay();

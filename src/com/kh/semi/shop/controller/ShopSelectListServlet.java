@@ -8,21 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.shop.model.service.ShopService;
 import com.kh.semi.shop.model.vo.Shop;
 
 /**
- * Servlet implementation class ShopSearchConditionServlet
+ * Servlet implementation class ShopSelectListServlet
  */
-@WebServlet("/SearchCondition.sc")
-public class ShopSearchConditionServlet extends HttpServlet {
+@WebServlet("/sSelectList.sh")
+public class ShopSelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopSearchConditionServlet() {
+    public ShopSelectListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +33,16 @@ public class ShopSearchConditionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 인코딩
-				request.setCharacterEncoding("UTF-8");
-				response.setContentType("application/json; charset=UTF-8");
-				
-				String keyword = request.getParameter("keyword");
-				String[] tlist = request.getParameterValues("tlist");
-				String[] clist = request.getParameterValues("clist");
-				String[] plist = request.getParameterValues("plist");			
-				
-				ArrayList<Shop> list = new ShopService().SearchCondition(tlist, clist, plist);
-				
-				
-				response.getWriter().print(tlist);
-				
-			}
-
+		HttpSession session=request.getSession();
+		Member m=(Member)session.getAttribute("member");
+		System.out.println(m);
+		ArrayList<Shop> s=new ShopService().selectList(m.getUserId());
+		if(s!=null) {
+			System.out.println(s);
+			session.setAttribute("shop", s);
+			response.sendRedirect("/siktam/views/main_6.jsp");
+		}
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

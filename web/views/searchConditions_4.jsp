@@ -186,6 +186,7 @@
             plist.push($(this).val());
          });
         
+        
          console.log(tlist);
          $.ajax({
             url:"/siktam/SearchCondition.sc",
