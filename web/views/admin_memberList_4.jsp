@@ -21,8 +21,17 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/siktam/resources/css/admin_4.css">
+  <link rel="stylesheet" href="/siktam/resources/css/notice_5.css">
 
   <style>
+  .wrap{
+  	padding-top: 50px;
+  }
+  
+  th, td{
+  	font-size: 12px;
+  }
+
   </style>
 </head>
 
@@ -39,16 +48,15 @@
                         <thead>
                             <tr>
                               <th>아이디</th>
-                              <th>비밀번호</th>
-                              <th>주소</th>
-                              <th>이름</th>
+                              <th width="110px">주소</th>
+                              <th width="110px">이름</th>
                               <th>주민번호</th>
                               <th>전화번호</th>
-                              <th>업체유무</th>
-                              <th>마일리지</th>
-                              <th>쿠폰번호</th>
-                              <th>블랙리스트유무</th>
-                              <th>회원탈퇴유무</th>
+                              <th width="60px">업체</th>
+                              <th width="110px">마일리지</th>
+                              <th>쿠폰</th>
+                              <th width="110px">블랙리스트</th>
+                              <th width="110px">탈퇴</th>
                               <th>가입일</th>
                             </tr>
                         </thead>
@@ -56,7 +64,6 @@
                             <% for(Member mem : list){ %>
 							<tr>
 								<td><%= mem.getUserId() %></td>
-								<td><%= mem.getPassword() %></td>
 								<td><%= mem.getAddr() %></td>		
 								<td><%= mem.getName() %></td>		
 								<td><%= mem.getPid() %></td>		
@@ -66,12 +73,14 @@
 								<td><%= mem.getCouponNo() %></td>		
 								<td><%= mem.getBlackYN() %></td>		
 								<td><%= mem.getOutYN() %></td>		
-								<td><%= mem.getEnrolldate() %></td>		
+								<td><%= mem.getEnrolldate() %></td>
 							</tr>
 							<% } %>
                         </tbody>
                     </table>
             </div>
+            
+            <br>
             
             <%-- 페이지 처리 --%>
 			<div class="pagingArea" align="center">
@@ -85,7 +94,7 @@
 				<% for(int p = startPage; p <= endPage; p++){
 						if(p == currentPage){
 				%>
-					<button disabled><%= p %></button>
+					<button disabled style="background: gray; color: white"><%= p %></button>
 				<%      }else{ %>
 					<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%= p %>'"><%= p %></button>
 				<%      } %>
@@ -99,7 +108,6 @@
 				<button onclick="location.href='<%= request.getContextPath() %>/selectList.,me?currentPage=<%= maxPage %>'">>></button>
 				
 			</div>
-            
             
             <fieldset>
                 <!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
@@ -125,8 +133,8 @@
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
 				//console.log($(this).parent().children().eq(0).text());
-				var nno = $(this).parent().children().eq(0).text();
-				location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
+				//var nno = $(this).parent().children().eq(0).text();
+				//location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
 			});
 		});
 		
