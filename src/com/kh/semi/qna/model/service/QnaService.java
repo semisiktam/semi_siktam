@@ -15,10 +15,10 @@ public class QnaService {
 	 * 문의사항 조회용
 	 * @return
 	 */
-	public ArrayList<Qna> selectList() {
+	public ArrayList<Qna> selectList(int currentPage, int limit) {
 		Connection con = getConnection();
 		
-		ArrayList<Qna> list = qDao.selectList(con);
+		ArrayList<Qna> list = qDao.selectList(con,currentPage,limit);
 		
 		close(con);
 		
@@ -52,7 +52,7 @@ public class QnaService {
 		return list;
 	}
 
-	public int insertQna(Qna q) {
+public int insertQna(Qna q) {
 		
 		Connection con = getConnection();
 		int result = qDao.insertQna(con,q);
@@ -86,6 +86,27 @@ public class QnaService {
 		close(con);
 		
 		return q;
+	}
+
+	public int qnaDelete(int q) {
+		Connection con = getConnection();
+		int result = qDao.qnaDelete(con,q);
+		
+		if(result >= 1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = qDao.getListCount(con);
+		
+		close(con);
+		
+		return listCount;
 	}
 
 }

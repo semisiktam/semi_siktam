@@ -4,7 +4,7 @@
 <style>
 .container-fluid {
   padding: 10px;
-  padding-left: 20%;
+  padding-left: 15%;
   padding-right: 15%;
   height: 70px;
 }
@@ -23,6 +23,14 @@
 
 .navbar-inverse .navbar-nav>.active>a{
 	color: white;
+}
+
+.nav{
+    margin-right: 0;
+    /* border: 1px solid black; */
+    text-align: right;
+    vertical-align: top;
+    float: right;
 }
 
 </style>

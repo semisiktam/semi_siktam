@@ -219,7 +219,7 @@ public class MemberDao {
       return list;
    }
 
-   public int getListCount(Connection con) {
+    public int getListCount(Connection con) {
       int listCount = 0;
       Statement stmt = null;
       ResultSet rset = null;

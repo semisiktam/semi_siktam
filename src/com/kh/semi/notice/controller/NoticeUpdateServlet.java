@@ -1,7 +1,6 @@
-package com.kh.semi.shop.controller;
+package com.kh.semi.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.shop.model.service.ShopService;
-import com.kh.semi.shop.model.vo.Shop;
+import com.kh.semi.notice.model.service.NoticeService;
+import com.kh.semi.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class ShopSearchConditionServlet
+ * Servlet implementation class NoticeUpdateServlet
  */
-@WebServlet("/SearchCondition.sc")
-public class ShopSearchConditionServlet extends HttpServlet {
+@WebServlet("/nUpdate.no")
+public class NoticeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopSearchConditionServlet() {
+    public NoticeUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +30,26 @@ public class ShopSearchConditionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 인코딩
-				request.setCharacterEncoding("UTF-8");
-				response.setContentType("application/json; charset=UTF-8");
-				
-//				String keyword = request.getParameter("keyword");
-				String[] tlist = request.getParameterValues("tlist");
-				String[] clist = request.getParameterValues("clist");
-				String[] plist = request.getParameterValues("plist");			
-				
-				ArrayList<Shop> list = new ShopService().SearchCondition(tlist, clist, plist);
-				
-				
-				response.getWriter().print(tlist);
-				
-			}
-
+		
+		String ntitle = request.getParameter("ntitle");
+		String ncontext = request.getParameter("ncontext");
+		int nno = Integer.parseInt(request.getParameter("nno"));
+		
+		Notice n = new Notice();
+		n.setnNo(nno);
+		n.setnContext(ncontext);
+		n.setnTitle(ntitle);
+		
+		int result = new NoticeService().updateNotice(n);
+		System.out.println(result);
+		
+		if(result>0) {
+			response.sendRedirect("/siktam/nselectOne.no?nno="+nno);
+		}else {
+			request.setAttribute("msg", "업데이트 실패");
+		}
+		
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

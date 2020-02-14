@@ -79,3 +79,12 @@ tbody{
     font-size:14px;
     margin-top:10px;
 }
+#deleteBtn{
+    background: rgb(13, 78, 100);
+    width:80px;
+    height: 35px;
+    color: white;
+    font-weight: bold;
+    font-size:14px;
+    margin-top:10px;
+}

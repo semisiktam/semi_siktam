@@ -1,7 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'master' of https\://github.com/semisiktam/semi_siktam.git
 eclipse.preferences.version=1
 encoding//src/config/notice-query.properties=UTF-8
-encoding//src/config/shop-query.properties=UTF-8
-<<<<<<< HEAD
+encoding//src/config/pay-query.properties=UTF-8
 encoding//src/config/qna-query.properties=UTF-8
-=======
->>>>>>> refs/remotes/origin/master
+encoding//src/config/reservation-query.properties=UTF-8
+encoding//src/config/shop-query.properties=UTF-8

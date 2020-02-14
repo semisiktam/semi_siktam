@@ -82,6 +82,62 @@ public class NoticeService {
 		
 		return list;
 	}
+
+
+	public int insertNotice(Notice n) {
+		
+		Connection con = getConnection();
+		
+		int result = nDao.insertNotice(con,n);
+		
+		if(result >= 1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+
+	public int updateNotice(Notice n) {
+		
+		Connection con = getConnection();
+		
+		int result = nDao.updateNotice(con,n);
+		
+		if(result >= 1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+
+	public Notice updateView(int nno) {
+		Connection con = getConnection();
+		
+		Notice n = nDao.selectOne(con, nno);
+		
+		close(con);
+		
+		return n;
+	}
+
+
+	public int deleteNotice(int nno) {
+		
+		Connection con = getConnection();
+		
+		int result = nDao.deleteNotice(con,nno);
+		
+		if(result >= 1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 	
 	
 	
