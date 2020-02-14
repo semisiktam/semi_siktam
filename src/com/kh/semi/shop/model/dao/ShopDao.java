@@ -130,12 +130,12 @@ public class ShopDao {
 		String avgPay6 = null;
 		
 		if(plist == null) {
-			avgPay1 = "0";
-			avgPay2 = "0";
-			avgPay3 = "1";
-			avgPay4 = "0";
-			avgPay5 = "0";
-			avgPay6 = "0";
+			query = new SelectQueryMaker.Builder()
+					.select().column("*").enter()
+					.from().tableName("Shop").enter()
+					.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+					.and().column("MENU_CATEGORY").in().condition(clist).enter()
+					.build();
 		}else {
 			for(int i=0; i<plist.length; i++) {
 				if(plist[i].equals("10000")) {

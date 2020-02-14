@@ -37,19 +37,17 @@ public class NoticeUpdateServlet extends HttpServlet {
 		
 		Notice n = new Notice();
 		n.setnNo(nno);
-		n.setnTitle(ntitle);
 		n.setnContext(ncontext);
+		n.setnTitle(ntitle);
 		
 		int result = new NoticeService().updateNotice(n);
+		System.out.println(result);
 		
 		if(result>0) {
-			System.out.println(nno);
-			System.out.println("업데이트");
-			response.sendRedirect("nselectOne.no?nno="+nno);
+			response.sendRedirect("/siktam/nselectOne.no?nno="+nno);
 		}else {
-			request.setAttribute("msg", "실패");
+			request.setAttribute("msg", "업데이트 실패");
 		}
-		
 		
 	}
 

@@ -207,6 +207,27 @@ public class QnaDao {
 		return result;
 	}
 
+	public int qnaDelete(Connection con, int q) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("qnaDelete");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, q);
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 
 	

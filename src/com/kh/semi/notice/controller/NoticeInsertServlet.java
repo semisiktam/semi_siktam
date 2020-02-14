@@ -35,10 +35,7 @@ public class NoticeInsertServlet extends HttpServlet {
 		String ntitle = request.getParameter("ntitle");
 		String ncontext = request.getParameter("ncontext");
 		
-		Notice n = new Notice();
-		n.setnWriter(nwriter);
-		n.setnTitle(ntitle);
-		n.setnContext(ncontext);
+		Notice n = new Notice(nwriter,ntitle,ncontext);
 		
 		NoticeService ns = new NoticeService();
 		

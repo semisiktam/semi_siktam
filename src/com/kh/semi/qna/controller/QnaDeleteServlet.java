@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.qna.model.service.QnaService;
+
 /**
  * Servlet implementation class QnaDeleteServlet
  */
@@ -26,8 +28,18 @@ public class QnaDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int q = Integer.parseInt(request.getParameter("qno"));
+		
+		
+		QnaService qs = new QnaService();
+		
+		int result = qs.qnaDelete(q);
+		
+		if(result > 0) {
+			response.sendRedirect("QnaListServlet");
+		}else {
+			request.setAttribute("msg", "삭제 실패");
+		}
 	}
 
 	/**
