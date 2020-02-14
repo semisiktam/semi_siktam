@@ -60,10 +60,11 @@ public class NoticeSearchServlet extends HttpServlet {
 		
 		maxPage = (int)((double)listCount/limit+0.9);
 		
-		startPage = ((int)((double)currentPage/limit+0.9)-1)*limit+1;
+		startPage = ((currentPage-1)/limit)*limit+1;
 		
 		endPage = startPage + limit - 1;
-		
+		System.out.println(startPage);
+		System.out.println(endPage);
 		if(endPage > maxPage) {
 			endPage = maxPage;
 		}
@@ -78,26 +79,19 @@ public class NoticeSearchServlet extends HttpServlet {
 		
 		if(list != null) {
 			
-			if(mem != null && mem.getUserId().equals("4dich")) {
-				page = "views/admin_notice_4.jsp";
-				request.setAttribute("list", list);
-				
-				PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
-				request.setAttribute("pi", pi);
-			}else {
-				page = "views/notice_5.jsp";
-				request.setAttribute("list", list);
-				
-				PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
-				request.setAttribute("pi", pi);
-			}
+			page = "views/notice_5.jsp";
+			request.setAttribute("list", list);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
+			request.setAttribute("pi", pi);
+			
 		}else {
 			request.setAttribute("msg", "공지사항 검색 에러 ");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 
-	/**3
+	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

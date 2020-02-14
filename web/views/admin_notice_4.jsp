@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.notice.model.vo.*"%>
 
+
 <% 
 ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -31,6 +32,39 @@ int endPage = pi.getEndPage();
 <body style="height:1080px">
 
 <%@ include file="common/admin_header.jsp" %>
+
+
+<div class="wrap" align="center">
+            <div class="noticeTitle">
+                <h1>공지사항</h1>
+            </div>
+            <div class="tableDiv">
+                    <table id="listArea">
+                        <thead>
+                            <tr>
+                              <th>번호</th>
+                              <th style="width:70%">제목</th>
+                              <th>작성자</th>
+                              <th>작성일</th>
+                              <th>조회</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(Notice n : list){ %>
+							<tr>
+								<td><%= n.getnNo() %></td>
+								<td><%= n.getnTitle() %></td>
+								<td><%= n.getnWriter() %></td>
+								<td><%= n.getnDate() %></td>
+								<td><%= n.getnCount() %></td>
+							</tr>
+							<% } %>
+                        </tbody>
+                    </table>
+            </div>
+            <br>
+            <%-- 페이지 처리 --%>
+
 
 	<div class="wrap" align="center">
 		<div class="noticeTitle">
@@ -66,6 +100,7 @@ int endPage = pi.getEndPage();
 		</div>
 
 		<%-- 페이지 처리 --%>
+
 		<div class="pagingArea" align="center">
 			<button
 				onclick="location.href='<%=request.getContextPath()%>/nselectList.no?currentPage=1'"><<</button>
@@ -101,6 +136,23 @@ int endPage = pi.getEndPage();
 
 		</div>
 
+            
+            <fieldset>
+                <!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
+                <label for="title"><input type="radio" name="search" value="title">제목</label>
+                <label for="text"><input type="radio" name="search" value="text">내용</label>  -->
+                <select id="searchCondition">
+                	<option>---</option>
+                	<option value="writer">작성자</option>
+                	<option value="title">제목</option>
+                	<option value="context">내용</option>
+                </select>
+                <input type="text" id="keyword">
+                <input type="button" id="searchBtn" value="검색">
+            </fieldset>
+    </div>
+
+
 
 		<fieldset>
 			<!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
@@ -115,6 +167,7 @@ int endPage = pi.getEndPage();
 				id="searchBtn" value="검색">
 		</fieldset>
 	</div>
+
 
 	<script>  
 		$(function(){
@@ -135,6 +188,7 @@ int endPage = pi.getEndPage();
 			location.href="<%=request.getContextPath()%>/nsearchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 		});
 	</script>
+
 
 </body>
 </html>
