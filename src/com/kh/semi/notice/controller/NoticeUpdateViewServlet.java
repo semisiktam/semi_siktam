@@ -39,10 +39,10 @@ public class NoticeUpdateViewServlet extends HttpServlet {
 		String page = "";
 		
 		if(n != null) {
-			page="views/noticeUpdate_7.jsp";
+			page = "views/noticeUpdateForm_7.jsp";
 			request.setAttribute("notice", n);
 		}else {
-			request.setAttribute("msg", "실패");
+			request.setAttribute("msg", "공지글 수정 페이지 오류");
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}

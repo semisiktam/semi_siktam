@@ -52,7 +52,10 @@
                             </tbody>
                         </table>
                         <div id="confirm">
-                            <input type="submit" id="submitBtn" onclick="complete();" value="작성완료">
+                            <input type="submit" id="submitBtn" onclick="complete();" value="수정하기">
+                            <button id="submitBtn" onclick="deleteQna();">삭제하기</button>
+                            <!-- 인풋태그 하면 값이 삭제가 안되고 id deleteBtn으로 하고 submitBtn이랑 속성값 같게해도 id값 동일하게 하고 button으로 변경합니다. -->
+                            <!-- <input type="button" id="deleteBtn" onclick="deleteQna();" value="삭제하기"> -->
                         </div>
                         <script>
                         
@@ -60,7 +63,9 @@
 								$("#updateForm").attr("action","<%=request.getContextPath() %>/qUpdate.qn");
 								
 							}
-							
+							function deleteQna(){
+								$('#updateForm').attr("action","<%=request.getContextPath() %>/qDelete.qn");
+							}
 					
 						</script>
                    

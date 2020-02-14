@@ -1,4 +1,4 @@
-package com.kh.semi.qna.controller;
+package com.kh.semi.notice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.qna.model.service.QnaService;
+import com.kh.semi.notice.model.service.NoticeService;
 
 /**
- * Servlet implementation class QnaDeleteServlet
+ * Servlet implementation class NoticeDeleteServlet
  */
-@WebServlet("/qDelete.qn")
-public class QnaDeleteServlet extends HttpServlet {
+@WebServlet("/nDelete.no")
+public class NoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaDeleteServlet() {
+    public NoticeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,18 +28,18 @@ public class QnaDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int q = Integer.parseInt(request.getParameter("qno"));
+		int nno = Integer.parseInt(request.getParameter("nno"));
 		
+		NoticeService ns = new NoticeService();
 		
-		QnaService qs = new QnaService();
+		int result = ns.deleteNotice(nno);
 		
-		int result = qs.qnaDelete(q);
-		
-		if(result > 0) {
-			response.sendRedirect("QnaListServlet");
+		if(result>0) {
+			response.sendRedirect("/siktam/nselectList.no");
 		}else {
-			request.setAttribute("msg", "삭제 실패");
+			request.setAttribute("msg", "공지사항 삭제 실패");
 		}
+		
 	}
 
 	/**

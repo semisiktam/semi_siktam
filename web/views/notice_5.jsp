@@ -94,7 +94,7 @@
                 <input type="text" id="keyword">
                 <input type="button" id="searchBtn" value="검색">
                 <% if(m != null && m.getUserId().equals("4dich")){ %>
-                	<input type="button" id="searchBtn" value="글쓰기" onclick="location.href='views/notice_insertForm_7.jsp'">
+                	<input type="button" id="searchBtn" value="글쓰기" onclick="location.href='views/noticeInsertForm_7.jsp'">
                 <% } %>
             </fieldset>
     </div>
