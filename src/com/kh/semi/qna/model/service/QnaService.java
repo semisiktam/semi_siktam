@@ -15,10 +15,10 @@ public class QnaService {
 	 * 문의사항 조회용
 	 * @return
 	 */
-	public ArrayList<Qna> selectList() {
+	public ArrayList<Qna> selectList(int currentPage, int limit) {
 		Connection con = getConnection();
 		
-		ArrayList<Qna> list = qDao.selectList(con);
+		ArrayList<Qna> list = qDao.selectList(con,currentPage,limit);
 		
 		close(con);
 		
@@ -98,6 +98,15 @@ public int insertQna(Qna q) {
 		close(con);
 		
 		return result;
+	}
+
+	public int getListCount() {
+		Connection con = getConnection();
+		int listCount = qDao.getListCount(con);
+		
+		close(con);
+		
+		return listCount;
 	}
 
 }

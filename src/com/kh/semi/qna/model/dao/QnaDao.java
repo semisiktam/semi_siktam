@@ -32,6 +32,15 @@ public class QnaDao {
 		}
 	}
 	
+	
+	
+	/**
+	 * 리스트 조회용
+	 * @param con
+	 * @param currentPage
+	 * @param limit
+	 * @return
+	 */
 	public ArrayList<Qna> selectList(Connection con) {
 		// Select문을 실행하고 Java에서 사용할 객체를 선언
 		ArrayList<Qna> list = null;
@@ -41,7 +50,7 @@ public class QnaDao {
 		// (select절을 사용할 경우 반환형은 ResultSet 타입으로 넘어오니깐 java에서도 ResultSet 타입으로 선언하고 받을 준비)
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectList");
+		String sql = prop.getProperty("selectListAll");
 		
 		try {
 			stmt = con.createStatement();
@@ -73,6 +82,57 @@ public class QnaDao {
 		
 		
 		return list;	
+	}
+	/**
+	 * 페이징 처리용 전체 조회
+	 * @param con
+	 * @param currentPage
+	 * @param limit
+	 * @return
+	 */
+	public ArrayList<Qna> selectList(Connection con, int currentPage, int limit) {
+		
+		ArrayList<Qna> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			int startRow = (currentPage-1)*limit+1;
+			int endRow = startRow + limit -1;
+			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Qna>();
+			
+			while(rset.next()) {
+				Qna q = new Qna();
+				
+				q.setqNo(rset.getInt(1)); 
+				q.setUserId(rset.getString("QWRITER"));
+				q.setqTitle(rset.getString("QTITLE"));
+				q.setqContext(rset.getString("QCONTEXT"));
+				q.setqReply(rset.getString("QREPLY"));
+				q.setqDate(rset.getDate("QDATE"));
+				
+				list.add(q);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
 	}
 
 	public Qna qSelectOne(Connection con, int qno) {
@@ -228,6 +288,32 @@ public class QnaDao {
 		return result;
 	}
 
+	public int getListCount(Connection con) {
+
+		int listCount = 0;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return listCount;
+	}
 	
 
 	

@@ -1,7 +1,6 @@
 package com.kh.semi.qna.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.qna.model.service.QnaService;
+import com.kh.semi.qna.model.vo.QPageInfo;
 import com.kh.semi.qna.model.vo.Qna;
 
 /**
@@ -40,17 +40,50 @@ public class QnaListServlet extends HttpServlet {
 		// QnA의 내용을 검색하기 위해서 Service호출
 		QnaService qs = new QnaService();
 		
+		// 페이지 처리
+		int startPage; // 가장 앞 페이지
+		int endPage; // 가장 뒷 페이지
+		int maxPage; // 가장 마지막 페이지
+		int currentPage; // 사용자 현재 페이지
+		int limit; // 총 페이지 수 ( 한페이지당 보여줄 게시글 수)
+				
+		currentPage = 1;
+				
+		limit = 10;
+				
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+				
+		int listCount = qs.getListCount();
+				
+		maxPage = (int)((double)listCount/limit+0.9);
+				
+		startPage = ((currentPage-1)/limit)*limit+1;// ((int)((double)currentPage/limit+0.9)-1)*limit+1;
+				
+		endPage = startPage + limit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		// 페이지 처리
+		
 		// Sevice-> Dao를 거쳐서 QnA에 결과물을 실행하고 받아오기
-		list = qs.selectList();
+		list = qs.selectList(currentPage,limit);
 		
 		String page = "";
+		
 		HttpSession session = request.getSession();
+		
         Member mem = (Member)session.getAttribute("member");
 		
         if(mem != null) {
         	if(list != null) {
 				page = "views/qna_5.jsp";
 				request.setAttribute("list", list);
+				
+				QPageInfo pi = new QPageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
+				request.setAttribute("pi", pi);
 			}else {
 				request.setAttribute("msg", "공지사항 목록 불러오기 에러 ");
 			}

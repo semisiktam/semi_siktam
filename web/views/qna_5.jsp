@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.qna.model.vo.*"%>
     
-<% ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list"); %>    
+<% ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
+	QPageInfo pi = (QPageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +51,34 @@
                         </tbody>
                     </table>
             </div>
+            <div class="pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath() %>/QnaListServlet?currentPage=1'"><<</button>
+			<%  if(currentPage <= 1){  %>
+			<button disabled><</button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/QnaListServlet?currentPage=<%=currentPage - 1 %>'"><</button>
+			<%  } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+					if(p == currentPage){	
+			%>
+				<button disabled><%= p %></button>
+			<%      }else{ %>
+				<button onclick="location.href='<%= request.getContextPath() %>/QnaListServlet?currentPage=<%= p %>'"><%= p %></button>
+			<%      } %>
+			<% } %>
+				
+			<%  if(currentPage >= maxPage){  %>
+			<button disabled>></button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/QnaListServlet?currentPage=<%=currentPage + 1 %>'">></button>
+			<%  } %>
+			<button onclick="location.href='<%= request.getContextPath() %>/QnaListServlet?currentPage=<%= maxPage %>'">>></button>
+		
+            
+        </div>    
+            
+            
             <fieldset>
                 <select id="searchCondition">
                 	<option>---</option>
