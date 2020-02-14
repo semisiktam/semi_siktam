@@ -19,6 +19,19 @@ public class Notice implements Serializable{
 	
 	public Notice() {
 	}
+	
+	public Notice(int nNo, String nTitle, String nContext) {
+		this.nNo = nNo;
+		this.nTitle = nTitle;
+		this.nContext = nContext;
+	}
+	
+	public Notice(String nWriter, String nTitle, String nContext) {
+		this.nWriter = nWriter;
+		this.nTitle = nTitle;
+		this.nContext = nContext;
+	}
+	
 	/**
 	 * 전체 생성자
 	 * @param nNo

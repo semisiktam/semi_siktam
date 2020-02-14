@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+    
+    <%String userId =(String)request.getAttribute("mem");%>>
 <!DOCTYPE html>
 <html>
 
@@ -46,16 +50,23 @@
                 <input type="radio" id="phone" class="radio" name="find" onclick="divshow();">&nbsp;<label for="phone">핸드폰 인증</label><br>
                 <div id="f1" class="radioDiv" style="display: none;">
                     내 명의로 가입한 아이디와, 이름/핸드폰번호가 일치하는 아이디를 찾습니다<br>
-                    <button>다음단계</button>
-                    
+                    <input type="button" onclick="location.href='<%= request.getContextPath()%>/siktam/fip.me'" value="다음단계">
                 </div>
             </div>
             <div>
+            <form action="/siktam/fip.me" method="post">
                 <input type="radio" id="rphone"  class="radio" name="find" onclick="divshow();">&nbsp;<label for="rphone">등록된 핸드폰으로 찾기</label><br>
                 <div id="f2" class="radioDiv">
-                    <input type="text" class="text" placeholder="이름을 입력해 주세요"><br>
-                    <input type="text" class="text" placeholder="가입했을때 등록된 핸드폰 번호">&nbsp;<button>다음단계</button>
+                    <input type="text" class="text" name="phoneName" placeholder="이름을 입력해 주세요"><br>
+                    <input type="text" class="text" name="phoneNumber" placeholder="가입했을때 등록된 핸드폰 번호">&nbsp;
+                    <input type="submit" value="다음단계" onclick="IdResultph();">
+                   
+                    
+                    
+                 
+                  
                 </div>
+            </form>
             </div>
             <div>
                 <input type="radio" id="email" class="radio" name="find" onclick="divshow();">&nbsp;<label for="email">등록된 이메일로 찾기</label><br>
@@ -100,10 +111,19 @@
                 $('#f4').slideUp();
             }
         }
-
+        
+        function IdResultph(){
+       	 if('<%=userId%>' != null && '<%=userId%>' !=""){
+       		 alert("찾으시는 아이디는" + '<%=userId%>' + "입니다.");
+       	 }else{
+       		 alert("찾으시는 아이디가 없습니다");
+       	 }
+       	 	
+        }
 
 
     </script>
+    
 
         <div class="div3">
             비밀번호 찾으시나요? &nbsp;<a href="FindPassword_1.jsp" style="color: black;">비밀번호 찾기 (이동)</a>
