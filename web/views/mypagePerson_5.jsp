@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% ArrayList<MemberReservationList> mrList = (ArrayList<MemberReservationList>)request.getAttribute("mrList"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,7 @@
             </div>
         </div>
 		
-		<form action="/siktam/selectUserReserv.re" method="post" >
+		
         <div id="modal1">
             <div class="modal_content">
                 <h2>예약 내역</h2>
@@ -50,6 +51,18 @@
                          </tr>
                     </thead>
                     <tbody>
+                   <%--  <%for(MemberReservationList r : mrList){ %>
+                        <tr class="reservationTr">
+                            <td><%=r.getShopName() %></td>
+                            <td><%=r.getrDate() %></td>
+                            <td><%=r.getrTime() %></td>
+                            <td><%=r.getMenuName() %></td>
+                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
+                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
+                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
+                            <td><%=r.getAcceptYN() %></td>
+                        </tr>
+                        <%} %> --%>
                         <tr class="reservationTr">
                             <td>역전우동</td>
                             <td>2020.01.24</td>
@@ -99,7 +112,7 @@
             </div>
             <div class="modal_layer"></div>
         </div>
-        </form>
+        
 
         <div id="modal2">
             <div class="modal_content">
@@ -150,7 +163,7 @@
 
         <script>
             function test1(){
-
+            	location.href = "/siktam/selectUserReserv.re";
                 document.getElementById('modal1').style.display = "block";
                 document.getElementById('content2').style.display = "none";
 

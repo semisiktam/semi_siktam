@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 import com.kh.semi.member.model.dao.MemberDao;
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.member.model.vo.MemberReservationList;
+import com.kh.semi.menu.model.vo.Menu;
+import com.kh.semi.reservation.model.vo.Reservation;
+import com.kh.semi.shop.model.vo.Shop;
 
 public class MemberService {
    private Connection con;
@@ -91,4 +95,39 @@ public class MemberService {
       close(con);
       return listCount;
    }
+
+public ArrayList<MemberReservationList> selectUserReserve(String id) {
+	Connection con = getConnection();
+	
+	ArrayList<MemberReservationList> mrList = mDao.selectUserReserve(con,id);
+	
+	close(con);
+	
+	return mrList;
+}
+
+/*public ArrayList<Shop> selectUserShop(String id) {
+	Connection con = getConnection();
+	
+	ArrayList<Shop> shop = mDao.selectUserShop(con,id);
+	close(con);
+	return shop;
+}
+
+public ArrayList<Reservation> selectUserReserve(String id) {
+	Connection con = getConnection();
+	
+	ArrayList<Reservation> reservation = mDao.selectUserReserve(con,id);
+	close(con);
+	return reservation;
+}
+
+public ArrayList<Menu> selectUserMenu(String id) {
+	
+	Connection con = getConnection();
+	
+	ArrayList<Menu> reservation = mDao.selectUserMenu(con,id);
+	close(con);
+	return reservation;
+}*/
 }

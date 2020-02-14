@@ -15,12 +15,12 @@ public class Reservation implements Serializable {
 	private String rTime  ;//예약시간
 	private int mNo       ;//메뉴번호
 //	private int mprice    ;//메뉴가격
-	private char acceptYN     ;//수락여부
+	private String acceptYN     ;//수락여부
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Reservation(String resNo, String userId, String shopPid, Date rDate, String rTime, int mNo, char acceptYN) {
+	public Reservation(String resNo, String userId, String shopPid, Date rDate, String rTime, int mNo, String acceptYN) {
 		super();
 		this.resNo = resNo;
 		this.userId = userId;
@@ -66,10 +66,10 @@ public class Reservation implements Serializable {
 	public void setmNo(int mNo) {
 		this.mNo = mNo;
 	}
-	public char getAcceptYN() {
+	public String getAcceptYN() {
 		return acceptYN;
 	}
-	public void setAcceptYN(char acceptYN) {
+	public void setAcceptYN(String acceptYN) {
 		this.acceptYN = acceptYN;
 	}
 	@Override

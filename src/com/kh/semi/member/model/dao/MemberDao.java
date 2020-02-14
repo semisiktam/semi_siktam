@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.member.model.vo.MemberReservationList;
+import com.kh.semi.menu.model.vo.Menu;
+import com.kh.semi.reservation.model.vo.Reservation;
+import com.kh.semi.shop.model.vo.Shop;
 
 public class MemberDao {
    
@@ -239,4 +243,104 @@ public class MemberDao {
       
       return listCount;
    }
+
+public ArrayList<MemberReservationList> selectUserReserve(Connection con, String id) {
+	ArrayList<MemberReservationList> mrList = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	
+	String sql = prop.getProperty("selectUserReserve");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, id);
+		
+		rset = pstmt.executeQuery();
+		
+		mrList = new ArrayList<MemberReservationList>();
+		
+		while(rset.next()) {
+			MemberReservationList mrListVo = new MemberReservationList();
+			
+			mrListVo.setShopName(rset.getString("SHOP_NAME"));
+			mrListVo.setrDate(rset.getDate("RESERVE_DATE"));
+			mrListVo.setrTime(rset.getString("RESERVE_TIME"));
+			mrListVo.setMenuName(rset.getString("MENU_NAME"));
+			mrListVo.setAcceptYN(rset.getString("ACCEPT_YN"));
+			
+			mrList.add(mrListVo);
+			
+		}
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	for(MemberReservationList n : mrList) {
+		System.out.println(n);
+	}
+	return mrList;
+}
+
+/*public ArrayList<Shop> selectUserShop(Connection con, String id) {
+	ArrayList<Shop> shop = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	
+	String sql = prop.getProperty("selectUserReserveShop");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	return shop;
+}
+
+public ArrayList<Reservation> selectUserReserve(Connection con, String id) {
+	ArrayList<Reservation> reservation = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	
+	String sql = prop.getProperty("selectUserReserve");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return reservation;
+}
+
+public ArrayList<Menu> selectUserMenu(Connection con, String id) {
+	ArrayList<Menu> menu = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	
+	String sql = prop.getProperty("selectUserReserveMenu");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	return menu;
+}*/
 }
