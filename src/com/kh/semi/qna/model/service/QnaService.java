@@ -88,6 +88,18 @@ public int insertQna(Qna q) {
 		return q;
 	}
 
+	public int qnaDelete(int q) {
+		Connection con = getConnection();
+		int result = qDao.qnaDelete(con,q);
+		
+		if(result >= 1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
 }
 
 
