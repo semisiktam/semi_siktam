@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>공지사항 작성</title>
+    <title>공지사항 입력</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/qna_form_5.css">
     <script src="/siktam/resources/js/jquery-3.4.1.min.js"></script>
@@ -19,7 +19,7 @@
     <div class="wrap" align="center">
     
             <div class="noticeTitle">
-                <h1>공지사항</h1>
+                <h1>공지사항 입력</h1>
             </div>
             <div class="qnaDiv">
                 <form action="<%= request.getContextPath() %>/nInsert.no" method="post">
@@ -28,7 +28,7 @@
                             <tbody>
                                 <tr>
                                     <td class="qna_write_td">작성자</td>
-                                    <td><input type="text" name="nwriter" value="<%=m.getUserId()%>" readonly></td>
+                                    <td><input type="text" name="nwriter" value="<%=m.getUserId() %>" readonly></td>
                                 </tr>
                                 <tr>
                                     <td class="qna_write_td">제목</td>
@@ -39,7 +39,7 @@
                                 <tr>
                                     <td class="qna_write_td">내용</td>
                                     <td>
-                                        <textarea name="ncontext" class="qna_write_textarea" style="resize:none"></textarea>
+                                        <textarea name="ncontext" class="qna_write_textarea"></textarea>
                                     </td>
                                 </tr>
                             </tbody>

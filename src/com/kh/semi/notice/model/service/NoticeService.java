@@ -123,6 +123,21 @@ public class NoticeService {
 		
 		return n;
 	}
+
+
+	public int deleteNotice(int nno) {
+		
+		Connection con = getConnection();
+		
+		int result = nDao.deleteNotice(con,nno);
+		
+		if(result >= 1) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 	
 	
 	

@@ -1,7 +1,6 @@
 package com.kh.semi.notice.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.notice.model.service.NoticeService;
-import com.kh.semi.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeUpdateViewServlet
+ * Servlet implementation class NoticeDeleteServlet
  */
-@WebServlet("/nUpView.no")
-public class NoticeUpdateViewServlet extends HttpServlet {
+@WebServlet("/nDelete.no")
+public class NoticeDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeUpdateViewServlet() {
+    public NoticeDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,17 +32,14 @@ public class NoticeUpdateViewServlet extends HttpServlet {
 		
 		NoticeService ns = new NoticeService();
 		
-		Notice n = ns.updateView(nno);
+		int result = ns.deleteNotice(nno);
 		
-		String page = "";
-		
-		if(n != null) {
-			page = "views/noticeUpdateForm_7.jsp";
-			request.setAttribute("notice", n);
+		if(result>0) {
+			response.sendRedirect("/siktam/nselectList.no");
 		}else {
-			request.setAttribute("msg", "공지글 수정 페이지 오류");
+			request.setAttribute("msg", "공지사항 삭제 실패");
 		}
-		request.getRequestDispatcher(page).forward(request, response);
+		
 	}
 
 	/**
