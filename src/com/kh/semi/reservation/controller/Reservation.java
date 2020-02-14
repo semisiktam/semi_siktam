@@ -32,15 +32,13 @@ public class Reservation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String shopPid = request.getParameter("shopPid");
-		
 		ArrayList<ReservationTest> list = new ReservationService().Reservation(shopPid);
+		
 		
 		String page = "";
 		if(list != null) {
 			page = "views/reservation_4.jsp";
 			request.setAttribute("list", list);
-		}else {
-			
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
