@@ -8,7 +8,7 @@
     <title>마이페이지(개인)</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/mypage_person_5.css">
-    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
 </head>
 <body>
@@ -27,14 +27,14 @@
                     <li><b>내 프로필</b>
                     <a href="registerPerson_5_7.jsp"><input type="button" class="btn1" value="수정하기"></a></li><hr>
                     <li><b>예약 내역</b>
-                    <input type="button" class="btn1" value="수정하기" onclick="test1();"></li><hr>
+                    <input type="button" id="userReserve" class="btn1" value="수정하기" onclick="test1();"></li><hr>
                     <li><b>결제 내역</b>
                     <input type="button" class="btn1" value="확인하기" onclick="test3();"></li><hr>
                 </ul>
             </div>
         </div>
 		
-		
+		<!-- <form action="/siktam/selectUserReserv.re" method="post"> -->
         <div id="modal1">
             <div class="modal_content">
                 <h2>예약 내역</h2>
@@ -46,29 +46,29 @@
                             <th>예약날짜</th>
                             <th>예약시간</th> 
                             <th>예약메뉴</th> 
-                            <th colspan="2">예약 변경/취소</th> 
                             <th>예약상태</th>
+                            <th colspan="2">예약 변경/취소</th> 
                          </tr>
                     </thead>
                     <tbody>
-                   <%--  <%for(MemberReservationList r : mrList){ %>
+                     <%-- <%for(MemberReservationList rr : mrList){ %>
                         <tr class="reservationTr">
-                            <td><%=r.getShopName() %></td>
-                            <td><%=r.getrDate() %></td>
-                            <td><%=r.getrTime() %></td>
-                            <td><%=r.getMenuName() %></td>
+                            <td><%=rr.getShopName() %></td>
+                            <td><%=rr.getrDate() %></td>
+                            <td><%=rr.getrTime() %></td>
+                            <td><%=rr.getMenuName() %></td>
                             <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
                             <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
                             <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
-                            <td><%=r.getAcceptYN() %></td>
+                            <td><%=rr.getAcceptYN() %></td>
                         </tr>
                         <%} %> --%>
-                        <tr class="reservationTr">
+                       <!--  <tr class="reservationTr">
                             <td>역전우동</td>
                             <td>2020.01.24</td>
                             <td>13:00~14:00</td>
                             <td>김치우동 1</td>
-                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
+                            변경 클릭 시 예약변경 페이지로 이동
                             <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
                             <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
                             <td>대기중</td>
@@ -78,7 +78,7 @@
                             <td>2020.01.25</td>
                             <td>17:00~18:00</td>
                             <td>오늘의메뉴 1</td>
-                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
+                            변경 클릭 시 예약변경 페이지로 이동
                             <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
                             <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
                             <td>대기중</td>
@@ -88,7 +88,7 @@
                             <td>2020.01.26</td>
                             <td>18:00~19:00</td>
                             <td>소막창 1</td>
-                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
+                            변경 클릭 시 예약변경 페이지로 이동
                             <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
                             <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
                             <td>대기중</td>
@@ -98,11 +98,11 @@
                             <td>2020.01.27</td>
                             <td>13:00~14:00</td>
                             <td>보쌈정식XL 1</td>
-                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
+                            변경 클릭 시 예약변경 페이지로 이동
                             <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
                             <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
                             <td>대기중</td>
-                        </tr>
+                        </tr> -->
                         
                         
                     </tbody>
@@ -112,6 +112,7 @@
             </div>
             <div class="modal_layer"></div>
         </div>
+        <!-- </form> -->
         
 
         <div id="modal2">
@@ -163,7 +164,6 @@
 
         <script>
             function test1(){
-            	location.href = "/siktam/selectUserReserv.re";
                 document.getElementById('modal1').style.display = "block";
                 document.getElementById('content2').style.display = "none";
 
@@ -189,6 +189,40 @@
             function informationChange(){
                 window.open("registerPerson_5_7.jsp");
             }
+            
+            /*예약내역 ajax
+             DB에서 값은 넘어오는데 출력이 안됨
+            */
+            $('#userReserve').click(function(){
+            	$.ajax({
+            		url:"/siktam/selectUserReserv.re",
+            		type:"get",
+            		/* dataType : "json", */
+            		success:function(data){
+            			console.log(data);
+            			$.each(data,function(index,value){
+            				var $tr = $('<tr>');
+            				var $shopName = $('<td>').text(value.shopName);
+            				var $rDate = $('<td>').text(value.rDate);
+            				var $rTime = $('<td>').text(value.rTime);
+            				var $menu = $('<td>').text(value.menu);
+            				var $acceptYn = $('<td>').text(value.acceptYn);
+            				var $aa = $('<td>').text(value.acceptYn);
+            				
+            				$tr.append($shopName);
+            				$tr.append($rDate);
+            				$tr.append($rTime);
+            				$tr.append($menu);
+            				$tr.append($acceptYn);
+            				$tr.append($aa);
+            				
+            				$('#reservationTb1').append($tr);
+            			});
+            		}, error:function(data){
+            			console.log("에러입니다.");
+            		}
+            	});
+            });
         </script>
 
         <div class ="content" id="content2">
