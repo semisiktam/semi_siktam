@@ -10,12 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.member.model.vo.MemberReservationList;
+import com.kh.semi.shop.model.vo.Shop;
 
 /**
  * Servlet implementation class selectUserReservServlet
@@ -38,11 +36,11 @@ public class mypageMemberServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<MemberReservationList> mrList= new ArrayList<MemberReservationList>();
-		
 		HttpSession session = request.getSession();
 		Member m=(Member)session.getAttribute("member");
 		
+		ArrayList<MemberReservationList> mrList= new ArrayList<MemberReservationList>();
+			
 		MemberService ms = new MemberService();
 		
 		mrList = ms.selectUserReserve(m.getUserId());
@@ -53,7 +51,7 @@ public class mypageMemberServlet extends HttpServlet {
 		
 		if(mrList!=null) {
 			page = "views/mypagePerson_5.jsp";
-			request.setAttribute("mrList", mrList);			
+			request.setAttribute("mrList", mrList);	
 		}else {
 			request.setAttribute("msg", "예약내역 불러오기 에러 ");
 		}
