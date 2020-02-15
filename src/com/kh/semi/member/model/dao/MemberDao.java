@@ -249,7 +249,7 @@ public ArrayList<MemberReservationList> selectUserReserve(Connection con, String
 	PreparedStatement pstmt = null;
 	ResultSet rset = null;
 	
-	String sql = prop.getProperty("selectUserReserve");
+	String sql = prop.getProperty("selectUserReservePay");
 	
 	try {
 		pstmt = con.prepareStatement(sql);
@@ -267,6 +267,9 @@ public ArrayList<MemberReservationList> selectUserReserve(Connection con, String
 			mrListVo.setrTime(rset.getString("RESERVE_TIME"));
 			mrListVo.setMenuName(rset.getString("MENU_NAME"));
 			mrListVo.setAcceptYN(rset.getString("ACCEPT_YN"));
+			mrListVo.setPayType(rset.getString("PAY_TYPE"));
+			mrListVo.setTotalPay(rset.getInt("TOTAL_PAY"));
+			
 			
 			mrList.add(mrListVo);
 			
