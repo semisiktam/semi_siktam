@@ -20,14 +20,14 @@ import com.kh.semi.member.model.vo.MemberReservationList;
 /**
  * Servlet implementation class selectUserReservServlet
  */
-@WebServlet("/selectUserReserv.re")
-public class selectUserReservServlet extends HttpServlet {
+@WebServlet("/mypageMember.mm")
+public class mypageMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public selectUserReservServlet() {
+    public mypageMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,34 +37,7 @@ public class selectUserReservServlet extends HttpServlet {
 	 */
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*response.setContentType("application/json; charset=UTF-8");
 		
-		HttpSession session = request.getSession();
-		Member m  = (Member)session.getAttribute("member");
-		
-		String id = m.getUserId();
-		
-		Map hmap =new HashMap();
-		
-		ArrayList<Shop> shop = new ArrayList<Shop>();
-		ArrayList<Reservation> reservation = new ArrayList<Reservation>();
-		ArrayList<Menu> menu = new ArrayList<Menu>();
-		
-		
-		
-		MemberService ms = new MemberService();
-		
-		shop = ms.selectUserShop(id);
-		reservation = ms.selectUserReserve(id);
-		menu = ms.selectUserMenu(id);
-		
-		
-		hmap.put("shop", shop);
-		hmap.put("reservation", reservation);
-		hmap.put("menu",menu);
-				
-		new Gson().toJson(hmap, response.getWriter());*/
-//		response.setContentType("application/json;");
 		ArrayList<MemberReservationList> mrList= new ArrayList<MemberReservationList>();
 		
 		HttpSession session = request.getSession();
@@ -73,7 +46,19 @@ public class selectUserReservServlet extends HttpServlet {
 		MemberService ms = new MemberService();
 		
 		mrList = ms.selectUserReserve(m.getUserId());
+				
+		String page = "";
 		
+		System.out.println(mrList);
+		
+		if(mrList!=null) {
+			page = "views/mypagePerson_5.jsp";
+			request.setAttribute("mrList", mrList);			
+		}else {
+			request.setAttribute("msg", "예약내역 불러오기 에러 ");
+		}
+		request.getRequestDispatcher(page).forward(request, response);
+
 		/*JSONObject userInfo = null;
 		JSONArray result = new JSONArray();
 		
@@ -91,20 +76,6 @@ public class selectUserReservServlet extends HttpServlet {
 		
 		response.getWriter().print(result.toJSONString());*/
 		
-		
-		
-		String page = "";
-		
-		System.out.println(mrList);
-		
-		if(mrList!=null) {
-			page = "views/mypagePerson_5.jsp";
-			request.setAttribute("mrList", mrList);			
-		}else {
-			request.setAttribute("msg", "예약내역 불러오기 에러 ");
-		}
-		request.getRequestDispatcher(page).forward(request, response);
-
 		
 		
 		
