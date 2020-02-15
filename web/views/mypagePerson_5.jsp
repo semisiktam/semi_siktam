@@ -194,9 +194,9 @@
                 document.getElementById('modal2').style.display = "none";
                 document.getElementById('content2').style.display = "block";
             }
-            function informationChange(){
+            /* function informationChange(){
                 window.open("registerPerson_5_7.jsp");
-            }
+            } */
             
             /*예약내역 ajax
              DB에서 값은 넘어오는데 출력이 안됨
@@ -249,29 +249,9 @@
                             <h4 align="center">역전우동</h4>
                             <p align="center"><small>서울 강남구 테헤란로10길 25</small></p>
                         </div>
-                        
-                        
-                         <!-- 2020.02.10 수정 시작(현희) -->
-
                         <div class="bookmark">
-                        <p id="star">★</a>
-
-                        </div>
-
-                        <script>
-                            $(document).ready(function(){
-                                $('#star').toggle(function(){
-                                    $(this).css({'color':'rgb(255, 184, 53)'});
-                                },function(){
-                                    $(this).css({'color':'#eee'});
-                                });
-                            })
-                        </script>
-                        
-
-                        <!-- 2020.02.10 수정 끝 (현희) -->
-
-                        
+                        <p class="star">★</a>
+                        </div>                        
                     </li>
                     <li>
                         <div class="registStore2" onclick="location.href=''">
@@ -279,12 +259,18 @@
                             <h4 align="center">곱창이야기</h4>
                             <p align="center"><small>서울 서초구 강남대로69길 10</small></p>
                         </div>
+                        <div class="bookmark">
+                        <p class="star">★</a>
+                        </div>
                     </li>
                     <li>
                         <div class="registStore2" onclick="location.href=''">
                             <img src="/siktam/resources/images/싸움의고수.png" class="registStoreImg" alt="싸움의고수" width="170px" height="120px"><br>
                             <h4 align="center">싸움의고수</h4>
                             <p align="center"><small>서울 서대문구 명물길 20</small></p>
+                        </div>
+                        <div class="bookmark">
+                        <p class="star">★</a>
                         </div>
                     </li>
                     <li class="registStore2Add">
@@ -296,7 +282,15 @@
                     </li>
                 </ul>
             </div>
-
+			<script>
+                  $(document).ready(function(){
+                  	$('.star').toggle(function(){
+                      $(this).css({'color':'rgb(255, 184, 53)'});
+                      },function(){
+                          $(this).css({'color':'#eee'});
+                       });
+                  });
+            </script>
 
 
 
