@@ -87,7 +87,7 @@
             </div><br>
             <p class="infop">매장 전화번호 : </p> <p class="infop2"><%= s.getsPhone() %></p><br>
             <p class="infop">매장 주소 : </p> <p class="infop2"><%=s.getsAddr() %></p><br>
-            <p class="infop">매장 영업시간 : </p> <p class="infop2"><%= s.getsTime() %></p><br>
+            <p class="infop">매장 영업시간 : </p> <p class="infop2"><%= s.getsTime() %> ~ <%= s.geteTime() %></p><br>
         </div>
     </div>
 
@@ -96,14 +96,15 @@
         <div id="pagemenudiv">
             <div id="menuspan"> 메뉴 </div><div id="menuhr"><hr></div>
             <div class="menubox">
-            <% for(Menu me : list) { %>
+            <!-- 지원 잠시 주석처리 -->
+            <%-- <% for(Menu me : list) { %>
                 <div class="menuimg"><img src="<%=me.getMenuImg() %>" alt=""></div>
                 <div class="menutext">
                     <h4><%=me.getMenuName() %></h4>
                     <p><%=me.getMenuInfo() %></p>
                     <p class="menuprice"><b><%=me.getMenuPrice() %></b></p>
                 </div>
-            <% } %>
+            <% } %> --%>
             </div>
         </div>
     </div>
@@ -114,7 +115,7 @@
             <div id="addressspan">상세 주소</div><div id="addresshr"><hr></div>
             <div id="addinfo">
                 <p><%=s.getsAddr() %></p>
-                <p class="infop">대표자명 : </p> <p class="infop2"><%=mem.getName() %></p><br>
+                <p class="infop">대표자명 : </p> <p class="infop2"><%--<%=mem.getName() %> --%></p><br>
                 <p class="infop">사업자 등록번호 : </p> <p class="infop2"><%=s.getOwnerId() %></p><br>
             </div>
             <div id="daumRoughmapContainer1578697903624" 

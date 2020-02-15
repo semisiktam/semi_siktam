@@ -62,7 +62,7 @@
 	                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
 	                            <td><%=rr.getAcceptYN() %></td>
 	                        </tr>
-                        <% } %>
+                       <% } %>
                        <!--  <tr class="reservationTr">
                             <td>역전우동</td>
                             <td>2020.01.24</td>
