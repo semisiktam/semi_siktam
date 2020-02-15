@@ -15,10 +15,12 @@ public class Review implements Serializable {
 	private String reviewImg     ; //리뷰이미지
 	private int score             ; //별점
 	private Date rDate      ; //작성일
+	private int reviewAll;  // 전체 리뷰 수
+	
 	public Review() {
 		super();
 	}
-	public Review(int rNo, String userId, String shopPid, String rContent, String reviewImg, int score, Date rDate) {
+	public Review(int rNo, String userId, String shopPid, String rContent, String reviewImg, int score, Date rDate,int reviewAll) {
 		super();
 		this.rNo = rNo;
 		this.userId = userId;
@@ -27,6 +29,7 @@ public class Review implements Serializable {
 		this.reviewImg = reviewImg;
 		this.score = score;
 		this.rDate = rDate;
+		this.reviewAll = reviewAll;
 	}
 	public int getrNo() {
 		return rNo;
@@ -69,6 +72,12 @@ public class Review implements Serializable {
 	}
 	public void setrDate(Date rDate) {
 		this.rDate = rDate;
+	}
+	public int getReviewAll() {
+		return reviewAll;
+	}
+	public void setReviewAll(int reviewAll) {
+		this.reviewAll = reviewAll;
 	}
 	@Override
 	public String toString() {

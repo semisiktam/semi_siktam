@@ -1,6 +1,7 @@
 package com.kh.semi.shop.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.menu.model.sevice.MenuService;
+import com.kh.semi.menu.model.vo.Menu;
 import com.kh.semi.shop.model.service.ShopService;
 import com.kh.semi.shop.model.vo.Shop;
 
@@ -37,10 +40,17 @@ public class ShopSelectOneServlet extends HttpServlet {
 		
 		Shop s = ss.selectOne(shopPid);
 		
+		ArrayList<Menu> list = new ArrayList<Menu>();
+		
+		MenuService ms = new MenuService();
+		
+		list = ms.selectList(shopPid);
+		
 		String page = "";
 		
 		if(s != null) {
 			page = "views/productDetailPage_6.jsp";
+			request.setAttribute("mList", list);
 			request.setAttribute("shop", s);
 		}else {
 			request.setAttribute("msg", "공지사항 상세보기 실패");

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import=""%>
+<%
+	Member mem = (Member)request.getAttribute("member");
+	Shop s = (Shop)request.getAttribute("shop");
+%>    
+
 <!DOCTYPE html>
 <html>
 <head>

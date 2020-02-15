@@ -4,7 +4,7 @@
 
 <% 
 	Shop s = (Shop)request.getAttribute("shop");
-	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("menu");
+	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("mList");
 	Member mem = (Member)request.getAttribute("member");
 %>
 <!DOCTYPE html>
@@ -55,7 +55,7 @@
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
             <!-- %% 리뷰연결-->
-            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰(1,389)</span></div></a>
+            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰</span></div></a>
         </div>
         <!-- 상단 업체명/설명/예약버튼 -->
         <div id="pagetop">
@@ -97,14 +97,14 @@
             <div id="menuspan"> 메뉴 </div><div id="menuhr"><hr></div>
             <div class="menubox">
             <!-- 지원 잠시 주석처리 -->
-            <%-- <% for(Menu me : list) { %>
+            <% for(Menu me : list) { %>
                 <div class="menuimg"><img src="<%=me.getMenuImg() %>" alt=""></div>
                 <div class="menutext">
                     <h4><%=me.getMenuName() %></h4>
                     <p><%=me.getMenuInfo() %></p>
                     <p class="menuprice"><b><%=me.getMenuPrice() %></b></p>
                 </div>
-            <% } %> --%>
+            <% } %>
             </div>
         </div>
     </div>
