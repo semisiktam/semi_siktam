@@ -57,7 +57,7 @@ public class MemberUpdateServlet extends HttpServlet {
 	    System.out.println(result);
 	    
 	    if(result>0) {
-	    	response.sendRedirect("selectUserReserv.re");
+	    	response.sendRedirect("mypageMember.mm");
 	    }else{
 	    	  request.setAttribute("msg", "회원가입실패!");
 	    	  PrintWriter out = response.getWriter();
