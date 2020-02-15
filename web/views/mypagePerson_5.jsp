@@ -25,7 +25,7 @@
                 <ul class="storeInfo2">
                     <li id="userName"><b><%= m.getName() %></b>님 안녕하세요</li>
                     <li><b>내 프로필</b>
-                    <a href="registerPerson_5_7.jsp"><input type="button" class="btn1" value="수정하기"></a></li><hr>
+                    <a href="views/registerPerson_5_7.jsp"><input type="button" class="btn1" value="수정하기"></a></li><hr>
                     <li><b>예약 내역</b>
                     <input type="button" id="userReserve" class="btn1" value="수정하기" onclick="test1();"></li><hr>
                     <li><b>결제 내역</b>
@@ -57,10 +57,10 @@
 	                            <td><%=rr.getrDate() %></td>
 	                            <td><%=rr.getrTime() %></td>
 	                            <td><%=rr.getMenuName() %></td>
+	                            <td><%=rr.getAcceptYN() %></td>
 	                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
 	                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
 	                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
-	                            <td><%=rr.getAcceptYN() %></td>
 	                        </tr>
                         <% } %>
                        <!--  <tr class="reservationTr">
@@ -129,7 +129,15 @@
                          </tr>
                     </thead>
                     <tbody>
+                    	<%for(MemberReservationList rp : mrList){ %>
                         <tr class="reservationTr">
+                            <td><%=rp.getShopName() %></td>
+                            <td><%=rp.getMenuName() %></td>
+                            <td><%=rp.getTotalPay() %></td>
+                            <td><%=rp.getPayType() %></td>
+                        </tr>
+                        <% } %>
+                        <!-- <tr class="reservationTr">
                             <td>역전우동</td>
                             <td>김치우동 1</td>
                             <td>3,500원</td>
@@ -152,7 +160,7 @@
                             <td>보쌈정식XL 1</td>
                             <td>7,000원</td>
                             <td>네이버페이</td>
-                        </tr>
+                        </tr> -->
                         
                     </tbody>
                 </table>
