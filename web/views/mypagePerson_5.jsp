@@ -51,18 +51,18 @@
                          </tr>
                     </thead>
                     <tbody>
-                     <%-- <%for(MemberReservationList rr : mrList){ %>
-                        <tr class="reservationTr">
-                            <td><%=rr.getShopName() %></td>
-                            <td><%=rr.getrDate() %></td>
-                            <td><%=rr.getrTime() %></td>
-                            <td><%=rr.getMenuName() %></td>
-                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
-                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
-                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
-                            <td><%=rr.getAcceptYN() %></td>
-                        </tr>
-                        <%} %> --%>
+                      <%for(MemberReservationList rr : mrList){ %>
+	                        <tr class="reservationTr">
+	                            <td><%=rr.getShopName() %></td>
+	                            <td><%=rr.getrDate() %></td>
+	                            <td><%=rr.getrTime() %></td>
+	                            <td><%=rr.getMenuName() %></td>
+	                            <!-- 변경 클릭 시 예약변경 페이지로 이동 -->
+	                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
+	                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
+	                            <td><%=rr.getAcceptYN() %></td>
+	                        </tr>
+                        <% } %>
                        <!--  <tr class="reservationTr">
                             <td>역전우동</td>
                             <td>2020.01.24</td>
@@ -193,11 +193,12 @@
             /*예약내역 ajax
              DB에서 값은 넘어오는데 출력이 안됨
             */
+            /*
             $('#userReserve').click(function(){
             	$.ajax({
             		url:"/siktam/selectUserReserv.re",
             		type:"get",
-            		/* dataType : "json", */
+            		 dataType : "json", 
             		success:function(data){
             			console.log(data);
             			$.each(data,function(index,value){
@@ -223,6 +224,7 @@
             		}
             	});
             });
+           */
         </script>
 
         <div class ="content" id="content2">

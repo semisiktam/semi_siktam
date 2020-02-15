@@ -74,10 +74,7 @@ public class selectUserReservServlet extends HttpServlet {
 		
 		mrList = ms.selectUserReserve(m.getUserId());
 		
-		
-		
-		
-		JSONObject userInfo = null;
+		/*JSONObject userInfo = null;
 		JSONArray result = new JSONArray();
 		
 		for(MemberReservationList user : mrList) {
@@ -92,11 +89,11 @@ public class selectUserReservServlet extends HttpServlet {
 			result.add(userInfo);
 		}
 		
-		response.getWriter().print(result.toJSONString());
+		response.getWriter().print(result.toJSONString());*/
 		
 		
 		
-		/*String page = "";
+		String page = "";
 		
 		System.out.println(mrList);
 		
@@ -106,8 +103,7 @@ public class selectUserReservServlet extends HttpServlet {
 		}else {
 			request.setAttribute("msg", "예약내역 불러오기 에러 ");
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);*/
+		request.getRequestDispatcher(page).forward(request, response);
 
 		
 		

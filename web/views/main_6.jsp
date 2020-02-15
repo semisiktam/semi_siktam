@@ -87,7 +87,7 @@
 
            <%if(m==null) {%>
             <%}else if(m.getShopYN().equals("N")){%>
-            	<a class="navp" href="/siktam/views/mypagePerson_5.jsp"><span>마이페이지</span></a>
+            	<a class="navp" href="/siktam/selectUserReserv.re"><span>마이페이지</span></a>
             <%}else{ %>
             	<a class="navp" href="/siktam/views/mypageShop_5.jsp"><span>마이페이지</span></a>
             <%} %>
