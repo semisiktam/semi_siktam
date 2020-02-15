@@ -249,9 +249,9 @@ public class SelectQueryMaker {
 			
 			for(int i = 0; i < conditionList.length; i++) {
 				if(i != conditionList.length - 1) {
-					query.append(conditionList[i]).append(",").append(" ");
+					query.append("'").append(conditionList[i]).append("'").append(",").append(" ");
 				} else {
-					query.append(conditionList[i]);
+					query.append("'").append(conditionList[i]).append("'");
 				}
 			}
 			

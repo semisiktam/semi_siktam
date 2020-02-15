@@ -33,17 +33,24 @@ public class ShopSearchConditionServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 인코딩
 				request.setCharacterEncoding("UTF-8");
-				response.setContentType("application/json; charset=UTF-8");
+//				response.setContentType("application/json; charset=UTF-8");
 				
-//				String keyword = request.getParameter("keyword");
+				String keyword = request.getParameter("keyword");
 				String[] tlist = request.getParameterValues("tlist");
 				String[] clist = request.getParameterValues("clist");
 				String[] plist = request.getParameterValues("plist");			
 				
-				ArrayList<Shop> list = new ShopService().SearchCondition(tlist, clist, plist);
+				System.out.println(keyword);
+				ArrayList<Shop> list = new ShopService().SearchCondition(keyword,tlist, clist, plist);
 				
+				String page = "";
+				if(list !=null) {
+					page = "views/searchConditions_4.jsp";
+					request.setAttribute("list", list);
+				}
+				request.getRequestDispatcher(page).forward(request, response);
 				
-				response.getWriter().print(tlist);
+				response.getWriter().print(list);
 				
 			}
 

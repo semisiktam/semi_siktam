@@ -40,12 +40,20 @@ public class ShopDao {
 		ArrayList<Shop> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
-		String sql = prop.getProperty("searchAddrMain");
+		String sql = null;
+		if(keyword == "*") {
+			sql = prop.getProperty("searchAddrMain2");
+		}else {
+			sql = prop.getProperty("searchAddrMain");
+		}
+			
 
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, keyword);
+			if(keyword != "*") {
+				pstmt.setString(1, keyword);
+				
+			}
 
 			rset = pstmt.executeQuery();
 			list = new ArrayList<Shop>();
@@ -115,82 +123,170 @@ public class ShopDao {
 		return result;
 	}
 
-	public ArrayList<Shop> SearchCondition(Connection con, String[] tlist, String[] clist, String[] plist) {
+	public ArrayList<Shop> SearchCondition(Connection con, String keyword, String[] tlist, String[] clist, String[] plist) {
 		ArrayList<Shop> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql =null;
 		SelectQueryMaker query = null;
 		
-		String avgPay1 = null;
-		String avgPay2 = null;
-		String avgPay3 = null;
-		String avgPay4 = null;
-		String avgPay5 = null;
-		String avgPay6 = null;
+		String avgPay1 = "10000";
+		String avgPay2 = "10000";
+		String avgPay3 = "20000";
+		String avgPay4 = "20000";
+		String avgPay5 = "30000";
+		String avgPay6 = "30000";
 		
-		if(plist == null) {
-			query = new SelectQueryMaker.Builder()
-					.select().column("*").enter()
-					.from().tableName("Shop").enter()
-					.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
-					.and().column("MENU_CATEGORY").in().condition(clist).enter()
-					.build();
-		}else {
+		System.out.println(keyword);
+		if(plist != null) {
 			for(int i=0; i<plist.length; i++) {
-				if(plist[i].equals("10000")) {
-					avgPay1 = "10000";
-				}else {
-					avgPay1 = "0";
-				}if(plist[i].equals("10000~20000")) {
-					avgPay2 = "10000";
-					avgPay3 = "20000";
-				}else {
+				if(!plist[i].equals("10000")) {
+					avgPay1 = "0";	
+				}if(!plist[i].equals("10000~20000")) {
 					avgPay2 = "0";
-					avgPay3 = "1";
-				}if(plist[i].equals("20000~30000")) {
-					avgPay4 = "20000";
-					avgPay5 = "30000";
-				}else {
+					avgPay3 = "1";	
+				}if(!plist[i].equals("20000~30000")) {
 					avgPay4 = "0";
 					avgPay5 = "1";
-				}if(plist[i].equals("30000")){
-					avgPay6 = "30000";
-				}else {
+				}if(!plist[i].equals("30000")){
 					avgPay6 = "99999999";
 				}
 			}
 		}
 		
-		if(tlist == null) {
-			query = new SelectQueryMaker.Builder()
-					.select().column("*").enter()
-					.from().tableName("Shop").enter()
-					.where().column("MENU_CATEGORY").in().condition(clist).enter()
-					.and().column("AVG_PAY").space().inequalityRigth(avgPay1).enter()
-					.or().column("AVG_PAY").space().betweenAnd(avgPay2, avgPay3).enter()
-					.or().column("AVG_PAY").space().betweenAnd(avgPay4, avgPay5).enter()
-					.or().column("AVG_PAY").space().inequalityLeft(avgPay6)
-					.build();
-		}else if(clist == null) {
-			query = new SelectQueryMaker.Builder()
-					.select().column("*").enter()
-					.from().tableName("Shop").enter()
-					.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
-					.and().column("AVG_PAY").inequalityRigth(avgPay1).enter()
-					.or().column("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
-					.or().column("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
-					.or().column("AVG_PAY").inequalityLeft(avgPay6)
-					.build();
-		}if(plist == null){
-			
-			query = new SelectQueryMaker.Builder()
-					.select().column("*").enter()
-					.from().tableName("Shop").enter()
-					.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
-					.and().column("MENU_CATEGORY").in().condition(clist).enter()
-					.build();
+		if(keyword == null) {
+			if(tlist == null && clist ==null){
+				if(plist == null) {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.build();
+				}else {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.build();
+				}
+			}else if(tlist == null) {
+				if(plist == null) {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("MENU_CATEGORY").in().condition(clist).enter()
+							.build();
+				}else {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("MENU_CATEGORY").in().condition(clist).enter()
+							.and().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.build();
+				}
+			}else if(clist == null){
+				if(plist == null) {
+					query = new SelectQueryMaker.Builder()
+							.select().column("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+							.build();
+				}else {
+					query = new SelectQueryMaker.Builder()
+							.select().column("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+							.and().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.build();
+				}
+			}else if(plist == null) {
+				query = new SelectQueryMaker.Builder()
+						.select().column("*").enter()
+						.from().tableName("Shop").enter()
+						.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+						.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+						.build();
+			}
+		}else {
+			if(tlist == null && clist ==null){
+				if(plist == null) {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+							.build();
+				}else {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+							.and().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.build();
+				}
+			}else if(tlist == null) {
+				if(plist == null) {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+							.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+							.build();
+				}else {
+					query = new SelectQueryMaker.Builder()
+							.select().columnName("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+							.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+							.and().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.build();
+				}
+			}else if(clist == null){
+				if(plist == null) {
+					query = new SelectQueryMaker.Builder()
+							.select().column("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+							.and().columnName("TABLE_TYPE").in().condition(tlist).enter()
+							.build();
+				}else {
+					query = new SelectQueryMaker.Builder()
+							.select().column("*").enter()
+							.from().tableName("Shop").enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+							.and().columnName("TABLE_TYPE").in().condition(tlist).enter()
+							.and().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.build();
+				}
+			}else if(plist == null) {
+				query = new SelectQueryMaker.Builder()
+						.select().column("*").enter()
+						.from().tableName("Shop").enter()
+						.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+						.and().columnName("TABLE_TYPE").in().condition(tlist).enter()
+						.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+						.build();
+			}
 		}
+		
+				
+		
 		
 	
 		System.out.println(query.getQuery());

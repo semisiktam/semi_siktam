@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.shop.model.vo.*"%>
-  <%ArrayList<Shop> list = (ArrayList<Shop>)request.getAttribute("list"); %> 
+	<%ArrayList<Shop> list = (ArrayList<Shop>)request.getAttribute("list");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,13 +29,13 @@
                 <span class="glyphicon glyphicon-ok" onclick='search();'></span> 검색
             </a>
         </div>
-    
+    	
         <table id="table1">
             <!-- border="1px solid black" -->
             <tr id="tr1">
                 <td class="table-rowName">테이블</td>
-                <td><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" ><label for='a1'>1인석</label></td>
-                <td><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" ><label for='a2'>2인석</label></td>
+                <td><a href=#><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" ><label for='a1'>1인석</label></a></td>
+                <td><a href=#><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" ><label for='a2'>2인석</label></a></td>
                 <td><input type="checkbox" value="칸막이" id='a3' class="table-check" name="table" ><label for='a3'>칸막이</label></td>
                 <td><input type="checkbox" value="바테이블" id='a4' class="table-check" name="table" ><label for='a4'>바테이블</label></td>
                 <td><input type="checkbox" value="셀프주문" id='a5' class="table-check" name="table" ><label for='a5'>셀프주문</label></td>
@@ -103,31 +103,14 @@
     <hr>
 
     <div id="result">
-            <%-- <% for(Shop s : list){ %> --%>
-            <!-- 처음 있던 테이블(기준) -->
-             <!--  잠시 주석 처리(지원)
-            <table border="1px" id="tbl">
-                <tr onclick="location.href='productDetailPage_6.jsp'">
-                    <td id="img"><img src="/siktam/resources/images/조건_역전우동.png<%-- <%= s.getShopImg() %> --%>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
-                    <td id="txt"  style="word-break:break-all">
-                        <h4><b><%-- <%= s.getShopName() %>> --%></b></h4>
-                        <ul>
-                            <li><span class="star">★ 4.1</span><span class="review_num">리뷰 187</span><span class="reserve_num">예약 200</span></li>
-                            <li><span class="area">강남</span><span class="tableInfo">1<%-- <%= s.getTableType()%> --%></span><span class="sectors">2<%-- <%= s.getMenuCategory() %> --%></span></li>
-                            <li><span class="mainMenu">대표메뉴 : 역전우동, 김치우동, 어묵우동 등</span></li>
-                        </ul>
-                    </td>
-                </tr>
-            </table>
-            -->
-            <!-- 새로 만든 테이블 -->
+
             <table border="1px" id="tbl">
             	<% for(Shop s : list){ %>
 	                <tr>
 	                	<td style="display:none"><%=s.getShopPid() %></td>
 	                    <td id="img"><img src="<%= s.getShopImg() %>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
 	                    <td id="txt"  style="word-break:break-all">
-	                        <h4><b><%= s.getShopName() %>> </b></h4>
+	                        <h4><b><%= s.getShopName() %> </b></h4>
 	                        <ul>
 	                            <li><span class="star">★ 4.1</span><span class="review_num">리뷰 187</span><span class="reserve_num">예약 200</span></li>
 	                            <li><span class="area"><%= s.getsAddr() %></span><span class="tableInfo"> <%= s.getTableType()%></span><span class="sectors"> <%= s.getMenuCategory() %></span></li>
@@ -137,45 +120,12 @@
 	                </tr>
                 <% } %>
             </table>
-           <%--  <% } %> --%>
-            <%--
-                <tr onclick="location.href='productDetailPage_6.jsp'">
-                    <td id="img"><img src="/siktam/resources/images/진씨화로.jpg"  style="width:100%" alt="Image" class="img-thumbnail"></td>
-                    <td id="txt"  style="word-break:break-all">
-                        <h4><b>진씨화로</b></h4>
-                        <ul>
-                            <li><span class="star">★ 4.5</span><span class="review_num">리뷰 137</span><span class="reserve_num">예약 221</span></li>
-                            <li><span class="area">강남</span><span class="tableInfo">1인 테이블</span><span class="sectors">한식</span></li>
-                            <li><span class="mainMenu">대표메뉴 : 육회비빔밥, 차돌된장찌개 등</span></li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr onclick="location.href='productDetailPage_6.jsp'">
-                    <td id="img"><img src="/siktam/resources/images/곱창.png"  style="width:100%" alt="Image" class="img-thumbnail"></td>
-                    <td id="txt"  style="word-break:break-all">
-                        <h4><b>곱창이야기</b></h4>
-                        <ul>
-                            <li><span class="star">★ 4.2</span><span class="review_num">리뷰 452</span><span class="reserve_num">예약 576</span></li>
-                            <li><span class="area">강남</span><span class="tableInfo">2인 테이블</span><span class="sectors">한식</span></li>
-                            <li><span class="mainMenu">대표메뉴 : 곱창모듬, 소곱창, 소막창 등</span></li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr onclick="location.href='productDetailPage_6.jsp'">
-                    <td id="img"><img src="/siktam/resources/images/tamhate2.jpg"  style="width:100%" alt="Image" class="img-thumbnail"></td>
-                    <td id="txt"  style="word-break:break-all">
-                        <h4><b>에머이</b></h4>
-                        <ul>
-                            <li><span class="star">★ 4.4</span><span class="review_num">리뷰 387</span><span class="reserve_num">예약 401</span></li>
-                            <li><span class="area">강남</span><span class="tableInfo">1인 테이블</span><span class="sectors">아시안</span></li>
-                            <li><span class="mainMenu">대표메뉴 : 양지쌀국수, 분짜 등</span></li>
-                        </ul>
-                    </td>
-                </tr> --%>
+           
     </div>
 	<script>
 		function search(){
-			<%-- location.href="<%=request.getContextPath() %>/searchMain.sc?keyword="$('#search-text').val(); --%>
+			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#search-text').val();
+			
 		}
 		$(function(){
 			
@@ -218,8 +168,6 @@
             plist.push($(this).val());
          });
         
-        
-         console.log(tlist);
          $.ajax({
             url:"/siktam/SearchCondition.sc",
             type:"get",
@@ -234,63 +182,7 @@
             }
           }); 
      }); 
-     
-/*      $("input[name='table']").click(function(){
-        var tlist = [];
-         $("input[name='table']:checked").each(function(i){
-            tlist.push($(this).val());
-         });   
-         console.log(tlist);
-         $.ajax({
-            url:"/siktam/SearchCondition.sc",
-            type:"get",
-            traditional : true,
-            data:{
-               "tlist" : tlist
-            },success:function(data){
-               console.log(data);
-            },error:function(){
-            }
-          }); 
-     });
-     
-     $("input[name='category']").click(function(){
-        var clist = [];
-         $("input[name='category']:checked").each(function(i){
-            clist.push($(this).val());
-         });   
-         console.log(clist);
-         $.ajax({
-            url:"/siktam/SearchCondition.sc",
-            type:"get",
-            traditional : true,
-            data:{
-               "clist" : clist
-            },success:function(data){
-               console.log(data);
-            },error:function(){
-            }
-          }); 
-     });
-     
-     $("input[name='price']").click(function(){
-        var plist = [];
-         $("input[name='price']:checked").each(function(i){
-            plist.push($(this).val());
-         });   
-         console.log(plist);
-         $.ajax({
-            url:"/siktam/SearchCondition.sc",
-            type:"get",
-            traditional : true,
-            data:{
-               "plist" : plist
-            },success:function(data){
-               console.log(data);
-            },error:function(){
-            }
-          }); 
-     }); */
+   
     </script>
     </div>
 </div>

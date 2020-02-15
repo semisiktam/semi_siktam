@@ -92,11 +92,7 @@
 					<span class="glyphicon glyphicon-list-alt"></span> 메뉴
 				</p>
 				<div id="menuType">
-					<!-- <ul class="tabs">
-						<li class="tab-link current" data-tab="tab-1">짜잔</li>
-						<li class="tab-link" data-tab="tab-2">피자</li>
-                <li class="tab-link" data-tab="tab-3">짜장면</li>
-					</ul> -->
+				
 				</div>
 				<div id="tab-1" class="tab-content current">
 					<table id="tbl">
