@@ -62,7 +62,7 @@
 	                            <td colspan="2"><input type="button" value="변경" class="confirm" id="change" onclick="location.href='modify_3.html'"> &nbsp;
 	                            <input type="button" value="취소" class="confirm" id="cancel" onclick="location.href='mypagePerson_5.html'"></td>
 	                        </tr>
-                        <% } %>
+                       <% } %>
                        <!--  <tr class="reservationTr">
                             <td>역전우동</td>
                             <td>2020.01.24</td>

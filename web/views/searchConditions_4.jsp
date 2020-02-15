@@ -123,7 +123,8 @@
             <!-- 새로 만든 테이블 -->
             <table border="1px" id="tbl">
             	<% for(Shop s : list){ %>
-	                <tr onclick="location.href='productDetailPage_6.jsp'">
+	                <tr>
+	                	<td style="display:none"><%=s.getShopPid() %></td>
 	                    <td id="img"><img src="<%= s.getShopImg() %>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
 	                    <td id="txt"  style="word-break:break-all">
 	                        <h4><b><%= s.getShopName() %>> </b></h4>
@@ -176,6 +177,18 @@
 		function search(){
 			<%-- location.href="<%=request.getContextPath() %>/searchMain.sc?keyword="$('#search-text').val(); --%>
 		}
+		$(function(){
+			
+			$("#tbl td").mouseenter(function(){
+				$(this).parent().css({"background":"lightgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				//console.log($(this).parent().children().eq(0).text());
+				var shopPid = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/sSelect.so?shopPid=" + shopPid;
+			});
+		});
 	</script>
     <script>
        /*  function check(){
