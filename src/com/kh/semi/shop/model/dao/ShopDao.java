@@ -53,21 +53,21 @@ public class ShopDao {
 			while(rset.next()) {
 				Shop s = new Shop();
 
-				s.setShopPid(rset.getString("shopPid"));
-				s.setUserId(rset.getString("userId"));
-				s.setShopName(rset.getString("shopName"));
-				s.setShopImg(rset.getString("shopImg"));
-				s.setsAddr(rset.getString("sAddr"));
-				s.setsPhone(rset.getString("sPhone"));
-				s.setsInfo(rset.getString("sInfo"));
-				s.setOwnerId(rset.getString("ownerId"));
-				s.setsTime(rset.getString("sTime"));
-				s.seteTime(rset.getString("eTime"));
-				s.setShopDay(rset.getString("shopDay"));
-				s.setMenuCategory(rset.getString("menuCategory"));
-				s.setTableType(rset.getString("tableType"));
-				s.setAvgPay(rset.getInt("avgPay"));
-				s.setOutYn(rset.getString("outYn"));
+				s.setShopPid(rset.getString("shop_pid"));
+				s.setUserId(rset.getString("userid"));
+				s.setShopName(rset.getString("shop_name"));
+				s.setShopImg(rset.getString("shop_img"));
+				s.setsAddr(rset.getString("shop_addr"));
+				s.setsPhone(rset.getString("shop_phone"));
+				s.setsInfo(rset.getString("shop_info"));
+				s.setOwnerId(rset.getString("owner_id"));
+				s.setsTime(rset.getString("shop_starttime"));
+				s.seteTime(rset.getString("shop_endtime"));
+				s.setShopDay(rset.getString("shop_day"));
+				s.setMenuCategory(rset.getString("menu_category"));
+				s.setTableType(rset.getString("table_type"));
+				s.setAvgPay(rset.getInt("avg_pay"));
+				s.setOutYn(rset.getString("out_yn"));
 
 				list.add(s);
 

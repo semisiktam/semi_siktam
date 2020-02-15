@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.shop.model.vo.*"%>
- <%-- <%ArrayList<Shop> list = (ArrayList<Shop>)request.getAttribute("list"); %> --%>
+  <%ArrayList<Shop> list = (ArrayList<Shop>)request.getAttribute("list"); %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,6 +104,8 @@
 
     <div id="result">
             <%-- <% for(Shop s : list){ %> --%>
+            <!-- 처음 있던 테이블(기준) -->
+             <!--  잠시 주석 처리(지원)
             <table border="1px" id="tbl">
                 <tr onclick="location.href='productDetailPage_6.jsp'">
                     <td id="img"><img src="/siktam/resources/images/조건_역전우동.png<%-- <%= s.getShopImg() %> --%>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
@@ -116,6 +118,23 @@
                         </ul>
                     </td>
                 </tr>
+            </table>
+            -->
+            <!-- 새로 만든 테이블 -->
+            <table border="1px" id="tbl">
+            	<% for(Shop s : list){ %>
+	                <tr onclick="location.href='productDetailPage_6.jsp'">
+	                    <td id="img"><img src="<%= s.getShopImg() %>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
+	                    <td id="txt"  style="word-break:break-all">
+	                        <h4><b><%= s.getShopName() %>> </b></h4>
+	                        <ul>
+	                            <li><span class="star">★ 4.1</span><span class="review_num">리뷰 187</span><span class="reserve_num">예약 200</span></li>
+	                            <li><span class="area"><%= s.getsAddr() %></span><span class="tableInfo"> <%= s.getTableType()%></span><span class="sectors"> <%= s.getMenuCategory() %></span></li>
+	                            <li><span class="mainMenu">대표메뉴 : 역전우동, 김치우동, 어묵우동 등</span></li>
+	                        </ul>
+	                    </td>
+	                </tr>
+                <% } %>
             </table>
            <%--  <% } %> --%>
             <%--

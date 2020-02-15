@@ -17,7 +17,6 @@ public class Review implements Serializable {
 	private Date rDate      ; //작성일
 	public Review() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Review(int rNo, String userId, String shopPid, String rContent, String reviewImg, int score, Date rDate) {
 		super();

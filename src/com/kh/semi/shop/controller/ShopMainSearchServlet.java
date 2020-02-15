@@ -44,19 +44,19 @@ public class ShopMainSearchServlet extends HttpServlet {
 		
 		//--------------------------------------------------------------
 		
-//		String page ="";
+		String page ="";
 		
 		System.out.println(list.isEmpty());
 		
-//		if(list != null) { 
-//			page = "views/searchConditions_4.jsp";
-//			request.setAttribute("list", list);
-//		}else {
-//			page = "views/errorPage.jsp";
-//			request.setAttribute("msg", "지역 검색에 실패했답니다~");
-//		}
+		if(list != null) { 
+			page = "views/searchConditions_4.jsp";
+			request.setAttribute("list", list);
+		}else {
+			page = "views/errorPage.jsp";
+			request.setAttribute("msg", "지역 검색에 실패했답니다~");
+		}
 		
-//		request.getRequestDispatcher(page).forward(request, response);
+		request.getRequestDispatcher(page).forward(request, response);
 		
 		// 2020-02-11 2020-02-11 현희 수정(서치기능)
 		
