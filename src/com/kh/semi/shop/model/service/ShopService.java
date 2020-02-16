@@ -12,7 +12,6 @@ import com.kh.semi.shop.model.dao.ShopDao;
 import com.kh.semi.shop.model.vo.Shop;
 
 public class ShopService {
-	
 	private ShopDao sDao;
 	public ShopService(){
 		sDao=new ShopDao();
@@ -82,6 +81,43 @@ public class ShopService {
 		close(con);
 		
 		return s;
+	}
+
+	/**
+	 * 전체 업체수 조회
+	 * @return
+	 */
+	public int getListCount() {
+		Connection con = getConnection();
+		System.out.println("여긴 작동합니까?");
+		int listCount = sDao.getListCount(con);
+		
+		System.out.println("서비스" + listCount);
+		
+		close(con);
+		
+		return listCount;
+	}
+
+
+	/**
+	 * 관리자에서 업체리스트 조회
+	 * @param currentPage
+	 * @param limit
+	 * @return
+	 */
+	public ArrayList<Shop> shopAdminList(int currentPage, int limit) {
+		Connection con = getConnection();
+		
+		ArrayList<Shop> list = new ShopDao().shopAdminList(con, currentPage, limit);
+		
+		for(Shop s: list) {
+			System.out.println(s);
+		}
+		
+		close(con);
+		
+		return list;
 	}
 
 	

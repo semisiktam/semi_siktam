@@ -1,12 +1,12 @@
-package com.kh.semi.member.model.vo;
+package com.kh.semi.shop.model.vo;
 
 import java.io.Serializable;
 
-public class MemberPageInfo implements Serializable{
+public class ShopPageInfo implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8064067451644052219L;
+	private static final long serialVersionUID = -7657561347463252834L;
 	private int currentPage;
 	private int listCount;
 	private int limit;
@@ -14,9 +14,9 @@ public class MemberPageInfo implements Serializable{
 	private int startPage;
 	private int endPage;
 	
-	public MemberPageInfo() {}
+	public ShopPageInfo() {}
 
-	public MemberPageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
+	public ShopPageInfo(int currentPage, int listCount, int limit, int maxPage, int startPage, int endPage) {
 		super();
 		this.currentPage = currentPage;
 		this.listCount = listCount;
@@ -76,9 +76,7 @@ public class MemberPageInfo implements Serializable{
 
 	@Override
 	public String toString() {
-		return "MemberPageInfo [currentPage=" + currentPage + ", listCount=" + listCount + ", limit=" + limit
+		return "ShopPageInfo [currentPage=" + currentPage + ", listCount=" + listCount + ", limit=" + limit
 				+ ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
 	}
-	
-	
 }
