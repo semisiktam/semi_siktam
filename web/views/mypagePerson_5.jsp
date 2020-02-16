@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.member.model.vo.*"%>
 <% ArrayList<MemberReservationList> mrList = (ArrayList<MemberReservationList>)request.getAttribute("mrList"); 
-  /* ArrayList<Shop> favorShopList = (ArrayList<Shop>)request.getAttribute("favorShopList"); */
+   ArrayList<Shop> fsList = (ArrayList<Shop>)request.getAttribute("fsList");
 %>
 <!DOCTYPE html>
 <html>
@@ -244,7 +244,7 @@
             <h3 id="contentTxt" align="left">내가 즐겨찾기 한 음식점</h3>
             <div id="registStore">
                 <ul>
-                <%-- <%for(Shop s : favorShopList){ %>
+                 <%for(Shop s : fsList){ %>
                     <li>
                         <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
                             <img src="<%=s.getShopImg() %>" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
@@ -255,8 +255,8 @@
                         <p class="star">★</a>
                         </div>                        
                     </li>
-                    <%} %> --%>
-                    <li>
+                    <%} %>
+                    <!-- <li>
                         <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
                             <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
                             <h4 align="center">역전우동</h4>
@@ -292,7 +292,7 @@
                             <input type="button" id="plusBtn2" value="+" onclick="location.href='searchConditions_4.jsp'">
                             </div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
            </div>

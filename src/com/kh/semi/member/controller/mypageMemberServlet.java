@@ -54,19 +54,23 @@ public class mypageMemberServlet extends HttpServlet {
 		System.out.println(mrList);
 		System.out.println(fsList);
 		
-		// 즐겨찾기 > 오류
-//		ArrayList<Shop> favorShopList = new ArrayList<Shop>();
-//		mypageFavoriteService mfs = new mypageFavoriteService();
-//		favorShopList = mfs.selectFavoriteShop(m.getUserId());
-//		System.out.println(favorShopList);
+
 		
 		if(mrList!=null) {
 			page = "views/mypagePerson_5.jsp";
 			request.setAttribute("mrList", mrList);	
-//			request.setAttribute("favorShopList", favorShopList);
+			request.setAttribute("fsList", fsList);
 		}else {
 			request.setAttribute("msg", "예약내역 불러오기 에러 ");
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
+		// 탐희 즐겨찾기 > 오류
+//		ArrayList<Shop> favorShopList = new ArrayList<Shop>();
+//		mypageFavoriteService mfs = new mypageFavoriteService();
+//		favorShopList = mfs.selectFavoriteShop(m.getUserId());
+//		System.out.println(favorShopList);
 		
 //		if(favorShopList!=null) {
 //			page = "views/mypagePerson_5.jsp";
@@ -74,9 +78,11 @@ public class mypageMemberServlet extends HttpServlet {
 //		}else {
 //			request.setAttribute("msg", "예약내역 불러오기 에러 ");
 //		}
-		request.getRequestDispatcher(page).forward(request, response);
 
-		/*JSONObject userInfo = null;
+		
+		/*
+		 * 타미 json > 실패
+		 * JSONObject userInfo = null;
 		JSONArray result = new JSONArray();
 		
 		for(MemberReservationList user : mrList) {
