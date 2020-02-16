@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.member.model.vo.MemberReservationList;
+import com.kh.semi.mypageFavorite.model.service.mypageFavoriteService;
 import com.kh.semi.shop.model.vo.Shop;
 
 /**
@@ -36,25 +37,39 @@ public class mypageMemberServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		HttpSession session = request.getSession();
 		Member m=(Member)session.getAttribute("member");
 		
 		ArrayList<MemberReservationList> mrList= new ArrayList<MemberReservationList>();
-			
-		MemberService ms = new MemberService();
-		
+		MemberService ms = new MemberService();	
 		mrList = ms.selectUserReserve(m.getUserId());
-				
+
 		String page = "";
 		
 		System.out.println(mrList);
 		
+		// 즐겨찾기 > 오류
+//		ArrayList<Shop> favorShopList = new ArrayList<Shop>();
+//		mypageFavoriteService mfs = new mypageFavoriteService();
+//		favorShopList = mfs.selectFavoriteShop(m.getUserId());
+//		System.out.println(favorShopList);
+
+		
 		if(mrList!=null) {
 			page = "views/mypagePerson_5.jsp";
 			request.setAttribute("mrList", mrList);	
+//			request.setAttribute("favorShopList", favorShopList);
 		}else {
 			request.setAttribute("msg", "예약내역 불러오기 에러 ");
 		}
+		
+//		if(favorShopList!=null) {
+//			page = "views/mypagePerson_5.jsp";
+//			request.setAttribute("favorShopList", favorShopList);
+//		}else {
+//			request.setAttribute("msg", "예약내역 불러오기 에러 ");
+//		}
 		request.getRequestDispatcher(page).forward(request, response);
 
 		/*JSONObject userInfo = null;

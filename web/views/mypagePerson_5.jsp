@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.member.model.vo.*"%>
 <% ArrayList<MemberReservationList> mrList = (ArrayList<MemberReservationList>)request.getAttribute("mrList"); 
+  /* ArrayList<Shop> favorShopList = (ArrayList<Shop>)request.getAttribute("favorShopList"); */
 %>
 <!DOCTYPE html>
 <html>
@@ -235,15 +236,26 @@
             });
            */
         </script>
-
+        <!-- 마이페이지로 넘어가는 mypageMember.mm 서블릿에 arraylist<shop>했더니 되지 않아서
+       	 즐겨찾기 div에 form을 추가하여  새로운 servlet을 생성함 but 널포인트 오류^^-->
+       	 
+		<form action="/siktam/mypageFavorite.mf" method="post">
         <div class ="content" id="content2">
-
-
             <h3 id="contentTxt" align="left">내가 즐겨찾기 한 음식점</h3>
-
-
             <div id="registStore">
                 <ul>
+                <%-- <%for(Shop s : favorShopList){ %>
+                    <li>
+                        <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
+                            <img src="<%=s.getShopImg() %>" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
+                            <h4 align="center"><%=s.getShopName() %></h4>
+                            <p align="center"><small><%=s.getsAddr() %></small></p>
+                        </div>
+                        <div class="bookmark">
+                        <p class="star">★</a>
+                        </div>                        
+                    </li>
+                    <%} %> --%>
                     <li>
                         <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
                             <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
@@ -283,6 +295,8 @@
                     </li>
                 </ul>
             </div>
+           </div>
+          </form>
 			<script>
                   $(document).ready(function(){
                   	$('.star').toggle(function(){
@@ -334,7 +348,7 @@
             
             
            
-        </div>
+        
         </div>
     
         
