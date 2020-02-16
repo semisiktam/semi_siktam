@@ -47,14 +47,18 @@ public class mypageMemberServlet extends HttpServlet {
 
 		String page = "";
 		
+		// 서지가 해본다
+		ArrayList<Shop> fsList = new ArrayList<Shop>();
+		fsList = ms.selectFSList(m.getUserId());
+		
 		System.out.println(mrList);
+		System.out.println(fsList);
 		
 		// 즐겨찾기 > 오류
 //		ArrayList<Shop> favorShopList = new ArrayList<Shop>();
 //		mypageFavoriteService mfs = new mypageFavoriteService();
 //		favorShopList = mfs.selectFavoriteShop(m.getUserId());
 //		System.out.println(favorShopList);
-
 		
 		if(mrList!=null) {
 			page = "views/mypagePerson_5.jsp";

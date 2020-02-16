@@ -57,27 +57,14 @@ public class mypageFavoriteDao {
 			while(rset.next()) {
 				Shop s = new Shop();
 				
-				s.setShopPid(rset.getString("shop_pid"));
-				s.setUserId(rset.getString("userid"));
 				s.setShopName(rset.getString("shop_name"));
 				s.setShopImg(rset.getString("shop_img"));
 				s.setsAddr(rset.getString("shop_addr"));
-				s.setsPhone(rset.getString("shop_phone"));
-				s.setsInfo(rset.getString("shop_info"));
-				s.setOwnerId(rset.getString("owner_id"));
-				s.setsTime(rset.getString("shop_starttime"));
-				s.seteTime(rset.getString("shop_endtime"));
-				s.setShopDay(rset.getString("shop_day"));
-				s.setMenuCategory(rset.getString("menu_category"));
-				s.setTableType(rset.getString("table_type"));
-				s.setAvgPay(rset.getInt("avg_pay"));
-				s.setOutYn(rset.getString("out_yn"));
 				
 				favorShopList.add(s);
 				
-				
-				
 			}
+			System.out.println(favorShopList);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
