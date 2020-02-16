@@ -34,8 +34,8 @@
             <!-- border="1px solid black" -->
             <tr id="tr1">
                 <td class="table-rowName">테이블</td>
-                <td><a href=#><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" ><label for='a1'>1인석</label></a></td>
-                <td><a href=#><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" ><label for='a2'>2인석</label></a></td>
+                <td><a href="#"><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" ><label for='a1'>1인석</label></a></td>
+                <td><a href="#"><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" ><label for='a2'>2인석</label></a></td>
                 <td><input type="checkbox" value="칸막이" id='a3' class="table-check" name="table" ><label for='a3'>칸막이</label></td>
                 <td><input type="checkbox" value="바테이블" id='a4' class="table-check" name="table" ><label for='a4'>바테이블</label></td>
                 <td><input type="checkbox" value="셀프주문" id='a5' class="table-check" name="table" ><label for='a5'>셀프주문</label></td>
@@ -167,7 +167,7 @@
         $("input[name='price']:checked").each(function(i){
             plist.push($(this).val());
          });
-        
+        <%-- location.href="<%=request.getContextPath()%>/SearchCondition.sc?tlist=" + tlist + "&clist=" + clist + "&plist=" +plist; --%>
          $.ajax({
             url:"/siktam/SearchCondition.sc",
             type:"get",

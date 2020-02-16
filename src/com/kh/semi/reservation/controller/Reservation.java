@@ -31,7 +31,7 @@ public class Reservation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String shopPid = request.getParameter("shopPid");
+		String shopPid = request.getParameter("ShopId");
 		ArrayList<ReservationTest> list = new ReservationService().Reservation(shopPid);
 		
 		

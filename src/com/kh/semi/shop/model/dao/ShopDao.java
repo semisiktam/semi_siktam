@@ -284,11 +284,6 @@ public class ShopDao {
 						.build();
 			}
 		}
-		
-				
-		
-		
-	
 		System.out.println(query.getQuery());
 				
 		sql = query.getQuery().toString();
