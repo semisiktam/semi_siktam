@@ -282,10 +282,50 @@ public ArrayList<MemberReservationList> selectUserReserve(Connection con, String
 		close(pstmt);
 	}
 	
-	for(MemberReservationList n : mrList) {
-		System.out.println(n);
-	}
 	return mrList;
+}
+
+/**
+ * 서지가 한거
+ * @param con
+ * @param userId
+ * @return
+ */
+public ArrayList<Shop> selectFSList(Connection con, String userId) {
+	
+	ArrayList<Shop> FSList = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	
+	String sql = prop.getProperty("selectFavorite");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		rset = pstmt.executeQuery();
+		
+		FSList = new ArrayList<Shop>();
+		
+		while(rset.next()) {
+			Shop s = new Shop();
+			
+			s.setShopName(rset.getString("shop_name"));
+			s.setShopImg(rset.getString("shop_img"));
+			s.setsAddr(rset.getString("shop_addr"));
+			
+			FSList.add(s);
+			
+		}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return FSList;
 }
 
 /*public ArrayList<Shop> selectUserShop(Connection con, String id) {

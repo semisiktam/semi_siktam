@@ -106,6 +106,22 @@ public ArrayList<MemberReservationList> selectUserReserve(String id) {
 	return mrList;
 }
 
+/**
+ * 서지가 한거
+ * @param userId
+ * @return
+ */
+public ArrayList<Shop> selectFSList(String userId) {
+	
+	Connection con = getConnection();
+	
+	ArrayList<Shop> fsList = mDao.selectFSList(con,userId);
+	
+	close(con);
+	
+	return fsList;
+}
+
 /*public ArrayList<Shop> selectUserShop(String id) {
 	Connection con = getConnection();
 	
