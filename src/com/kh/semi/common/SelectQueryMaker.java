@@ -274,7 +274,7 @@ public class SelectQueryMaker {
 		}
 		
 		public Builder bothPattern(String pattern) {
-			query.append("'%' || ").append(pattern).append(" || '%'").append(" ");
+			query.append("'%' || ").append("'").append(pattern).append("'").append(" || '%'").append(" ");
 			
 			return this;
 		}

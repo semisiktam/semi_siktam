@@ -35,12 +35,12 @@ public class ReservationDao {
 		ArrayList<ReservationTest>list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		shopPid = "S10";
+		
 		String sql = prop.getProperty("reservation");
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "S10");
+			pstmt.setString(1, shopPid);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<ReservationTest>();
