@@ -183,38 +183,54 @@
 	</script> -->
 	<script>
 		$(function() {
-			$('.bt_up').click(each(function(){
+			$('.bt_up').click(function() {
+				
 				var mlist = [];
 				var n = $('.bt_up').index(this);
 				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
 				num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 + 1);
 				
-				if (parseInt(num) > 0) {
-					mlist.push($('#tbl tr:eq('+ n +')').children().eq(1).text(),
-							$('#tbl tr:eq('+ n +')').children().eq(2).text(),
-							$('#tbl tr:eq('+ n +')').children().eq(3).text());
+				var m0 = {
+							menuName:$('#tbl tr:eq(0)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(0)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(0)').children().eq(3).text()
+						};
+				var m1 = {
+							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(1)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(1)').children().eq(3).text()
+						};
+				var m2 = {
+							menuName:$('#tbl tr:eq(2)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(2)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(2)').children().eq(3).text()
+						};
+				var m3 = {
+							menuName:$('#tbl tr:eq(3)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(3)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(3)').children().eq(3).text()
+						};
 					
-					
-					console.log(mlist);
-				}
-			}));
-			
-			
-			
-/* 			$('.bt_up').click(function() {
-				var mlist = [];
-				var n = $('.bt_up').index(this);
-				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
-				num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 + 1);
+				mlist.push(m0);
+				mlist.push(m1);
+				mlist.push(m2);
+				mlist.push(m3);
 				
-				if (parseInt(num) > 0) {
-					mlist.push($('#tbl tr:eq('+ n +')').children().eq(1).text(),
-							$('#tbl tr:eq('+ n +')').children().eq(2).text(),
-							$('#tbl tr:eq('+ n +')').children().eq(3).text());
+				console.log(mlist);
+				
+				$.ajax({
+					 url:"/siktam/reservationPay.rc",
+			         type:"get",
+			         traditional : true,
+			         dataType:"json",
+			         data:{
+			               "mlist" : mlist
+			         },success:function(data){
+			           
+			         },error:function(){
+			         }
+				});
 					
-					
-					console.log(mlist);
-				}
 			});
 			$('.bt_down').click(function() {
 				var mlist = [];
@@ -223,18 +239,48 @@
 				if (parseInt(num) > 0) {
 					num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 - 1);
 					
-					mlist.push($('#tbl tr:eq('+ n +')').children().eq(1).text(),
-							$('#tbl tr:eq('+ n +')').children().eq(2).text(),
-							$('#tbl tr:eq('+ n +')').children().eq(3).text());
+				var m0 = {
+							menuName:$('#tbl tr:eq(0)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(0)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(0)').children().eq(3).text()
+						};
+				var m1 = {
+							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(1)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(1)').children().eq(3).text()
+						};
+				var m2 = {
+							menuName:$('#tbl tr:eq(2)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(2)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(2)').children().eq(3).text()
+						};
+				var m3 = {
+							menuName:$('#tbl tr:eq(3)').children().eq(1).text(),
+							menuPrice:$('#tbl tr:eq(3)').children().eq(2).text(),
+							menuCount:$('#tbl tr:eq(3)').children().eq(3).text()
+						};
 					
-					console.log(mlist);
-				}
+				mlist.push(m0);
+				mlist.push(m1);
+				mlist.push(m2);
+				mlist.push(m3);
 				
-				console.log($('#tbl tr:eq('+ n +')').children().eq(1).text());
-				console.log($('#tbl tr:eq('+ n +')').children().eq(2).text());
-				console.log($('#tbl tr:eq('+ n +')').children().eq(3).text());
+				console.log(mlist);
+				
+				$.ajax({
+					 url:"/siktam/reservationPay.rc",
+			         type:"get",
+			         traditional : true,
+			         dataType:"json",
+			         data:{
+			               "mlist" : mlist
+			         },success:function(data){
+			           
+			         },error:function(){
+			         }
+				});
+				}
 			});
-			 */
 		})
 	</script>
 
