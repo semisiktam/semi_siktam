@@ -1,11 +1,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.menu.model.vo.* , com.kh.semi.member.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.menu.model.vo.* ,
+     com.kh.semi.member.model.vo.*" %>
 
 <% 
 	Shop s = (Shop)request.getAttribute("shop");
 	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("mList");
 	Member mem = (Member)request.getAttribute("member");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +19,10 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <!-- 지도 설치 스크립트 -->
+    
+    <!-- 지도 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services"></script>
+    
     
     <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
@@ -55,7 +61,7 @@
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
             <!-- %% 리뷰연결-->
-            <a href="/siktam/views/productReviewPage_7.jsp?shopPid=<%=s.getShopPid()%>"><div id="review"><span>리뷰</span></div></a>
+            <a href="/siktam/views/productReviewPage_7.jsp"><div id="review"><span>리뷰</span></div></a>
         </div>
         <!-- 상단 업체명/설명/예약버튼 -->
         <div id="pagetop">
@@ -123,17 +129,22 @@
             <!-- 지도 api -->
             <div id="storeMap" style="width:500px; height:400px;border:1px solid black;"></div>
             
+            <a href="https://map.kakao.com/link/search/<%=s.getsAddr()%>"><input type="button" value="카카오맵으로 확인하기!"></a>
+            
+            
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b75b48c17de2e99d89241117f1dc015c"></script>
             
             <script>
             
 	            var container = document.getElementById('storeMap');
 	    		var options = {
-	    			center: new kakao.maps.LatLng(33.450701, 126.570667),
+	    			center: new kakao.maps.LatLng(37.4921173, 127.011819),
 	    			level: 3
 	    		};
 	
 	    		var map = new kakao.maps.Map(container, options);
+	    		
+	    		
 
             
             </script>
