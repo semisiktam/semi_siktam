@@ -73,6 +73,8 @@ public class ShopService {
 		return s;
 	}
 
+	
+	
 	public Shop selectOne(String shopPid) {
 		
 		Connection con = getConnection();
@@ -90,10 +92,8 @@ public class ShopService {
 	 */
 	public int getListCount() {
 		Connection con = getConnection();
-		System.out.println("여긴 작동합니까?");
+
 		int listCount = sDao.getListCount(con);
-		
-		System.out.println("서비스" + listCount);
 		
 		close(con);
 		
@@ -112,13 +112,29 @@ public class ShopService {
 		
 		ArrayList<Shop> list = new ShopDao().shopAdminList(con, currentPage, limit);
 		
-		for(Shop s: list) {
-			System.out.println(s);
-		}
-		
 		close(con);
 		
 		return list;
+	}
+
+	/**
+	 * 관리자에서 매장정보 수정
+	 * @param s
+	 * @return
+	 */
+	public int updateAdminShop(Shop s) {
+		Connection con = getConnection();
+		
+		int result = new ShopDao().updateAdminShop(con, s);
+		
+		System.out.println("서비스" + result);
+		
+		if(result>0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
 	}
 
 	

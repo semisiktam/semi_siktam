@@ -1,11 +1,18 @@
 package com.kh.semi.review.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.semi.notice.model.vo.PageInfo;
+import com.kh.semi.review.model.service.ReviewService;
+import com.kh.semi.review.model.vo.Review;
+import com.kh.semi.shop.model.vo.Shop;
 
 /**
  * Servlet implementation class ReviewPageServlet
@@ -29,8 +36,62 @@ public class ReviewPageServlet extends HttpServlet {
 		// 리뷰 리스트 받아오기
 		// 멤버(로그인정보)(헤더에 딸려온다) 와 가게 번호 받아오기 -> 가게 번호로 가게 정보 가져오는 기능
 		
+		String shopPid = request.getParameter("shopPid");
 		
+		ArrayList<Review> rList = new ArrayList<Review>();
 		
+		ReviewService rs = new ReviewService();
+		
+		// 페이지 처리
+		int startPage; // 가장 앞 페이지
+		int endPage; // 가장 뒷 페이지
+		int maxPage; // 가장 마지막 페이지
+		int currentPage; // 사용자 현재 페이지
+		int limit; // 총 페이지 수 ( 한페이지당 보여줄 게시글 수)
+		
+		currentPage = 1;
+		
+		limit = 5;
+		
+		if(request.getParameter("currentPage")!=null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
+		int listCount = rs.getListCount(shopPid);
+		
+		maxPage = (int)((double)listCount/limit+0.9);
+		
+		startPage = ((currentPage-1)/limit)*limit+1;// ((int)((double)currentPage/limit+0.9)-1)*limit+1;
+		
+		endPage = startPage + limit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		// 페이지 처리
+		
+		rList = rs.selectReviewList(shopPid,currentPage,limit);
+		
+		Shop s = new Shop();
+		
+		s = rs.selectShop(shopPid);
+		
+		String page="";
+		
+		if(rList != null) {
+			
+			page = "/views/productReviewPage_7.jsp";
+			request.setAttribute("reviewList", rList);
+			request.setAttribute("shop", s);
+			
+			PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
+			request.setAttribute("pi", pi);
+			
+		}else {
+			request.setAttribute("msg", "공지사항 목록 불러오기 에러 ");
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 		
 		

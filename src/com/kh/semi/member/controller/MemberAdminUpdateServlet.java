@@ -46,14 +46,14 @@ public class MemberAdminUpdateServlet extends HttpServlet {
 		Member m = new Member(userId, password, addr, name, pid, phone, shopyn, mileage, couponno, blackyn, outyn);
 		
 		int result = new MemberService().updateAdminMember(m);
-		System.out.println("controller" + result);
+
 		if(result>0) {
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");
 			
 			PrintWriter out = response.getWriter();
 			
-			out.println("<html><script>alert('"+ userId +"님 회원정보의 변경이 적용되었습니다');");
+			out.println("<html><script>alert('"+ userId +"님의 회원정보 변경이 적용되었습니다');");
 			out.println("document.location.href='selectList.me'");
 			out.println("</script></html>");
 			out.flush();

@@ -8,4 +8,5 @@ encoding//src/config/notice-query.properties=UTF-8
 encoding//src/config/pay-query.properties=UTF-8
 encoding//src/config/qna-query.properties=UTF-8
 encoding//src/config/reservation-query.properties=UTF-8
+encoding//src/config/review-query.properties=UTF-8
 encoding//src/config/shop-query.properties=UTF-8
