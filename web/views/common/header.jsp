@@ -11,7 +11,6 @@
 	}else{
 		slist=null;
 	}
-	ArrayList<Shop> shop = (ArrayList<Shop>)session.getAttribute("selectShop");
 	
 %>
 

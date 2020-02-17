@@ -318,6 +318,7 @@ public class ShopDao {
 		return s;
 	}
 
+
 	public Shop selectOne(Connection con, String shopPid) {
 
 		Shop s = null;
@@ -350,6 +351,7 @@ public class ShopDao {
 				s.setAvgPay(rset.getInt("AVG_PAY"));
 				s.setOutYn(rset.getString("OUT_YN"));
 			}
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
