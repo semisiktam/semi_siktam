@@ -468,6 +468,7 @@ public class ShopDao {
 				sc.setShopPid(rset.getString("SHOP_PID"));
 				sc.setShopImg(rset.getString("SHOP_IMG"));
 				sc.setShopName(rset.getString("SHOP_NAME"));
+				sc.setShopAddr(rset.getString("SHOP_ADDR"));
 				sc.setTableType(rset.getString("TABLE_TYPE"));
 				sc.setMenuCategory(rset.getString("MENU_CATEGORY"));
 //				sc.setMainMenu(rset.getString(""));

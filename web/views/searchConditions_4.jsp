@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.shop.model.vo.*"%>
-	<%ArrayList<Shop> list = (ArrayList<Shop>)request.getAttribute("list");%>
+	<%ArrayList<ShopSearch> list = (ArrayList<ShopSearch>)request.getAttribute("list");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,15 +104,15 @@
 
     <div id="result">
         <table border="1px" id="tbl">
-        <% for(Shop s : list){ %>
+        <% for(ShopSearch sc : list){ %>
 	       <tr>
-	         <td style="display:none"><%=s.getShopPid() %></td>
-	         <td id="img"><img src="/siktam/resources/images/<%= s.getShopImg() %>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
+	         <td style="display:none"><%=sc.getShopPid() %></td>
+	         <td id="img"><img src="/siktam/resources/images/<%= sc.getShopImg() %>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
 	         <td id="txt"  style="word-break:break-all">
-	            <h4><b><%= s.getShopName() %> </b></h4>
+	            <h4><b><%= sc.getShopName() %> </b></h4>
 	            <ul>
-	              <li><span class="star">★ 4.1</span><span class="review_num">리뷰 187</span><span class="reserve_num">예약 200</span></li>
-	              <li><span class="area"><%= s.getsAddr() %></span><span class="tableInfo"> <%= s.getTableType()%></span><span class="sectors"> <%= s.getMenuCategory() %></span></li>
+	              <li><span class="star">★<%= sc.getStar() %></span><span class="review_num">리뷰 <%= sc.getReviewCount() %></span><span class="reserve_num">예약 <%= sc.getReviewCount() %></span></li>
+	              <li><span class="area"><%= sc.getShopAddr() %></span><span class="tableInfo"> <%= sc.getTableType()%></span><span class="sectors"> <%= sc.getMenuCategory() %></span></li>
 	              <li><span class="mainMenu">대표메뉴 : 역전우동, 김치우동, 어묵우동 등</span></li>
 	            </ul>
 	         </td>
@@ -122,7 +122,7 @@
     </div>
 	<script>
 		function search(){
-			<%-- location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#search-text').val(); --%>
+	 		 location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#search-text').val(); 
 			
 		}
 		$(function(){

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.semi.member.model.vo.*"%>
 <%
@@ -119,7 +120,7 @@
 	
 	<script>
 		function search(){
-			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#searchtext').val();
+			location.href="<%=request.getContextPath()%>/SearchCondition.sc?keyword="+$('#searchtext').val();
 		}
 	</script>
 	<!-- 2020-02-11 현희 수정(서치기능) 끝 -->

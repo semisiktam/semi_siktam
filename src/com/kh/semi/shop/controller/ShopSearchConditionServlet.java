@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.kh.semi.shop.model.service.ShopService;
-import com.kh.semi.shop.model.vo.Shop;
 import com.kh.semi.shop.model.vo.ShopSearch;
 
 /**
@@ -49,15 +48,15 @@ public class ShopSearchConditionServlet extends HttpServlet {
 					System.out.println(sc);
 				}
 				
-/*				String page = "";
+				String page = "";
 				if(list !=null) {
 					page = "views/searchConditions_4.jsp";
 					request.setAttribute("list", list);
 				}
-				request.getRequestDispatcher(page).forward(request, response);*/
+				request.getRequestDispatcher(page).forward(request, response);
 				
 				new Gson().toJson(list,response.getWriter());
-//				response.getWriter().print(list);
+				response.getWriter().print(list);
 				
 			}
 
