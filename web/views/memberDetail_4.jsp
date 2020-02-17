@@ -54,6 +54,9 @@
 	<form action="<%=request.getContextPath()%>/mAdminUpdate.me" method="post" onsubmit="return validate();">
 	<div id="container1">
 		<h1>회원 정보</h1>
+		<br>
+		<input type="submit" class="btn" value="수정완료">
+        <input type="reset" class="btn" value="취소" onclick="location.href='selectList.me'">
 	</div>
 	
 	<div id="container2">
@@ -108,10 +111,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="container3" style="top: 80%; left: 50%; position: absolute; text-align: center; margin: 0px 0pt 0pt -90px;">
-		<input type="submit" class="btn" value="수정완료">
-        <input type="reset" class="btn" value="취소" onclick="location.href='selectList.me'">
-	</div>
+
 	</form>
 	
 	<script>  
