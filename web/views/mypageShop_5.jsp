@@ -7,12 +7,15 @@
     <title>마이페이지(업체)</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/mypage_shop_5.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <!-- 헤더 시작 -->
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
+    
+   
     <div id="wrap">
         <div class ="content" id="content1">
             <h1 align="center">마이페이지_업체</h1><br>
@@ -262,6 +265,8 @@
         </div>
 
         <script>
+        
+        	
             function test1(){
                 document.getElementById('modal1').style.display = "block";
                 document.getElementById('content2').style.display = "none";
@@ -289,6 +294,9 @@
                 document.getElementById('modal3').style.display = "none";
                 document.getElementById('content2').style.display = "block";
             }
+            
+            
+        
         </script>
 
         <div class ="content" id="content2">
@@ -299,14 +307,19 @@
 
             <div id="registStore">
                 <ul>
+                <%for(int i=0;i<slist.size();i++){ %>
                     <li>
-                        <div class="registStore2" onclick="location.href='registerMenu_5.jsp'">
-                            <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
-                            <h4 align="center">역전우동</h4>
-                            <p align="center"><small>서울 강남구 테헤란로10길 25</small></p>
+                        <div class="registStore2" id="myshop<%=i%>"><!--  onclick="location.href='registerMenu_5.jsp'" -->
+                            <!-- <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br> -->
+                            <input type="hidden" class="pid" value="<%=slist.get(i).getShopPid() %>">
+                            <h4 align="center"><%=slist.get(i).getShopName() %></h4>
+                            <p align="center"><small><%=slist.get(i).getsAddr() %></small></p>
                         </div>
                     </li>
-                    <li>
+                    <%} %>
+                    
+                    
+                   <!--  <li>
                         <div class="registStore2" onclick="location.href='registerMenu_5.jsp'">
                             <img src="/siktam/resources/images/곱창이야기.png" class="registStoreImg" alt="곱창이야기" width="170px" height="120px"><br>
                             <h4 align="center">곱창이야기</h4>
@@ -319,7 +332,7 @@
                             <h4 align="center">싸움의고수</h4>
                             <p align="center"><small>서울 서대문구 명물길 20</small></p>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="registStore2Add">
                         <div>
                             <div id="plusBtn1">
@@ -329,6 +342,7 @@
                     </li>
                 </ul>
             </div>
+            
 
 
 
@@ -405,7 +419,27 @@
         </div>
         </div>
     </div>
+    <script>
 
+		$(".registStore2").click(function(){
+    		var pid=$(this).find(".pid").val();
+    		$.ajax({
+    			url:"/siktam/myMenulist.menu",
+    			type:"get",
+    			data:{
+    				shopPid:pid
+    			},
+    			success:function(data){
+    				console.log(data);
+    				console.log(data[0].menuNo);
+    			},error:function(){
+    				alert("에러");
+    			}
+    		
+    		});
+		});
+    
+    </script>
 
 
 

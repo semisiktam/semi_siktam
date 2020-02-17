@@ -23,7 +23,11 @@
     <form action="/siktam/sInsert.sh" method="get">
         <div class="wrap" align="center">
             <h1 align="center">업체등록</h1>
-            <h4 align="center"><b><%=userId %></b>님! 식탐과 함께 할 매장을 등록해주세요!</h4><br>
+            <%if(m!=null){ %>
+            	<h4 align="center"><b><%=m.getName() %></b>님! 식탐과 함께 할 매장을 등록해주세요!</h4><br>
+            <%} else{%>
+            	<h4 align="center"><b><%=userId %></b>님! 식탐과 함께 할 매장을 등록해주세요!</h4><br>
+            <%} %>
         <table class="regist">
             <tr>
                 <th align="left">매장명 </th>
