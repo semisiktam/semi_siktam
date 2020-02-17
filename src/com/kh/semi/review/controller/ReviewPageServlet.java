@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.semi.notice.model.vo.PageInfo;
 import com.kh.semi.review.model.service.ReviewService;
 import com.kh.semi.review.model.vo.Review;
+import com.kh.semi.shop.model.vo.Shop;
 
 /**
  * Servlet implementation class ReviewPageServlet
@@ -71,12 +72,17 @@ public class ReviewPageServlet extends HttpServlet {
 		
 		rList = rs.selectReviewList(shopPid,currentPage,limit);
 		
+		Shop s = new Shop();
+		
+		s = rs.selectShop(shopPid);
+		
 		String page="";
 		
 		if(rList != null) {
 			
-			page = "views/productReviewPage_7.jsp";
+			page = "/views/productReviewPage_7.jsp";
 			request.setAttribute("reviewList", rList);
+			request.setAttribute("shop", s);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
 			request.setAttribute("pi", pi);

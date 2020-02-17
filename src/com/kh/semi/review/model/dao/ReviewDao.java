@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.semi.review.model.vo.Review;
+import com.kh.semi.shop.model.vo.Shop;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
@@ -30,6 +31,12 @@ public class ReviewDao {
 		
 	}
 
+	/**
+	 * 리뷰 전체 갯수 가져오기
+	 * @param con
+	 * @param shopPid
+	 * @return
+	 */
 	public int getListCount(Connection con, String shopPid) {
 		
 		int listCount = 0;
@@ -58,6 +65,14 @@ public class ReviewDao {
 		return listCount;
 	}
 
+	/**
+	 * 리뷰 정보 가져오기
+	 * @param con
+	 * @param shopPid
+	 * @param currentPage
+	 * @param limit
+	 * @return
+	 */
 	public ArrayList<Review> selectReviewList(Connection con, String shopPid, int currentPage, int limit) {
 		ArrayList<Review> rList = new ArrayList<Review>();
 		PreparedStatement pstmt = null;
@@ -100,6 +115,53 @@ public class ReviewDao {
 		}
 		
 		return rList;
+	}
+
+	/**
+	 * 가게 정보 가져오기
+	 * @param shopPid
+	 * @return
+	 */
+	public Shop selectShop(Connection con,String shopPid) {
+		Shop s = new Shop();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectShop");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, shopPid);
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				s = new Shop();
+
+				s.setShopPid(rset.getString("SHOP_PID"));
+				s.setUserId(rset.getString("USERID"));
+				s.setShopName(rset.getString("SHOP_NAME"));
+				s.setShopImg(rset.getString("SHOP_IMG"));
+				s.setsAddr(rset.getString("SHOP_ADDR"));
+				s.setsPhone(rset.getString("SHOP_PHONE"));
+				s.setsInfo(rset.getString("SHOP_INFO"));
+				s.setOwnerId(rset.getString("OWNER_ID"));
+				s.setsTime(rset.getString("SHOP_STARTTIME"));
+				s.seteTime(rset.getString("SHOP_ENDTIME"));
+				s.setShopDay(rset.getString("SHOP_DAY"));
+				s.setMenuCategory(rset.getString("MENU_CATEGORY"));
+				s.setTableType(rset.getString("TABLE_TYPE"));
+				s.setAvgPay(rset.getInt("AVG_PAY"));
+				s.setOutYn(rset.getString("OUT_YN"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return s;
 	}
 	
 	
