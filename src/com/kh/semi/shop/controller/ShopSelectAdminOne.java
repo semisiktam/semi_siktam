@@ -36,9 +36,9 @@ public class ShopSelectAdminOne extends HttpServlet {
 		ShopService ss = new ShopService();
 		String page = "";
 		try {
-//			shop = ss.selectShop(shopPid);
+			shop = ss.selectOne(shopPid);
 			if(shop != null) {
-//				page = "views/shopDetail_4.jsp";
+				page = "views/admin_shopDetail_4.jsp";
 				request.setAttribute("shop", shop);
 			}else {
 				page = "views/common/errorPage.jsp";

@@ -449,4 +449,43 @@ public class ShopDao {
 		
 		return list;
 	}
+
+	/**
+	 * 관리자에서 매장정보 수정, shopPid와 userId는 수정불가
+	 * @param con
+	 * @param s
+	 * @return
+	 */
+	public int updateAdminShop(Connection con, Shop s) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAdminShop");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, s.getShopName());
+			pstmt.setString(2, s.getShopImg());
+			pstmt.setString(3, s.getsAddr());
+			pstmt.setString(4, s.getsPhone());
+			pstmt.setString(5, s.getsInfo());
+			pstmt.setString(6, s.getOwnerId());
+			pstmt.setString(7, s.getsTime());
+			pstmt.setString(8, s.geteTime());
+			pstmt.setString(9, s.getShopDay());
+			pstmt.setString(10, s.getMenuCategory());
+			pstmt.setString(11, s.getTableType());
+			pstmt.setInt(12, s.getAvgPay());
+			pstmt.setString(13, s.getOutYn());
+			pstmt.setString(14, s.getShopPid());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
