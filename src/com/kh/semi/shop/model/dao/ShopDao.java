@@ -108,9 +108,11 @@ public class ShopDao {
 			pstmt.setString(5, s.getsPhone());
 			pstmt.setString(6, s.getsInfo());
 			pstmt.setString(7, s.getOwnerId());
-			pstmt.setString(8, s.getShopDay());
-			pstmt.setString(9, s.getMenuCategory());
-			pstmt.setString(10, s.getTableType());
+			pstmt.setString(8, s.getsTime());
+			pstmt.setString(9, s.geteTime());
+			pstmt.setString(10, s.getShopDay());
+			pstmt.setString(11, s.getMenuCategory());
+			pstmt.setString(12, s.getTableType());
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
