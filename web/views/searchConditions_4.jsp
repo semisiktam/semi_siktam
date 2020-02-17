@@ -34,8 +34,8 @@
             <!-- border="1px solid black" -->
             <tr id="tr1">
                 <td class="table-rowName">테이블</td>
-                <td><a href="#"><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" ><label for='a1'>1인석</label></a></td>
-                <td><a href="#"><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" ><label for='a2'>2인석</label></a></td>
+                <td><input type="checkbox" value="1인석" id='a1' class="table-check" name="table" ><label for='a1'>1인석</label></td>
+                <td><input type="checkbox" value="2인석" id='a2' class="table-check" name="table" ><label for='a2'>2인석</label></td>
                 <td><input type="checkbox" value="칸막이" id='a3' class="table-check" name="table" ><label for='a3'>칸막이</label></td>
                 <td><input type="checkbox" value="바테이블" id='a4' class="table-check" name="table" ><label for='a4'>바테이블</label></td>
                 <td><input type="checkbox" value="셀프주문" id='a5' class="table-check" name="table" ><label for='a5'>셀프주문</label></td>
@@ -103,28 +103,26 @@
     <hr>
 
     <div id="result">
-
-            <table border="1px" id="tbl">
-            	<% for(Shop s : list){ %>
-	                <tr>
-	                	<td style="display:none"><%=s.getShopPid() %></td>
-	                    <td id="img"><img src="<%= s.getShopImg() %>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
-	                    <td id="txt"  style="word-break:break-all">
-	                        <h4><b><%= s.getShopName() %> </b></h4>
-	                        <ul>
-	                            <li><span class="star">★ 4.1</span><span class="review_num">리뷰 187</span><span class="reserve_num">예약 200</span></li>
-	                            <li><span class="area"><%= s.getsAddr() %></span><span class="tableInfo"> <%= s.getTableType()%></span><span class="sectors"> <%= s.getMenuCategory() %></span></li>
-	                            <li><span class="mainMenu">대표메뉴 : 역전우동, 김치우동, 어묵우동 등</span></li>
-	                        </ul>
-	                    </td>
-	                </tr>
-                <% } %>
-            </table>
-           
+        <table border="1px" id="tbl">
+        <% for(Shop s : list){ %>
+	       <tr>
+	         <td style="display:none"><%=s.getShopPid() %></td>
+	         <td id="img"><img src="/siktam/resources/images/<%= s.getShopImg() %>"  style="width:100%" alt="Image" class="img-thumbnail"></td>
+	         <td id="txt"  style="word-break:break-all">
+	            <h4><b><%= s.getShopName() %> </b></h4>
+	            <ul>
+	              <li><span class="star">★ 4.1</span><span class="review_num">리뷰 187</span><span class="reserve_num">예약 200</span></li>
+	              <li><span class="area"><%= s.getsAddr() %></span><span class="tableInfo"> <%= s.getTableType()%></span><span class="sectors"> <%= s.getMenuCategory() %></span></li>
+	              <li><span class="mainMenu">대표메뉴 : 역전우동, 김치우동, 어묵우동 등</span></li>
+	            </ul>
+	         </td>
+	      </tr>
+        <% } %>
+        </table>
     </div>
 	<script>
 		function search(){
-			location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#search-text').val();
+			<%-- location.href="<%=request.getContextPath()%>/searchMain.sc?keyword="+$('#search-text').val(); --%>
 			
 		}
 		$(function(){
@@ -178,7 +176,12 @@
                "plist" : plist
             },success:function(data){
                console.log(data);
+               for(var i=0; i<data,length; i++){
+           		
+              
+               }
             },error:function(){
+            	 console.log("에러");
             }
           }); 
      }); 

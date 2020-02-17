@@ -31,15 +31,14 @@ public class ReservationPay extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 			
-		String[] mlist = request.getParameter("m0list").split(",");
+		//String[] mlist = request.getParameter("m0list").split(",");
+		String[] mlist = request.getParameterValues("m0list");
 		System.out.println(Arrays.toString(mlist));
+		System.out.println(mlist.length);
+		for(int i=0; i<mlist.length; i=i+3) {
+			System.out.println(mlist[i] + " " +mlist[i+1]+" "+ mlist[i+2]);
+		}
 		
-//		for(int i =0; i<mlist.length; i++) {
-//			for(int j=0; j<mlist[i].length(); j++) {
-//				
-//				System.out.println(mlist[i][j]);
-//			}
-//		}
 	}
 
 	/**
