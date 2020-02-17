@@ -61,31 +61,7 @@ public class FindIdPhoneServlet extends HttpServlet {
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 		
-		/* response.getWriter().print(userId);
-		 System.out.println(userId);*/
 		
-		
-	/*	try {
-			
-			fId.FindIdPhone(userId);
-			System.out.println("찾으시는 아이디는" + userId +"입니다");
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("해당하는 비밀번호가 없습니다.");
-		}
-		*/
-	
-		
-		/*try {
-			userId
-			System.out.println("아이디찾기완료");
-		
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("오류");
-		}
-		*/
 	}
 
 	/**

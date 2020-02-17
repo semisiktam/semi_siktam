@@ -37,8 +37,11 @@ public class ShopSelectListServlet extends HttpServlet {
 		Member m=(Member)session.getAttribute("member");
 		System.out.println(m);
 		ArrayList<Shop> s=new ShopService().selectList(m.getUserId());
+		System.out.println(s.size());
 		if(s!=null) {
-			System.out.println(s);
+			for(int i=0;i<s.size();i++) {
+				System.out.println(s.get(i));
+			}
 			session.setAttribute("shop", s);
 			response.sendRedirect("/siktam/views/main_6.jsp");
 		}
