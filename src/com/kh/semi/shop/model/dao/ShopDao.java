@@ -331,9 +331,9 @@ public class ShopDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, shopPid);
 			rset = pstmt.executeQuery();
+			s = new Shop();
 
 			if (rset.next()) {
-				s = new Shop();
 
 				s.setShopPid(rset.getString("SHOP_PID"));
 				s.setUserId(rset.getString("USERID"));
