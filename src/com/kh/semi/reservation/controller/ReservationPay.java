@@ -1,7 +1,7 @@
 package com.kh.semi.reservation.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,9 +30,16 @@ public class ReservationPay extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
-		String list = request.getParameter("mlist");
+			
+		String[] mlist = request.getParameter("m0list").split(",");
+		System.out.println(Arrays.toString(mlist));
 		
-		System.out.println(list);
+//		for(int i =0; i<mlist.length; i++) {
+//			for(int j=0; j<mlist[i].length(); j++) {
+//				
+//				System.out.println(mlist[i][j]);
+//			}
+//		}
 	}
 
 	/**

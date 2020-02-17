@@ -190,12 +190,12 @@
 				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
 				num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 + 1);
 				
-				var m0 = {
-							menuName:$('#tbl tr:eq(0)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(0)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(0)').children().eq(3).text()
-						};
-				var m1 = {
+				var m0 = []
+				m0.push($('#tbl tr:eq(0)').children().eq(1).text());
+			    m0.push($('#tbl tr:eq(0)').children().eq(2).text());
+				m0.push($('#tbl tr:eq(0)').children().eq(3).text());
+						
+				/* var m1 = {
 							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
 							menuPrice:$('#tbl tr:eq(1)').children().eq(2).text(),
 							menuCount:$('#tbl tr:eq(1)').children().eq(3).text()
@@ -215,8 +215,8 @@
 				mlist.push(m1);
 				mlist.push(m2);
 				mlist.push(m3);
-				
-				console.log(mlist);
+				 */
+				console.log(m0);
 				
 				$.ajax({
 					 url:"/siktam/reservationPay.rc",
@@ -224,7 +224,7 @@
 			         traditional : true,
 			         dataType:"json",
 			         data:{
-			               "mlist" : mlist
+			               "m0list" : m0.join()
 			         },success:function(data){
 			           
 			         },error:function(){
@@ -239,33 +239,33 @@
 				if (parseInt(num) > 0) {
 					num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 - 1);
 					
-				var m0 = {
-							menuName:$('#tbl tr:eq(0)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(0)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(0)').children().eq(3).text()
-						};
-				var m1 = {
+				var m0 = []
+						m0.push($('#tbl tr:eq(0)').children().eq(1).text());
+					    m0.push($('#tbl tr:eq(0)').children().eq(2).text());
+						m0.push($('#tbl tr:eq(0)').children().eq(3).text());
+						 
+				/* var m1 = 
 							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
 							menuPrice:$('#tbl tr:eq(1)').children().eq(2).text(),
 							menuCount:$('#tbl tr:eq(1)').children().eq(3).text()
-						};
-				var m2 = {
+						 
+				var m2 = 
 							menuName:$('#tbl tr:eq(2)').children().eq(1).text(),
 							menuPrice:$('#tbl tr:eq(2)').children().eq(2).text(),
 							menuCount:$('#tbl tr:eq(2)').children().eq(3).text()
-						};
-				var m3 = {
+						
+				var m3 =
 							menuName:$('#tbl tr:eq(3)').children().eq(1).text(),
 							menuPrice:$('#tbl tr:eq(3)').children().eq(2).text(),
 							menuCount:$('#tbl tr:eq(3)').children().eq(3).text()
-						};
+						}; */
 					
-				mlist.push(m0);
+				/* mlist.push(m0);
 				mlist.push(m1);
 				mlist.push(m2);
-				mlist.push(m3);
+				mlist.push(m3); */
 				
-				console.log(mlist);
+				console.log(m0);
 				
 				$.ajax({
 					 url:"/siktam/reservationPay.rc",
@@ -273,8 +273,9 @@
 			         traditional : true,
 			         dataType:"json",
 			         data:{
-			               "mlist" : mlist
-			         },success:function(data){
+			        	 "m0list" : m0.join()
+			         }
+			         ,success:function(data){
 			           
 			         },error:function(){
 			         }
