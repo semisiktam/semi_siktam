@@ -55,7 +55,7 @@
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
             <!-- %% 리뷰연결-->
-            <a href="/siktam/views/productReviewPage_7.jsp"><div id="review"><span>리뷰</span></div></a>
+            <a href="/siktam/views/productReviewPage_7.jsp?shopPid=<%=s.getShopPid()%>"><div id="review"><span>리뷰</span></div></a>
         </div>
         <!-- 상단 업체명/설명/예약버튼 -->
         <div id="pagetop">
@@ -119,6 +119,28 @@
                 <p class="infop">대표자명 : </p> <p class="infop2"><%--<%=mem.getName() %> --%></p><br>
                 <p class="infop">사업자 등록번호 : </p> <p class="infop2"><%=s.getOwnerId() %></p><br>
             </div>
+            
+            <!-- 지도 api -->
+            <div id="storeMap" style="width:500px; height:400px;border:1px solid black;"></div>
+            
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b75b48c17de2e99d89241117f1dc015c"></script>
+            
+            <script>
+            
+	            var container = document.getElementById('storeMap');
+	    		var options = {
+	    			center: new kakao.maps.LatLng(33.450701, 126.570667),
+	    			level: 3
+	    		};
+	
+	    		var map = new kakao.maps.Map(container, options);
+
+            
+            </script>
+            
+            
+            
+            <!-- 지도 api (끝) -->
             <div id="daumRoughmapContainer1578697903624" 
             class="root_daum_roughmap root_daum_roughmap_landing">
             </div>
