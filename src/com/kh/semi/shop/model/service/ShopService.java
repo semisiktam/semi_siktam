@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.semi.shop.model.dao.ShopDao;
 import com.kh.semi.shop.model.vo.Shop;
+import com.kh.semi.shop.model.vo.ShopSearch;
 
 public class ShopService {
 	private ShopDao sDao;
@@ -42,10 +43,10 @@ public class ShopService {
 		return list;
 	}
 
-	public ArrayList<Shop> SearchCondition(String keyword,String[] tlist, String[] clist, String[] plist) {
+	public ArrayList<ShopSearch> SearchCondition(String keyword,String[] tlist, String[] clist, String[] plist) {
 		Connection con = getConnection();
 		
-		ArrayList<Shop> list = sDao.SearchCondition(con,keyword,tlist,clist,plist);
+		ArrayList<ShopSearch> list = sDao.SearchCondition(con,keyword,tlist,clist,plist);
 		
 		close(con);
 		return list;
