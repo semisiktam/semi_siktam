@@ -59,7 +59,6 @@ public class ReservationDao {
 				r.setUserId(rset.getString("USERID"));
 				
 				list.add(r);
-				System.out.println(r);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
