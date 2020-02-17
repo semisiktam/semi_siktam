@@ -55,7 +55,7 @@
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
             <!-- %% 리뷰연결-->
-            <a href="/siktam/views/productReviewPage_7.jsp"><div id="review"><span>리뷰</span></div></a>
+            <a href="/siktam/views/productReviewPage_7.jsp?shopPid=<%=s.getShopPid()%>"><div id="review"><span>리뷰</span></div></a>
         </div>
         <!-- 상단 업체명/설명/예약버튼 -->
         <div id="pagetop">
