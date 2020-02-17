@@ -60,7 +60,12 @@
         <div class="pageselect">
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
+<<<<<<< HEAD
             <!-- %% 리뷰연결-->
+=======
+            <!-- %% 리뷰연결-->
+
+>>>>>>> branch 'master' of https://github.com/semisiktam/semi_siktam.git
             <a href="/siktam/rPage.ro?shopPid=<%=s.getShopPid()%>"><div id="review"><span>리뷰</span></div></a>
 
         </div>

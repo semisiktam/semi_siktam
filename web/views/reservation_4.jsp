@@ -191,9 +191,12 @@
 				num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 + 1);
 				
 				var m0 = []
-				m0.push($('#tbl tr:eq(0)').children().eq(1).text());
-			    m0.push($('#tbl tr:eq(0)').children().eq(2).text());
-				m0.push($('#tbl tr:eq(0)').children().eq(3).text());
+				for(var i=0; i<$('#tbl tr').length; i++){
+					m0.push($('#tbl tr:eq('+i+')').children().eq(1).text());
+				    m0.push($('#tbl tr:eq('+i+')').children().eq(2).text());
+					m0.push($('#tbl tr:eq('+i+')').children().eq(3).text());
+				}
+					
 						
 				/* var m1 = {
 							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
@@ -224,7 +227,7 @@
 			         traditional : true,
 			         dataType:"json",
 			         data:{
-			               "m0list" : m0.join()
+			               "m0list" : m0
 			         },success:function(data){
 			           
 			         },error:function(){
@@ -240,9 +243,11 @@
 					num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 - 1);
 					
 				var m0 = []
-						m0.push($('#tbl tr:eq(0)').children().eq(1).text());
-					    m0.push($('#tbl tr:eq(0)').children().eq(2).text());
-						m0.push($('#tbl tr:eq(0)').children().eq(3).text());
+				for(var i=0; i<$('#tbl tr').length; i++){
+					m0.push($('#tbl tr:eq('+i+')').children().eq(1).text());
+					m0.push($('#tbl tr:eq('+i+')').children().eq(2).text());
+					m0.push($('#tbl tr:eq('+i+')').children().eq(3).text());
+				}
 						 
 				/* var m1 = 
 							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
@@ -273,7 +278,7 @@
 			         traditional : true,
 			         dataType:"json",
 			         data:{
-			        	 "m0list" : m0.join()
+			        	 "m0list" : m0
 			         }
 			         ,success:function(data){
 			           

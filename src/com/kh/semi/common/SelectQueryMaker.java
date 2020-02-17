@@ -340,12 +340,6 @@ public class SelectQueryMaker {
 		
 		
 	}
-	
-	private SelectQueryMaker(Builder builder) {
-		this.query = builder.query;
-	}
-	
-	public StringBuilder getQuery() {
 		return query;
 	}
 

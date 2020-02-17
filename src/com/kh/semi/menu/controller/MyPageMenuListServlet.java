@@ -8,15 +8,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.kh.semi.menu.model.sevice.MenuService;
 import com.kh.semi.menu.model.vo.Menu;
 
 /**
  * Servlet implementation class MyPageMenuListServlet
  */
-@WebServlet("/mypage.men")
+@WebServlet("/myMenulist.menu")
 public class MyPageMenuListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,10 +35,14 @@ public class MyPageMenuListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		response.setContentType("application/json; charset=UTF-8");
+		String shopPid = request.getParameter("shopPid");
 		ArrayList<Menu> list=new ArrayList<Menu>();
-		System.out.println("is list empty?"+list.isEmpty());
+//		System.out.println("is list empty?"+list.isEmpty());
 		list=new MenuService().selectList(shopPid);
+		System.out.println(list);
 		
+		new Gson().toJson(list,response.getWriter());
 	}
 
 	/**
