@@ -8,19 +8,19 @@ public class Review implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 2834416249344370030L;
-	private int rNo         ; //리뷰번호
+	private String rNo         ; //리뷰번호
 	private String userId         ; //사용자아이디
 	private String shopPid       ; //매장등록번호
 	private String rContent ; //리뷰내용
 	private String reviewImg     ; //리뷰이미지
 	private int score             ; //별점
 	private Date rDate      ; //작성일
-	private int reviewAll;  // 전체 리뷰 수
+	
 	
 	public Review() {
 		super();
 	}
-	public Review(int rNo, String userId, String shopPid, String rContent, String reviewImg, int score, Date rDate,int reviewAll) {
+	public Review(String rNo, String userId, String shopPid, String rContent, String reviewImg, int score, Date rDate) {
 		super();
 		this.rNo = rNo;
 		this.userId = userId;
@@ -29,12 +29,12 @@ public class Review implements Serializable {
 		this.reviewImg = reviewImg;
 		this.score = score;
 		this.rDate = rDate;
-		this.reviewAll = reviewAll;
+		
 	}
-	public int getrNo() {
+	public String getrNo() {
 		return rNo;
 	}
-	public void setrNo(int rNo) {
+	public void setrNo(String rNo) {
 		this.rNo = rNo;
 	}
 	public String getUserId() {
@@ -73,12 +73,7 @@ public class Review implements Serializable {
 	public void setrDate(Date rDate) {
 		this.rDate = rDate;
 	}
-	public int getReviewAll() {
-		return reviewAll;
-	}
-	public void setReviewAll(int reviewAll) {
-		this.reviewAll = reviewAll;
-	}
+	
 	@Override
 	public String toString() {
 		return "Review [rNo=" + rNo + ", userId=" + userId + ", shopPid=" + shopPid + ", rContent=" + rContent

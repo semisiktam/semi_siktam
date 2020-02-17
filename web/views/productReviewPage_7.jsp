@@ -1,8 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.semi.review.model.vo.*"%>
 <%
+	ArrayList<Review> rList = (ArrayList<Review>)request.getAttribute("reviewList"); 
 	Member mem = (Member)request.getAttribute("member");
 	Shop s = (Shop)request.getAttribute("shop");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>   
 
 <!DOCTYPE html>
@@ -124,6 +131,31 @@
 
         <!-- 각 버튼은 리뷰 상세를 열고 닫는 버튼 설정 TODO-->
 
+		<% for(Review r : rList){ %>
+			<div class="allReview">
+            <div class="personInfo">
+                <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel"><%= r.getUserId() %></label>
+                <div class="bottomBtn"><button id="btn1" class="reviewBtn">▼</button>▼</div>
+            </div>
+            <div id="personReview1" class="personReview">
+                <label>별점 : </label>
+                <label id="star_view1">
+                    <a href="#">★</a>
+                    <a href="#">★</a>
+                    <a href="#">★</a>
+                    <a href="#">★</a>
+                    <a href="#">★</a>
+                </label>
+                <br><br>
+                <div class="imgDiv">
+                    <img src="/siktam/resources/images/<%=r.getReviewImg() %>" class="reviewImg" alt="">
+                </div>
+                <br>
+                <p><%= r.getrContent() %></p>
+            </div>
+        </div>
+		<% } %>
+		
         <div class="allReview">
             <div class="personInfo">
                 <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">hyeonhee9411</label>
@@ -149,7 +181,7 @@
 
         <br>
 
-        <div class="allReview">
+        <!-- <div class="allReview">
             <div class="personInfo">
                 <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">tamheekim0110</label>
                 <div class="bottomBtn"><button id="btn2" class="reviewBtn">▼</button>▼</div>
@@ -199,9 +231,39 @@
                    김치가 맛있어서 그런지 깊은 맛이 있고 국물의 감칠맛이 좋습니다!
                 </p>
             </div>
-        </div>
+        </d -->iv>
+        
         <br>
-
+        
+        <!-- 버튼 -->
+        
+        <div class="pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=1'"><<</button>
+			<%  if(currentPage <= 1){  %>
+			<button disabled><</button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%=currentPage - 1 %>'"><</button>
+			<%  } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+					if(p == currentPage){	
+			%>
+				<button disabled><%= p %></button>
+			<%      }else{ %>
+				<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%= p %>'"><%= p %></button>
+			<%      } %>
+			<% } %>
+				
+			<%  if(currentPage >= maxPage){  %>
+			<button disabled>></button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%=currentPage + 1 %>'">></button>
+			<%  } %>
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%= maxPage %>'">>></button>
+			
+		</div>
+        <br>
+		
         <script>
             $(function(){
 
