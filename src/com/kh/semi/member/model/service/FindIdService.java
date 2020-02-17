@@ -25,4 +25,14 @@ public class FindIdService {
 		return userId;
 		
 	}
+
+	public String FindIdBirthGender(Member m) {
+		
+		Connection con = getConnection();
+		String userId = idDao.FindIdBirthGender(con,m);
+		System.out.println("서비스:"+userId);
+		close(con);
+		
+		return userId;
+			}
 }
