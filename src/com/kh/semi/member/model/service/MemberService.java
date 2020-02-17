@@ -147,29 +147,19 @@ public int updateAdminMember(Member m) {
 	return result;
 }
 
-
-/*public ArrayList<Shop> selectUserShop(String id) {
+public int deleteMember(String userId, String password) {
 	Connection con = getConnection();
+	int result = mDao.deleteMember(con,userId,password);
 	
-	ArrayList<Shop> shop = mDao.selectUserShop(con,id);
+	if(result>0) commit(con);
+	else rollback(con);
+	
 	close(con);
-	return shop;
+	
+	return result;
+	
 }
 
-public ArrayList<Reservation> selectUserReserve(String id) {
-	Connection con = getConnection();
-	
-	ArrayList<Reservation> reservation = mDao.selectUserReserve(con,id);
-	close(con);
-	return reservation;
-}
 
-public ArrayList<Menu> selectUserMenu(String id) {
-	
-	Connection con = getConnection();
-	
-	ArrayList<Menu> reservation = mDao.selectUserMenu(con,id);
-	close(con);
-	return reservation;
-}*/
+
 }
