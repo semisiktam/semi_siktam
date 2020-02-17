@@ -81,6 +81,11 @@ public class SelectQueryMaker {
 			return this;
 		}
 		
+		public Builder Leftjoin() {
+			query.append("LEFT JOIN ");
+			return this;
+		}
+		
 		public Builder on() {
 			query.append("ON").append(" ");
 			

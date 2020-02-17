@@ -14,9 +14,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.semi.common.SelectQueryMaker;
-import com.kh.semi.member.model.dao.MemberDao;
-import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.shop.model.vo.Shop;
+import com.kh.semi.shop.model.vo.ShopSearch;
 
 public class ShopDao {
 
@@ -124,9 +123,9 @@ public class ShopDao {
 		return result;
 	}
 
-	public ArrayList<Shop> SearchCondition(Connection con, String keyword, String[] tlist, String[] clist,
+	public ArrayList<ShopSearch> SearchCondition(Connection con, String keyword, String[] tlist, String[] clist,
 			String[] plist) {
-		ArrayList<Shop> list = null;
+		ArrayList<ShopSearch> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = null;
@@ -162,86 +161,290 @@ public class ShopDao {
 		if (keyword == null) {
 			if (tlist == null && clist == null) {
 				if (plist == null) {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().build();
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
 				} else {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().where().columnName("AVG_PAY").inequalityRigth(avgPay1).enter().or()
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.where().columnName("AVG_PAY").inequalityRigth(avgPay1).enter().or()
 							.columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
 							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
 							.build();
 				}
 			} else if (tlist == null) {
 				if (plist == null) {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().where().columnName("MENU_CATEGORY").in().condition(clist).enter().build();
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.where().columnName("S.MENU_CATEGORY").in().condition(clist).enter()
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
 				} else {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().where().columnName("MENU_CATEGORY").in().condition(clist).enter().and()
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.where().columnName("MENU_CATEGORY").in().condition(clist).enter().and()
 							.columnName("AVG_PAY").inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY")
 							.betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
 							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
 							.build();
 				}
 			} else if (clist == null) {
 				if (plist == null) {
-					query = new SelectQueryMaker.Builder().select().column("*").enter().from().tableName("Shop").enter()
-							.where().columnName("TABLE_TYPE").in().condition(tlist).enter().build();
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+					
+							.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+					
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
 				} else {
-					query = new SelectQueryMaker.Builder().select().column("*").enter().from().tableName("Shop").enter()
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
 							.where().columnName("TABLE_TYPE").in().condition(tlist).enter().and().columnName("AVG_PAY")
 							.inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3)
 							.enter().or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter().or()
-							.columnName("AVG_PAY").inequalityLeft(avgPay6).build();
+							.columnName("AVG_PAY").inequalityLeft(avgPay6)
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
 				}
 			} else if (plist == null) {
-				query = new SelectQueryMaker.Builder().select().column("*").enter().from().tableName("Shop").enter()
+				query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+						.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+						.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+						.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+						.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+						
+						.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+						.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+						.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+						
 						.where().columnName("TABLE_TYPE").in().condition(tlist).enter().and()
-						.columnName("MENU_CATEGORY").in().condition(clist).enter().build();
+						.columnName("MENU_CATEGORY").in().condition(clist).enter()
+						
+						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+						.column("S.MENU_CATEGORY").enter()
+						
+						.build();
 			}
 		} else {
 			if (tlist == null && clist == null) {
 				if (plist == null) {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().where().columnName("SHOP_ADDR").like().bothPattern(keyword).build();
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+					
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
+					
 				} else {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
 							.columnName("AVG_PAY").inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY")
 							.betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
 							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
 							.build();
 				}
 			} else if (tlist == null) {
 				if (plist == null) {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
-							.columnName("MENU_CATEGORY").in().condition(clist).enter().build();
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
+							.columnName("MENU_CATEGORY").in().condition(clist).enter()
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
 				} else {
-					query = new SelectQueryMaker.Builder().select().columnName("*").enter().from().tableName("Shop")
-							.enter().where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
 							.columnName("MENU_CATEGORY").in().condition(clist).enter().and().columnName("AVG_PAY")
 							.inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3)
 							.enter().or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter().or()
-							.columnName("AVG_PAY").inequalityLeft(avgPay6).build();
+							.columnName("AVG_PAY").inequalityLeft(avgPay6)
+					
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
+					
 				}
 			} else if (clist == null) {
 				if (plist == null) {
-					query = new SelectQueryMaker.Builder().select().column("*").enter().from().tableName("Shop").enter()
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
 							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and().columnName("TABLE_TYPE")
-							.in().condition(tlist).enter().build();
+							.in().condition(tlist).enter()
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
+							.build();
 				} else {
-					query = new SelectQueryMaker.Builder().select().column("*").enter().from().tableName("Shop").enter()
+					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+							.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+							.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+							.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+							.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+							
+							.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+							
 							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and().columnName("TABLE_TYPE")
 							.in().condition(tlist).enter().and().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
 							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
 							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							
+							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+							.column("S.MENU_CATEGORY").enter()
+							
 							.build();
 				}
 			} else if (plist == null) {
-				query = new SelectQueryMaker.Builder().select().column("*").enter().from().tableName("Shop").enter()
+				query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+						.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+						.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+						.column("S.MENU_CATEGORY").comma().column("NVL(AVG(RE.SCORE),0)").comma()
+						.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+						
+						.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+						.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+						.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+						
 						.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and().columnName("TABLE_TYPE").in()
 						.condition(tlist).enter().and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+						
+						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+						.column("S.MENU_CATEGORY").enter()
+						
 						.build();
 			}
 		}
@@ -254,28 +457,22 @@ public class ShopDao {
 			pstmt = con.prepareStatement(sql);
 
 			rset = pstmt.executeQuery();
-			list = new ArrayList<Shop>();
+			list = new ArrayList<ShopSearch>();
 
 			while (rset.next()) {
-				Shop s = new Shop();
+				ShopSearch sc = new ShopSearch();
+				
+				sc.setStar(rset.getDouble("NVL(AVG(RE.SCORE),0)"));
+				sc.setReviewCount(rset.getInt("COUNT(RE.SHOP_PID)"));
+				sc.setReservationCount(rset.getInt("COUNT(RES.SHOP_PID)"));
+				sc.setShopPid(rset.getString("SHOP_PID"));
+				sc.setShopImg(rset.getString("SHOP_IMG"));
+				sc.setShopName(rset.getString("SHOP_NAME"));
+				sc.setTableType(rset.getString("TABLE_TYPE"));
+				sc.setMenuCategory(rset.getString("MENU_CATEGORY"));
+//				sc.setMainMenu(rset.getString(""));
 
-				s.setShopPid(rset.getString("SHOP_PID"));
-				s.setUserId(rset.getString("USERID"));
-				s.setShopName(rset.getString("SHOP_NAME"));
-				s.setShopImg(rset.getString("SHOP_IMG"));
-				s.setsAddr(rset.getString("SHOP_ADDR"));
-				s.setsPhone(rset.getString("SHOP_PHONE"));
-				s.setsInfo(rset.getString("SHOP_INFO"));
-				s.setOwnerId(rset.getString("OWNER_ID"));
-				s.setsTime(rset.getString("SHOP_STARTTIME"));
-				s.seteTime(rset.getString("SHOP_ENDTIME"));
-				s.setShopDay(rset.getString("SHOP_DAY"));
-				s.setMenuCategory(rset.getString("MENU_CATEGORY"));
-				s.setTableType(rset.getString("TABLE_TYPE"));
-				s.setAvgPay(rset.getInt("AVG_PAY"));
-				s.setOutYn(rset.getString("OUT_YN"));
-
-				list.add(s);
+				list.add(sc);
 			}
 
 			System.out.println(list);
