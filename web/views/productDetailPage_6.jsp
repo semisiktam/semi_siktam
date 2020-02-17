@@ -62,9 +62,10 @@
             <h3><%= s.getShopName() %></h3>
             <span><%= s.getsInfo() %></span>
             <!-- %% 예약페이지연결-->
-            <a href="reservation_4.jsp"><input type="button" id="reservation" value="예약하기"></a>
+            <input type="button" id="reservation" onclick="location.href='<%=request.getContextPath()%>/reservation.rc?ShopId='+'<%= s.getShopPid()%>'" value="예약하기">
         </div>
-
+		
+		
     <!-- 매장정보 -->
     <div id="pageinfo">
         <div id="pageinfodiv">

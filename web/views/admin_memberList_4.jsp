@@ -22,17 +22,25 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/siktam/resources/css/admin_4.css">
   <link rel="stylesheet" href="/siktam/resources/css/notice_5.css">
-
+	
   <style>
-  .wrap{
-  	padding-top: 50px;
-  }
-  
-  th, td{
-  	font-size: 12px;
-  }
+.wrap {
+	padding-top: 50px;
+}
 
-  </style>
+#searchBtn{
+	background: rgb(110, 0, 0);
+}
+
+table thead tr{
+    border-bottom: 2px solid rgb(110, 0, 0);
+}
+
+.pagination{
+	cursor: pointer;
+}
+
+</style>
 </head>
 
 <body style="height:1080px">
@@ -48,16 +56,11 @@
                         <thead>
                             <tr>
                               <th>아이디</th>
-                              <th width="110px">주소</th>
-                              <th width="110px">이름</th>
+                              <th>주소</th>
+                              <th>이름</th>
                               <th>주민번호</th>
                               <th>전화번호</th>
-                              <th width="60px">업체</th>
-                              <th width="110px">마일리지</th>
-                              <th>쿠폰</th>
-                              <th width="110px">블랙리스트</th>
-                              <th width="110px">탈퇴</th>
-                              <th>가입일</th>
+                              <th>업체</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,11 +72,6 @@
 								<td><%= mem.getPid() %></td>		
 								<td><%= mem.getPhone() %></td>		
 								<td><%= mem.getShopYN() %></td>		
-								<td><%= mem.getMileage() %></td>		
-								<td><%= mem.getCouponNo() %></td>		
-								<td><%= mem.getBlackYN() %></td>		
-								<td><%= mem.getOutYN() %></td>		
-								<td><%= mem.getEnrolldate() %></td>
 							</tr>
 							<% } %>
                         </tbody>
@@ -84,28 +82,36 @@
             
             <%-- 페이지 처리 --%>
 			<div class="pagingArea" align="center">
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=1'"><<</button>
-				<%  if(currentPage <= 1){  %>
-				<button disabled></button>
-				<%  }else{ %>
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage - 1 %>'"><</button>
-				<%  } %>
-				
-				<% for(int p = startPage; p <= endPage; p++){
-						if(p == currentPage){
-				%>
-					<button disabled style="background: gray; color: white"><%= p %></button>
-				<%      }else{ %>
-					<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%= p %>'"><%= p %></button>
-				<%      } %>
-				<% } %>
+				<div class="page">
+			      <ul class="pagination">
+			      	<li><a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=1'"><<</a></li>
+			        <li>
+			        	<%  if(currentPage <= 1){  %>
+			        	<a><</a>
+						<%  }else{ %>
+						<a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage - 1 %>'"><</a>
+						<%  } %>
+			        </li>
+			        
+			        <% for(int p = startPage; p <= endPage; p++){
+							if(p == currentPage){
+					%>
+						<li><a style="background: rgb(110, 0, 0); color: white"><%= p %></a><li>
+					<%      }else{ %>
+						<li><a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%= p %>'"><%= p %></a><li>
+					<%      } %>
+					<% } %>
 					
-				<%  if(currentPage >= maxPage){  %>
-				<button disabled>></button>
-				<%  }else{ %>
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage + 1 %>'">></button>
-				<%  } %>
-				<button onclick="location.href='<%= request.getContextPath() %>/selectList.,me?currentPage=<%= maxPage %>'">>></button>
+			        <li>
+			        	<%  if(currentPage >= maxPage){  %>
+						<a>></a>
+						<%  }else{ %>
+						<a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage + 1 %>'">></a>
+						<%  } %>
+			        </li>
+			        <li><a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%= maxPage %>'">>></a></li>
+			      </ul>
+			    </div>
 				
 			</div>
             
@@ -115,9 +121,9 @@
                 <label for="text"><input type="radio" name="search" value="text">내용</label>  -->
                 <select id="searchCondition">
                 	<option>---</option>
-                	<option value="writer">작성자</option>
-                	<option value="title">제목</option>
-                	<option value="context">내용</option>
+                	<option value="writer">아이디</option>
+                	<option value="title">이름</option>
+                	<option value="context">전화번호</option>
                 </select>
                 <input type="text" id="keyword">
                 <input type="button" id="searchBtn" value="검색">
@@ -133,13 +139,13 @@
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
 				//console.log($(this).parent().children().eq(0).text());
-				//var nno = $(this).parent().children().eq(0).text();
-				//location.href="<%=request.getContextPath()%>/selectOne.no?nno=" + nno;
+				var userId = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/selectOne.me?userId=" + userId;
 			});
 		});
 		
 		$('#searchBtn').click(function(){
-			location.href="<%=request.getContextPath()%>/searchNotice.no?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+			location.href="<%=request.getContextPath()%>/searchMember.me?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 		});
 	</script>
 </body>

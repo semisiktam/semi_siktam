@@ -15,8 +15,6 @@ import java.util.Properties;
 
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.member.model.vo.MemberReservationList;
-import com.kh.semi.menu.model.vo.Menu;
-import com.kh.semi.reservation.model.vo.Reservation;
 import com.kh.semi.shop.model.vo.Shop;
 
 public class MemberDao {
@@ -281,7 +279,7 @@ public ArrayList<MemberReservationList> selectUserReserve(Connection con, String
 		close(rset);
 		close(pstmt);
 	}
-	
+
 	return mrList;
 }
 
@@ -326,6 +324,89 @@ public ArrayList<Shop> selectFSList(Connection con, String userId) {
 	}
 	
 	return FSList;
+}
+
+/**
+ * 관리자에서 회원리스트 상세보기
+ * @param con
+ * @param userId
+ * @return
+ */
+public Member selectMember(Connection con, String userId) {
+	Member m = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("selectOne");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, userId);
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			m = new Member();
+			
+            m.setUserId(rset.getString("userid"));
+            m.setPassword(rset.getString("password"));
+            m.setAddr(rset.getString("addr"));
+            m.setName(rset.getString("name"));
+            m.setPid(rset.getString("pid"));
+            m.setPhone(rset.getString("phone"));
+            m.setShopYN(rset.getString("shop_yn"));
+            m.setMileage(rset.getInt("mileage"));
+            m.setCouponNo(rset.getInt("coupon_no"));
+            m.setBlackYN(rset.getString("black_yn"));
+            m.setOutYN(rset.getString("out_yn"));
+            m.setEnrolldate(rset.getDate("enrolldate"));
+
+		}
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return m;
+}
+
+/**
+ * 관리자에서 회원정보 수정
+ * @param con
+ * @param m
+ * @return
+ */
+public int updateAdminMember(Connection con, Member m) {
+	int result = 0;
+    PreparedStatement pstmt = null;
+    String sql = prop.getProperty("updateAdminMember");
+
+    
+    try {
+       pstmt = con.prepareStatement(sql);
+       pstmt.setString(1, m.getPassword());
+       pstmt.setString(2, m.getAddr());
+       pstmt.setString(3, m.getName());
+       pstmt.setString(4, m.getPhone());
+       pstmt.setString(5, m.getShopYN());
+       pstmt.setInt(6, m.getMileage());
+       pstmt.setInt(7, m.getCouponNo());
+       pstmt.setString(8, m.getBlackYN());
+       pstmt.setString(9, m.getOutYN());
+       pstmt.setString(10, m.getUserId());
+       
+       result = pstmt.executeUpdate();
+       
+       
+    }catch(SQLException e) {
+       e.printStackTrace();
+    }finally {
+       close(pstmt);
+    }
+    
+    System.out.println("dao" + result);
+    return result;
 }
 
 /*public ArrayList<Shop> selectUserShop(Connection con, String id) {

@@ -34,15 +34,15 @@
 <!-- timepicker -->
 <link rel="stylesheet"
 	href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<link
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<%-- <link
 	href="${pageContext.servletContext.contextPath}/resources/jquery/jquery-ui.css?version=1.3"
 	rel="stylesheet" type="text/css" media="screen">
 <script
 	src="${pageContext.servletContext.contextPath}/resources/js//jquery-1.8.3.min.js"></script>
 <script
-	src="${pageContext.servletContext.contextPath}/resources/jquery/jquery-ui.js?version=1.3"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+	src="${pageContext.servletContext.contextPath}/resources/jquery/jquery-ui.js?version=1.3"></script> --%>
 </head>
 
 <body>
@@ -102,9 +102,10 @@
 								style="width: 100px" alt="Image" class="img-thumbnail"></td>
 							<td><%=r.getMenuName()%></td>
 							<td><%=r.getMenuPrice()%></td>
+							<td>0</td>
 							<td><img src="/siktam/resources/images/leftArrow.png" alt=""
-								width="10" height="10" class="bt_down" /> <input type="text"
-								name="num" value="0" id="" class="num" size="1" /> <img
+								width="10" height="10" class="bt_down" /> <!-- <input type="text"
+								name="num" value="0" class="num" size="1" /> --> <img
 								src="/siktam/resources/images/rightArrow.png" alt="" width="10"
 								height="10" class="bt_up" /></td>
 						</tr>
@@ -114,7 +115,7 @@
 					</table>
 				</div>
 			</div>
-
+			
 			<div id="result1">
 				<p>
 					<span class="glyphicon glyphicon-check"></span> 주문표
@@ -124,6 +125,7 @@
 						<table id="resultTable">
 							<tr>
 								<td>후라이드 치킨</td>
+								<td>1</td>
 								<td>5000원</td>
 							</tr>
 						</table>
@@ -163,7 +165,7 @@
 	</script>
 
 	<!-- 메뉴 수량 -->
-	<script>
+<!-- 	<script>
 		$(function() {
 			$('.bt_up').click(function() {
 				var n = $('.bt_up').index(this);
@@ -177,6 +179,62 @@
 					num = $(".num:eq(" + n + ")").val(num * 1 - 1);
 				}
 			});
+		})
+	</script> -->
+	<script>
+		$(function() {
+			$('.bt_up').click(each(function(){
+				var mlist = [];
+				var n = $('.bt_up').index(this);
+				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
+				num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 + 1);
+				
+				if (parseInt(num) > 0) {
+					mlist.push($('#tbl tr:eq('+ n +')').children().eq(1).text(),
+							$('#tbl tr:eq('+ n +')').children().eq(2).text(),
+							$('#tbl tr:eq('+ n +')').children().eq(3).text());
+					
+					
+					console.log(mlist);
+				}
+			}));
+			
+			
+			
+/* 			$('.bt_up').click(function() {
+				var mlist = [];
+				var n = $('.bt_up').index(this);
+				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
+				num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 + 1);
+				
+				if (parseInt(num) > 0) {
+					mlist.push($('#tbl tr:eq('+ n +')').children().eq(1).text(),
+							$('#tbl tr:eq('+ n +')').children().eq(2).text(),
+							$('#tbl tr:eq('+ n +')').children().eq(3).text());
+					
+					
+					console.log(mlist);
+				}
+			});
+			$('.bt_down').click(function() {
+				var mlist = [];
+				var n = $('.bt_down').index(this);
+				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
+				if (parseInt(num) > 0) {
+					num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 - 1);
+					
+					mlist.push($('#tbl tr:eq('+ n +')').children().eq(1).text(),
+							$('#tbl tr:eq('+ n +')').children().eq(2).text(),
+							$('#tbl tr:eq('+ n +')').children().eq(3).text());
+					
+					console.log(mlist);
+				}
+				
+				console.log($('#tbl tr:eq('+ n +')').children().eq(1).text());
+				console.log($('#tbl tr:eq('+ n +')').children().eq(2).text());
+				console.log($('#tbl tr:eq('+ n +')').children().eq(3).text());
+			});
+			 */
 		})
 	</script>
 

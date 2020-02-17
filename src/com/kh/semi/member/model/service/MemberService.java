@@ -122,6 +122,32 @@ public ArrayList<Shop> selectFSList(String userId) {
 	return fsList;
 }
 
+public Member selectMember(String userId) {
+	Connection con = getConnection();
+	
+	Member m = mDao.selectMember(con, userId);
+	
+	close(con);
+	
+	return m;
+}
+
+public int updateAdminMember(Member m) {
+	Connection con = getConnection();
+	
+	int result = mDao.updateAdminMember(con, m);
+	System.out.println("service" + result);
+	
+	
+	if(result>0) commit(con);
+	else rollback(con);
+	
+	close(con);
+	
+	return result;
+}
+
+
 /*public ArrayList<Shop> selectUserShop(String id) {
 	Connection con = getConnection();
 	
