@@ -94,5 +94,34 @@ public class FindIdDao {
 		}	
 		return userId;
 	}
+
+	public String FindIdBirthGender(Connection con, Member m) {
+String userId="";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("FindIdBirth");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getName());
+			pstmt.setString(2, m.getPid());
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				userId=rset.getString("USERID");
+			 }
+			 System.out.print("DAO:"+userId);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return userId;
+}
+	
 }
 
