@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.member.model.vo.*"%>
 <% ArrayList<MemberReservationList> mrList = (ArrayList<MemberReservationList>)request.getAttribute("mrList"); 
    ArrayList<Shop> fsList = (ArrayList<Shop>)request.getAttribute("fsList");
-   /* Shop se = (Shop)session.getAttribute("selectShop"); */
+	Shop se = (Shop)session.getAttribute("selectShop");
    /* ArrayList<Shop> mList = (ArrayList<Shop>)session.getAttribute("selectShop"); */
 %>
 <!DOCTYPE html>
@@ -241,7 +241,7 @@
         <!-- 마이페이지로 넘어가는 mypageMember.mm 서블릿에 arraylist<shop>했더니 되지 않아서
        	 즐겨찾기 div에 form을 추가하여  새로운 servlet을 생성함 but 널포인트 오류^^-->
        	 
-		<form action="/siktam/mypageFavorite.mf" method="post">
+		<!-- <form action="/siktam/mypageFavorite.mf" method="post"> -->
         <div class ="content" id="content2">
             <h3 id="contentTxt" align="left">내가 즐겨찾기 한 음식점</h3>
             <div id="registStore">
@@ -298,7 +298,7 @@
                 </ul>
             </div>
            </div>
-          </form>
+          <!-- </form> -->
 			<script>
                   $(document).ready(function(){
                   	$('.star').toggle(function(){
@@ -317,16 +317,26 @@
             
                 <div id="registStore">
                     <ul>
-                        <%-- <li>
-                        <% for(Shop ml : mList) { %>
-                            <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
-                                <img src="<%=ml.getShopImg() %>" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
-                                <h4 align="center"><%=ml.getShopName() %></h4>
-                                <p align="center"><small><%=ml.getsAddr() %></small></p>
-                            </div>
-                            <% } %>
-                        </li> --%>
+                    <%if(se==null){ %>
                         <li>
+                            <div class="">
+                                <img src="" class="registStoreImg" alt="" width="170px" height="120px"><br>
+                                <h4 align="center"></h4>
+                                <p align="center"><small></small></p>
+                            </div>
+                        </li>
+                     <%} else{ %>
+                     	<%-- <%for(Shop se : mList) {%> --%>
+                        <li>
+                            <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
+                                <img src="<%=se.getShopImg() %>" class="registStoreImg" alt="<%=se.getShopName() %>" width="170px" height="120px"><br>
+                                <h4 align="center"><%=se.getShopName() %></h4>
+                                <p align="center"><small><%=se.getsAddr() %></small></p>
+                            </div>
+                        </li>
+                        <%-- <%} %> --%>
+                     <%} %>
+                        <!-- <li>
                             <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
                                 <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
                                 <h4 align="center">역전우동</h4>
@@ -353,7 +363,7 @@
                                 <input type="button" id="plusBtn2" value="+" onclick="location.href='searchConditions_4.jsp'">
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             

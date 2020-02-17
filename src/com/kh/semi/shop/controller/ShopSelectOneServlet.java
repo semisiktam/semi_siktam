@@ -41,13 +41,13 @@ public class ShopSelectOneServlet extends HttpServlet {
 		
 		Shop s = ss.selectOne(shopPid);
 		
+		
 		ArrayList<Menu> list = new ArrayList<Menu>();
 		
 		MenuService ms = new MenuService();
 		
 		list = ms.selectList(shopPid);
 		
-		ArrayList<Shop> mList = new ArrayList<Shop>();
 		
 		
 		String page = "";
@@ -57,10 +57,10 @@ public class ShopSelectOneServlet extends HttpServlet {
 			request.setAttribute("mList", list);
 			request.setAttribute("shop", s);
 			
-			mList.add(s);
 			// 탐희
 			HttpSession session = request.getSession();
-			session.setAttribute("selectShop", mList);
+			session.setAttribute("selectShop", s);
+			
 		}else {
 			request.setAttribute("msg", "공지사항 상세보기 실패");
 		}
