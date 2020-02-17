@@ -299,14 +299,17 @@
 
             <div id="registStore">
                 <ul>
+                <%for(int i=0;i<slist.size();i++){ %>
                     <li>
-                        <div class="registStore2" onclick="location.href='registerMenu_5.jsp'">
-                            <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
-                            <h4 align="center">역전우동</h4>
-                            <p align="center"><small>서울 강남구 테헤란로10길 25</small></p>
+                        <div class="registStore2" id="myshop<%=i%>"><!--  onclick="location.href='registerMenu_5.jsp'" -->
+                            <!-- <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br> -->
+                            <h4 align="center"><%=slist.get(i).getShopName() %></h4>
+                            <p align="center"><small><%=slist.get(i).getsAddr() %></small></p>
                         </div>
                     </li>
-                    <li>
+                    <%} %>
+                    
+                   <!--  <li>
                         <div class="registStore2" onclick="location.href='registerMenu_5.jsp'">
                             <img src="/siktam/resources/images/곱창이야기.png" class="registStoreImg" alt="곱창이야기" width="170px" height="120px"><br>
                             <h4 align="center">곱창이야기</h4>
@@ -319,7 +322,7 @@
                             <h4 align="center">싸움의고수</h4>
                             <p align="center"><small>서울 서대문구 명물길 20</small></p>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="registStore2Add">
                         <div>
                             <div id="plusBtn1">
@@ -329,6 +332,7 @@
                     </li>
                 </ul>
             </div>
+            
 
 
 

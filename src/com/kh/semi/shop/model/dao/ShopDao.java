@@ -299,8 +299,8 @@ public class ShopDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			rset = pstmt.executeQuery();
+			s = new ArrayList<Shop>();
 			while (rset.next()) {
-				s = new ArrayList<Shop>();
 				Shop shop = new Shop(rset.getString("SHOP_PID"), rset.getString("USERID"), rset.getString("SHOP_NAME"),
 						rset.getString("SHOP_IMG"), rset.getString("SHOP_ADDR"), rset.getString("SHOP_PHONE"),
 						rset.getString("SHOP_INFO"), rset.getString("OWNER_ID"), rset.getString("SHOP_STARTTIME"),
