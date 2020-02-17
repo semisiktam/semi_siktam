@@ -409,62 +409,37 @@ public int updateAdminMember(Connection con, Member m) {
     return result;
 }
 
-/*public ArrayList<Shop> selectUserShop(Connection con, String id) {
-	ArrayList<Shop> shop = null;
+public int deleteMember(Connection con, String userId, String password) {
+	int result = 0;
+	String userPassword = "";
 	PreparedStatement pstmt = null;
 	ResultSet rset = null;
 	
-	String sql = prop.getProperty("selectUserReserveShop");
+	String sql1= prop.getProperty("selectPassword");
+	String sql2 = prop.getProperty("deleteMember");
 	
 	try {
-		pstmt = con.prepareStatement(sql);
+		pstmt = con.prepareStatement(sql1);
+		pstmt.setString(1, userId);
+		rset = pstmt.executeQuery();
 		
+		if(rset.next()) {
+			userPassword = rset.getString("PASSWORD");
+			if(userPassword.equals(password)) {
+				pstmt = con.prepareStatement(sql2);
+				pstmt.setString(1, userId);
+				result = pstmt.executeUpdate();
+			}
+			
+		}
 	}catch(SQLException e) {
 		e.printStackTrace();
 	}finally {
 		close(rset);
 		close(pstmt);
 	}
-	return shop;
+	return result;
 }
 
-public ArrayList<Reservation> selectUserReserve(Connection con, String id) {
-	ArrayList<Reservation> reservation = null;
-	PreparedStatement pstmt = null;
-	ResultSet rset = null;
-	
-	String sql = prop.getProperty("selectUserReserve");
-	
-	try {
-		pstmt = con.prepareStatement(sql);
-		
-		
-	}catch(SQLException e) {
-		e.printStackTrace();
-	}finally {
-		close(rset);
-		close(pstmt);
-	}
-	
-	return reservation;
-}
 
-public ArrayList<Menu> selectUserMenu(Connection con, String id) {
-	ArrayList<Menu> menu = null;
-	PreparedStatement pstmt = null;
-	ResultSet rset = null;
-	
-	String sql = prop.getProperty("selectUserReserveMenu");
-	
-	try {
-		pstmt = con.prepareStatement(sql);
-		
-	}catch(SQLException e) {
-		e.printStackTrace();
-	}finally {
-		close(rset);
-		close(pstmt);
-	}
-	return menu;
-}*/
 }
