@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.semi.menu.model.sevice.MenuService;
 import com.kh.semi.menu.model.vo.Menu;
@@ -46,12 +47,20 @@ public class ShopSelectOneServlet extends HttpServlet {
 		
 		list = ms.selectList(shopPid);
 		
+		ArrayList<Shop> mList = new ArrayList<Shop>();
+		
+		
 		String page = "";
 		
 		if(s != null) {
 			page = "views/productDetailPage_6.jsp";
 			request.setAttribute("mList", list);
 			request.setAttribute("shop", s);
+			
+			mList.add(s);
+			// 탐희
+			HttpSession session = request.getSession();
+			session.setAttribute("selectShop", mList);
 		}else {
 			request.setAttribute("msg", "공지사항 상세보기 실패");
 		}

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.member.model.vo.*"%>
 <% ArrayList<MemberReservationList> mrList = (ArrayList<MemberReservationList>)request.getAttribute("mrList"); 
    ArrayList<Shop> fsList = (ArrayList<Shop>)request.getAttribute("fsList");
+   /* Shop se = (Shop)session.getAttribute("selectShop"); */
+   /* ArrayList<Shop> mList = (ArrayList<Shop>)session.getAttribute("selectShop"); */
 %>
 <!DOCTYPE html>
 <html>
@@ -315,6 +317,15 @@
             
                 <div id="registStore">
                     <ul>
+                        <%-- <li>
+                        <% for(Shop ml : mList) { %>
+                            <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
+                                <img src="<%=ml.getShopImg() %>" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
+                                <h4 align="center"><%=ml.getShopName() %></h4>
+                                <p align="center"><small><%=ml.getsAddr() %></small></p>
+                            </div>
+                            <% } %>
+                        </li> --%>
                         <li>
                             <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
                                 <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
