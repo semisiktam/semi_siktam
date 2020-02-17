@@ -1,6 +1,7 @@
-package com.kh.semi.shop.controller;
+package com.kh.semi.reservation.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.shop.model.service.ShopService;
-import com.kh.semi.shop.model.vo.Shop;
-
 /**
- * Servlet implementation class ShopSelectAdminOne
+ * Servlet implementation class ReservationPay
  */
-@WebServlet("/sAdminSelect.sh")
-public class ShopSelectAdminOne extends HttpServlet {
+@WebServlet("/reservationPay.rc")
+public class ReservationPay extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopSelectAdminOne() {
+    public ReservationPay() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,27 +28,18 @@ public class ShopSelectAdminOne extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String shopPid = request.getParameter("shopPid");
-
-		Shop shop = null; // 혹시 오류나면 new Shop();
-		ShopService ss = new ShopService();
-		String page = "";
-		try {
-			shop = ss.selectOne(shopPid);
-			if(shop != null) {
-				page = "views/admin_shopDetail_4.jsp";
-				request.setAttribute("shop", shop);
-			}else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "업체정보 조회 실패");
-			}
-			request.getRequestDispatcher(page).forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 			
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		String[] mlist = request.getParameter("m0list").split(",");
+		System.out.println(Arrays.toString(mlist));
 		
+//		for(int i =0; i<mlist.length; i++) {
+//			for(int j=0; j<mlist[i].length(); j++) {
+//				
+//				System.out.println(mlist[i][j]);
+//			}
+//		}
 	}
 
 	/**

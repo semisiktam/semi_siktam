@@ -49,8 +49,6 @@ public class ShopAdminList extends HttpServlet {
 		
 		int listCount = ss.getListCount();
 		
-		System.out.println(listCount);
-		
 		System.out.println("전체 업체수 : " + listCount);
 		
 		maxPage = (int)((double)listCount/limit + 0.9);

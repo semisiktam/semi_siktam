@@ -79,7 +79,7 @@
 			<%  } %>
 			<button onclick="location.href='<%= request.getContextPath() %>/nselectList.no?currentPage=<%= maxPage %>'">>></button>
 			
-		</div>
+			</div>
             
             <fieldset>
                 <!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
