@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.shop.model.service.ShopService;
-import com.kh.semi.shop.model.vo.Shop;
+import com.kh.semi.shop.model.vo.ShopSearch;
 
 /**
  * Servlet implementation class ShopMainSearchServlet
@@ -40,7 +40,7 @@ public class ShopMainSearchServlet extends HttpServlet {
 		}
 		
 		System.out.print(keyword);
-		ArrayList<Shop> list = new ArrayList<Shop>();
+		ArrayList<ShopSearch> list = new ArrayList<ShopSearch>();
 		
 		ShopService ss = new ShopService();
 		

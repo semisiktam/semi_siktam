@@ -42,21 +42,20 @@ public class ShopSearchConditionServlet extends HttpServlet {
 				String[] plist = request.getParameterValues("plist");			
 				
 				System.out.println(keyword);
-				ArrayList<ShopSearch> list = new ShopService().SearchCondition(keyword,tlist, clist, plist);
+				ArrayList<ShopSearch> list = new ShopService().SearchCondition(keyword,tlist,clist,plist);
 				
 				for(ShopSearch sc : list) {
 					System.out.println(sc);
 				}
 				
-				String page = "";
+				/*String page = "";
 				if(list !=null) {
 					page = "views/searchConditions_4.jsp";
 					request.setAttribute("list", list);
 				}
-				request.getRequestDispatcher(page).forward(request, response);
+				request.getRequestDispatcher(page).forward(request, response);*/
 				
 				new Gson().toJson(list,response.getWriter());
-				response.getWriter().print(list);
 				
 			}
 

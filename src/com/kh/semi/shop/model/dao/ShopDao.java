@@ -36,8 +36,8 @@ public class ShopDao {
 
 	}
 
-	public ArrayList<Shop> searchMain(Connection con, String keyword) {
-		ArrayList<Shop> list = null;
+	public ArrayList<ShopSearch> searchMain(Connection con, String keyword) {
+		ArrayList<ShopSearch> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = null;
@@ -49,34 +49,29 @@ public class ShopDao {
 
 		try {
 			pstmt = con.prepareStatement(sql);
+			
 			if (keyword != "*") {
 				pstmt.setString(1, keyword);
 
 			}
 
 			rset = pstmt.executeQuery();
-			list = new ArrayList<Shop>();
+			list = new ArrayList<ShopSearch>();
 
 			while (rset.next()) {
-				Shop s = new Shop();
+				ShopSearch sc = new ShopSearch();
 
-				s.setShopPid(rset.getString("shop_pid"));
-				s.setUserId(rset.getString("userid"));
-				s.setShopName(rset.getString("shop_name"));
-				s.setShopImg(rset.getString("shop_img"));
-				s.setsAddr(rset.getString("shop_addr"));
-				s.setsPhone(rset.getString("shop_phone"));
-				s.setsInfo(rset.getString("shop_info"));
-				s.setOwnerId(rset.getString("owner_id"));
-				s.setsTime(rset.getString("shop_starttime"));
-				s.seteTime(rset.getString("shop_endtime"));
-				s.setShopDay(rset.getString("shop_day"));
-				s.setMenuCategory(rset.getString("menu_category"));
-				s.setTableType(rset.getString("table_type"));
-				s.setAvgPay(rset.getInt("avg_pay"));
-				s.setOutYn(rset.getString("out_yn"));
+				sc.setStar(rset.getDouble("NVL(AVG(RE.SCORE),0)"));
+				sc.setReviewCount(rset.getInt("COUNT(RE.SHOP_PID)"));
+				sc.setReservationCount(rset.getInt("COUNT(RES.SHOP_PID)"));
+				sc.setShopPid(rset.getString("SHOP_PID"));
+				sc.setShopImg(rset.getString("SHOP_IMG"));
+				sc.setShopName(rset.getString("SHOP_NAME"));
+				sc.setShopAddr(rset.getString("SHOP_ADDR"));
+				sc.setTableType(rset.getString("TABLE_TYPE"));
+				sc.setMenuCategory(rset.getString("MENU_CATEGORY"));
 
-				list.add(s);
+				list.add(sc);
 
 			}
 		} catch (SQLException e) {

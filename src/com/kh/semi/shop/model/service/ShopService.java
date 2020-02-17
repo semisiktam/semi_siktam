@@ -23,20 +23,14 @@ public class ShopService {
 	 * @param keyword
 	 * @return
 	 */
-	public ArrayList<Shop> searchMain(String keyword) {
+	public ArrayList<ShopSearch> searchMain(String keyword) {
 		Connection con = getConnection();
 		 
-		ArrayList<Shop> list = null;
+		ArrayList<ShopSearch> list = null;
 		
-		if(keyword.length() > 0) {
-			list=new ArrayList<Shop>();
+		
+			list=new ArrayList<ShopSearch>();
 			list = sDao.searchMain(con,keyword);
-			
-		}else {
-			
-			// 모든 shop리스트 조회
-//			list = sDao.selectList(con);
-		}
 		
 		close(con);
 		
