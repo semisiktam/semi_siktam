@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, java.util.*"%>
+
+<% 
+	ArrayList<Shop> list = (ArrayList<Shop>)request.getAttribute("list"); 
+	ShopPageInfo spi = (ShopPageInfo)request.getAttribute("spi");
+	int listCount = spi.getListCount();
+	int currentPage = spi.getCurrentPage();
+	int maxPage = spi.getMaxPage();
+	int startPage = spi.getStartPage();
+	int endPage = spi.getEndPage();
+%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,363 +21,128 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="/siktam/resources/css/admin_4.css">
-
+  <link rel="stylesheet" href="/siktam/resources/css/notice_5.css">
+	
   <style>
-  </style>
+.wrap {
+	padding-top: 50px;
+}
+
+#searchBtn{
+	background: rgb(110, 0, 0);
+}
+
+table thead tr{
+    border-bottom: 2px solid rgb(110, 0, 0);
+}
+</style>
 </head>
+
 <body style="height:1080px">
 
 <%@ include file="common/admin_header.jsp" %>
 
-<div class="container" style="margin-top:50px">
-  <div class="title">
-    <h1><b>업체리스트 관리</b></h1>
-  </div>
-
-  <div class="pagesearch">
-    <div class="search">
-      <input class="form-control input-lg" id="inputlg" type="text">
-      <button style="border-radius: 6px;" ><span class="glyphicon glyphicon-search" style="color: white; font-size: 18px;"></span></button>
+	<div class="wrap" align="center">
+            <div class="noticeTitle">
+                <h1>업체리스트</h1>
+            </div>
+            <div class="tableDiv">
+                    <table id="listArea">
+                        <thead>
+                            <tr>
+                              <th>매장등록번호</th>
+                              <th>사용자아이디</th>
+                              <th>매장명</th>
+                              <th>매장주소</th>
+                              <th>매장전화번호</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(Shop s : list){ %>
+							<tr>
+								<td><%= s.getShopPid() %></td>
+								<td><%= s.getUserId() %></td>		
+								<td><%= s.getShopName() %></td>		
+								<td><%= s.getsAddr() %></td>		
+								<td><%= s.getsPhone() %></td>			
+							</tr>
+							<% } %>
+                        </tbody>
+                    </table>
+            </div>
+            
+            <br>
+            
+            <%-- 페이지 처리 --%>
+			<div class="pagingArea" align="center">
+				<div class="page">
+			      <ul class="pagination">
+			      	<li><a onclick="location.href='<%= request.getContextPath() %>/sAdminList.sh?currentPage=1'"><<</a></li>
+			        <li>
+			        	<%  if(currentPage <= 1){  %>
+			        	<a><</a>
+						<%  }else{ %>
+						<a onclick="location.href='<%= request.getContextPath() %>/sAdminList.sh?currentPage=<%=currentPage - 1 %>'"><</a>
+						<%  } %>
+			        </li>
+			        
+			        <% for(int p = startPage; p <= endPage; p++){
+							if(p == currentPage){
+					%>
+						<li><a style="background: rgb(110, 0, 0); color: white"><%= p %></a><li>
+					<%      }else{ %>
+						<li><a onclick="location.href='<%= request.getContextPath() %>/sAdminList.sh?currentPage=<%= p %>'"><%= p %></a><li>
+					<%      } %>
+					<% } %>
+					
+			        <li>
+			        	<%  if(currentPage >= maxPage){  %>
+						<a>></a>
+						<%  }else{ %>
+						<a onclick="location.href='<%= request.getContextPath() %>/sAdminList.sh?currentPage=<%=currentPage + 1 %>'">></a>
+						<%  } %>
+			        </li>
+			        <li><a onclick="location.href='<%= request.getContextPath() %>/sAdminList.sh?currentPage=<%= maxPage %>'">>></a></li>
+			      </ul>
+			    </div>
+				
+			</div>
+            
+            <fieldset>
+                <!--<label for="name"><input type="radio" name="search" value="writer">작성자</label>
+                <label for="title"><input type="radio" name="search" value="title">제목</label>
+                <label for="text"><input type="radio" name="search" value="text">내용</label>  -->
+                <select id="searchCondition">
+                	<option>---</option>
+                	<option value="writer">매장등록번호</option>
+                	<option value="title">사용자아이디</option>
+                	<option value="context">매장명</option>
+                </select>
+                <input type="text" id="keyword">
+                <input type="button" id="searchBtn" value="검색">
+            </fieldset>
     </div>
-    <div class="page">
-      <ul class="pagination">
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">7</a></li>
-        <li><a href="#">8</a></li>
-        <li><a href="#">9</a></li>
-        <li><a href="#">></a></li>
-        <li><a href="#">>></a></li>
-      </ul>
-    </div>
-    <!-- class page -->
-  </div>
 
-  <div class="tbl">
-    <table class="table table-hover">
-      <tr>
-        <th>매장명</th>
-        <th>주소</th>
-        <th>전화번호</th>
-        <th>사업자 등록번호</th>
-        <th>영업시간</th>
-        <th>카테고리</th>
-        <th></th>
-      </tr>
-      <tr>
-        <td>역전우동 0410</td>
-        <td>서울시 강남구</td>
-        <td>02-553-2111</td>
-        <td>000-00-0000</td>
-        <td>am10:00 ~ pm10:00</td>
-        <td>일식,프랜차이즈</td>
-        <td align="right">
-  
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modmember">수정</button>
-
-    
-          <div id="modmember" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">업체 수정</h4>
-                </div>
-                <div class="modal-body">
-                  <p>업체정보를 수정하시겠습니까?</p>
-                  <table class="modal-tbl">
-                    <tr>
-                      <td>매장명</td>
-                      <td><input type="text" value="역전우동 0410" disabled></td>
-                    </tr>
-                    <tr>
-                      <td>주소</td>
-                      <td><input type="text" value="서울시 강남구"></td>
-                    </tr>
-                    <tr>
-                      <td>전화번호</td>
-                      <td><input type="text" value="02-553-2111"></td>
-                    </tr>
-                    <tr>
-                      <td>사업자 등록번호</td>
-                      <td><input type="text" value="000-00-0000"></td>
-                    </tr>
-                    <tr>
-                      <td>영업시간</td>
-                      <td><input type="text" value="am10:00 ~ pm10:00"></td>
-                    </tr>
-                    <tr>
-                      <td>카테고리</td>
-                      <td><input type="text" value="010-8947-7489"></td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">네</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">아니요</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delmember">삭제</button>
-
-          <!-- Modal -->
-          <div id="delmember" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">업체 삭제</h4>
-                </div>
-                <div class="modal-body">
-                  <p>해당 회원을 삭제하시겠습니까?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">네</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">아니요</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>역전우동 0410</td>
-        <td>서울시 강남구</td>
-        <td>02-553-2111</td>
-        <td>000-00-0000</td>
-        <td>am10:00 ~ pm10:00</td>
-        <td>일식,프랜차이즈</td>
-        <td align="right">
-  
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modmember">수정</button>
-
-    
-          <div id="modmember" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">회원 수정</h4>
-                </div>
-                <div class="modal-body">
-                  <p>회원정보를 수정하시겠습니까?</p>
-                  <table class="modal-tbl">
-                    <tr>
-                      <td>아이디</td>
-                      <td><input type="text" value="hansol" disabled></td>
-                    </tr>
-                    <tr>
-                      <td>비밀번호</td>
-                      <td><input type="text" value="123123"></td>
-                    </tr>
-                    <tr>
-                      <td>주소</td>
-                      <td><input type="text" value="경기도 안양시"></td>
-                    </tr>
-                    <tr>
-                      <td>이름</td>
-                      <td><input type="text" value="장한솔"></td>
-                    </tr>
-                    <tr>
-                      <td>주민번호</td>
-                      <td><input type="text" value="891222-1******"></td>
-                    </tr>
-                    <tr>
-                      <td>휴대폰번호</td>
-                      <td><input type="text" value="010-8947-7489"></td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">네</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">아니요</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delmember">삭제</button>
-
-          <!-- Modal -->
-          <div id="delmember" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">회원 삭제</h4>
-                </div>
-                <div class="modal-body">
-                  <p>해당 회원을 삭제하시겠습니까?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">네</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">아니요</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>역전우동 0410</td>
-        <td>서울시 강남구</td>
-        <td>02-553-2111</td>
-        <td>000-00-0000</td>
-        <td>am10:00 ~ pm10:00</td>
-        <td>일식,프랜차이즈</td>
-        <td align="right">
-  
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modmember">수정</button>
-
-    
-          <div id="modmember" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">회원 수정</h4>
-                </div>
-                <div class="modal-body">
-                  <p>회원정보를 수정하시겠습니까?</p>
-                  <table class="modal-tbl">
-                    <tr>
-                      <td>아이디</td>
-                      <td><input type="text" value="hansol" disabled></td>
-                    </tr>
-                    <tr>
-                      <td>비밀번호</td>
-                      <td><input type="text" value="123123"></td>
-                    </tr>
-                    <tr>
-                      <td>주소</td>
-                      <td><input type="text" value="경기도 안양시"></td>
-                    </tr>
-                    <tr>
-                      <td>이름</td>
-                      <td><input type="text" value="장한솔"></td>
-                    </tr>
-                    <tr>
-                      <td>주민번호</td>
-                      <td><input type="text" value="891222-1******"></td>
-                    </tr>
-                    <tr>
-                      <td>휴대폰번호</td>
-                      <td><input type="text" value="010-8947-7489"></td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">네</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">아니요</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delmember">삭제</button>
-
-          <!-- Modal -->
-          <div id="delmember" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">회원 삭제</h4>
-                </div>
-                <div class="modal-body">
-                  <p>해당 회원을 삭제하시겠습니까?</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">네</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">아니요</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </table>
-  </div>
-  <!-- class tbl -->
-
-</div>
-<!-- class container -->
-
+	<script>  
+		$(function(){
+			
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"lightgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				//console.log($(this).parent().children().eq(0).text());
+				var shopPid = $(this).parent().children().eq(0).text();
+				location.href="<%=request.getContextPath()%>/sAdminSelect.sh?shopPid=" + shopPid;
+			});
+		});
+		
+		$('#searchBtn').click(function(){
+			location.href="<%=request.getContextPath()%>/searchMember.me?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		});
+	</script>
 </body>
+
+
 </html>
     

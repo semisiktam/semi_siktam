@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import=""%>
+    pageEncoding="UTF-8" %>
 <%
 	Member mem = (Member)request.getAttribute("member");
 	Shop s = (Shop)request.getAttribute("shop");
-%>    
+%>   
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +27,7 @@
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
             <!-- %% 리뷰연결-->
-            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰(1,389)</span></div></a>
+            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰</span></div></a>
         </div>
 
         <div id="pagetop">

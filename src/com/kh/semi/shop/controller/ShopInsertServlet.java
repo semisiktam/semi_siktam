@@ -41,12 +41,12 @@ public class ShopInsertServlet extends HttpServlet {
       String sPhone = request.getParameter("phone"); //매장전화번호
       String sInfo="정말 맛있는 식당!";
       String ownerId = request.getParameter("pid"); //사업자번호
-      String startTime = request.getParameter("startTime"); //영업시작시간-->10:00
-      String endTime = request.getParameter("endTime"); //영업종료시간-->22:00
+      String sTime = request.getParameter("startTime"); //영업시작시간-->10:00
+      String eTime = request.getParameter("endTime"); //영업종료시간-->22:00
       String shopDay = request.getParameter("Day"); //휴무일
       String menuCategory = String.join(", ", request.getParameterValues("eatType")); //메뉴카테고리
       String tableType = String.join(", ", request.getParameter("table")); //테이블형태
-      Shop s=new Shop(shopName,userId,shopImg,sAddr,sPhone,sInfo,ownerId,shopDay,menuCategory,tableType);
+      Shop s=new Shop(shopName,userId,shopImg,sAddr,sPhone,sInfo,ownerId,sTime,eTime,shopDay,menuCategory,tableType);
       System.out.println(s);
       
       new ShopService().insertShop(s);
