@@ -68,12 +68,25 @@
          
                 </table><br>
                 <input type="submit" class="btn" value="수정">
-                <input type="reset" class="btn" value="탈퇴" onclick="location.href = 'mypagePerson_5.jsp'">
+                <input type="button" class="btn" value="탈퇴" onclick="passwordChk()">
 
                 <br><br>
             </div>
        </form>
        <script>
+       function passwordChk(){
+    	   var password = prompt("비밀번호를 입력하세요");
+    	   var userPassword = '<%=m.getPassword()%>';
+    	   
+    	   if(password!=userPassword){
+    		   alert("비밀번호가 틀렸습니다. 다시 입력해주세요.");
+    		   password.focus();
+    	   }else{
+    		   location.href="/siktam/deleteMember.dm"
+       			+"?password="+password;
+    	   }
+    	   
+       }
        
        $(function(){
     	   var addressArr = '<%= m.getAddr() %>'.split(', ');
