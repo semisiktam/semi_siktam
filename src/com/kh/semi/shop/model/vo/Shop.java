@@ -61,6 +61,25 @@ public class Shop implements Serializable{
 		this.menuCategory = menuCategory;
 		this.tableType = tableType;
 	}
+	
+	public Shop(String shopName,String userId, String shopImg, String sAddr, String sPhone, String sInfo, String ownerId,
+			String sTime,String eTime,
+			String shopDay, String menuCategory, String tableType) {
+		super();
+		this.sTime=sTime;
+		this.eTime=eTime;
+		this.shopName = shopName;
+		this.userId=userId;
+		this.shopImg = shopImg;
+		this.sAddr = sAddr;
+		this.sPhone = sPhone;
+		this.sInfo = sInfo;
+		this.ownerId = ownerId;
+		this.shopDay = shopDay;
+		this.menuCategory = menuCategory;
+		this.tableType = tableType;
+	}
+	
 	public String getShopPid() {
 		return shopPid;
 	}
