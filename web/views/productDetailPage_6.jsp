@@ -134,13 +134,13 @@
             <a href="https://map.kakao.com/link/search/<%=s.getsAddr()%>"><input type="button" value="카카오맵으로 확인하기!"></a>
             
             
-            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b75b48c17de2e99d89241117f1dc015c"></script>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86ac46e343755ab8ce65f87ac019437b"></script>
             
             <script>
             
 	            var container = document.getElementById('storeMap');
 	    		var options = {
-	    			center: new kakao.maps.LatLng(37.4921173, 127.011819),
+	    			center: new kakao.maps.LatLng(126.81882157731387, 37.28787490414719),
 	    			level: 3
 	    		};
 	
