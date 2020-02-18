@@ -131,6 +131,27 @@ public class ShopService {
 		return result;
 	}
 
+	public int shopRecordInsert(String userId, String shopPid) {
+		Connection con = getConnection();
+		
+		int result = new ShopDao().shopRecordInsert(con,userId,shopPid);
+		
+		if(result>0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		return result;
+	}
+
+	public ArrayList<Shop> SelectShopRecentRecord(String userId) {
+		Connection con = getConnection();
+		
+		ArrayList<Shop> recordShop = new ShopDao().SelectShopRecentRecord(con,userId);
+		
+		close(con);
+		return recordShop;
+	}
+
 	
  
 } 
