@@ -148,6 +148,15 @@ public class ShopService {
 		
 		ArrayList<Shop> recordShop = new ShopDao().SelectShopRecentRecord(con,userId);
 		
+		/*if(recordShop!=null) {
+			int result = new ShopDao().deleteShopRecentRecord(con,userId);
+			if(result>0) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+		}*/
+		
 		close(con);
 		return recordShop;
 	}
