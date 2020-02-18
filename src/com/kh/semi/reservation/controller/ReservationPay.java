@@ -50,10 +50,13 @@ public class ReservationPay extends HttpServlet {
 			ReservationTest rt = new ReservationTest();
 			
 			rt.setMenuName(mlist[i]);
-			rt.setMenuPrice(Integer.parseInt(mlist[i+1]));
+			rt.setMenuPrice(Integer.parseInt(mlist[i+1]) * Integer.parseInt(mlist[i+2]));
 			rt.setMenuCount(Integer.parseInt(mlist[i+2]));
 			
-			list.add(rt);
+			if(rt.getMenuCount() > 0) {
+				
+				list.add(rt);
+			}
 		}
 		
 		for(ReservationTest rt : list) {
