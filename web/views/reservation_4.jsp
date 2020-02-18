@@ -104,8 +104,7 @@
 							<td><%=r.getMenuPrice()%></td>
 							<td>0</td>
 							<td><img src="/siktam/resources/images/leftArrow.png" alt=""
-								width="10" height="10" class="bt_down" /> <!-- <input type="text"
-								name="num" value="0" class="num" size="1" /> --> <img
+								width="10" height="10" class="bt_down" /><img
 								src="/siktam/resources/images/rightArrow.png" alt="" width="10"
 								height="10" class="bt_up" /></td>
 						</tr>
@@ -123,14 +122,12 @@
 				<div id="result2">
 					<div id="result3">
 						<table id="resultTable">
-							
 						</table>
 					</div>
 					<div id="result5">
 						<table id="tblSum">
 							<tr>
 								<td>결제 금액</td>
-								
 							</tr>
 						</table>
 					</div>
@@ -228,27 +225,25 @@
 			           console.log(data);
 			         
 			        $('#resultTable').find('tr').remove(); 
-			        $('#tblSum').find('td').eq(1).remove();
+			        $('#tblSum').find('td:eq(1)').remove();
 			           for(var i=0; i<data.length; i++){
-			        	   
-			        	   
 				           var $tr = $('<tr>');
 				           var $menuName = $('<td>').text(data[i].menuName);
 			        	   var $menuCount = $('<td>').text(data[i].menuCount);
 			        	   var $menuPrice = $('<td>').text(data[i].menuPrice);
-			        	  
-			        	   var $td = $('<td>');
-			        	  
-			        	   
-			        	   $td.append($total);
 			        	   
 			        	   $tr.append($menuName);
 			        	   $tr.append($menuCount);
 			        	   $tr.append($menuPrice);
 			        	   
 			        	   $('#resultTable').append($tr);
-			        	   $('#tblSum').append($td);
+			        	   
+			        	   var $sum = 0;
+			        	   var $total = $('<td>').text($sum += data[i].menuPrice); 
+			        	   console.log($total);
 			           }
+			        	   $tr.append($total);
+			        	   $('#tblSum').append($total);
 			           
 			         },error:function(){
 			         }
@@ -302,8 +297,27 @@
 			         }
 			         ,success:function(data){
 			           console.log(data);
-			          
-			         },error:function(){
+			            $('#resultTable').find('tr').remove(); 
+				        $('#tblSum').find('td:eq(1)').remove();
+				           for(var i=0; i<data.length; i++){
+					           var $tr = $('<tr>');
+					           var $menuName = $('<td>').text(data[i].menuName);
+				        	   var $menuCount = $('<td>').text(data[i].menuCount);
+				        	   var $menuPrice = $('<td>').text(data[i].menuPrice);
+				        	   $tr.append($menuName);
+				        	   $tr.append($menuCount);
+				        	   $tr.append($menuPrice);
+				        	   
+				        	   $('#resultTable').append($tr);
+				        	   var sum = 0;
+				        	   var $td = $('<td>');
+				        	   var total = sum += data[i].menuPrice; 
+				        	   console.log(total);
+				           }
+				           	  $td.append(total)
+				        	   $tr.append($td);
+				        	   $('#tblSum').append($total);
+ 			         },error:function(){
 			         }
 				});
 				}
