@@ -32,13 +32,13 @@
 						src="/siktam/resources/images/KakaoTalk_20200101_193858750.png"
 						alt="">
 				</div>
-			</a> <a href="/siktam/view/IdFind_1.jsp">
+			</a> <a href="IdFind_1.jsp">
 				<div id="area3">
 					<div class="idDiv">
 						<h1>아이디 찾기</h1>
 						<hr class="hr">
 					</div>
-			</a> <a href="/siktam/view/FindPassword_1.jsp">
+			</a> <a href="FindPassword_1.jsp">
 				<div class="pwdDiv">
 					<h1>비밀번호 찾기</h1>
 					<hr class="hr">
@@ -49,17 +49,17 @@
 			<div class="div2">
 				<h4>아이디 찾기 방법 중 가능한 방법을 선택해 주세요.</h4>
 				<br>
-				<div>
+ 				<div>
 					<input type="radio" id="phone" class="radio" name="find"
-						onclick="divshow();">&nbsp;<label for="phone">핸드폰
+						onclick="divshow();">&nbsp;<label for="phone">이메일
 						인증</label><br>
 					<div id="f1" class="radioDiv" style="display: none;">
-						내 명의로 가입한 아이디와, 이름/핸드폰번호가 일치하는 아이디를 찾습니다<br> <input
+						내 명의로 가입한 아이디와, 이름/이메일이 일치하는 아이디를 찾습니다<br> <input
 							type="button"
 							onclick="location.href='<%=request.getContextPath()%>FindIdResult.jsp'"
 							value="다음단계">
 					</div>
-				</div>
+				</div> 
 				<div>
 					<form action="/siktam/fip.me" method="post">
 						<input type="radio" id="rphone" class="radio" name="find"
@@ -67,20 +67,22 @@
 							핸드폰으로 찾기</label><br>
 						<div id="f2" class="radioDiv">
 							<input type="text" class="text" name="phoneName" id="phoneName"
-								placeholder="이름을 입력해 주세요"><br> <input type="text"
-								class="text" name="phoneNumber" id="phoneNumber" placeholder="가입했을때 등록된 핸드폰 번호">&nbsp;
+								placeholder="이름을 입력해 주세요" required><br> <input type="text"
+								class="text" name="phoneNumber" id="phoneNumber" placeholder="가입했을때 등록된 핸드폰 번호" required>&nbsp;
 							<input type="button" id="idresult2" value="다음단계">
 
 						</div>
 					</form>
 				</div>
 				<div>
+					<form action="/siktam/fie.me" method="post">
 					<input type="radio" id="email" class="radio" name="find"
 						onclick="divshow();">&nbsp;<label for="email">등록된
 						이메일로 찾기</label><br>
 					<div id="f3" class="radioDiv">
-						<input type="email" class="text" placeholder="이메일을 입력해주세요">&nbsp;
-						<button>다음단계</button>
+					<input type="text" class="text" name="emailName" id="emailName" placeholder="이름을 입력해주세요" required>&nbsp;
+					<input type="email" class="text" name="eemail" id="eemail" placeholder="이메일을 입력해주세요" required>&nbsp;
+							<input type="button" id="idresult3" value="다음단계">
 					</div>
 				</div>
 				<div>
