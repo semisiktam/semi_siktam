@@ -120,10 +120,10 @@ public class ReservationTest implements Serializable{
 	public String toString() {
 		return "ReservationTest [userId=" + userId + ", shopName=" + shopName + ", shopAddr=" + shopAddr + ", shopDay="
 				+ shopDay + ", shopStartTime=" + shopStartTime + ", shopEndTime=" + shopEndTime + ", menuName="
-				+ menuName + ", menuImg=" + menuImg + ", menuPrice=" + menuPrice + ", menuCount=" + menuCount + "]";
+				+ menuName + ", menuImg=" + menuImg + ", menuPrice=" + menuPrice + ", menuCount=" + menuCount
+				+ ", total=" + "]";
 	}
-	
-	
+
 	
 	
 }

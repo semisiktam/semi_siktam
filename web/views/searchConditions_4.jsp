@@ -177,28 +177,19 @@
             },success:function(data){
                console.log(data);
                for(var i=0; i<data.length; i++){
-            	   var $tr = $('#tbl tr');
-            	   var $shopPid = $('#tbl tr').children().eq(0).text(data[i].shopPid);
-            	   var $shopImg = $('#tbl tr').children().eq(1).text(data[i].shopImg);
-            	   var $shopName = $('#tbl tr').children().eq(2).children().text(data[i].shopName);
-            	   var $star = $('.star').text(data[i].star);
-            	   var $reviewCount = $('.review_num').text(data[i].reviewCount);
-            	   var $reservationCount = $('.reserve_num').text(data[i].reservationCount);
-            	   var $shopAddr = $('.area').text(data[i].shopAddr);
-            	   var $tableType = $('.tableInfo').text(data[i].tableType);
-            	   var $MenuCategory = $('.sectors').text(data[i].MenuCategory);
+            	   var $tr = $('<tr>');
+            	   var $td = $('#tbl tr').children();
+            	   var $shopPid = text(data[i].shopPid);
+            	   var $shopImg = text(data[i].shopImg);
+            	   var $shopName = text(data[i].shopName);
+            	   var $star = text(data[i].star);
+            	   var $reviewCount = text(data[i].reviewCount);
+            	   var $reservationCount = text(data[i].reservationCount);
+            	   var $shopAddr = text(data[i].shopAddr);
+            	   var $tableType = text(data[i].tableType);
+            	   var $MenuCategory = text(data[i].MenuCategory);
             	   
-            	   $tr.append($shopPid);
-            	   $tr.append($shopImg);
-            	   $tr.append($shopName);
-            	   $tr.append($star);
-            	   $tr.append($reviewCount);
-            	   $tr.append($reservationCount);
-            	   $tr.append($shopAddr);
-            	   $tr.append($tableType);
-            	   $tr.append($MenuCategory);
             	   
-            	   $('#tbl').append($tr);
                } 
                
             },error:function(){
