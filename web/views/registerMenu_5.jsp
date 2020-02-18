@@ -1,5 +1,12 @@
+<%@page import="com.kh.semi.menu.model.vo.Menu"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%ArrayList<Menu> mlist=null;
+      if(request.getAttribute("mlist")!=null){
+    	  mlist=new ArrayList<Menu>();
+    	  mlist=(ArrayList)request.getAttribute("mlist");
+      }
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,15 +37,17 @@
                          </tr>
                     </thead>
                     <tbody>
+                    <%for(int i=0; i<mlist.size();i++){ %>
                         <tr class="reservationTr">
-                            <td><input type="text" placeholder="아이스크림"></td>
-                            <td><input type="file"></td>
-                            <td><input type="text" placeholder="2000">&nbsp;원</td>
-                            <td><input type="text" placeholder="차갑다"></td>
+                            <td><input type="text" placeholder="<%=mlist.get(i).getMenuName()%>"></td>
+                            <td><input type="file"><%=mlist.get(i).getMenuImg()%></td>
+                            <td><input type="text" placeholder="<%=mlist.get(i).getMenuPrice()%>">&nbsp;원</td>
+                            <td><input type="text" placeholder="<%=mlist.get(i).getMenuInfo()%>"></td>
                             <td><input type="button" value="수정" class="btn" id="change" onclick="location.href='registerCompany_2_5.jsp'">
                                 <input type="button" value="삭제" class="btn" id="cancel"></td>
                         </tr>
-                        <tr class="reservationTr">
+                        <%} %>
+                        <!-- <tr class="reservationTr">
                             <td><input type="text" placeholder="해물순듀뷰"></td>
                             <td><input type="file"></td>
                             <td><input type="text" placeholder="7000">&nbsp;원</td>
@@ -53,13 +62,13 @@
                             <td><input type="text" placeholder="이탐희 최애"></td>
                             <td><input type="button" value="수정" class="btn" id="change" onclick="location.href='registerCompany_2_5.jsp'">
                                 <input type="button" value="삭제" class="btn" id="cancel"></td>
-                        </tr>
+                        </tr> -->
                         
                     </tbody>
                 </table><br>
                 <button id="plus" class="btn" name="plus">추가하기</button><br><br><br>
                 <button class="btn" name="confirm">완료</button>
-                <button class="btn" name="cencel" onclick="location.href='mypageShop_5.jsp'">취소</button>
+                <button class="btn" name="cencel" onclick="location.href='views/mypageShop_5.jsp'">취소</button>
                 
             </div>
         </div>
