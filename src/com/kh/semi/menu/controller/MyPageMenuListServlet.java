@@ -40,7 +40,7 @@ public class MyPageMenuListServlet extends HttpServlet {
 		ArrayList<Menu> list=new ArrayList<Menu>();
 //		System.out.println("is list empty?"+list.isEmpty());
 		list=new MenuService().selectList(shopPid);
-		System.out.println(list);
+		System.out.println(list.isEmpty());
 		
 		//new Gson().toJson(list,response.getWriter());
 		

@@ -1,6 +1,8 @@
 package com.kh.semi.eventBanner.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.eventBanner.model.service.EventBannerService;
 import com.kh.semi.eventBanner.model.vo.EventBanner;
+import com.kh.semi.qna.model.vo.QPageInfo;
 
 /**
- * Servlet implementation class eventInsertServlet
+ * Servlet implementation class eventListServlet
  */
-@WebServlet("/eInsert.ev")
-public class eventInsertServlet extends HttpServlet {
+@WebServlet("/eSelectList.ev")
+public class eventListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public eventInsertServlet() {
+    public eventListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +32,26 @@ public class eventInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String eventName = request.getParameter("eventName");
-		String eventImg = request.getParameter("eventImg");
-		System.out.println(eventName+"  "+eventImg);
-		EventBanner eb = new EventBanner(eventName,eventImg);
 		
-		EventBannerService es= new EventBannerService();
+		ArrayList<EventBanner> list = new ArrayList<EventBanner>();
 		
-		int result = es.InsertEvent(eb);
-
-		System.out.println("servlet"+result);
-		if(result > 0) {
-			response.sendRedirect("eSelectList.ev");			
+		EventBannerService es = new EventBannerService();
+		
+		list = es.selectList();
+		
+		String page = "";
+		
+		if(list != null) {
+			page = "views/admin_eventBanner_4.jsp";
+			request.setAttribute("list", list);
+			
 		}else {
-			request.setAttribute("msg", "등록실패");
+			request.setAttribute("msg", " 불러오기 에러 ");
 		}
 		
+		request.getRequestDispatcher(page).forward(request, response);
+		
+
 	}
 
 	/**
