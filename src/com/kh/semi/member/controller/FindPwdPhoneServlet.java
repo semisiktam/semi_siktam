@@ -1,4 +1,4 @@
-package com.kh.semi.eventBanner.controller;
+package com.kh.semi.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.eventBanner.model.service.EventBannerService;
-import com.kh.semi.eventBanner.model.vo.EventBanner;
+import com.google.gson.Gson;
+import com.kh.semi.member.model.service.FindIdService;
+import com.kh.semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class eventInsertServlet
+ * Servlet implementation class FindPwdPhoneServlet
  */
-@WebServlet("/eInsert.ev")
-public class eventInsertServlet extends HttpServlet {
+@WebServlet("/fpp.me")
+public class FindPwdPhoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public eventInsertServlet() {
+    public FindPwdPhoneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +30,28 @@ public class eventInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String eventName = request.getParameter("eventName");
-		String eventImg = request.getParameter("eventImg");
-		System.out.println(eventName+"  "+eventImg);
-		EventBanner eb = new EventBanner(eventName,eventImg);
 		
-		EventBannerService es= new EventBannerService();
+		response.setContentType("application/json; charset=UTF-8");
+		String name = request.getParameter("pphoneName");
+		String phone = request.getParameter("pphoneNumber");
 		
-		int result = es.InsertEvent(eb);
+		System.out.println(name);
+		System.out.println(phone);
+		
+		Member m = new Member();
+		m.setName(name);
+		m.setPhone(phone);
+		
+		FindIdService fId = new FindIdService();
+		
+		// String userId = fId.FindIdPhone(m);
+		// System.out.println(m);
 
-		System.out.println("servlet"+result);
-		if(result > 0) {
-			response.sendRedirect("eSelectList.ev");			
-		}else {
-			request.setAttribute("msg", "등록실패");
-		}
 		
+		String mem= fId.FindPwdPhone(m);
+		System.out.println("뭐나오나" + m);
+		System.out.println("서블릿:"+mem);
+		new Gson().toJson(mem,response.getWriter());
 	}
 
 	/**

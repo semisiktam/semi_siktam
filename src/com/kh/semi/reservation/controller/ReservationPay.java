@@ -42,8 +42,6 @@ public class ReservationPay extends HttpServlet {
 		
 		ArrayList<ReservationTest> list = new ArrayList<ReservationTest>();
 		
-		
-		
 		for(int i=0; i<mlist.length; i=i+3) {
 			System.out.println(mlist[i] + " " +mlist[i+1]+" "+ mlist[i+2]);
 			
@@ -57,6 +55,7 @@ public class ReservationPay extends HttpServlet {
 				
 				list.add(rt);
 			}
+			
 		}
 		
 		for(ReservationTest rt : list) {
