@@ -21,7 +21,8 @@ public class EventBannerService {
 		Connection con = getConnection();
 		
 		int result = eDao.insertNotice(con,eb);
-		
+
+		System.out.println("service"+result);
 		if(result >= 1) commit(con);
 		else rollback(con);
 		

@@ -31,15 +31,16 @@ public class eventInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String eventName = request.getParameter("eventName");
 		String eventImg = request.getParameter("eventImg");
-
+		System.out.println(eventName+"  "+eventImg);
 		EventBanner eb = new EventBanner(eventName,eventImg);
 		
 		EventBannerService es= new EventBannerService();
 		
 		int result = es.InsertEvent(eb);
-		
+
+		System.out.println("servlet"+result);
 		if(result > 0) {
-			response.sendRedirect("eInsert.ev");			
+			response.sendRedirect("eSelectList.ev");			
 		}else {
 			request.setAttribute("msg", "등록실패");
 		}
