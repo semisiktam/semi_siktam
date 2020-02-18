@@ -31,7 +31,7 @@
                 <hr class="hr">
             </div>
             </a>
-            <a href="/siktam/views/FindPassword_1.jsp">
+            <a href="FindPassword_1.jsp">
             <div class="pwdDiv">
                 <h1>비밀번호 찾기</h1>
                 <hr class="hr">
@@ -40,15 +40,13 @@
         </div>
         <div id="area2">
         <div class="div2">
-            <h4>아이디를 입력해주세요.</h4>
-            <input type="text" class="text" placeholder="이름을 입력해 주세요">&nbsp;
-            <a href="/siktam/views/HowFindPassword_1.jsp"><button>다음단계</button></a>
+        <!--      <h4>아이디를 입력해주세요.</h4>-->
+            <input type="text" class="text" placeholder="아이디를 입력해 주세요" id="nextPwdId" name="nextPwdId">&nbsp;
+            <a href="/siktam/views/HowFindPassword_1.jsp">
+            <input type="button" id="pwdNext" value="다음단계">
+</a>
 
         </div>
-
-    
-
-            
 
         <div class="div3">
             아이디를 모르시나요? &nbsp;<a href="IdFind_1.jsp" style="color: black;">아이디 찾기 (이동)</a>
@@ -57,6 +55,33 @@
         </div>
     </div>
     </div>
+    
+    
+    <script>   
+  /*   $("#pwdNext").click(function(){
+			$.ajax({
+				
+				url : "/siktam/HowFindPassword_1.jsp",
+				type : "get",
+				data :{
+					nextPwdId:$('#nextPwdId').val()
+				}, success:function(result){
+					 
+					if(!result==""){
+						alert(result);
+					}else{
+						alert("회원 아이디를 정확히 입력해주십시오");
+					}
+					
+				},error :  function(request,errorcode,error){
+					alert("페이지에러");
+
+				}
+			});
+		}); */
+		
+		
+    </script>
 </body>
 
 </html>
