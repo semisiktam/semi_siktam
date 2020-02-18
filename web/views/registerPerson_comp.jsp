@@ -66,13 +66,15 @@
                         <input type="text" class="tel-control" id="tel2" name="tel2" maxlength="4"> -
                         <input type="text" class="tel-control" id="tel3" name="tel3" maxlength="4">
                         </td>
-                        <td><button id="confirm">휴대폰인증</button></td>
+                        <!-- <td><button id="confirm">휴대폰인증</button></td> -->
                     </tr>
-                    <tr>
+                    <!--
+                    	휴대폰 인증 보류
+                     <tr>
                         <th align="left">인증번호 입력 </th>
                         <td><input type="tel" class="form-control" id="tel4" name="tel4"></td>
                         
-                    </tr>
+                    </tr> -->
          
                 </table><br>
                 <div id="chkwrap1" >
