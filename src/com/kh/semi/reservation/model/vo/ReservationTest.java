@@ -17,11 +17,12 @@ public class ReservationTest implements Serializable{
 	private String menuName;
 	private String menuImg;
 	private int menuPrice;
+	private int menuCount;
 	
 	public ReservationTest() {}
 	
 	public ReservationTest(String userId, String shopName, String shopAddr, String shopDay, String shopStartTime,
-			String shopEndTime, String menuName, String menuImg, int menuPrice) {
+			String shopEndTime, String menuName, String menuImg, int menuPrice, int menuCount) {
 		super();
 		this.userId = userId;
 		this.shopName = shopName;
@@ -32,6 +33,7 @@ public class ReservationTest implements Serializable{
 		this.menuName = menuName;
 		this.menuImg = menuImg;
 		this.menuPrice = menuPrice;
+		this.menuCount = menuCount;
 	}
 
 	public String getUserId() {
@@ -106,13 +108,22 @@ public class ReservationTest implements Serializable{
 		this.menuPrice = menuPrice;
 	}
 
-	
+	public int getMenuCount() {
+		return menuCount;
+	}
+
+	public void setMenuCount(int menuCount) {
+		this.menuCount = menuCount;
+	}
+
 	@Override
 	public String toString() {
-		return "Reservtion2 [userId=" + userId + ", shopName=" + shopName + ", shopAddr=" + shopAddr + ", shopDay="
+		return "ReservationTest [userId=" + userId + ", shopName=" + shopName + ", shopAddr=" + shopAddr + ", shopDay="
 				+ shopDay + ", shopStartTime=" + shopStartTime + ", shopEndTime=" + shopEndTime + ", menuName="
-				+ menuName + ", menuPrice=" + menuPrice + "]";
+				+ menuName + ", menuImg=" + menuImg + ", menuPrice=" + menuPrice + ", menuCount=" + menuCount + "]";
 	}
+	
+	
 	
 	
 }

@@ -1,6 +1,7 @@
 package com.kh.semi.reservation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.kh.semi.reservation.model.vo.ReservationTest;
 
 /**
  * Servlet implementation class ReservationPay
@@ -35,10 +39,28 @@ public class ReservationPay extends HttpServlet {
 		String[] mlist = request.getParameterValues("m0list");
 		System.out.println(Arrays.toString(mlist));
 		System.out.println(mlist.length);
+		
+		ArrayList<ReservationTest> list = new ArrayList<ReservationTest>();
+		
+		
+		
 		for(int i=0; i<mlist.length; i=i+3) {
 			System.out.println(mlist[i] + " " +mlist[i+1]+" "+ mlist[i+2]);
+			
+			ReservationTest rt = new ReservationTest();
+			
+			rt.setMenuName(mlist[i]);
+			rt.setMenuPrice(Integer.parseInt(mlist[i+1]));
+			rt.setMenuCount(Integer.parseInt(mlist[i+2]));
+			
+			list.add(rt);
 		}
 		
+		for(ReservationTest rt : list) {
+			System.out.println(rt);
+		}
+		
+		new Gson().toJson(list,response.getWriter());
 	}
 
 	/**

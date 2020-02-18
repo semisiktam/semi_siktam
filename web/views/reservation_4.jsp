@@ -229,6 +229,8 @@
 			         data:{
 			               "m0list" : m0
 			         },success:function(data){
+			           console.log(data);
+			           
 			           
 			         },error:function(){
 			         }
@@ -281,7 +283,7 @@
 			        	 "m0list" : m0
 			         }
 			         ,success:function(data){
-			           
+			           console.log(data);
 			         },error:function(){
 			         }
 				});
