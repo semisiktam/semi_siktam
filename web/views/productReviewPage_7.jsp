@@ -2,14 +2,14 @@
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.review.model.vo.*"%>
 <%
 	ArrayList<Review> rList = (ArrayList<Review>)request.getAttribute("reviewList"); 
-	Member mem = (Member)request.getAttribute("member");
+	/*Member mem = (Member)session.getAttribute("member");*/
 	Shop s = (Shop)request.getAttribute("shop");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	/* PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	int endPage = pi.getEndPage(); */
 %>   
 
 <!DOCTYPE html>
@@ -34,12 +34,12 @@
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
             <!-- %% 리뷰연결-->
-            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰</span></div></a>
+            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰(<%= rList.size() %>)</span></div></a>
         </div>
 
         <div id="pagetop">
-            <h3>역전 우동 0416</h3>
-            <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+            <h3><%= s.getShopName() %></h3>
+            <span><%= s.getsInfo() %></span>
         </div>
 
         <br>
@@ -91,18 +91,19 @@
                 <label>정렬방식</label> <!-- 리뷰 정렬 방식 선택-->
                 <select> <!-- TODO -->
                     <option value="최신순">최신순</option>
-                    <option value="별점순">별점순</option>
+                    <option value="별점순">별점 낮은 순</option>
+                    <option value="별점순">별점 높은 순</option>
                 </select>
             </div>
             <br>
         </div>
         
         <br>
-
+		<% if(m != null){ %>
         <div id="reviewWriteText">
             <div class="allReview" id="writeReview">
                 <div>
-                    <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">id</label>
+                    <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel"><%= m.getUserId() %></label>
                 </div>
                 <br>
                 <label>별점 : </label>
@@ -126,6 +127,7 @@
                 </div>
             </div>
         </div>
+        <% }%>
         
         <br><br><br>
 
@@ -156,7 +158,7 @@
         </div>
 		<% } %>
 		
-        <div class="allReview">
+       <!-- <div class="allReview">
             <div class="personInfo">
                 <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">hyeonhee9411</label>
                 <div class="bottomBtn"><button id="btn1" class="reviewBtn">▼</button>▼</div>
@@ -181,7 +183,7 @@
 
         <br>
 
-        <!-- <div class="allReview">
+         <div class="allReview">
             <div class="personInfo">
                 <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">tamheekim0110</label>
                 <div class="bottomBtn"><button id="btn2" class="reviewBtn">▼</button>▼</div>
@@ -231,13 +233,13 @@
                    김치가 맛있어서 그런지 깊은 맛이 있고 국물의 감칠맛이 좋습니다!
                 </p>
             </div>
-        </d -->iv>
+        </d iv>-->
         
         <br>
         
-        <!-- 버튼 -->
+        <!-- 페이지 버튼 -->
         
-        <div class="pagingArea" align="center">
+        <%-- <div class="pagingArea" align="center">
 			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=1'"><<</button>
 			<%  if(currentPage <= 1){  %>
 			<button disabled><</button>
@@ -261,7 +263,7 @@
 			<%  } %>
 			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%= maxPage %>'">>></button>
 			
-		</div>
+		</div> --%>
         <br>
 		
         <script>
@@ -270,24 +272,24 @@
                 $('.personReview').css('display','none');
                 
 
-                $('#btn1').click(function(){
-                   /*  $('.personReview1').css('display','block'); */
+                /* $('#btn1').click(function(){
+                   /*  $('.personReview1').css('display','block'); 
                     $('#personReview1').slideToggle();
-                });
-                $('#btn2').click(function(){
-                    $('#personReview2').slideToggle();
-                });
-                $('#btn3').click(function(){
-                    $('#personReview3').slideToggle();
-                });
+                }); */
+                
+                $('.personInfo').click(function(){
+                	$(this).next().slideToggle();
+                })
 
                 $('#reviewWriteText').css('display','none');
 
                 /* $('#reviewWriteText').slideUp(); */
 
-                $('#wReviewbtn').click(function(){
-                    $('#reviewWriteText').slideToggle();
-                });
+                /* $('#wReviewbtn').click(function(){
+                	
+                   	$('#reviewWriteText').slideToggle();
+                	
+                }); */
 
                 $("#star_grade a").eq(3).addClass("on").prevAll("a").addClass("on");
                 $('#star_view1 a').eq(2).addClass("on").prevAll("a").addClass("on");
@@ -329,6 +331,24 @@
                 return false;
             });
         });
+        <% if(m != null) {%>
+        
+	      $(function(){
+	    	  $('#wReviewbtn').click(function(){
+              	
+                 	$('#reviewWriteText').slideToggle();
+              	
+              });
+	      });
+        <% }else{%>
+        	$(function(){
+	    	  $('#wReviewbtn').click(function(){
+            	
+               	alert("로그인 먼저 해주세요!");
+            	
+            });
+	      });
+        <%}%>
         </script>
 
     </div>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.shop.model.service.ShopService;
 import com.kh.semi.shop.model.vo.Shop;
 
@@ -33,11 +34,13 @@ public class ShopInsertServlet extends HttpServlet {
     */
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       HttpSession session=request.getSession();
-      
+      Member m=(Member)session.getAttribute("member");
 	  String shopName = request.getParameter("shopName"); //매장명
       String shopImg = request.getParameter("shopImg"); //매장사진
-      String userId=(String)session.getAttribute("userId");
-      String sAddr = request.getParameter("address"); //매장주소
+      String userId=m.getUserId();
+      String sAddr = request.getParameter("zipCode")+", "
+				+ request.getParameter("address1")+", "
+				+ request.getParameter("address2"); //매장주소
       String sPhone = request.getParameter("phone"); //매장전화번호
       String sInfo="정말 맛있는 식당!";
       String ownerId = request.getParameter("pid"); //사업자번호

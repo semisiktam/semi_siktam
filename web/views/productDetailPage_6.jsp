@@ -1,11 +1,13 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.menu.model.vo.* , com.kh.semi.member.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.menu.model.vo.* ,
+     com.kh.semi.member.model.vo.*" %>
 
 <% 
 	Shop s = (Shop)request.getAttribute("shop");
 	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("mList");
 	Member mem = (Member)request.getAttribute("member");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +19,10 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
     <!-- 지도 설치 스크립트 -->
+    
+    <!-- 지도 라이브러리 불러오기 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b75b48c17de2e99d89241117f1dc015c&libraries=services"></script>
+    
     
     <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
 
@@ -54,8 +60,12 @@
         <div class="pageselect">
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
+
             <!-- %% 리뷰연결-->
-            <a href="/siktam/views/productReviewPage_7.jsp?shopPid=<%=s.getShopPid()%>"><div id="review"><span>리뷰</span></div></a>
+
+            <!-- %% 리뷰연결-->
+          <a href="/siktam/rPage.ro?shopPid=<%=s.getShopPid()%>"><div id="review"><span>리뷰</span></div></a>
+
         </div>
         <!-- 상단 업체명/설명/예약버튼 -->
         <div id="pagetop">
@@ -96,17 +106,19 @@
     <div id="pagemenu">
         <div id="pagemenudiv">
             <div id="menuspan"> 메뉴 </div><div id="menuhr"><hr></div>
-            <div class="menubox">
+            
             <!-- 지원 잠시 주석처리 -->
             <% for(Menu me : list) { %>
+            <div class="menubox">
                 <div class="menuimg"><img src="<%=me.getMenuImg() %>" alt=""></div>
                 <div class="menutext">
                     <h4><%=me.getMenuName() %></h4>
                     <p><%=me.getMenuInfo() %></p>
                     <p class="menuprice"><b><%=me.getMenuPrice() %></b></p>
                 </div>
-            <% } %>
             </div>
+            <% } %>
+            
         </div>
     </div>
 
@@ -115,33 +127,70 @@
         <div id="pageaddressdiv">
             <div id="addressspan">상세 주소</div><div id="addresshr"><hr></div>
             <div id="addinfo">
-                <p><%=s.getsAddr() %></p>
+                <p class="infop">업체 주소 :</p> <p class="infop2"><%=s.getsAddr() %></p><br>
+                <a href="https://map.kakao.com/link/search/<%=s.getsAddr()%>"><input id="mapButton" type="button" value="카카오맵으로 확인하기!"></a><br>
                 <p class="infop">대표자명 : </p> <p class="infop2"><%--<%=mem.getName() %> --%></p><br>
                 <p class="infop">사업자 등록번호 : </p> <p class="infop2"><%=s.getOwnerId() %></p><br>
             </div>
             
             <!-- 지도 api -->
-            <div id="storeMap" style="width:500px; height:400px;border:1px solid black;"></div>
+            <div id="map" style="width: 430px;height: 300px;border:1px solid black;"></div>
             
-            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b75b48c17de2e99d89241117f1dc015c"></script>
+            
+            
+            
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=86ac46e343755ab8ce65f87ac019437b"></script>
             
             <script>
             
-	            var container = document.getElementById('storeMap');
-	    		var options = {
-	    			center: new kakao.maps.LatLng(33.450701, 126.570667),
-	    			level: 3
-	    		};
-	
-	    		var map = new kakao.maps.Map(container, options);
+           
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+             mapOption = {
+                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                 level: 3 // 지도의 확대 레벨
+             };  
 
-            
-            </script>
+	         // 지도를 생성합니다    
+	         var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	         // 주소-좌표 변환 객체를 생성합니다
+	         var geocoder = new kakao.maps.services.Geocoder();
+	
+	         // 주소로 좌표를 검색합니다
+	         geocoder.addressSearch('<%=s.getsAddr()%>', function(result, status) {
+	
+	             // 정상적으로 검색이 완료됐으면 
+	              if (status === kakao.maps.services.Status.OK) {
+	
+	                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	                 // 결과값으로 받은 위치를 마커로 표시합니다
+	                 var marker = new kakao.maps.Marker({
+	                     map: map,
+	                     position: coords
+	                 });
+	
+	                 // 인포윈도우로 장소에 대한 설명을 표시합니다
+	                 var infowindow = new kakao.maps.InfoWindow({
+	                     content: '<div style="width:150px;text-align:center;padding:6px 0;">하..</div>'
+	                 });
+	                 infowindow.open(map, marker);
+	
+	                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	                 map.setCenter(coords);
+	             } 
+	         });    
+	             
+             
+
+         </script>
+	    		
+       
             
             
             
             <!-- 지도 api (끝) -->
-            <div id="daumRoughmapContainer1578697903624" 
+            <!-- <div id="daumRoughmapContainer1578697903624" 
             class="root_daum_roughmap root_daum_roughmap_landing">
             </div>
 
@@ -152,7 +201,7 @@
                    "mapWidth" : "400",
                    "mapHeight" : "200"
                 }).render();
-             </script>
+             </script> -->
         </div>
     </div>
 

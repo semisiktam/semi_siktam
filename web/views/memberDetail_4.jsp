@@ -99,7 +99,8 @@
 			</tr>
 			<tr>
 				<td>블랙리스트</td>
-				<td> <input type="text" class="inputInfo" name="blackyn" value="<%= m.getBlackYN() %>"></td>
+				<%-- <td> <input type="text" class="inputInfo" name="blackyn" value="<%= m.getBlackYN() %>"></td> --%>
+				<td><input type="text" class="inputInfo" id="blackyn" name="blackyn" value="<%= m.getBlackYN() %>"></td>
 			</tr>
 			<tr>
 				<td>회원탈퇴</td>
@@ -126,6 +127,30 @@
 		$('.inputInfo').click(function(){
 			$(this).select();
 		});
+		
+        $(function(){
+			$('input:text[name="blackyn"]').click(function(){
+				if($(this).val()=='Y'){
+					$(this).val('N');
+				}else{
+					$(this).val('Y');
+					var banTerm = prompt("정지기간(일)을 입력하세요");
+					var banReason = prompt("정지사유를 입력하세요");
+				}
+			});
+        });
+        
+        /*$(function(){
+			$("#blackyn").click(function(){
+				if($(this).val()=='Y'){
+					$(this).val('N');
+				}else{
+					$(this).val('Y');
+					var banTerm = prompt("정지기간(일)을 입력하세요");
+					var banReason = prompt("정지사유를 입력하세요");
+				}
+			});
+        });*/
 	</script>
 </body>
 </html>

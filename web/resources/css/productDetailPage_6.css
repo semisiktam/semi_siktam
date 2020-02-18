@@ -301,5 +301,13 @@
     width: 40%;
     margin-bottom: 100px;
 }
-#storeMap{
+#mapButton{
+	background: rgb(13, 78, 100);
+    height: 35px;
+    width: auto;
+    color: white;
+    font-weight: bold;
+    /* margin-top: 10px; */
+    cursor: pointer;
+    padding: 0px 10px 0px 10px;
 }

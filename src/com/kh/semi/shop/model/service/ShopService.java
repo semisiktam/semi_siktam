@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.semi.shop.model.dao.ShopDao;
 import com.kh.semi.shop.model.vo.Shop;
+import com.kh.semi.shop.model.vo.ShopSearch;
 
 public class ShopService {
 	private ShopDao sDao;
@@ -22,30 +23,24 @@ public class ShopService {
 	 * @param keyword
 	 * @return
 	 */
-	public ArrayList<Shop> searchMain(String keyword) {
+	public ArrayList<ShopSearch> searchMain(String keyword) {
 		Connection con = getConnection();
 		 
-		ArrayList<Shop> list = null;
+		ArrayList<ShopSearch> list = null;
 		
-		if(keyword.length() > 0) {
-			list=new ArrayList<Shop>();
+		
+			list=new ArrayList<ShopSearch>();
 			list = sDao.searchMain(con,keyword);
-			
-		}else {
-			
-			// 모든 shop리스트 조회
-//			list = sDao.selectList(con);
-		}
 		
 		close(con);
 		
 		return list;
 	}
 
-	public ArrayList<Shop> SearchCondition(String keyword,String[] tlist, String[] clist, String[] plist) {
+	public ArrayList<ShopSearch> SearchCondition(String keyword,String[] tlist, String[] clist, String[] plist) {
 		Connection con = getConnection();
 		
-		ArrayList<Shop> list = sDao.SearchCondition(con,keyword,tlist,clist,plist);
+		ArrayList<ShopSearch> list = sDao.SearchCondition(con,keyword,tlist,clist,plist);
 		
 		close(con);
 		return list;
@@ -72,7 +67,8 @@ public class ShopService {
 		return s;
 	}
 
-
+	
+	
 	public Shop selectOne(String shopPid) {
 		
 		Connection con = getConnection();

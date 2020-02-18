@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.semi.shop.model.service.ShopService;
-import com.kh.semi.shop.model.vo.Shop;
+import com.kh.semi.shop.model.vo.ShopSearch;
 
 /**
  * Servlet implementation class ShopSearchConditionServlet
@@ -41,20 +42,20 @@ public class ShopSearchConditionServlet extends HttpServlet {
 				String[] plist = request.getParameterValues("plist");			
 				
 				System.out.println(keyword);
-				ArrayList<Shop> list = new ShopService().SearchCondition(keyword,tlist, clist, plist);
+				ArrayList<ShopSearch> list = new ShopService().SearchCondition(keyword,tlist,clist,plist);
 				
-				for(Shop s : list) {
-					System.out.println(s);
+				for(ShopSearch sc : list) {
+					System.out.println(sc);
 				}
 				
-				String page = "";
+				/*String page = "";
 				if(list !=null) {
 					page = "views/searchConditions_4.jsp";
 					request.setAttribute("list", list);
 				}
-				request.getRequestDispatcher(page).forward(request, response);
+				request.getRequestDispatcher(page).forward(request, response);*/
 				
-				response.getWriter().print(list);
+				new Gson().toJson(list,response.getWriter());
 				
 			}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +49,17 @@ public class ShopSelectOneServlet extends HttpServlet {
 		
 		list = ms.selectList(shopPid);
 		
+		/*Cookie c1 = new Cookie("shopImg",s.getShopImg());
+		Cookie c2 = new Cookie("shopName",s.getShopName());
+		Cookie c3 = new Cookie("shopAddr",s.getsAddr());
 		
+		c1.setPath("/");
+		c2.setPath("/");
+		c3.setPath("/");
+		
+		response.addCookie(c1);
+		response.addCookie(c2);
+		response.addCookie(c3);*/
 		
 		String page = "";
 		
