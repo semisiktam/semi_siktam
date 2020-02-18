@@ -123,18 +123,14 @@
 				<div id="result2">
 					<div id="result3">
 						<table id="resultTable">
-							<tr>
-								<td>후라이드 치킨</td>
-								<td>1</td>
-								<td>5000원</td>
-							</tr>
+							
 						</table>
 					</div>
 					<div id="result5">
 						<table id="tblSum">
 							<tr>
 								<td>결제 금액</td>
-								<td>30000원</td>
+								
 							</tr>
 						</table>
 					</div>
@@ -229,6 +225,30 @@
 			         data:{
 			               "m0list" : m0
 			         },success:function(data){
+			           console.log(data);
+			         
+			        $('#resultTable').find('tr').remove(); 
+			        $('#tblSum').find('td').eq(1).remove();
+			           for(var i=0; i<data.length; i++){
+			        	   
+			        	   
+				           var $tr = $('<tr>');
+				           var $menuName = $('<td>').text(data[i].menuName);
+			        	   var $menuCount = $('<td>').text(data[i].menuCount);
+			        	   var $menuPrice = $('<td>').text(data[i].menuPrice);
+			        	  
+			        	   var $td = $('<td>');
+			        	  
+			        	   
+			        	   $td.append($total);
+			        	   
+			        	   $tr.append($menuName);
+			        	   $tr.append($menuCount);
+			        	   $tr.append($menuPrice);
+			        	   
+			        	   $('#resultTable').append($tr);
+			        	   $('#tblSum').append($td);
+			           }
 			           
 			         },error:function(){
 			         }
@@ -281,7 +301,8 @@
 			        	 "m0list" : m0
 			         }
 			         ,success:function(data){
-			           
+			           console.log(data);
+			          
 			         },error:function(){
 			         }
 				});

@@ -54,9 +54,9 @@
   <div class="tbl">
     <table class="table table-hover" id="tbl">
       <tr>
-        <th colspan="2">이벤트명</th>
-        <th colspan="2">이미지 업로드</th>
-        <th colspan="2">미리보기</th>
+        <th class="eventInfo" colspan="2">이벤트명</th>
+        <th class="eventInfo" colspan="2">이미지 업로드</th>
+        <th class="eventInfo" colspan="2">미리보기</th>
         <th class="text-right">
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#addevent" id="registerBtn" style="width: 55px;">등록</button>
           <div id="addevent" class="modal fade" role="dialog">
@@ -65,18 +65,24 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">배너 등록</h4>
+                  <h4 class="modal-title">이벤트 등록</h4>
                 </div>
-                <div class="modal-body">
-                  <label>이벤트명</label><br>
-                  <input type="text" name="" id=""><br><br>
-                  <label>이미지 업로드</label>
-                  <input type="file">
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">확인</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-                </div>
+                
+                <!-- 이벤트 insert -->
+                <form action="<%= request.getContextPath() %>/eInsert.ev" method="post">
+	                <div class="modal-body">
+	                  <label>이벤트명</label><br>
+	                  <input type="text" name="eventName" id="modalEventName"><br><br>
+	                  <label>이벤트 대표이미지</label>
+	                  <input type="file" name="eventImg" id="modalEventImg">
+	                </div>
+	                <div class="modal-footer">
+	                	<input type="submit" class="btn btn-danger" data-dismiss="modal" value="등록">
+	                	<input type="reset" class="btn btn-danger" data-dismiss="modal" value="취소">
+	                </div>
+                </form>
+                
+                
               </div>
 
             </div>
@@ -182,84 +188,18 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr><tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+      
     </table>
   </div>
   <!-- class tbl -->
 
 </div>
 <!-- class container -->
-
+<script>
+	function name() {
+		
+	}
+</script>
 
 
 </body>
