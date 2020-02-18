@@ -3,16 +3,18 @@
 
 
 
-<%String userId =(String)request.getAttribute("mem");%>
+<%
+	String userId = (String) request.getAttribute("mem");
+%>
 
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <link rel="stylesheet" href="/siktam/resources/css/header_idpw.css">
 <link rel="stylesheet" href="/siktam/resources/css/IdFind_1.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Find Id</title>
 
 </head>
@@ -54,7 +56,7 @@
 					<div id="f1" class="radioDiv" style="display: none;">
 						내 명의로 가입한 아이디와, 이름/핸드폰번호가 일치하는 아이디를 찾습니다<br> <input
 							type="button"
-							onclick="location.href='<%= request.getContextPath()%>/siktam/fip.me'"
+							onclick="location.href='<%=request.getContextPath()%>FindIdResult.jsp'"
 							value="다음단계">
 					</div>
 				</div>
@@ -64,10 +66,10 @@
 							onclick="divshow();">&nbsp;<label for="rphone">등록된
 							핸드폰으로 찾기</label><br>
 						<div id="f2" class="radioDiv">
-							<input type="text" class="text" name="phoneName"
+							<input type="text" class="text" name="phoneName" id="phoneName"
 								placeholder="이름을 입력해 주세요"><br> <input type="text"
-								class="text" name="phoneNumber" placeholder="가입했을때 등록된 핸드폰 번호">&nbsp;
-							<input type="submit" value="다음단계" onclick="IdResultph();">
+								class="text" name="phoneNumber" id="phoneNumber" placeholder="가입했을때 등록된 핸드폰 번호">&nbsp;
+							<input type="button" id="idresult2" value="다음단계">
 
 						</div>
 					</form>
@@ -88,26 +90,25 @@
 							이름/생년월일/성별 찾기</label><br>
 						<div id="f4" class="radioDiv">
 							<input type="text" class="text" name="BirthName" id="BirthName"
-								placeholder="이름을 입력해 주세요">&nbsp; <input type="text"
-								class="text" name="Birth" id="Birth"
-								placeholder="생일을 입력해 주세요(200217형식으로 입력)">&nbsp;
-								<input
-								type="text" class="text" name="Gender" id="Gender"
-								placeholder="성별을 입력해 주세요(남성/여성으로 입력)">&nbsp; <br>
-								<!-- <input
+								placeholder="이름을 입력해 주세요" required>&nbsp; <input
+								type="text" class="text" name="Birth" id="Birth"
+								placeholder="주민번호 앞자리를 입력하세요(900217형식으로 입력)" required>&nbsp;
+							<input type="text" class="text" name="Gender" id="Gender"
+								placeholder="성별을 입력해 주세요(남성/여성으로 입력)" required>&nbsp; <br>
+							<!-- <input
 								type="date" name="Birth" id="Birth" class="text">&nbsp;
 							<select style="height: 29px;" id="Gender" name="Gender">
 								<option value="남자">남자</option>
 								<option value="여자">여자</option>
 							</select> -->
-							<input type="submit" value="다음단계" onclick="">
-								</form>
-						</div>
+							<input type="button" id="idresult4" value="다음단계">
+					</form>
 				</div>
 			</div>
+		</div>
 
 
-			<script>
+		<script>
         function divshow() {
             if ($('input:radio[id=phone]').is(':checked')) {
                 $('#f1').slideDown();
@@ -138,34 +139,78 @@
        		 alert("찾으시는 아이디가 없습니다");
        	 }
        	 	
-        }
+        } 
+         --%>
         
-        
-        $("#IdResultph").click(function(){
+         $("#idresult2").click(function(){
+ 			$.ajax({
+ 				
+ 				url : "/siktam/fip.me",
+ 				type : "get",
+ 				data :{
+ 					phoneName:$('#phoneName').val(),
+ 					phoneNumber:$('#phoneNumber').val()
+ 				}, success:function(result){
+ 					 
+ 					if(!result==""){
+ 						alert(result);
+ 					}else{
+ 						alert("해당하는 아이디가 없습니다");
+ 					}
+ 					
+ 				},error :  function(request,errorcode,error){
+ 					alert("페이지에러");
+
+ 				}
+ 			});
+ 		});
+         
+         
+         
+          $("#idresult4").click(function(){
 			$.ajax({
-				url : "/ajax/fip.me",
+				
+				url : "/siktam/fibg.me",
 				type : "get",
 				data :{
-					myAge:$('#myAge').val()
+					BirthName:$('#BirthName').val(),
+					Birth:$('#Birth').val(),
+					Gender:$('#Gender').val()
 				}, success:function(result){
-					$('#testP3').text(result);
+					 
+					if(!result==""){
+						alert(result);
+					}else{
+						alert("해당하는 아이디가 없습니다");
+					}
+					
 				},error :  function(request,errorcode,error){
-					alert("해당하는 아이디가 없습니다");
+					alert("페이지에러");
 
 				}
 			});
 		});
- --%>
+          
+          
+
+          
+/*           function  popup(){
+             var url = "FindIdResult.jsp";
+             var name = "아이디찾기결과";
+             var option = "width = 300, height = 150, top = 100, left = 200, location = no"
+             window.open(url, name, option);
+         } 
+ */
 
     </script>
 
 
-			<div class="div3">
-				비밀번호 찾으시나요? &nbsp;<a href="FindPassword_1.jsp" style="color: black;">비밀번호
-					찾기 (이동)</a>
-			</div>
-			<br>
+		<div class="div3">
+			비밀번호 찾으시나요? &nbsp;<a href="FindPassword_1.jsp" style="color: black;">비밀번호
+				찾기 (이동)</a>
 		</div>
+		<br>
+	</div>
 	</div>
 
 
