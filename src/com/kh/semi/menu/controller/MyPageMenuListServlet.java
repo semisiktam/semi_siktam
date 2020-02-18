@@ -35,14 +35,18 @@ public class MyPageMenuListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		response.setContentType("application/json; charset=UTF-8");
+//		response.setContentType("application/json; charset=UTF-8");
 		String shopPid = request.getParameter("shopPid");
 		ArrayList<Menu> list=new ArrayList<Menu>();
 //		System.out.println("is list empty?"+list.isEmpty());
 		list=new MenuService().selectList(shopPid);
 		System.out.println(list);
 		
-		new Gson().toJson(list,response.getWriter());
+		//new Gson().toJson(list,response.getWriter());
+		
+		request.setAttribute("mlist",list);
+//		
+		request.getRequestDispatcher("views/registerMenu_5.jsp").forward(request, response);
 	}
 
 	/**

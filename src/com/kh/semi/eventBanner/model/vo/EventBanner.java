@@ -9,13 +9,19 @@ public class EventBanner implements Serializable{
 	private static final long serialVersionUID = -1746921829697456340L;
 	private String eventNo; //이벤트번호
 	private String eventName; //이벤트명
-	private int shopPid; //매장등록번호
+	private String shopPid; //매장등록번호
 	private String eventImg; //이벤트이미지
+	
 	public EventBanner() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public EventBanner(String eventNo, String eventName, int shopPid, String eventImg) {
+	public EventBanner(String eventName,String eventImg) {
+		super();
+		this.eventName = eventName;
+		this.eventImg = eventImg;
+	}
+	public EventBanner(String eventNo, String eventName, String shopPid, String eventImg) {
 		super();
 		this.eventNo = eventNo;
 		this.eventName = eventName;
@@ -34,10 +40,10 @@ public class EventBanner implements Serializable{
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-	public int getShopPid() {
+	public String getShopPid() {
 		return shopPid;
 	}
-	public void setShopPid(int shopPid) {
+	public void setShopPid(String shopPid) {
 		this.shopPid = shopPid;
 	}
 	public String getEventImg() {

@@ -58,7 +58,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">사이트관리 <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/siktam/nselectList.no">공지사항</a></li>
-            <li><a href="/siktam/views/admin_eventBanner_4.jsp">이벤트배너</a></li>
+            <li><a href="/siktam/eSelectList.ev">이벤트배너</a></li>
             <li><a href="/siktam/views/admin_questions_4.jsp">문의사항</a></li>
           </ul>
         </li>
