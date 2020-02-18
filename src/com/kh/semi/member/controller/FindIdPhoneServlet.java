@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.semi.member.model.service.FindIdService;
 import com.kh.semi.member.model.vo.Member;
 
@@ -31,6 +32,7 @@ public class FindIdPhoneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		response.setContentType("application/json; charset=UTF-8");
 		String name = request.getParameter("phoneName");
 		String phone = request.getParameter("phoneNumber");
 		
@@ -50,17 +52,19 @@ public class FindIdPhoneServlet extends HttpServlet {
 		String mem= fId.FindIdPhone(m);
 		System.out.println("뭐나오나" + m);
 		System.out.println("서블릿:"+mem);
-		String page = "";
+		new Gson().toJson(mem,response.getWriter());
+
+/*		String page = "";
 		if(mem != null) { 
 			
-			page = "views/IdFind_1.jsp";
+			page = "views/FindIdResult.jsp";
 			
 			request.setAttribute("mem", mem);
 		}else {
 			page="views/common/errorPage.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);
-		
+		*/
 		
 	}
 

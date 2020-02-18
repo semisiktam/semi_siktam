@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.semi.member.model.service.FindIdService;
 import com.kh.semi.member.model.vo.Member;
 
@@ -33,7 +34,7 @@ public class FindIdBirthGender extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		
+		response.setContentType("application/json; charset=UTF-8");
 		String name = request.getParameter("BirthName");
 		String birth = request.getParameter("Birth");// 890717-2
 		String gender = request.getParameter("Gender"); //여성(글자로)
@@ -66,54 +67,24 @@ public class FindIdBirthGender extends HttpServlet {
 		String mem = fId.FindIdBirthGender(m);
 		
 		System.out.println("뭐나오나" + m);
-		System.out.println("서블릿:"+mem);
+		System.out.println("서블릿:"+ mem);
 		
-		String page = "";
-		if(mem != null) { 
-			
-			page = "views/IdFind_1.jsp";
-			
-			request.setAttribute("mem", mem);
-		}else {
-			page="views/common/errorPage.jsp";
-		}
-		request.getRequestDispatcher(page).forward(request, response);
-		
+		new Gson().toJson(mem,response.getWriter());
+//		String page = "";
+//		if(mem != null) { 
+//			
+//			page = "views/FindIdResult.jsp";
+//			
+//			request.setAttribute("mem", mem);
+//		}else {
+//			page="views/common/errorPage.jsp";
+//		}
+//		request.getRequestDispatcher(page).forward(request, response);
 		
 		
 		
 	}
 	
-	
-	/*	
-    String job= request.getParameter("job");
-    String interests[] = request.getParameterValues("interest");
-    
-//    안적어도 되는 부분
-    response.setContentType("text/html; charset=UTF-8");
-//    출력문 시작
-    PrintWriter out = response.getWriter();
-    out.print("<html><body>");
-    out.println("당신이 선택한 직업: <b>");
-//    jsp에서 적은 job의 값을 가져오기
-    out.print(job);
-    
-    out.println("</b><hr>당신이 선택한 관심 분야: <b>");
-    if(interests ==null){
-        out.print("선택한 항목이 없어요");
-        
-    }else{
-        for(String interest:interests){
-            out.print(interest +" ");
-        }
-    }
-//    뒤로가기 버튼
-    out.println("</b><br><a href='javascript:history.go(-1)'>뒤로가기</a>");
-    out.print("</body></html>");
-//    출력문 종료
-    out.close();
-}
-[출처] [Jsp] select문 값 받기|작성자 sunghyun1200*/
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
