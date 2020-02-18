@@ -112,7 +112,7 @@
 
 		<script>
         function divshow() {
-            if ($('input:radio[name=phone]').is(':checked')) {
+            if ($('input:radio[id=phone]').is(':checked')) {
                 $('#f1').slideDown();
             } else {
                 $('#f1').slideUp();
