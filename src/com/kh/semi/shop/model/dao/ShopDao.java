@@ -681,4 +681,58 @@ public class ShopDao {
 		
 		return result;
 	}
+
+	public int shopRecordInsert(Connection con, String userId, String shopPid) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shopRecordInsert");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, shopPid);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Shop> SelectShopRecentRecord(Connection con, String userId) {
+		ArrayList<Shop> recordShop = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("SelectShopRecentRecord");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			recordShop = new ArrayList<Shop>();
+			
+			while(rset.next()) {
+				Shop s = new Shop();
+				
+				s.setShopImg(rset.getString("shop_img"));
+				s.setShopName(rset.getString("shop_name"));
+				s.setsAddr(rset.getString("shop_addr"));
+				
+				recordShop.add(s);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return recordShop;
+	}
 }

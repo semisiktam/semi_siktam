@@ -35,4 +35,13 @@ public class FindIdService {
 		
 		return userId;
 			}
+
+	public String FindPwdPhone(Member m) {
+		Connection con = getConnection();
+		String password = idDao.FindPwdPhone(con,m);
+		System.out.println("서비스:"+password);
+		close(con);
+		
+		return password;
+	}
 }

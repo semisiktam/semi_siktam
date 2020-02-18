@@ -61,7 +61,9 @@
                         </td>
                         <!-- <td><button id="confirm">휴대폰인증</button></td> -->
                     </tr>
-                    <!-- <tr>
+                    <!-- 
+                    	휴대폰 인증 보류
+                    <tr>
                         <th align="left">인증번호 입력 </th>
                         <td><input type="tel" class="form-control" name="tel"></td>
                     </tr> -->

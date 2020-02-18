@@ -1,21 +1,22 @@
 package com.kh.semi.member.model.service;
 
-import static com.kh.semi.common.JDBCTemplate.*;
+import static com.kh.semi.common.JDBCTemplate.close;
+import static com.kh.semi.common.JDBCTemplate.commit;
+import static com.kh.semi.common.JDBCTemplate.getConnection;
+import static com.kh.semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.semi.black.model.vo.BlackList;
 import com.kh.semi.member.model.dao.MemberDao;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.member.model.vo.MemberReservationList;
-import com.kh.semi.menu.model.vo.Menu;
-import com.kh.semi.reservation.model.vo.Reservation;
 import com.kh.semi.shop.model.vo.Shop;
 
 public class MemberService {
    private Connection con;
-   private MemberDao mDao = new MemberDao();
-   
+   private MemberDao mDao = new MemberDao(); 
    
    public Member selectMember(Member m) {
       con = getConnection();
@@ -132,12 +133,12 @@ public Member selectMember(String userId) {
 	return m;
 }
 
-public int updateAdminMember(Member m) {
+public int updateAdminMember(Member m, BlackList bl) {
 	Connection con = getConnection();
 	
 	int result = mDao.updateAdminMember(con, m);
-	System.out.println("service" + result);
 	
+	int result2 = mDao.insertAdminBlack(con, bl);
 	
 	if(result>0) commit(con);
 	else rollback(con);
