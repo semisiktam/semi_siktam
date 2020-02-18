@@ -309,12 +309,16 @@
                 <ul>
                 <%for(int i=0;i<slist.size();i++){ %>
                     <li>
-                        <div class="registStore2" id="myshop<%=i%>"><!--  onclick="location.href='registerMenu_5.jsp'" -->
+                  
+                        <div class="registStore2"><!--  onclick="location.href='registerMenu_5.jsp'" -->
                             <!-- <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br> -->
-                            <input type="hidden" class="pid" value="<%=slist.get(i).getShopPid() %>">
+                            <form action="/siktam/myMenulist.menu" method="get" class=myMenu>
+                            <input type="hidden" name="shopPid" value="<%=slist.get(i).getShopPid()%>">
                             <h4 align="center"><%=slist.get(i).getShopName() %></h4>
                             <p align="center"><small><%=slist.get(i).getsAddr() %></small></p>
+                            </form>
                         </div>
+                    
                     </li>
                     <%} %>
                     
@@ -347,7 +351,7 @@
 
 
 
-        <div class ="content" id="content3">
+        <!-- <div class ="content" id="content3">
             <h3 id="contentTxt" align="left">다가오는 예약 목록</h3 id="contentTxt">
             
             
@@ -416,29 +420,32 @@
             
             
            
-        </div>
+        </div> -->
         </div>
     </div>
     <script>
-
-		$(".registStore2").click(function(){
+    $( ".registStore2" ).click(function() {
+    	console.log("확인");
+    	 $(this).children("form").submit();
+    	 
+    	});
+		/* $(".registStore2").click(function(){
     		var pid=$(this).find(".pid").val();
     		$.ajax({
     			url:"/siktam/myMenulist.menu",
     			type:"get",
     			data:{
     				shopPid:pid
-    			},
-    			success:function(data){
+    			} ,success:function(data){
+    				
     				console.log(data);
-    				console.log(data[0].menuNo);
-    			},error:function(){
+    			} ,error:function(){
     				alert("에러");
     			}
     		
     		});
 		});
-    
+     */
     </script>
 
 
