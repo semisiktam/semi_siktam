@@ -6,6 +6,7 @@ import static com.kh.semi.common.JDBCTemplate.getConnection;
 import static com.kh.semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.semi.eventBanner.model.dao.EventBannerDao;
 import com.kh.semi.eventBanner.model.vo.EventBanner;
@@ -27,6 +28,16 @@ public class EventBannerService {
 		close(con);
 		
 		return result;
+	}
+
+	public ArrayList<EventBanner> selectList() {
+		Connection con = getConnection();
+		
+		ArrayList<EventBanner> list = eDao.selectList(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 }
