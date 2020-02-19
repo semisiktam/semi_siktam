@@ -24,7 +24,7 @@
            					alert("비밀번호 찾기 단계로 넘어갑니다.")
            					location.href="/siktam/views/HowFindPassword_1.jsp";
            				}else{
-           					alert("등록된 아이디가 아닙니다. 다시 한번 확인 해보십시오");
+           					alert("등록된 아이디가 아니거나 공란입니다. 다시 확인하십시오");
            					$('#nextPwdId').select();
            				}
            			},error:function(){
@@ -68,7 +68,7 @@
         <div id="area2">
         <div class="div2">
         <!--      <h4>아이디를 입력해주세요.</h4>-->
-            <input type="text" class="text" placeholder="아이디를 입력해 주세요" id="nextPwdId" name="nextPwdId">&nbsp;
+            <input type="text" class="text" placeholder="아이디를 입력해 주세요" id="nextPwdId" name="nextPwdId" required>&nbsp;
             <input type="button" id="nextPwd" value="다음단계">
         </div>
 
