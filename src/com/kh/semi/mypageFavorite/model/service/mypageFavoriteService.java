@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.semi.mypageFavorite.model.dao.mypageFavoriteDao;
+import com.kh.semi.mypageFavorite.model.vo.MypageFavorite;
 import com.kh.semi.shop.model.vo.Shop;
 import static com.kh.semi.common.JDBCTemplate.*;
 
@@ -19,6 +20,16 @@ public class mypageFavoriteService {
 		close(con);
 		
 		return favorShopList;
+	}
+
+	public int isExist(MypageFavorite mf) {
+		Connection con = getConnection();
+		
+		int result = mfDao.isExist(con, mf);
+		
+		close(con);
+		
+		return result;
 	}
 
 }

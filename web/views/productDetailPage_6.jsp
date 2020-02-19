@@ -7,6 +7,7 @@
 	Shop s = (Shop)request.getAttribute("shop");
 	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("mList");
 	Member mem = (Member)request.getAttribute("member");
+	String favorite = String.valueOf(request.getAttribute("favorite"));
 	
 %>
 <!DOCTYPE html>
@@ -40,12 +41,22 @@
         <div class="pagemainimg"></div>
         
         <!-- 2020.02.10 수정 시작(현희) < 즐겨찾기 추가 > -->
-
+		
         <div class="bookmark">
             <p id="star">★</p>
         </div>
-   
+   		
+   		<input type="hidden" id="fav" value="<%= favorite %>">
+   		
         <script>
+        	$(document).ready(function(){
+        		if($('#fav').val()=='o'){
+        			$('#star').css({'color':'rgb(255, 184, 53)'});
+        		}else{
+        			$('#star').css({'color':'#eee'});
+        		}
+        	});
+        	
         	/* 탐희 즐겨찾기 AJAX 추가 */
             $(document).ready(function(){
                 $('#star').toggle(function(){
