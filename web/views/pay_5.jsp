@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.semi.pay.model.vo.*, com.kh.semi.member.model.vo.*, java.util.*"%>
+    <%Member mc = (Member)request.getAttribute("mc");
+      ArrayList<PayInfo>list = (ArrayList<PayInfo>)request.getAttribute("list");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +22,8 @@
             <img src="/siktam/resources/images/udon.png" alt="">
         </div>
         <div id="titleText">
-            <h1><b>역전우동</b>(결제하기)</h1>
-            <p>서울특별시 서초구 양재동 역전우동 양재점</p>
+            <h1><b><%= list.get(0).getRshopName() %></b>(결제하기)</h1>
+            <p><%= list.get(0).getRshopAddr() %></p>
         </div>
     </div>
 
@@ -71,7 +73,7 @@
                     <div id="mileageDiv">
                         <div>
                             <input type="text" class="mileage" id="A" value="0"><label id="won1">원 <--</label>
-                            <input type="text" class="mileage" id="B" value="10000" style="text-align: left;"><label id="won2">원</label>
+                            <input type="text" class="mileage" id="B" value='<%= mc.getMileage() %>' style="text-align: left;"><label id="won2">원</label>
                         </div>
                         <p>(사용가능 마일리지)</p>
                     </div>
@@ -104,24 +106,26 @@
                     </div>
                     <div id="menulist">
                         <table id="menutable" >
+                        <%for(PayInfo pi : list){ %>
                             <tr class="menupan">
-                                <td class="menu">옛날우동 X 1개</td>
-                                <td>3,500원</td>
+                                <td class="menu"><%= pi.getRmenuName() %> X <%= pi.getRmenuCount()%>개</td>
+                                <td><%= pi.getRmenuPrice() %></td>
                             </tr>
-                            <tr class="menupan">
+                            <!-- <tr class="menupan">
                                 <td class="menu">김치우동 X 1개</td>
                                 <td>3,500원</td>
                             </tr>
                             <tr class="menupan">
                                 <td class="menu">어묵우동 X 1개</td>
                                 <td>3,500원</td>
-                            </tr>
+                            </tr> -->
+                        <%} %>    
                         </table>
                     </div>
                     <table id="menutable2">
                         <tr class="menupan2">
                             <td class="allpay"><b>총 결제 금액</b></td>
-                            <td><b>10,500원</b></td>
+                            <td><b><%=list.get(0).getTotalPay()%></b></td>
                         </tr>
                     </table>
                 </div>
