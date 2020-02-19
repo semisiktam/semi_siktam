@@ -2,9 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%ArrayList<Menu> mlist=null;
+      String shopPid;
       if(request.getAttribute("mlist")!=null){
     	  mlist=new ArrayList<Menu>();
     	  mlist=(ArrayList)request.getAttribute("mlist");
+    	  shopPid=mlist.get(0).getShopPid();
+      }else{
+    	  shopPid=(String)request.getAttribute("shopPid");
       }
     %>
 <!DOCTYPE html>
@@ -14,13 +18,30 @@
     <title>메뉴 등록하기</title>
     <link rel="stylesheet" href="/siktam/resources/css/headerfooterLayout.css">
     <link rel="stylesheet" href="/siktam/resources/css/registerMenu_5.css">
-
+	<script src="/siktam/resources/js/jquery-3.4.1.min.js"></script>
+	<script>
+	 	function updateBtn(obj){
+	 		if(confirm("메뉴를 수정하시겠습니까?")){
+	 			$('#fr').attr('action','/siktam/UpdateMenuServlet').submit();
+	 		}
+	 	}
+	 	
+	 	function deleteBtn(obj){
+	 		$('#fr').attr('action','/siktam/DeleteMenuServlet').submit();
+	 	}
+	 	
+	 	function insertBtn(obj){
+	 		$('#fr').attr('action','/siktam/InsertMenuServlet').submit();
+	 	}
+	</script>
+	
 </head>
 <body>
     <!-- 헤더 시작 -->
     <%@ include file="common/header.jsp" %>
 
     <!-- 이 안에 작업하기 -->
+    <form id="fr">
     <div id="wrap">
         <div id="modal1">
             <div class="modal_content">
@@ -37,25 +58,37 @@
                          </tr>
                     </thead>
                     <tbody>
-                    <%if(mlist.size()!=0){ %>
+                    <%if(mlist!=null){ %>
                     	<%for(int i=0; i<mlist.size();i++){ %>
                         <tr class="reservationTr">
-                            <td><input type="text" placeholder="<%=mlist.get(i).getMenuName()%>"></td>
-                            <td><input type="file"><%=mlist.get(i).getMenuImg()%></td>
-                            <td><input type="text" placeholder="<%=mlist.get(i).getMenuPrice()%>">&nbsp;원</td>
-                            <td><input type="text" placeholder="<%=mlist.get(i).getMenuInfo()%>"></td>
-                            <td><input type="button" value="수정" class="btn" id="change" onclick="location.href='registerCompany_2_5.jsp'">
-                                <input type="button" value="삭제" class="btn" id="cancel"></td>
+                        	<input type="hidden" name="shopPid" value=<%=mlist.get(i).getShopPid() %>>
+                        	<input type="hidden" name="menuNo" value=<%=mlist.get(i).getMenuNo() %>>
+                            <td><input type="text" name="menuName" placeholder="<%=mlist.get(i).getMenuName()%>"></td>
+                            <td><input type="file" name="menuImg"><%=mlist.get(i).getMenuImg()%></td>
+                            <td><input type="text" name="menuPrice" placeholder="<%=mlist.get(i).getMenuPrice()%>">&nbsp;원</td>
+                            <td><input type="text" name="menuInfo" placeholder="<%=mlist.get(i).getMenuInfo()%>"></td>
+                            <td><input type="button" value="수정" class="btn" id="change" onclick="updateBtn(this);">
+                                <input type="button" value="삭제" class="btn" id="cancel" onclick="deleteBtn(this)"></td>
                         </tr>
                         <%} %>
+                        <tr class="reservationTr">
+                        	<input type="hidden" name="shopPid" value=<%=shopPid%>>
+                            <td><input type="text" name="menuName" placeholder="메뉴명을 입력해주세요"></td>
+                            <td><input type="file" name="menuImg"></td>
+                            <td><input type="text" name="menuPrice" placeholder="금액을 입력해주세요">&nbsp;</td>
+                            <td><input type="text" name="menuInfo" placeholder="메뉴에 대한 간략한 설명을 해주세요"></td>
+                            <td><input type="button" value="메뉴추가" class="btn" id="change" onclick="insertBtn();">
+                                <!-- <input type="button" value="삭제" class="btn" id="cancel"></td> -->
+                        </tr>
                     <%}else{%>
-                    	<tr class="reservationTr">
-                            <td><input type="text" placeholder="메뉴명을 입력해주세요"></td>
-                            <td><input type="file"></td>
-                            <td><input type="text" placeholder="금액을 입력해주세요">&nbsp;</td>
-                            <td><input type="text" placeholder="메뉴에 대한 간략한 설명을 해주세요"></td>
-                            <td><input type="button" value="메뉴추가" class="btn" id="change" onclick="location.href='registerCompany_2_5.jsp'">
-                                <input type="button" value="삭제" class="btn" id="cancel"></td>
+                    	 <tr class="reservationTr">
+                        	<input type="hidden" name="shopPid" value=<%=shopPid%>>
+                            <td><input type="text" name="menuName" placeholder="메뉴명을 입력해주세요"></td>
+                            <td><input type="file" name="menuImg"></td>
+                            <td><input type="text" name="menuPrice" placeholder="금액을 입력해주세요">&nbsp;</td>
+                            <td><input type="text" name="menuInfo" placeholder="메뉴에 대한 간략한 설명을 해주세요"></td>
+                            <td><input type="button" value="메뉴추가" class="btn" id="change" onclick="insertBtn();">
+                                <!-- <input type="button" value="삭제" class="btn" id="cancel"></td> -->
                         </tr>
                    	<%}%>
                         <!-- 
@@ -69,15 +102,15 @@
                         </tr> -->
                         
                     </tbody>
-                </table><br>
-                <button id="plus" class="btn" name="plus">추가하기</button><br><br><br>
+                </table><br><!-- 
+                <button id="plus" class="btn" name="plus">추가하기</button><br><br><br> -->
                 <button class="btn" name="confirm">완료</button>
                 <button class="btn" name="cencel" onclick="location.href='views/mypageShop_5.jsp'">취소</button>
                 
             </div>
         </div>
         </div>
-
+	</form>
     
 
     <!-- 푸터 시작 -->

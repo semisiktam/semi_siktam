@@ -27,6 +27,8 @@ public class mypageFavoriteService {
 		
 		int result = mfDao.isExist(con, mf);
 		
+		System.out.println("서비스" + result);
+		
 		close(con);
 		
 		return result;

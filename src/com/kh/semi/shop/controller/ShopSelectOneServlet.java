@@ -53,8 +53,11 @@ public class ShopSelectOneServlet extends HttpServlet {
 		MypageFavorite mf = new MypageFavorite(m.getUserId(), s.getShopPid());
 		mypageFavoriteService mfs = new mypageFavoriteService();
 		int resultFavor = mfs.isExist(mf);
+		System.out.println("컨트롤러" + resultFavor);
+		
+		
 		String result2 ="";
-		if(resultFavor>1) {
+		if(resultFavor>0) {
 			result2="o";
 		}else {
 			result2="x";

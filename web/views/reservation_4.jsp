@@ -61,6 +61,8 @@
 				</h1>
 				<p><%=list.get(0).getShopAddr()%>
 				<input type="hidden" name="shopPid" value="<%= list.get(0).getShopPid() %>"/>
+				<input type="hidden" name="shopName" value="<%=list.get(0).getShopName()%>"/>
+				<input type="hidden" name="shopAddr" value="<%=list.get(0).getShopAddr()%>"/>
 				</p>
 			</div>
 		</div>
@@ -185,35 +187,36 @@
 			         
 			        $('#resultTable').find('tr').remove(); 
 			        $('#tblSum').find('td:eq(1)').remove();
+			       
 			        $('#hdtotal').remove();
 			        $('#menuName').remove();
 			        $('#menuCount').remove();
 			        $('#menuPrice').remove();
-			           for(var i=0; i<data.length; i++){
-				           var $tr = $('<tr>');
-				           var $menuName = $('<td>').text(data[i].menuName);
-			        	   var $menuCount = $('<td>').text(data[i].menuCount);
-			        	   var $menuPrice = $('<td>').text(data[i].menuPrice);
-			        	   var $hdN = $('<input type="hidden" id="menuName" name="menuName" value="'+data[i].menuName+'">')
-			        	   var $hdC = $('<input type="hidden" id="menuCount" name="menuCount" value="'+data[i].menuCount+'">')
-			        	   var $hdP = $('<input type="hidden" id="menuPrice" name="menuPrice" value="'+data[i].menuPrice+'">')
+			          
+			        for(var i=0; i<data.length; i++){
+			        	var $tr = $('<tr>');
+			        	var $menuName = $('<td>').text(data[i].menuName);
+			        	var $menuCount = $('<td>').text(data[i].menuCount);
+			        	var $menuPrice = $('<td>').text(data[i].menuPrice);
+			        	var $hdN = $('<input type="hidden" id="menuName" name="menuName" value="'+data[i].menuName+'">')
+			        	var $hdC = $('<input type="hidden" id="menuCount" name="menuCount" value="'+data[i].menuCount+'">')
+			        	var $hdP = $('<input type="hidden" id="menuPrice" name="menuPrice" value="'+data[i].menuPrice+'">')
 			        	   
-			        	   $tr.append($menuName);
-			        	   $tr.append($hdN)
-			        	   $tr.append($menuCount);
-			        	   $tr.append($hdC)
-			        	   $tr.append($menuPrice);
-			        	   $tr.append($hdP)
+			        	$tr.append($menuName);
+			        	$tr.append($hdN)
+			        	$tr.append($menuCount);
+			        	$tr.append($hdC)
+			        	$tr.append($menuPrice);
+			        	$tr.append($hdP)
 			        	   
-			        	   $('#resultTable').append($tr);
+			        	$('#resultTable').append($tr);
 			        	   
-			        	   $td = $('<td>'); 
-			        	   $total = $('<td>').text(data[data.length-1].total);
-			        	   $hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
-			           }
-			           	  $td.append($total);
-			           	  
-			        	  $('#tblSum').append($total).append($hdTag);
+			        	$td = $('<td>'); 
+			        	$total = $('<td>').text(data[data.length-1].total);
+			        	$hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
+			        }
+			           	$td.append($total);
+			        	$('#tblSum').append($total).append($hdTag);
 			        	  
 			           
 			         },error:function(){
@@ -248,25 +251,34 @@
 			            $('#resultTable').find('tr').remove(); 
 				        $('#tblSum').find('td:eq(1)').remove();
 				        $('#hdtotal').remove();
-				        
-				           for(var i=0; i<data.length; i++){
-					           var $tr = $('<tr>');
-					           var $menuName = $('<td>').text(data[i].menuName);
-				        	   var $menuCount = $('<td>').text(data[i].menuCount);
-				        	   var $menuPrice = $('<td>').text(data[i].menuPrice);
-				        	   $tr.append($menuName);
-				        	   $tr.append($menuCount);
-				        	   $tr.append($menuPrice);
+				        $('#menuName').remove();
+				        $('#menuCount').remove();
+				        $('#menuPrice').remove();
+				          
+				        for(var i=0; i<data.length; i++){
+				        	var $tr = $('<tr>');
+				        	var $menuName = $('<td>').text(data[i].menuName);
+				        	var $menuCount = $('<td>').text(data[i].menuCount);
+				        	var $menuPrice = $('<td>').text(data[i].menuPrice);
+				        	var $hdN = $('<input type="hidden" id="menuName" name="menuName" value="'+data[i].menuName+'">')
+				        	var $hdC = $('<input type="hidden" id="menuCount" name="menuCount" value="'+data[i].menuCount+'">')
+				        	var $hdP = $('<input type="hidden" id="menuPrice" name="menuPrice" value="'+data[i].menuPrice+'">')
 				        	   
-				        	   $('#resultTable').append($tr);
-							  	
-				        	   $td = $('<td>'); 
-				        	   $total = $('<td>').text(data[data.length-1].total);
-				        	   $hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
-				           }
-				           	  $td.append($total);
-				           	  
-				        	  $('#tblSum').append($total).append($hdTag);
+				        	$tr.append($menuName);
+				        	$tr.append($hdN)
+				        	$tr.append($menuCount);
+				        	$tr.append($hdC)
+				        	$tr.append($menuPrice);
+				        	$tr.append($hdP)
+				        	   
+				        	$('#resultTable').append($tr);
+				        	   
+				        	$td = $('<td>'); 
+				        	$total = $('<td>').text(data[data.length-1].total);
+				        	$hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
+				        }
+				           	$td.append($total);
+				        	$('#tblSum').append($total).append($hdTag);
  			         },error:function(){
  			        	 console.log("에러");
 			         }
