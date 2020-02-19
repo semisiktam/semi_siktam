@@ -64,7 +64,7 @@
             <!-- %% 리뷰연결-->
 
             <!-- %% 리뷰연결-->
-          <a href="/siktam/rPage.ro?shopPid=<%=s.getShopPid()%>"><div id="review"><span>리뷰</span></div></a>
+          <a href="/siktam/rPage.ro?shopPid=<%=s.getShopPid()%>&howSelect=new"><div id="review"><span>리뷰</span></div></a>
 
         </div>
         <!-- 상단 업체명/설명/예약버튼 -->

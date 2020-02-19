@@ -91,10 +91,10 @@
             <br>
             <div id="select1"> <!-- 리뷰 시작 -->
                 <label>정렬방식</label> <!-- 리뷰 정렬 방식 선택-->
-                <select> <!-- TODO -->
-                    <option value="최신순">최신순</option>
-                    <option value="별점순">별점 낮은 순</option>
-                    <option value="별점순">별점 높은 순</option>
+                <select id="selectArray" name="selectArray" onchange="howSelect()"> <!-- TODO -->
+                    <option value="new">최신순</option>
+                    <option value="rowScore">별점 낮은 순</option>
+                    <option value="highScore">별점 높은 순</option>
                 </select>
             </div>
             <br>
@@ -135,15 +135,18 @@
 
         <!-- 각 버튼은 리뷰 상세를 열고 닫는 버튼 설정 TODO-->
 
+			<div class="allReview" id="reviewReview">
 		<% for(Review r : rList){ %>
 			
-			<div class="allReview">
             <div class="personInfo">
                 <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel"><%= r.getUserId() %></label>
-                <div class="bottomBtn"><button id="btn1" class="reviewBtn">▼</button>▼</div>
+                <div class="bottomBtn">
+                	<button id="btn1" class="reviewBtn">▼</button>
+                ▼</div>
             </div>
+            
             <div id="personReview1" class="personReview">
-            	<div style="display : none;"><%= r.getScore() %></div>
+            	<div class="scoreScore" style="display : none;"><%= r.getScore() %></div>
                 <label>별점 : </label>
                 <label id="star_view1">
                     <a href="#">★</a>
@@ -159,8 +162,8 @@
                 <br>
                 <p><%= r.getrContent() %></p>
             </div>
-        </div>
 		<% } %>
+        </div>
         
         <br>
         
@@ -198,29 +201,14 @@
 
                 $('.personReview').css('display','none');
                 
-
-                /* $('#btn1').click(function(){
-                   /*  $('.personReview1').css('display','block'); 
-                    $('#personReview1').slideToggle();
-                }); */
-                
                 $('.personInfo').click(function(){
                 	$(this).next().slideToggle();
                 	var score = $(this).next().children('div').eq(0).text()-1;
                 	$(this).next().children('label').eq(1).children('a').eq(score).addClass("on").prevAll('a').addClass('on');
                 })
                 
-                
-
                 $('#reviewWriteText').css('display','none');
 
-                /* $('#reviewWriteText').slideUp(); */
-
-                /* $('#wReviewbtn').click(function(){
-                	
-                   	$('#reviewWriteText').slideToggle();
-                	
-                }); */
 				<% if ( rScore.getScore() < 1.5 ) {%>
                 	$("#star_grade a").eq(0).addClass("on").prevAll("a").addClass("on").preventEvent();
 				<% } else if ( rScore.getScore() < 2.5 ) {%>
@@ -233,64 +221,99 @@
 					$("#star_grade a").eq(4).addClass("on").prevAll("a").addClass("on").preventEvent();
 				<% } %>
 				
-				
-				
-            /* $('.starRev span').click(function(){
-                $(this).parent().children('span').removeClass('on');
-                $(this).addClass('on').prevAll('span').addClass('on');
-                return false;
-            }); */
-
-            $('#star_grade a').click(function(){
-                $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-                $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-                return false;
-            });
-
-            $('#star_grade_review a').click(function(){
-                $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-                $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-                return false;
-            });
-            $('#star_view1 a').click(function(){
-                $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-                $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-                return false;
-            });
-
-            $('#star_view2 a').click(function(){
-                $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-                $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-                return false;
-            });
-
-            $('#star_view3 a').click(function(){
-                $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
-                $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
-                return false;
-            });
         });
-            
-            
             
         <% if(m != null) {%>
         
 	      $(function(){
 	    	  $('#wReviewbtn').click(function(){
-              	
                  	$('#reviewWriteText').slideToggle();
-              	
               });
 	      });
         <% }else{%>
         	$(function(){
 	    	  $('#wReviewbtn').click(function(){
-            	
                	alert("로그인 먼저 해주세요!");
-            	
             });
 	      });
         <%}%>
+        
+        function howSelect(){
+        	var selecthow = $('#selectArray').val();
+        	console.log(selecthow);
+        	$.ajax({
+        		url : "/siktam/review.do?shopPid=<%=s.getShopPid()%>&howSelect="+selecthow,
+        		type: "GET",
+        		data:{
+        			howSelect : selecthow
+        		}, success:function(data){
+        			console.log(data["rList"].length);
+        			
+                	$('#reviewReview').children().remove();
+                
+        			$.each(data["rList"],function(index,value){
+        				console.log(value);
+        				
+        				var $allDiv = $('#reviewReview');
+        				
+        				var $div1 = $('<div class="personInfo">');
+        				
+        				var $label1 = $('<label class="idLabel">').html(value.userId)
+        				// 아래 두개 묶음
+        				var $div2 = $('<div class="bottomBtn">');
+        				var $btn1 = $('<button id="btn1" class="reviewBtn">▼</button>▼');
+        				
+        				var $div3 = $('<div id="personReview1" class="personReview">');
+        				var $div4 = $('<div style="display : none;">').text(value.score);
+        				var $label2 = $('<label>별점 : ');
+        				// 아래  묶음
+        				var $label3 = $('<label id="star_view1">');
+        				var $a1 = $('<a href="#">★');
+        				var $a2 = $('<a href="#">★');
+        				var $a3 = $('<a href="#">★');
+        				var $a4 = $('<a href="#">★');
+        				var $a5 = $('<a href="#">★');
+        				var $br1 = $('<br><br>');
+        				// 아래 두개 묶음
+        				var $div5 = $('<div class="imgDiv">');
+        				var $img = $('<img src="/siktam/resources/images" class="reviewImg">');
+        				
+        				var $br2 = $('<br>');
+        				var $p = $('<p>').text(value.rContent);
+        				
+        				// div1 
+        				$div2.append($btn1);
+        				$div1.append($label1);
+        				$div1.append($div2);
+        				
+        				// div3
+        				$label3.append($a1);
+        				$label3.append($a2);
+        				$label3.append($a3);
+        				$label3.append($a4);
+        				$label3.append($a5);
+        				
+        				$div5.append($img);
+        				
+        				$div3.append($div4);
+        				$div3.append($label2);
+        				$div3.append($label3);
+        				$div3.append($br1);
+        				$div3.append($div5);
+        				$div3.append($br2);
+        				$div3.append($p);
+        				
+        				$allDiv.append($div1);
+        				$allDiv.append($div3);
+        				
+        			});
+        		}, error:function(){
+        			console.log("잘좀해라...");
+        		}
+        	});
+        };
+        
+        
         </script>
 
     </div>
