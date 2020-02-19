@@ -43,9 +43,11 @@ public class MyPageMenuListServlet extends HttpServlet {
 		System.out.println(list.isEmpty());
 		
 		//new Gson().toJson(list,response.getWriter());
-		
-		request.setAttribute("mlist",list);
-//		
+		if(list.isEmpty()) {
+			request.setAttribute("shopPid", shopPid);
+		}else {
+			request.setAttribute("mlist",list);
+		}
 		request.getRequestDispatcher("views/registerMenu_5.jsp").forward(request, response);
 	}
 
