@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.semi.notice.model.vo.Notice;
 import com.kh.semi.review.model.vo.Review;
 import com.kh.semi.shop.model.vo.Shop;
 
@@ -162,6 +163,45 @@ public class ReviewDao {
 		}
 		
 		return s;
+	}
+
+	public ArrayList<Review> selectAllReviewList(Connection con, String shopPid) {
+		
+		ArrayList<Review> allReviewList = new ArrayList<Review>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllReviewList");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, shopPid);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Review r = new Review();
+				
+				r.setrNo(rset.getString("review_no"));
+				r.setUserId(rset.getString("userid"));
+				r.setShopPid(rset.getString("shop_pid"));
+				r.setrContent(rset.getString("review_content"));
+				r.setReviewImg(rset.getString("review_img"));
+				r.setScore(rset.getInt("score"));
+				r.setrDate(rset.getDate("review_date"));
+				
+				allReviewList.add(r);
+			}
+			
+		}catch(SQLException e) {
+	         e.printStackTrace();
+	      }finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+		
+		
+		return allReviewList;
 	}
 	
 	
