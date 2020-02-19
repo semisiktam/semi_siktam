@@ -38,7 +38,7 @@ public class PwdIdCheckServlet extends HttpServlet {
 		
 		int result = -1;
 		
-		result = fs.FindId(chkId); // 1 찾기, 0 아이디 없음 -1 오류
+		result = fs.FindIdCheck(chkId); // 1 찾기, 0 아이디 없음 -1 오류
 		
 		new Gson().toJson(result,response.getWriter());
 	}

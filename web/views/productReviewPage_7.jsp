@@ -2,14 +2,16 @@
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.review.model.vo.*"%>
 <%
 	ArrayList<Review> rList = (ArrayList<Review>)request.getAttribute("reviewList"); 
-	/*Member mem = (Member)session.getAttribute("member");*/
+	ArrayList<Review> allReviewList = (ArrayList<Review>)request.getAttribute("allReviewList"); 
 	Shop s = (Shop)request.getAttribute("shop");
-	/* PageInfo pi = (PageInfo)request.getAttribute("pi");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ReviewScore rScore = (ReviewScore)request.getAttribute("ReviewScore");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage(); */
+	int endPage = pi.getEndPage(); 
+	/*Member mem = (Member)session.getAttribute("member");*/
 %>   
 
 <!DOCTYPE html>
@@ -34,7 +36,7 @@
             <!-- %% 업체정보연결-->
             <a href="productDetailPage_6.jsp"><div id="information"><span>업체정보</span></div></a>
             <!-- %% 리뷰연결-->
-            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰(<%= rList.size() %>)</span></div></a>
+            <a href="productReviewPage_7.jsp"><div id="review"><span>리뷰(<%= allReviewList.size() %>)</span></div></a>
         </div>
 
         <div id="pagetop">
@@ -48,7 +50,7 @@
 
         <div id="score"> <!-- 평점 -->
             <div id="number" class="scoreIn">
-                <h3 id="numberScore">4.0점</h3><br>
+                <h3 id="numberScore"><%= rScore.getScore() %>점</h3><br>
                 <!--<img id="scoreNumber" src="/siktam/resources/images/star.png" alt="">-->
                 <!-- <div class="starRev">
                     <span class="starR on">별1</span>
@@ -66,11 +68,11 @@
                 </p>
             </div>
             <div id="scores" class="scoreIn">
-                <h4 class="jum">5점&nbsp;&nbsp;<progress value="25" max="100" class="var">Progress : 30%</progress></h4><br>
-                <h4 class="jum">4점&nbsp;&nbsp;<progress value="40" max="100" class="var"></progress></h4><br>
-                <h4 class="jum">3점&nbsp;&nbsp;<progress value="60" max="100" class="var"></progress></h4><br>
-                <h4 class="jum">2점&nbsp;&nbsp;<progress value="35" max="100" class="var"></progress></h4><br>
-                <h4 class="jum">1점&nbsp;&nbsp;<progress value="10" max="100" class="var"></progress></h4><br>
+                <h4 class="jum">5점&nbsp;&nbsp;<progress value="<%= rScore.getFive() %>" max="<%= allReviewList.size() %>" class="var">Progress : 30%</progress></h4><br>
+                <h4 class="jum">4점&nbsp;&nbsp;<progress value="<%= rScore.getFour() %>" max="<%= allReviewList.size() %>" class="var"></progress></h4><br>
+                <h4 class="jum">3점&nbsp;&nbsp;<progress value="<%= rScore.getThree() %>" max="<%= allReviewList.size() %>" class="var"></progress></h4><br>
+                <h4 class="jum">2점&nbsp;&nbsp;<progress value="<%= rScore.getTwo() %>" max="<%= allReviewList.size() %>" class="var"></progress></h4><br>
+                <h4 class="jum">1점&nbsp;&nbsp;<progress value="<%= rScore.getOne() %>" max="<%= allReviewList.size() %>" class="var"></progress></h4><br>
                 
             </div>
         </div>
@@ -134,12 +136,14 @@
         <!-- 각 버튼은 리뷰 상세를 열고 닫는 버튼 설정 TODO-->
 
 		<% for(Review r : rList){ %>
+			
 			<div class="allReview">
             <div class="personInfo">
                 <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel"><%= r.getUserId() %></label>
                 <div class="bottomBtn"><button id="btn1" class="reviewBtn">▼</button>▼</div>
             </div>
             <div id="personReview1" class="personReview">
+            	<div style="display : none;"><%= r.getScore() %></div>
                 <label>별점 : </label>
                 <label id="star_view1">
                     <a href="#">★</a>
@@ -157,94 +161,17 @@
             </div>
         </div>
 		<% } %>
-		
-       <!-- <div class="allReview">
-            <div class="personInfo">
-                <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">hyeonhee9411</label>
-                <div class="bottomBtn"><button id="btn1" class="reviewBtn">▼</button>▼</div>
-            </div>
-            <div id="personReview1" class="personReview">
-                <label>별점 : </label>
-                <label id="star_view1">
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                </label>
-                <br><br>
-                <div class="imgDiv">
-                    <img src="/siktam/resources/images/07.png" class="reviewImg" alt="">
-                </div>
-                <br>
-                <p>족발이 사진과 너무 다르게 와서 양도 적고 아쉽지만 맛은 정말 맛있습니다!<br>다음에 또 시켜먹을께요!</p>
-            </div>
-        </div>
-
-        <br>
-
-         <div class="allReview">
-            <div class="personInfo">
-                <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">tamheekim0110</label>
-                <div class="bottomBtn"><button id="btn2" class="reviewBtn">▼</button>▼</div>
-            </div>
-            <div id="personReview2" class="personReview">
-                <label>별점 : </label>
-                <label id="star_view2">
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                </label>
-                <br><br>
-                <div class="imgDiv">
-                    <img src="/siktam/resources/images/tamlove1.jpg" class="reviewImg" alt="">
-                </div>
-                <br>
-                <p>매주 찾아가서 먹는 곱찾이지만 전혀 느끼하지 않고 생간과 천엽이 너무너무 신선해요!<br>
-                   종업원 분들도 너무 친절하게 해주셔서 잘 먹었습니다!
-                </p>
-            </div>
-        </div>
-
-        <br>
-
-        <div class="allReview">
-            <div class="personInfo">
-                <img class="id1" src="/siktam/resources/images/person1.png" alt="">&nbsp;&nbsp;<label class="idLabel">jiwonseo309</label>
-                <div class="bottomBtn"><button id="btn3" class="reviewBtn">▼</button>▼</div>
-            </div>
-            <div id="personReview3" class="personReview">
-                <label>별점 : </label>
-                <label id="star_view3">
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                    <a href="#">★</a>
-                </label>
-                <br><br>
-                <div class="imgDiv">
-                    <img src="/siktam/resources/images/05.png" class="reviewImg" alt="">
-                </div>
-                <br>
-                <p>역시 한국인의 해장에는 빨간 국물이 최고인거 같네요!<br>
-                   김치가 맛있어서 그런지 깊은 맛이 있고 국물의 감칠맛이 좋습니다!
-                </p>
-            </div>
-        </d iv>-->
         
         <br>
         
         <!-- 페이지 버튼 -->
         
-        <%-- <div class="pagingArea" align="center">
-			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=1'"><<</button>
+         <div class="pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?shopPid=<%=s.getShopPid()%>&currentPage=1'"><<</button>
 			<%  if(currentPage <= 1){  %>
 			<button disabled><</button>
 			<%  }else{ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%=currentPage - 1 %>'"><</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?shopPid=<%=s.getShopPid()%>&currentPage=<%=currentPage - 1 %>'"><</button>
 			<%  } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){
@@ -252,18 +179,18 @@
 			%>
 				<button disabled><%= p %></button>
 			<%      }else{ %>
-				<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%= p %>'"><%= p %></button>
+				<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?shopPid=<%=s.getShopPid()%>&currentPage=<%= p %>'"><%= p %></button>
 			<%      } %>
 			<% } %>
 				
 			<%  if(currentPage >= maxPage){  %>
 			<button disabled>></button>
 			<%  }else{ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%=currentPage + 1 %>'">></button>
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?shopPid=<%=s.getShopPid()%>&currentPage=<%=currentPage + 1 %>'">></button>
 			<%  } %>
-			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?currentPage=<%= maxPage %>'">>></button>
+			<button onclick="location.href='<%= request.getContextPath() %>/rPage.ro?shopPid=<%=s.getShopPid()%>&currentPage=<%= maxPage %>'">>></button>
 			
-		</div> --%>
+		</div>
         <br>
 		
         <script>
@@ -279,7 +206,11 @@
                 
                 $('.personInfo').click(function(){
                 	$(this).next().slideToggle();
+                	var score = $(this).next().children('div').eq(0).text()-1;
+                	$(this).next().children('label').eq(1).children('a').eq(score).addClass("on").prevAll('a').addClass('on');
                 })
+                
+                
 
                 $('#reviewWriteText').css('display','none');
 
@@ -290,12 +221,20 @@
                    	$('#reviewWriteText').slideToggle();
                 	
                 }); */
-
-                $("#star_grade a").eq(3).addClass("on").prevAll("a").addClass("on");
-                $('#star_view1 a').eq(2).addClass("on").prevAll("a").addClass("on");
-                $('#star_view2 a').eq(4).addClass("on").prevAll("a").addClass("on");
-                $('#star_view3 a').eq(3).addClass("on").prevAll("a").addClass("on");
-
+				<% if ( rScore.getScore() < 1.5 ) {%>
+                	$("#star_grade a").eq(0).addClass("on").prevAll("a").addClass("on").preventEvent();
+				<% } else if ( rScore.getScore() < 2.5 ) {%>
+            		$("#star_grade a").eq(1).addClass("on").prevAll("a").addClass("on").preventEvent();
+				<% } else if ( rScore.getScore() < 3.5 ) {%>
+        			$("#star_grade a").eq(2).addClass("on").prevAll("a").addClass("on").preventEvent();
+				<% } else if ( rScore.getScore() < 4.5 ) {%>
+            		$("#star_grade a").eq(3).addClass("on").prevAll("a").addClass("on").preventEvent();
+				<% } else {%>
+					$("#star_grade a").eq(4).addClass("on").prevAll("a").addClass("on").preventEvent();
+				<% } %>
+				
+				
+				
             /* $('.starRev span').click(function(){
                 $(this).parent().children('span').removeClass('on');
                 $(this).addClass('on').prevAll('span').addClass('on');
@@ -331,6 +270,9 @@
                 return false;
             });
         });
+            
+            
+            
         <% if(m != null) {%>
         
 	      $(function(){

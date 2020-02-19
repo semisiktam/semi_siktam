@@ -58,6 +58,14 @@ public class ReviewService {
 		
 		return s;
 	}
+
+	public ArrayList<Review> selectAllReviewList(String shopPid) {
+		Connection con = getConnection();
+		
+		ArrayList<Review> allReviewList = rDao.selectAllReviewList(con,shopPid);
+		
+		return allReviewList;
+	}
 	
 	
 }
