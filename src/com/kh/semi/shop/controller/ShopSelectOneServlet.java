@@ -56,16 +56,18 @@ public class ShopSelectOneServlet extends HttpServlet {
 	    
 		
 		String page = "";
-		
 		if(s != null) {
 			page = "views/productDetailPage_6.jsp";
 			
-			String userId = m.getUserId();
-			int result = ss.shopRecordInsert(userId,shopPid);
-			if(result > 0) {
-				System.out.println("최근방문등록성공");
-			}else {
-				System.out.println("최근방문등록실패");
+			if(m != null) {
+				String userId = m.getUserId();
+				int result = ss.shopRecordInsert(userId,shopPid);
+				
+				if(result > 0) {
+					System.out.println("최근방문등록성공");
+				}else {
+					System.out.println("최근방문등록실패");
+				}
 			}
 			request.setAttribute("mList", list);
 			request.setAttribute("shop", s);

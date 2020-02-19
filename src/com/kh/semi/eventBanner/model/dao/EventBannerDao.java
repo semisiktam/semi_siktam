@@ -46,7 +46,7 @@ public class EventBannerDao {
 			pstmt.setString(2, eb.getEventImg());
 			
 			result = pstmt.executeUpdate();
-			
+			System.out.println("DAO"+result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
