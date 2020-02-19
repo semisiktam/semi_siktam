@@ -19,7 +19,7 @@
     <div id="container">
         
         <div id="area1">
-            <a href="/siktam/view/main_6.jsp">
+            <a href="main_6.jsp">
             <div id="area1Img">
                 <img src="/siktam/resources/images/KakaoTalk_20200101_193858750.png" alt="">
             </div>
@@ -46,9 +46,9 @@
             	<form action="/siktam/fpp.me" method="post">
                 <input type="radio" id="phone" class="radio" name="find" onclick="divshow();">&nbsp;<label for="phoneHint">회원 정보에 등록된 휴대폰 번호<br></label><br>
                 <div id="f1" class="radioDiv" style="display: none;">
-                    이름 &nbsp;&nbsp;<input type="text" class="text" id=pphoneName name=pphoneName placeholder="이름을 입력해주세요"> <br>
-                    휴대폰 번호 &nbsp;&nbsp;<input type="text" class="text" id=pphoneNumber name=pphoneNumber placeholder="휴대폰번호를 입력해주세요"><br>
-				<input type="button" id="pwdresult" value="다음단계">
+                    이름 &nbsp;&nbsp;<input type="text" class="text" id=pphoneName name=pphoneName placeholder="이름을 입력해주세요" required> <br>
+                    휴대폰 번호 &nbsp;&nbsp;<input type="text" class="text" id=pphoneNumber name=pphoneNumber placeholder="휴대폰번호를 입력해주세요" required>
+				<input type="button" id="pwdresult" value="찾기">
                     
                 </div>
             </div>

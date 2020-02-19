@@ -310,6 +310,7 @@ public ArrayList<Shop> selectFSList(Connection con, String userId) {
 		while(rset.next()) {
 			Shop s = new Shop();
 			
+			s.setShopPid(rset.getString("shop_pid"));
 			s.setShopName(rset.getString("shop_name"));
 			s.setShopImg(rset.getString("shop_img"));
 			s.setsAddr(rset.getString("shop_addr"));
