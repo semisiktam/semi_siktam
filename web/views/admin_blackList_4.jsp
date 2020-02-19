@@ -57,7 +57,7 @@ table thead tr{
                             <tr>
                               <th>아이디</th>
                               <th>차단일자</th>
-                              <th>차단기간</th>
+                              <th>차단기간(일)</th>
                               <th>차단사유</th>
                             </tr>
                         </thead>

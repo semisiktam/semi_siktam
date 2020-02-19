@@ -465,5 +465,25 @@ public int insertAdminBlack(Connection con, BlackList bl) {
 	return result;
 }
 
+public int deleteAdminBlack(Connection con, String userId) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String sql = prop.getProperty("deleteAdminBlack");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		result = pstmt.executeUpdate();	
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
+
 
 }
