@@ -20,10 +20,11 @@
            			},success:function(data){
            				console.log(data);
            				if(data == 1){
-           					// 성공 
+           					// 성공
+           					alert("비밀번호 찾기 단계로 넘어갑니다.")
            					location.href="/siktam/views/HowFindPassword_1.jsp";
            				}else{
-           					alert("찾을려고하는 아이디가 존재하지 않습니다.");
+           					alert("등록된 아이디가 아닙니다. 다시 한번 확인 해보십시오");
            					$('#nextPwdId').select();
            				}
            			},error:function(){

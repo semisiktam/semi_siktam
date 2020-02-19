@@ -15,7 +15,7 @@
 <body>
     <%@ include file="common/header_idpw.jsp" %>
 
-    <!-- 여기부터 -->
+	<!-- 여기부터 -->
     <div id="container">
         
         <div id="area1">
