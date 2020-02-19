@@ -9,7 +9,6 @@ public class EventBanner implements Serializable{
 	private static final long serialVersionUID = -1746921829697456340L;
 	private String eventNo; //이벤트번호
 	private String eventName; //이벤트명
-	private String shopPid; //매장등록번호
 	private String eventImg; //이벤트이미지
 	
 	public EventBanner() {
@@ -21,11 +20,10 @@ public class EventBanner implements Serializable{
 		this.eventName = eventName;
 		this.eventImg = eventImg;
 	}
-	public EventBanner(String eventNo, String eventName, String shopPid, String eventImg) {
+	public EventBanner(String eventNo, String eventName, String eventImg) {
 		super();
 		this.eventNo = eventNo;
 		this.eventName = eventName;
-		this.shopPid = shopPid;
 		this.eventImg = eventImg;
 	}
 	public String getEventNo() {
@@ -40,12 +38,6 @@ public class EventBanner implements Serializable{
 	public void setEventName(String eventName) {
 		this.eventName = eventName;
 	}
-	public String getShopPid() {
-		return shopPid;
-	}
-	public void setShopPid(String shopPid) {
-		this.shopPid = shopPid;
-	}
 	public String getEventImg() {
 		return eventImg;
 	}
@@ -54,7 +46,7 @@ public class EventBanner implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "EventBanner [eventNo=" + eventNo + ", eventName=" + eventName + ", shopPid=" + shopPid + ", eventImg="
+		return "EventBanner [eventNo=" + eventNo + ", eventName=" + eventName + ", eventImg="
 				+ eventImg + "]";
 	}
 	

@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.eventBanner.model.vo.*"%>
-
-<%
-	ArrayList<EventBanner> list = (ArrayList<EventBanner>)request.getAttribute("list");
-%>
+    
+    <% EventBanner eb = (EventBanner)request.getAttribute("eb"); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,32 +26,11 @@
 
 <div class="container" style="margin-top:50px">
   <div class="title">
-    <h1><b>이벤트배너 관리</b></h1>
+    <h1><b>이벤트배너별 매장 관리(<%=eb.getEventName()%>)</b></h1>
   </div>
 
   <div class="pagesearch">
-    <!-- <div class="search">
-      <input class="form-control input-lg" id="inputlg" type="text">
-      <button style="border-radius: 6px;" ><span class="glyphicon glyphicon-search" style="color: white; font-size: 18px;"></span></button>
-    </div> -->
-    
-    <!-- <div class="page">
-      <ul class="pagination">
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">7</a></li>
-        <li><a href="#">8</a></li>
-        <li><a href="#">9</a></li>
-        <li><a href="#">></a></li>
-        <li><a href="#">>></a></li>
-      </ul>
-    </div>
-    class page -->
-    
+   
   </div>
 
   <div class="tbl">
@@ -93,7 +70,7 @@
           </div>
         </th>
       </tr>
-      
+      <%-- 
       <% for(EventBanner eb : list) { %>
       <tr>
       	<td style="display:none;"><%=eb.getEventNo() %></td>
@@ -127,7 +104,7 @@
           </div>
         </td>
       </tr>
-      <% } %>
+      <% } %> --%>
       
     </table>
   </div>
@@ -135,7 +112,7 @@
 
 </div>
 <!-- class container -->
-<script>
+<%-- <script>
 
 $(function(){
 	
@@ -151,7 +128,7 @@ $(function(){
 });
 
 
-</script>
+</script> --%>
 
 
 </body>

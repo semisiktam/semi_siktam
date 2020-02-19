@@ -41,4 +41,14 @@ public class EventBannerService {
 		return list;
 	}
 
+	public EventBanner eSelectOne(String eno) {
+		Connection con = getConnection();
+		
+		EventBanner eb = eDao.eSelectOne(con,eno);
+		
+		close(con);
+		
+		return eb;
+	}
+
 }

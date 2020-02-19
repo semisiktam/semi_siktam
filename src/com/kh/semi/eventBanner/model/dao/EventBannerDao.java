@@ -96,4 +96,40 @@ public class EventBannerDao {
 		return list;
 	}
 
+	public EventBanner eSelectOne(Connection con, String eno) {
+		EventBanner eb = null;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("eSelectOne");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, eno);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				eb = new EventBanner();
+				
+				eb.setEventNo(rset.getString("EVENT_NO"));
+				eb.setEventName(rset.getString("EVENT_NAME"));
+				eb.setEventImg(rset.getString("EVENT_IMG"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		return eb;
+	}
+
 }

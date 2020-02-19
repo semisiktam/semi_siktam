@@ -11,16 +11,16 @@ import com.kh.semi.eventBanner.model.service.EventBannerService;
 import com.kh.semi.eventBanner.model.vo.EventBanner;
 
 /**
- * Servlet implementation class eventInsertServlet
+ * Servlet implementation class eventSelectOneServlet
  */
-@WebServlet("/eInsert.ev")
-public class eventInsertServlet extends HttpServlet {
+@WebServlet("/eSelctOne.ev")
+public class eventSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public eventInsertServlet() {
+    public eventSelectOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +29,25 @@ public class eventInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String eventName = request.getParameter("eventName");
-		String eventImg = request.getParameter("eventImg");
-		System.out.println(eventName+"  "+eventImg);
-		EventBanner eb = new EventBanner(eventName,eventImg);
 		
-		EventBannerService es= new EventBannerService();
+		String eno = request.getParameter("eno");
 		
-		int result = es.InsertEvent(eb);
-
-		System.out.println("servlet"+result);
+		EventBannerService es = new EventBannerService();
 		
-		if(result > 0) {
-			response.sendRedirect("eSelectList.ev");			
+		EventBanner eb = es.eSelectOne(eno);
+		
+		String page = "";
+		
+		if(eb != null) {
+			page = "views/admin_eventBannerSelect.jsp";
+			request.setAttribute("EventBanner", eb);
+			
 		}else {
-			request.setAttribute("msg", "등록실패");
+			request.setAttribute("msg", "문의사항 상세보기 실패");
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+	
 		
 	}
 
