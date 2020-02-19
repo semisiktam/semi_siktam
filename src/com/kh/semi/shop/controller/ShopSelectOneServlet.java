@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.menu.model.sevice.MenuService;
 import com.kh.semi.menu.model.vo.Menu;
 import com.kh.semi.shop.model.service.ShopService;
@@ -42,39 +43,42 @@ public class ShopSelectOneServlet extends HttpServlet {
 		
 		Shop s = ss.selectOne(shopPid);
 		
-		
 		ArrayList<Menu> list = new ArrayList<Menu>();
 		
 		MenuService ms = new MenuService();
 		
 		list = ms.selectList(shopPid);
 		
-		/*Cookie c1 = new Cookie("shopImg",s.getShopImg());
-		Cookie c2 = new Cookie("shopName",s.getShopName());
-		Cookie c3 = new Cookie("shopAddr",s.getsAddr());
-		
-		c1.setPath("/");
-		c2.setPath("/");
-		c3.setPath("/");
-		
-		response.addCookie(c1);
-		response.addCookie(c2);
-		response.addCookie(c3);*/
+		// 탐희 마이페이지(개인) 들여다본기록 하는중
+		HttpSession session=request.getSession();
+	    Member m=(Member)session.getAttribute("member");
+	    
+	    
 		
 		String page = "";
-		
 		if(s != null) {
 			page = "views/productDetailPage_6.jsp";
+			
+			if(m != null) {
+				String userId = m.getUserId();
+				int result = ss.shopRecordInsert(userId,shopPid);
+				
+				if(result > 0) {
+					System.out.println("최근방문등록성공");
+				}else {
+					System.out.println("최근방문등록실패");
+				}
+			}
 			request.setAttribute("mList", list);
 			request.setAttribute("shop", s);
-			
 			// 탐희
-			HttpSession session = request.getSession();
-			session.setAttribute("selectShop", s);
+/*			HttpSession session = request.getSession();
+			session.setAttribute("selectShop", s);*/
 			
 		}else {
 			request.setAttribute("msg", "공지사항 상세보기 실패");
 		}
+		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 

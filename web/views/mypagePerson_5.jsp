@@ -2,8 +2,8 @@
     pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.member.model.vo.*"%>
 <% ArrayList<MemberReservationList> mrList = (ArrayList<MemberReservationList>)request.getAttribute("mrList"); 
    ArrayList<Shop> fsList = (ArrayList<Shop>)request.getAttribute("fsList");
-	Shop se = (Shop)session.getAttribute("selectShop");
-   /* ArrayList<Shop> mList = (ArrayList<Shop>)session.getAttribute("selectShop"); */
+	/* Shop se = (Shop)session.getAttribute("selectShop"); */
+   /* ArrayList<Shop> mList = (ArrayList<Shop>)session.getAttribute("selectShop");  */
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +14,42 @@
     <link rel="stylesheet" href="/siktam/resources/css/mypage_person_5.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script>
+    
+    	$(function(){
+    		$.ajax({
+    			url:"/siktam/shopRecentRecord.sr",
+    			type:"get",
+    			success:function(data){
+    				console.log(data);
+    				var $content3 = $('#content3');
+    				var $recent = $('.recent');
+    				var $ul = $('<ul>');
+    				$.each(data,function(index,value){
+    				var $li = $('<li>');
+    				var $recentDiv = $('<div class="registStore2" id="recentDiv">');
+    				var $imgArea = $('<img src="" class="registStoreImg" alt="" width="170px" height="120px"><br>').text(value.shopImg);
+    				var $h4 = $('<h4 align="center">').text(value.shopName);
+    				var $p = $('<p align="center"><small>').text(value.sAddr);
+    				
+    				$content3.append($recent);
+    				$recent.append($ul);
+    				$ul.append($li);
+    				$li.append($recentDiv);
+    				$recentDiv.append($imgArea);
+    				$recentDiv.append($h4);
+    				$recentDiv.append($p);
+    				
+    				});
+    			},error:function(){
+    				console.log("오류에요");
+    			}
+    			
+    		});
+    		
+    	});	
+
+    </script>
 </head>
 <body>
     <!-- 헤더 시작 -->
@@ -315,43 +351,31 @@
             <h3 id="contentTxt" align="left">최근 들여다 본 음식점</h3 id="contentTxt">
                 
             
-                <div id="registStore">
-                    <ul>
-                    <%if(se==null){ %>
-                        <li>
-                            <div class="">
-                                <img src="" class="registStoreImg" alt="" width="170px" height="120px"><br>
+                <div id="registStore" class="recent">
+                 <!-- <ul>
+                  <li>
+                            <div class="registStore2" id="recentDiv">
+                                <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="" width="170px" height="120px"><br>
                                 <h4 align="center"></h4>
                                 <p align="center"><small></small></p>
                             </div>
-                        </li>
-                     <%} else{ %>
-                     	<%-- <%for(Shop se : mList) {%> --%>
-                        <li>
-                            <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
-                                <img src="<%=se.getShopImg() %>" class="registStoreImg" alt="<%=se.getShopName() %>" width="170px" height="120px"><br>
-                                <h4 align="center"><%=se.getShopName() %></h4>
-                                <p align="center"><small><%=se.getsAddr() %></small></p>
-                            </div>
-                        </li>
-                        <%-- <%} %> --%>
-                     <%} %>
-                        <!-- <li>
-                            <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
+                        </li>  -->
+						 <!-- <li>
+                            <div class="registStore2" id="recentDiv" onclick="location.href='productDetailPage_6.jsp'">
                                 <img src="/siktam/resources/images/역전우동.png" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
                                 <h4 align="center">역전우동</h4>
                                 <p align="center"><small>서울 강남구 테헤란로10길 25</small></p>
                             </div>
                         </li>
                         <li>
-                            <div class="registStore2" onclick="location.href=''">
+                            <div class="registStore2" id="recentDiv" onclick="location.href=''">
                                 <img src="/siktam/resources/images/곱창이야기.png" class="registStoreImg" alt="곱창이야기" width="170px" height="120px"><br>
                                 <h4 align="center">곱창이야기</h4>
                                 <p align="center"><small>서울 서초구 강남대로69길 10</small></p>
                             </div>
                         </li>
                         <li>
-                            <div class="registStore2" onclick="location.href=''">
+                            <div class="registStore2" id="recentDiv" onclick="location.href=''">
                                 <img src="/siktam/resources/images/싸움의고수.png" class="registStoreImg" alt="싸움의고수" width="170px" height="120px"><br>
                                 <h4 align="center">싸움의고수</h4>
                                 <p align="center"><small>서울 서대문구 명물길 20</small></p>

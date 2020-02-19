@@ -123,5 +123,72 @@ String userId="";
 		return userId;
 }
 	
+	public String FindPwdPhone(Connection con, Member m) {
+		
+		String password="";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("FindPwdPhone");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, m.getName());
+			pstmt.setString(2, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()){
+				password=rset.getString("PASSWORD");
+			 }
+			 System.out.print("DAO:"+password);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return password;
+	}
+
+	public int FindIdCheck(Connection con, String chkId) {
+		
+		int result = -1;
+		String userId = "";
+				
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("FindPwdChk");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, chkId);			
+		
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				 userId = rset.getString(1);
+			 }
+			
+			if(userId == null || userId == "") {
+				result = 0;
+			}else
+			{
+				result = 1; 
+			}
+			 System.out.print("DAO:"+chkId);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}	
+		return result;
+	}
+		
+	
 }
 

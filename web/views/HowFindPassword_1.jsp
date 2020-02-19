@@ -15,7 +15,7 @@
 <body>
     <%@ include file="common/header_idpw.jsp" %>
 
-    <!-- 여기부터 -->
+	<!-- 여기부터 -->
     <div id="container">
         
         <div id="area1">
@@ -25,13 +25,13 @@
             </div>
             </a>
         <div id="area3">
-            <a href="/siktam/view/IdFind_1.jsp">
+            <a href="IdFind_1.jsp">
             <div class="idDiv">
                 <h1>아이디 찾기</h1>
                 <hr class="hr">
             </div>
             </a>
-            <a href="/siktam/view/FindPassword_1.jsp">
+            <a href="FindPassword_1.jsp">
             <div class="pwdDiv">
                 <h1>비밀번호 찾기</h1>
                 <hr class="hr">
@@ -40,30 +40,31 @@
         </div>
         <div id="area2">
         <div class="div2">
-            <h4>유승제님, 인증 가능한 연락처를 선택해주세요</h4>
-        <br>
+<!--             <h4>유승제님, 인증 가능한 연락처를 선택해주세요</h4>  --> 
+       <br>
             <div>
-                <input type="radio" id="phone" class="radio" name="find" onclick="divshow();">&nbsp;<div class="phoneHint">회원 정보에 등록된 휴대폰 번호 <br> 010-****-*245</div><br>
+            	<form action="/siktam/fpp.me" method="post">
+                <input type="radio" id="phone" class="radio" name="find" onclick="divshow();">&nbsp;<label for="phoneHint">회원 정보에 등록된 휴대폰 번호<br></label><br>
                 <div id="f1" class="radioDiv" style="display: none;">
-                    이름 &nbsp;&nbsp;<input type="text" class="text" placeholder="이름을 입력해주세요"> <br>
-                    휴대폰 번호 &nbsp;&nbsp;<input type="text" class="text" placeholder="휴대폰번호를 입력해주세요"><br>
-                    <button>인증번호 요청</button>
+                    이름 &nbsp;&nbsp;<input type="text" class="text" id=pphoneName name=pphoneName placeholder="이름을 입력해주세요"> <br>
+                    휴대폰 번호 &nbsp;&nbsp;<input type="text" class="text" id=pphoneNumber name=pphoneNumber placeholder="휴대폰번호를 입력해주세요"><br>
+				<input type="button" id="pwdresult" value="다음단계">
                     
                 </div>
             </div>
-            <div>
-                <input type="radio" id="email" class="radio" name="find" onclick="divshow();">&nbsp;<label for="email">등록된 이메일로 찾기</label><br>
+<!--            <div>
+                <input type="radio" id="email" class="radio" name="find" onclick="divshow();">&nbsp;<label for="email">회원 정보에 등록된 이메일로 찾기(인증번호 전송)</label><br>
                 <div id="f3" class="radioDiv">
                     <input type="email" class="text" placeholder="이메일을 입력해주세요">&nbsp;<button>인증번호 요청</button>
                 </div>
             </div>
-            <div>
+             <div>
                 <input type="radio" id="rphone"  class="radio" name="find" onclick="divshow();">&nbsp;<label for="rphone">등록된 핸드폰으로 찾기</label><br>
                 <div id="f2" class="radioDiv">
                     <input type="text" class="text" placeholder="이름을 입력해 주세요"><br>
                     <input type="text" class="text" placeholder="가입했을때 등록된 핸드폰 번호">&nbsp;<button>인증번호요청</button>
                 </div>
-            </div>
+            </div> -->
             
            
         </div>
@@ -76,9 +77,10 @@
             } else {
                 $('#f1').slideUp();
             }
-            if ($('input:radio[id=rphone]').is(':checked')) {
+        }
+/*             if ($('input:radio[id=rphone]').is(':checked')) {
                 $('#f2').slideDown();
-            } else {
+            } else {S
                 $('#f2').slideUp();
             }
             if ($('input:radio[id=email]').is(':checked')) {
@@ -90,15 +92,38 @@
                 $('#f4').slideDown();
             } else {
                 $('#f4').slideUp();
-            }
-        }
+            }*/
+        
 
+        
+        $("#pwdresult").click(function(){
+			$.ajax({
+				
+				url : "/siktam/fpp.me",
+				type : "get",
+				data :{
+					pphoneName:$('#pphoneName').val(),
+					pphoneNumber:$('#pphoneNumber').val()
+				}, success:function(result){
+					 
+					if(!result==""){
+						alert(result);
+					}else{
+						alert("해당하는 비밀번호가 없습니다");
+					}
+					
+				},error :  function(request,errorcode,error){
+					alert("페이지에러");
+
+				}
+			});
+		});
 
 
     </script>
 
         <div class="div3">
-            아이디를 잊으셨나요? &nbsp;<a href="FindPassword.jsp" style="color: black;">아이디 찾기 (이동)</a>
+            아이디를 잊으셨나요? &nbsp;<a href="IdFind_1.jsp" style="color: black;">아이디 찾기 (이동)</a>
         </div>
         <br>
         </div>

@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.semi.black.model.vo.BlackList;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.member.model.vo.MemberReservationList;
 import com.kh.semi.shop.model.vo.Shop;
@@ -438,6 +439,29 @@ public int deleteMember(Connection con, String userId, String password) {
 		close(rset);
 		close(pstmt);
 	}
+	return result;
+}
+
+public int insertAdminBlack(Connection con, BlackList bl) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String sql = prop.getProperty("insertAdminBlack");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, bl.getUserId());
+		pstmt.setString(2, bl.getBanTerm());
+		pstmt.setString(3, bl.getBanReason());
+		
+		result = pstmt.executeUpdate();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	
+	
 	return result;
 }
 

@@ -49,7 +49,7 @@
           <ul class="dropdown-menu">
             <li><a href="/siktam/selectList.me">회원리스트</a></li>
             <li><a href="/siktam/sAdminList.sh">업체리스트</a></li>
-            <li><a href="/siktam/views/admin_blackList_4.jsp">블랙리스트</a></li>
+            <li><a href="/siktam/bList.bl">블랙리스트</a></li>
             <li><a href="/siktam/views/admin_storeRegister_4.jsp">업체등록관리</a></li>
             <li><a href="/siktam/views/admin_storeSalesManagement_4.jsp">매출관리</a></li>
           </ul>
@@ -58,7 +58,7 @@
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">사이트관리 <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/siktam/nselectList.no">공지사항</a></li>
-            <li><a href="/siktam/views/admin_eventBanner_4.jsp">이벤트배너</a></li>
+            <li><a href="/siktam/eSelectList.ev">이벤트배너</a></li>
             <li><a href="/siktam/views/admin_questions_4.jsp">문의사항</a></li>
           </ul>
         </li>
