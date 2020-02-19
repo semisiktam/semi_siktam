@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.menu.model.sevice.MenuService;
+import com.kh.semi.menu.model.vo.Menu;
+
 /**
  * Servlet implementation class UpdateMenuServlet
  */
@@ -18,16 +21,35 @@ public class UpdateMenuServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public UpdateMenuServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String menuNo=request.getParameter("menuNo");
+		System.out.println("menuNo"+menuNo);
+		String shopPid=request.getParameter("shopPid");
+		System.out.println("shopPid"+shopPid);
+		String menuName=request.getParameter("menuName");
+		System.out.println("menuName"+menuName);
+		String menuImg=request.getParameter("menuImg");
+		System.out.println(menuImg+":menuImg");
+		int menuPrice=Integer.parseInt(request.getParameter("menuPrice"));
+		System.out.println(menuPrice+":menuPrice");
+		String menuInfo=request.getParameter("menuInfo");
+		System.out.println(menuInfo+":menuInfo");
+		Menu m=new Menu(menuNo,shopPid, menuName, menuImg, menuPrice, menuInfo);
+		System.out.println(m);
+		int result=new MenuService().updateMenu(m);
+		if(result>0) {
+			request.setAttribute("shopPid", shopPid);
+			request.getRequestDispatcher("/views/registerMenu_5.jsp").forward(request, response);
+			
+		}else {
+			
+		}
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.kh.semi.menu.controller;
+package com.kh.semi.shop.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.menu.model.sevice.MenuService;
-
 /**
- * Servlet implementation class DeleteMenuServlet
+ * Servlet implementation class ShopFavoriteYnServlet
  */
-@WebServlet("/DeleteMenuServlet")
-public class DeleteMenuServlet extends HttpServlet {
+@WebServlet("/sFavoriteYn.sh")
+public class ShopFavoriteYnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteMenuServlet() {
+    public ShopFavoriteYnServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +26,7 @@ public class DeleteMenuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String menuNo=request.getParameter("menuNo");
-		int result=new MenuService().deleteMenu(menuNo);
+		
 	}
 
 	/**

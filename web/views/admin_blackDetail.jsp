@@ -51,31 +51,34 @@
 <body>
 	<%@ include file="common/admin_header.jsp" %>
 	
-	<form action="<%=request.getContextPath()%>/sAdminUpdate.sh" method="post" onsubmit="return validate();">
+	<form action="<%=request.getContextPath()%>/bUpdate.bl" method="post" onsubmit="return validate();">
 	<div id="container1">
-		<h1>매장 정보</h1>
+		<h1>차단내용 상세정보</h1>
 		<br>
 		<input type="submit" class="btn" value="수정완료">
         <input type="reset" class="btn" value="취소" onclick="location.href='bList.bl'">
 	</div>
 	
+	<input type="hidden" class="inputInfo" name="bno" value="<%= bl.getBno() %>">
+	<input type="hidden" class="inputInfo" name="userId" value="<%= bl.getUserId() %>">
+	<input type="hidden" class="inputInfo" name="banDate" value="<%= bl.getBanDate() %>">
 	<div id="container2">
 		<table style='width: 500px; border-style: solid; border-width: 1px; left: 50%; position: absolute; height: 200px; text-align: center; margin: 0px 0pt 0pt -250px; border-color:gray' cellspacing="0" cellpadding="0">
 			<tr>
 				<td>아이디</td>
-				<td> <input type="text" class="inputInfo" name="userId" value="<%= bl.getUserId() %>"></td>
+				<td style="text-align:left"><%= bl.getUserId() %></td>
 			</tr>
 			<tr>
 				<td>차단일자</td>
-				<td> <input type="text" class="inputInfo" name="shopName" value="<%= bl.getBanDate() %>"></td>
+				<td style="text-align:left"><%= bl.getBanDate() %></td>
 			</tr>
 			<tr>
 				<td>차단기간</td>
-				<td> <input type="text" class="inputInfo" name="shopImg" value="<%= bl.getBanTerm() %>"></td>
+				<td style="text-align:left"> <input type="text" class="inputInfo" name="banTerm" value="<%= bl.getBanTerm() %>"></td>
 			</tr>
 			<tr>
 				<td>차단사유</td>
-				<td> <input type="text" class="inputInfo" name="sAddr" value="<%= bl.getBanReason() %>"></td>
+				<td style="text-align:left"> <input type="text" class="inputInfo" name="banReason" value="<%= bl.getBanReason() %>"></td>
 			</tr>
 		</table>
 	</div>

@@ -67,5 +67,114 @@ public class MenuDao {
 		
 		return list;
 	}
+
+	public int insertMenu(Connection con, Menu m) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("insertMenu");
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, m.getShopPid());
+			pstmt.setString(2, m.getMenuName());
+			pstmt.setString(2, m.getMenuImg());
+			pstmt.setInt(4, m.getMenuPrice());
+			pstmt.setString(5, m.getMenuInfo());
+			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateMenu(Connection con, Menu m) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("updateMenu");
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, m.getMenuName());
+			pstmt.setString(2, m.getMenuImg());
+			pstmt.setInt(3, m.getMenuPrice());
+			pstmt.setString(4, m.getMenuInfo());
+			pstmt.setString(5, m.getMenuNo());
+			result=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteMenu(Connection con, String menuNo) {
+		int result=0;
+		PreparedStatement pstmt=null;
+		String sql=prop.getProperty("deleteMenu");
+		try {
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, menuNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

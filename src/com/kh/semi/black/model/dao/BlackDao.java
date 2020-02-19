@@ -128,4 +128,25 @@ public class BlackDao {
 		return bl;
 	}
 
+	public int updateBlack(Connection con, BlackList bl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBlack");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bl.getBanTerm());
+			pstmt.setString(2, bl.getBanReason());
+			pstmt.setString(3, bl.getUserId());
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
 }

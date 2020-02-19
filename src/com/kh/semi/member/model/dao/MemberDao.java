@@ -310,6 +310,7 @@ public ArrayList<Shop> selectFSList(Connection con, String userId) {
 		while(rset.next()) {
 			Shop s = new Shop();
 			
+			s.setShopPid(rset.getString("shop_pid"));
 			s.setShopName(rset.getString("shop_name"));
 			s.setShopImg(rset.getString("shop_img"));
 			s.setsAddr(rset.getString("shop_addr"));
@@ -461,6 +462,26 @@ public int insertAdminBlack(Connection con, BlackList bl) {
 		close(pstmt);
 	}
 	
+	
+	return result;
+}
+
+public int deleteAdminBlack(Connection con, String userId) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String sql = prop.getProperty("deleteAdminBlack");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, userId);
+		
+		result = pstmt.executeUpdate();	
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
 	
 	return result;
 }
