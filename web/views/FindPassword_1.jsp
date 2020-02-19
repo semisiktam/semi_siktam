@@ -9,7 +9,34 @@
     <link rel="stylesheet" href="/siktam/resources/css/FindPassword_1.css" type="text/css"/>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <title>Find Id</title>
-    
+    <script>
+    	$(function(){
+    		$('#nextPwd').click(function(){
+           		$.ajax({
+           			url:"/siktam/idchk.me",
+           			type:"get",
+           			data:{
+           				idchk:$('#nextPwdId').val()
+           			},success:function(data){
+           				console.log(data);
+           				if(data == 1){
+           					// 성공
+           					alert("비밀번호 찾기 단계로 넘어갑니다.")
+           					location.href="/siktam/views/HowFindPassword_1.jsp";
+           				}else{
+           					alert("등록된 아이디가 아니거나 공란입니다. 다시 확인하십시오");
+           					$('#nextPwdId').select();
+           				}
+           			},error:function(){
+           				console.log("에러");
+           			}
+           		});
+           	});	
+    	});
+       	
+       	
+       
+        </script>
 </head>
 
 <body>
@@ -41,11 +68,8 @@
         <div id="area2">
         <div class="div2">
         <!--      <h4>아이디를 입력해주세요.</h4>-->
-            <input type="text" class="text" placeholder="아이디를 입력해 주세요" id="nextPwdId" name="nextPwdId">&nbsp;
-            <a href="/siktam/views/HowFindPassword_1.jsp">
-            <input type="button" id="pwdNext" value="다음단계">
-</a>
-
+            <input type="text" class="text" placeholder="아이디를 입력해 주세요" id="nextPwdId" name="nextPwdId" required>&nbsp;
+            <input type="button" id="nextPwd" value="다음단계">
         </div>
 
         <div class="div3">
@@ -57,31 +81,7 @@
     </div>
     
     
-    <script>   
-  /*   $("#pwdNext").click(function(){
-			$.ajax({
-				
-				url : "/siktam/HowFindPassword_1.jsp",
-				type : "get",
-				data :{
-					nextPwdId:$('#nextPwdId').val()
-				}, success:function(result){
-					 
-					if(!result==""){
-						alert(result);
-					}else{
-						alert("회원 아이디를 정확히 입력해주십시오");
-					}
-					
-				},error :  function(request,errorcode,error){
-					alert("페이지에러");
-
-				}
-			});
-		}); */
-		
-		
-    </script>
+   
 </body>
 
 </html>

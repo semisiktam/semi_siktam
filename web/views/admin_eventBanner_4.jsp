@@ -36,7 +36,8 @@
       <input class="form-control input-lg" id="inputlg" type="text">
       <button style="border-radius: 6px;" ><span class="glyphicon glyphicon-search" style="color: white; font-size: 18px;"></span></button>
     </div>
-    <div class="page">
+    
+    <!-- <div class="page">
       <ul class="pagination">
         <li class="active"><a href="#">1</a></li>
         <li><a href="#">2</a></li>
@@ -51,7 +52,8 @@
         <li><a href="#">>></a></li>
       </ul>
     </div>
-    <!-- class page -->
+    class page -->
+    
   </div>
 
   <div class="tbl">
@@ -71,18 +73,18 @@
                 </div>
                 
                 <!-- 이벤트 insert -->
-                <form action="<%= request.getContextPath() %>/eInsert.ev" method="post">
 	                <div class="modal-body">
+                <form action="/siktam/eInsert.ev" method="post">
 	                  <label>이벤트명</label><br>
 	                  <input type="text" name="eventName" id="modalEventName"><br><br>
 	                  <label>이벤트 대표이미지</label>
 	                  <input type="file" name="eventImg" id="modalEventImg">
+                </form>
 	                </div>
 	                <div class="modal-footer">
 	                	<input type="submit" class="btn btn-danger" data-dismiss="modal" value="등록">
 	                	<input type="reset" class="btn btn-danger" data-dismiss="modal" value="취소">
 	                </div>
-                </form>
                 
                 
               </div>

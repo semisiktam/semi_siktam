@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.kh.semi.member.model.dao.MemberDao;
 import com.kh.semi.member.model.vo.MemberReservationList;
+import com.kh.semi.mypageFavorite.model.vo.MypageFavorite;
 import com.kh.semi.shop.model.vo.Shop;
 import static com.kh.semi.common.JDBCTemplate.*;
 
@@ -21,7 +22,7 @@ public class mypageFavoriteDao {
 	public mypageFavoriteDao() {
 		prop = new Properties();
 		
-		String filePath=MemberDao.class.getResource("/config/myfavorite-query.properties").getPath();
+		String filePath=mypageFavoriteDao.class.getResource("/config/myfavorite-query.properties").getPath();
 	      
 	      try {
 	         prop.load(new FileReader(filePath));
@@ -76,6 +77,27 @@ public class mypageFavoriteDao {
 			System.out.println(n);
 		}
 		return favorShopList;
+	}
+
+	public int isExist(Connection con, MypageFavorite mf) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("isExist");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mf.getUserId());
+			pstmt.setString(2, mf.getShopPid());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

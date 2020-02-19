@@ -7,6 +7,7 @@
 	Shop s = (Shop)request.getAttribute("shop");
 	ArrayList<Menu> list = (ArrayList<Menu>)request.getAttribute("mList");
 	Member mem = (Member)request.getAttribute("member");
+	String favorite = String.valueOf(request.getAttribute("favorite"));
 	
 %>
 <!DOCTYPE html>
@@ -36,20 +37,58 @@
 
     <div id="detailbox">
         <!-- 메인 이미지 -->
+        <input type="hidden" id="shopPid" value="<%= s.getShopPid() %>"/>
         <div class="pagemainimg"></div>
         
         <!-- 2020.02.10 수정 시작(현희) < 즐겨찾기 추가 > -->
-
+		
         <div class="bookmark">
             <p id="star">★</p>
         </div>
-   
+   		
+   		<input type="hidden" id="fav" value="<%= favorite %>">
+   		
         <script>
+        	$(document).ready(function(){
+        		if($('#fav').val()=='o'){
+        			$('#star').css({'color':'rgb(255, 184, 53)'});
+        		}else{
+        			$('#star').css({'color':'#eee'});
+        		}
+        	});
+        	
+        	/* 탐희 즐겨찾기 AJAX 추가 */
             $(document).ready(function(){
                 $('#star').toggle(function(){
                     $(this).css({'color':'rgb(255, 184, 53)'});
+                    $.ajax({
+                	  	url:"/siktam/shopInsertFavorite.si",
+          				type:"get",
+          				data:{
+          					shopPid : $('#shopPid').val()
+          				},
+          				success: function(data){
+          					console.log(data);
+          				},
+          				error: function(){
+          					console.log("결과 전송 실패");
+          				}
+                  });
                 },function(){
                     $(this).css({'color':'#eee'});
+                    $.ajax({
+                	  	url:"/siktam/shopDeleteFavorite.si",
+          				type:"get",
+          				data:{
+          					shopPid : $('#shopPid').val()
+          				},
+          				success: function(data){
+          					console.log(data);
+          				},
+          				error: function(){
+          					console.log("결과 전송 실패");
+          				}
+                  });
                 });
             })
         </script>

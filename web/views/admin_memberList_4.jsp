@@ -145,7 +145,7 @@ table thead tr{
 		});
 		
 		$('#searchBtn').click(function(){
-			location.href="<%=request.getContextPath()%>/searchMember.me?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+			location.href="<%=request.getContextPath()%>/mAdminSearch.me?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 		});
 	</script>
 </body>

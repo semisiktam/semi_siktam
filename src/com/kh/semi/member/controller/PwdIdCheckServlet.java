@@ -1,4 +1,4 @@
-package com.kh.semi.eventBanner.controller;
+package com.kh.semi.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.eventBanner.model.service.EventBannerService;
-import com.kh.semi.eventBanner.model.vo.EventBanner;
+import com.google.gson.Gson;
+import com.kh.semi.member.model.service.FindIdService;
 
 /**
- * Servlet implementation class eventInsertServlet
+ * Servlet implementation class PwdIdCheckServlet
  */
-@WebServlet("/eInsert.ev")
-public class eventInsertServlet extends HttpServlet {
+@WebServlet("/idchk.me")
+public class PwdIdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public eventInsertServlet() {
+    public PwdIdCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +29,18 @@ public class eventInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String eventName = request.getParameter("eventName");
-		String eventImg = request.getParameter("eventImg");
-		System.out.println(eventName+"  "+eventImg);
-		EventBanner eb = new EventBanner(eventName,eventImg);
+		response.setContentType("applicaton/json; charset=UTF-8");
+		String chkId = request.getParameter("idchk");
+		System.out.println(chkId);
 		
-		EventBannerService es= new EventBannerService();
+		// service
+		FindIdService fs = new FindIdService();
 		
-		int result = es.InsertEvent(eb);
-
-		System.out.println("servlet"+result);
-		if(result > 0) {
-			response.sendRedirect("eSelectList.ev");			
-		}else {
-			request.setAttribute("msg", "등록실패");
-		}
+		int result = -1;
 		
+		result = fs.FindIdCheck(chkId); // 1 찾기, 0 아이디 없음 -1 오류
+		
+		new Gson().toJson(result,response.getWriter());
 	}
 
 	/**

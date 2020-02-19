@@ -15,7 +15,6 @@ import java.util.Properties;
 
 import com.kh.semi.black.model.vo.BlackList;
 import com.kh.semi.member.model.dao.MemberDao;
-import com.kh.semi.member.model.vo.Member;
 
 public class BlackDao {
 	
@@ -24,7 +23,7 @@ public class BlackDao {
 	public BlackDao() {
 		prop = new Properties();
 	    
-	    String filePath=MemberDao.class.getResource("/config/black-query.properties").getPath();
+	    String filePath = BlackDao.class.getResource("/config/black-query.properties").getPath();
 	    
 	    try {
 	       prop.load(new FileReader(filePath));
@@ -95,6 +94,59 @@ public class BlackDao {
 		}
 
 		return blist;
+	}
+
+	public BlackList selectOne(Connection con, String userId) {
+		System.out.println("dao" + userId);
+		BlackList bl = new BlackList();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				bl.setBno(rset.getString("bno"));
+				bl.setUserId(rset.getString("userid"));
+				bl.setBanDate(rset.getDate("ban_date"));
+				bl.setBanTerm(rset.getString("ban_term"));
+				bl.setBanReason(rset.getString("ban_reason"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return bl;
+	}
+
+	public int updateBlack(Connection con, BlackList bl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBlack");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bl.getBanTerm());
+			pstmt.setString(2, bl.getBanReason());
+			pstmt.setString(3, bl.getUserId());
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
 	}
 
 }

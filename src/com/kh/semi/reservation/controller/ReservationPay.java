@@ -37,31 +37,30 @@ public class ReservationPay extends HttpServlet {
 			
 		//String[] mlist = request.getParameter("m0list").split(",");
 		String[] mlist = request.getParameterValues("m0list");
-		System.out.println(Arrays.toString(mlist));
-		System.out.println(mlist.length);
-		
+
+		int sum = 0;
+		int total = 0;
 		ArrayList<ReservationTest> list = new ArrayList<ReservationTest>();
 		
-		
-		
 		for(int i=0; i<mlist.length; i=i+3) {
-			System.out.println(mlist[i] + " " +mlist[i+1]+" "+ mlist[i+2]);
-			
 			ReservationTest rt = new ReservationTest();
 			
 			rt.setMenuName(mlist[i]);
 			rt.setMenuPrice(Integer.parseInt(mlist[i+1]) * Integer.parseInt(mlist[i+2]));
 			rt.setMenuCount(Integer.parseInt(mlist[i+2]));
 			
+			total = (Integer.parseInt(mlist[i+1]) * Integer.parseInt(mlist[i+2]));
+			sum += total;
+			
+			rt.setTotal(sum);
+			
 			if(rt.getMenuCount() > 0) {
 				
 				list.add(rt);
 			}
+			
 		}
 		
-		for(ReservationTest rt : list) {
-			System.out.println(rt);
-		}
 		
 		new Gson().toJson(list,response.getWriter());
 	}

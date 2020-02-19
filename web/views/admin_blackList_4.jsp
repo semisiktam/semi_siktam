@@ -57,7 +57,7 @@ table thead tr{
                             <tr>
                               <th>아이디</th>
                               <th>차단일자</th>
-                              <th>차단기간</th>
+                              <th>차단기간(일)</th>
                               <th>차단사유</th>
                             </tr>
                         </thead>
@@ -66,7 +66,7 @@ table thead tr{
 							<tr>
 								<td><%= bl.getUserId() %></td>
 								<td><%= bl.getBanDate() %></td>
-								<td><%= bl.getBanTerm() %>일</td>
+								<td><%= bl.getBanTerm() %></td>
 								<td><%= bl.getBanReason() %></td>
 							</tr>
 							<% } %>
@@ -80,12 +80,12 @@ table thead tr{
 			<div class="pagingArea" align="center">
 				<div class="page">
 			      <ul class="pagination">
-			      	<li><a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=1'"><<</a></li>
+			      	<li><a onclick="location.href='<%= request.getContextPath() %>/bList.bl?currentPage=1'"><<</a></li>
 			        <li>
 			        	<%  if(currentPage <= 1){  %>
 			        	<a><</a>
 						<%  }else{ %>
-						<a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage - 1 %>'"><</a>
+						<a onclick="location.href='<%= request.getContextPath() %>/bList.bl?currentPage=<%=currentPage - 1 %>'"><</a>
 						<%  } %>
 			        </li>
 			        
@@ -94,7 +94,7 @@ table thead tr{
 					%>
 						<li><a style="background: rgb(110, 0, 0); color: white"><%= p %></a><li>
 					<%      }else{ %>
-						<li><a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%= p %>'"><%= p %></a><li>
+						<li><a onclick="location.href='<%= request.getContextPath() %>/bList.bl?currentPage=<%= p %>'"><%= p %></a><li>
 					<%      } %>
 					<% } %>
 					
@@ -102,10 +102,10 @@ table thead tr{
 			        	<%  if(currentPage >= maxPage){  %>
 						<a>></a>
 						<%  }else{ %>
-						<a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%=currentPage + 1 %>'">></a>
+						<a onclick="location.href='<%= request.getContextPath() %>/bList.bl?currentPage=<%=currentPage + 1 %>'">></a>
 						<%  } %>
 			        </li>
-			        <li><a onclick="location.href='<%= request.getContextPath() %>/selectList.me?currentPage=<%= maxPage %>'">>></a></li>
+			        <li><a onclick="location.href='<%= request.getContextPath() %>/bList.bl?currentPage=<%= maxPage %>'">>></a></li>
 			      </ul>
 			    </div>
 				
@@ -136,7 +136,7 @@ table thead tr{
 			}).click(function(){
 				//console.log($(this).parent().children().eq(0).text());
 				var userId = $(this).parent().children().eq(0).text();
-				location.href="<%=request.getContextPath()%>/selectOne.me?userId=" + userId;
+				location.href="<%=request.getContextPath()%>/bSelect.bl?userId=" + userId;
 			});
 		});
 		

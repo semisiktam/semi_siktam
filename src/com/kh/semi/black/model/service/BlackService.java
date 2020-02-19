@@ -32,4 +32,28 @@ public class BlackService {
 		return blist;
 	}
 
+	public BlackList selectOne(String userId) {
+		con = getConnection();
+		
+		
+		BlackList bl = bDao.selectOne(con, userId);
+		
+		close(con);
+		
+		return bl;
+	}
+
+	public int updateBlack(BlackList bl) {
+		con = getConnection();
+		
+		int result = bDao.updateBlack(con, bl);
+		
+		if(result>0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
 }

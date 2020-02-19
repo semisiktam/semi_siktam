@@ -44,4 +44,15 @@ public class FindIdService {
 		
 		return password;
 	}
+
+	public int FindIdCheck(String chkId) {
+		
+		Connection con = getConnection();
+		int result = idDao.FindIdCheck(con,chkId);
+		
+		System.out.println("서비스:"+chkId);
+		close(con);
+		
+		return result;
+	}
 }

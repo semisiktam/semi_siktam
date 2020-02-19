@@ -1,26 +1,27 @@
-package com.kh.semi.eventBanner.controller;
+package com.kh.semi.black.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.eventBanner.model.service.EventBannerService;
-import com.kh.semi.eventBanner.model.vo.EventBanner;
+import com.kh.semi.black.model.service.BlackService;
+import com.kh.semi.black.model.vo.BlackList;
 
 /**
- * Servlet implementation class eventInsertServlet
+ * Servlet implementation class BlackSelectOne
  */
-@WebServlet("/eInsert.ev")
-public class eventInsertServlet extends HttpServlet {
+@WebServlet("/bSelect.bl")
+public class BlackSelectOne extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public eventInsertServlet() {
+    public BlackSelectOne() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +30,32 @@ public class eventInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String eventName = request.getParameter("eventName");
-		String eventImg = request.getParameter("eventImg");
-		System.out.println(eventName+"  "+eventImg);
-		EventBanner eb = new EventBanner(eventName,eventImg);
+		String userId = request.getParameter("userId");
 		
-		EventBannerService es= new EventBannerService();
+		System.out.println(userId);
 		
-		int result = es.InsertEvent(eb);
-
-		System.out.println("servlet"+result);
-		if(result > 0) {
-			response.sendRedirect("eSelectList.ev");			
-		}else {
-			request.setAttribute("msg", "등록실패");
+		BlackList bl = new BlackList();
+		BlackService bs = new BlackService();
+		
+		bl = bs.selectOne(userId);
+		
+		System.out.println(bl);
+		
+		String page = "";
+		try {
+		
+			if(bl != null) {
+				page = "views/admin_blackDetail.jsp";
+				request.setAttribute("bl", bl);
+			}else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "블랙리스트 상세보기 실패");
+			}
+			
+			request.getRequestDispatcher(page).forward(request, response);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
 	}

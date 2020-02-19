@@ -1,4 +1,4 @@
-package com.kh.semi.eventBanner.controller;
+package com.kh.semi.pay.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.eventBanner.model.service.EventBannerService;
-import com.kh.semi.eventBanner.model.vo.EventBanner;
-
 /**
- * Servlet implementation class eventInsertServlet
+ * Servlet implementation class Pay
  */
-@WebServlet("/eInsert.ev")
-public class eventInsertServlet extends HttpServlet {
+@WebServlet("/pay.pc")
+public class Pay extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public eventInsertServlet() {
+    public Pay() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +26,25 @@ public class eventInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String eventName = request.getParameter("eventName");
-		String eventImg = request.getParameter("eventImg");
-		System.out.println(eventName+"  "+eventImg);
-		EventBanner eb = new EventBanner(eventName,eventImg);
+		String total =request.getParameter("hdtotal");
+		String[] menuName = request.getParameterValues("menuName");
+		String[] menuCount = request.getParameterValues("menuCount");
+		String[] menuPrice = request.getParameterValues("menuPrice");
+		String time = request.getParameter("time");
+		String shopPid = request.getParameter("shopPid");
+		String date = request.getParameter("date");
 		
-		EventBannerService es= new EventBannerService();
-		
-		int result = es.InsertEvent(eb);
-
-		System.out.println("servlet"+result);
-		if(result > 0) {
-			response.sendRedirect("eSelectList.ev");			
-		}else {
-			request.setAttribute("msg", "등록실패");
+		System.out.println(shopPid);
+		System.out.println(time);
+		System.out.println(total);
+		for(int i=0; i<menuName.length; i++) {
+			
+			System.out.println("메뉴이름 :" + menuName[i]);
+			System.out.println("메뉴 수량 : " + menuCount[i]);
+			System.out.println("메뉴 가격 : " + menuPrice[i]);
 		}
-		
+		System.out.println(date);
+	
 	}
 
 	/**
