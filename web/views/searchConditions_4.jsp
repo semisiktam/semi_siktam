@@ -176,22 +176,43 @@
                "plist" : plist
             },success:function(data){
                console.log(data);
+               $('#tbl').find('tr').remove();
                for(var i=0; i<data.length; i++){
             	   var $tr = $('<tr>');
-            	   var $td = $('#tbl tr').children();
-            	   var $shopPid = text(data[i].shopPid);
-            	   var $shopImg = text(data[i].shopImg);
-            	   var $shopName = text(data[i].shopName);
-            	   var $star = text(data[i].star);
-            	   var $reviewCount = text(data[i].reviewCount);
-            	   var $reservationCount = text(data[i].reservationCount);
-            	   var $shopAddr = text(data[i].shopAddr);
-            	   var $tableType = text(data[i].tableType);
-            	   var $MenuCategory = text(data[i].MenuCategory);
+            	   var $shopPid = $('<td style="display:none">').text(data[i].shopPid);
+            	   var $tdI = $('<td id="img">');
+            	   var $shopImg = $('<img src="/siktam/resources/images/'+data[i].shopImg+'"  style="width:100%" alt="Image" class="img-thumbnail">');
+            	   var $tdT = $('<td id="txt"  style="word-break:break-all">');
+            	   var $h4 = $('<h4>');
+            	   var $shopName = $('<b>').text(data[i].shopName);
+            	   var $ul = $('<ul>');
+            	   var $li = $('<li>');
+            	   var $star = $('<span class="star">').text("★" +data[i].star);
+            	   var $reviewCount = $('<span class="review_num">').text("리뷰 " +data[i].reviewCount);
+            	   var $reservationCount = $('<span class="reserve_num">').text("예약 " + data[i].reservationCount);
+            	   var $shopAddr = $('<span class="area">').text(data[i].shopAddr);
+            	   var $tableType = $('<span class="tableInfo">').text(data[i].tableType);
+            	   var $MenuCategory = $('<span class="sectors">').text(data[i].MenuCategory);
+            	   /* var $li3 = $('<li>');
+            	   var $mainMenu = $('<span class="mainMenu">'); */
+            	   $tdI.append($shopImg);
             	   
+            	   $h4.append($shopName);
             	   
+            	   $li.append($star).append($reviewCount).append($reservationCount);
+            	   $li.append($shopAddr).append($shopAddr).append($tableType).append($MenuCategory);
+            	   $ul.append($li);
+            	   
+            	   $tdT.append($h4);
+            	   $tdT.append($ul);
+            	   
+            	   $tr.append($shopPid);
+            	   $tr.append($tdI);
+            	   $tr.append($tdT);
+            	   
+            	   $('#tbl').append($tr);
                } 
-               
+               	   	
             },error:function(){
             	 console.log("에러");
             }
