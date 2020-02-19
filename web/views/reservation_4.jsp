@@ -50,7 +50,7 @@
 	<%@ include file="common/header.jsp"%>
 
 	<!-- 이 안에 작업하기 -->
-	<form method="POST" target="_self" action="pay_5.jsp">
+	<form method="POST" target="_self" action="pay.pc">
 		<div id="title">
 			<div id="titleImg">
 				<img src="/siktam/resources/images/udon.png" alt="">
@@ -60,6 +60,9 @@
 					<b><%=list.get(0).getShopName()%></b>(예약하기)
 				</h1>
 				<p><%=list.get(0).getShopAddr()%>
+				<input type="hidden" name="shopPid" value="<%= list.get(0).getShopPid() %>"/>
+				<input type="hidden" name="shopName" value="<%=list.get(0).getShopName()%>"/>
+				<input type="hidden" name="shopAddr" value="<%=list.get(0).getShopAddr()%>"/>
 				</p>
 			</div>
 		</div>
@@ -128,6 +131,7 @@
 						<table id="tblSum">
 							<tr>
 								<td>결제 금액</td>
+								<td></td>
 							</tr>
 						</table>
 					</div>
@@ -153,27 +157,8 @@
 				dropdown : true,
 				scrollbar : true
 			});
-
 		});
 	</script>
-
-	<!-- 메뉴 수량 -->
-<!-- 	<script>
-		$(function() {
-			$('.bt_up').click(function() {
-				var n = $('.bt_up').index(this);
-				var num = $(".num:eq(" + n + ")").val();
-				num = $(".num:eq(" + n + ")").val(num * 1 + 1);
-			});
-			$('.bt_down').click(function() {
-				var n = $('.bt_down').index(this);
-				var num = $(".num:eq(" + n + ")").val();
-				if (parseInt(num) > 0) {
-					num = $(".num:eq(" + n + ")").val(num * 1 - 1);
-				}
-			});
-		})
-	</script> -->
 	<script>
 		$(function() {
 			$('.bt_up').click(function() {
@@ -190,30 +175,6 @@
 					m0.push($('#tbl tr:eq('+i+')').children().eq(3).text());
 				}
 					
-						
-				/* var m1 = {
-							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(1)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(1)').children().eq(3).text()
-						};
-				var m2 = {
-							menuName:$('#tbl tr:eq(2)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(2)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(2)').children().eq(3).text()
-						};
-				var m3 = {
-							menuName:$('#tbl tr:eq(3)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(3)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(3)').children().eq(3).text()
-						};
-					
-				mlist.push(m0);
-				mlist.push(m1);
-				mlist.push(m2);
-				mlist.push(m3);
-				 */
-				console.log(m0);
-				
 				$.ajax({
 					 url:"/siktam/reservationPay.rc",
 			         type:"get",
@@ -226,24 +187,37 @@
 			         
 			        $('#resultTable').find('tr').remove(); 
 			        $('#tblSum').find('td:eq(1)').remove();
-			           for(var i=0; i<data.length; i++){
-				           var $tr = $('<tr>');
-				           var $menuName = $('<td>').text(data[i].menuName);
-			        	   var $menuCount = $('<td>').text(data[i].menuCount);
-			        	   var $menuPrice = $('<td>').text(data[i].menuPrice);
+			       
+			        $('#hdtotal').remove();
+			        $('#menuName').remove();
+			        $('#menuCount').remove();
+			        $('#menuPrice').remove();
+			          
+			        for(var i=0; i<data.length; i++){
+			        	var $tr = $('<tr>');
+			        	var $menuName = $('<td>').text(data[i].menuName);
+			        	var $menuCount = $('<td>').text(data[i].menuCount);
+			        	var $menuPrice = $('<td>').text(data[i].menuPrice);
+			        	var $hdN = $('<input type="hidden" id="menuName" name="menuName" value="'+data[i].menuName+'">')
+			        	var $hdC = $('<input type="hidden" id="menuCount" name="menuCount" value="'+data[i].menuCount+'">')
+			        	var $hdP = $('<input type="hidden" id="menuPrice" name="menuPrice" value="'+data[i].menuPrice+'">')
 			        	   
-			        	   $tr.append($menuName);
-			        	   $tr.append($menuCount);
-			        	   $tr.append($menuPrice);
+			        	$tr.append($menuName);
+			        	$tr.append($hdN)
+			        	$tr.append($menuCount);
+			        	$tr.append($hdC)
+			        	$tr.append($menuPrice);
+			        	$tr.append($hdP)
 			        	   
-			        	   $('#resultTable').append($tr);
+			        	$('#resultTable').append($tr);
 			        	   
-			        	   var $sum = 0;
-			        	   var $total = $('<td>').text($sum += data[i].menuPrice); 
-			        	   console.log($total);
-			           }
-			        	   $tr.append($total);
-			        	   $('#tblSum').append($total);
+			        	$td = $('<td>'); 
+			        	$total = $('<td>').text(data[data.length-1].total);
+			        	$hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
+			        }
+			           	$td.append($total);
+			        	$('#tblSum').append($total).append($hdTag);
+			        	  
 			           
 			         },error:function(){
 			         }
@@ -264,29 +238,6 @@
 					m0.push($('#tbl tr:eq('+i+')').children().eq(3).text());
 				}
 						 
-				/* var m1 = 
-							menuName:$('#tbl tr:eq(1)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(1)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(1)').children().eq(3).text()
-						 
-				var m2 = 
-							menuName:$('#tbl tr:eq(2)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(2)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(2)').children().eq(3).text()
-						
-				var m3 =
-							menuName:$('#tbl tr:eq(3)').children().eq(1).text(),
-							menuPrice:$('#tbl tr:eq(3)').children().eq(2).text(),
-							menuCount:$('#tbl tr:eq(3)').children().eq(3).text()
-						}; */
-					
-				/* mlist.push(m0);
-				mlist.push(m1);
-				mlist.push(m2);
-				mlist.push(m3); */
-				
-				console.log(m0);
-				
 				$.ajax({
 					 url:"/siktam/reservationPay.rc",
 			         type:"get",
@@ -299,25 +250,37 @@
 			           console.log(data);
 			            $('#resultTable').find('tr').remove(); 
 				        $('#tblSum').find('td:eq(1)').remove();
-				           for(var i=0; i<data.length; i++){
-					           var $tr = $('<tr>');
-					           var $menuName = $('<td>').text(data[i].menuName);
-				        	   var $menuCount = $('<td>').text(data[i].menuCount);
-				        	   var $menuPrice = $('<td>').text(data[i].menuPrice);
-				        	   $tr.append($menuName);
-				        	   $tr.append($menuCount);
-				        	   $tr.append($menuPrice);
+				        $('#hdtotal').remove();
+				        $('#menuName').remove();
+				        $('#menuCount').remove();
+				        $('#menuPrice').remove();
+				          
+				        for(var i=0; i<data.length; i++){
+				        	var $tr = $('<tr>');
+				        	var $menuName = $('<td>').text(data[i].menuName);
+				        	var $menuCount = $('<td>').text(data[i].menuCount);
+				        	var $menuPrice = $('<td>').text(data[i].menuPrice);
+				        	var $hdN = $('<input type="hidden" id="menuName" name="menuName" value="'+data[i].menuName+'">')
+				        	var $hdC = $('<input type="hidden" id="menuCount" name="menuCount" value="'+data[i].menuCount+'">')
+				        	var $hdP = $('<input type="hidden" id="menuPrice" name="menuPrice" value="'+data[i].menuPrice+'">')
 				        	   
-				        	   $('#resultTable').append($tr);
-				        	   var sum = 0;
-				        	   var $td = $('<td>');
-				        	   var total = sum += data[i].menuPrice; 
-				        	   console.log(total);
-				           }
-				           	  $td.append(total)
-				        	   $tr.append($td);
-				        	   $('#tblSum').append($total);
+				        	$tr.append($menuName);
+				        	$tr.append($hdN)
+				        	$tr.append($menuCount);
+				        	$tr.append($hdC)
+				        	$tr.append($menuPrice);
+				        	$tr.append($hdP)
+				        	   
+				        	$('#resultTable').append($tr);
+				        	   
+				        	$td = $('<td>'); 
+				        	$total = $('<td>').text(data[data.length-1].total);
+				        	$hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
+				        }
+				           	$td.append($total);
+				        	$('#tblSum').append($total).append($hdTag);
  			         },error:function(){
+ 			        	 console.log("에러");
 			         }
 				});
 				}

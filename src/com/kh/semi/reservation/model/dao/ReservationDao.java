@@ -48,6 +48,7 @@ public class ReservationDao {
 			while(rset.next()) {
 				ReservationTest r = new ReservationTest();
 				
+				r.setShopPid(rset.getString("SHOP_PID"));
 				r.setMenuImg(rset.getString("MENU_IMG"));
 				r.setMenuName(rset.getString("MENU_NAME"));
 				r.setMenuPrice(rset.getInt("MENU_PRICE"));

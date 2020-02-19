@@ -32,11 +32,11 @@ public class ReviewService {
 	 * @param limit
 	 * @return
 	 */
-	public ArrayList<Review> selectReviewList(String shopPid, int currentPage, int limit) {
+	public ArrayList<Review> selectReviewList(String shopPid,String howSelect, int currentPage, int limit) {
 		
 		Connection con = getConnection();
 		
-		ArrayList<Review> rList = rDao.selectReviewList(con,shopPid,currentPage,limit);
+		ArrayList<Review> rList = rDao.selectReviewList(con,shopPid,howSelect,currentPage,limit);
 		
 		close(con);
 		

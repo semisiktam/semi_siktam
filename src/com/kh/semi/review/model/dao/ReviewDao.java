@@ -74,12 +74,20 @@ public class ReviewDao {
 	 * @param limit
 	 * @return
 	 */
-	public ArrayList<Review> selectReviewList(Connection con, String shopPid, int currentPage, int limit) {
+	public ArrayList<Review> selectReviewList(Connection con, String shopPid,String howSelect, int currentPage, int limit) {
 		ArrayList<Review> rList = new ArrayList<Review>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectReviewList");
+		String sql = ""; 
+//		= prop.getProperty("selectReviewList");
+		
+		switch(howSelect) {
+			case "new" : sql = prop.getProperty("selectReviewList");  break;
+			case "rowScore" : sql = prop.getProperty("selectReviewRowList");  break;
+			case "highScore" : sql = prop.getProperty("selectReviewHighList");  break;
+		}
+		
 		
 		try {
 			

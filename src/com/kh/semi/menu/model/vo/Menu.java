@@ -11,6 +11,14 @@ public class Menu {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Menu(String shopPid, String menuName, String menuImg, int menuPrice, String menuInfo) {
+		super();
+		this.shopPid = shopPid;
+		this.menuName = menuName;
+		this.menuImg = menuImg;
+		this.menuPrice = menuPrice;
+		this.menuInfo = menuInfo;
+	}
 	public Menu(String menuNo, String shopPid, String menuName, String menuImg, int menuPrice, String menuInfo) {
 		super();
 		this.menuNo = menuNo;
