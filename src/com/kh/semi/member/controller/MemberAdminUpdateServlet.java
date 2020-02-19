@@ -45,18 +45,20 @@ public class MemberAdminUpdateServlet extends HttpServlet {
 		String outyn = request.getParameter("outyn");
 		
 //		int banTerm = Integer.parseInt(request.getParameter("banTerm"));
-		String banTerm = request.getParameter("banTerm");
-		String banReason = request.getParameter("banReason");
-		
-		System.out.println(banTerm);
-		System.out.println(banReason);
-		
-		BlackList bl = new BlackList(userId, banTerm, banReason);
-		
 		
 		Member m = new Member(userId, password, addr, name, pid, phone, shopyn, mileage, couponno, blackyn, outyn);
+		int result = 0;
 		
-		int result = new MemberService().updateAdminMember(m, bl);
+		if(blackyn.equals("Y")) {	// 블랙리스트가 N->Y
+			String banTerm = request.getParameter("banTerm");
+			String banReason = request.getParameter("banReason");
+			BlackList bl = new BlackList(userId, banTerm, banReason);
+			
+			result = new MemberService().updateAdminMember(m, bl);
+		}else {	// 블랙리스트가 Y->N
+			result = new MemberService().updateAdminMember2(m);
+		}
+		
 
 		if(result>0) {
 			request.setCharacterEncoding("UTF-8");
