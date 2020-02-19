@@ -1,11 +1,18 @@
 package com.kh.semi.pay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.pay.model.service.payService;
+import com.kh.semi.pay.model.vo.PayInfo;
 
 /**
  * Servlet implementation class Pay
@@ -26,25 +33,57 @@ public class Pay extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String total =request.getParameter("hdtotal");
+		
+		HttpSession session=request.getSession();
+	    Member m = (Member)session.getAttribute("member");
+	    //마일리지/쿠폰 번호
+	    Member mc = new payService().payinfo(m.getUserId());
+	    System.out.println(m.getUserId());
+	    //결제 정보
+	    String shopName = request.getParameter("shopName");
+	    String shopAddr = request.getParameter("shopAddr");
 		String[] menuName = request.getParameterValues("menuName");
 		String[] menuCount = request.getParameterValues("menuCount");
 		String[] menuPrice = request.getParameterValues("menuPrice");
-		String time = request.getParameter("time");
-		String shopPid = request.getParameter("shopPid");
-		String date = request.getParameter("date");
+		int total = Integer.parseInt(request.getParameter("hdtotal"));
 		
-		System.out.println(shopPid);
+		String time = request.getParameter("time");
+		String date = request.getParameter("date");
+		String shopPid = request.getParameter("shopPid");
+		
 		System.out.println(time);
-		System.out.println(total);
+		
+		PayInfo pi = null;
+		ArrayList<PayInfo>list = new ArrayList<PayInfo>();
 		for(int i=0; i<menuName.length; i++) {
+			pi = new PayInfo();
+			pi.setRshopName(shopName);
+			pi.setRshopAddr(shopAddr);
+			pi.setRmenuName(menuName[i]);
+			pi.setRmenuCount(menuCount[i]);
+			pi.setRmenuPrice(menuPrice[i]);
+			pi.setTotalPay(total);
 			
-			System.out.println("메뉴이름 :" + menuName[i]);
-			System.out.println("메뉴 수량 : " + menuCount[i]);
-			System.out.println("메뉴 가격 : " + menuPrice[i]);
+			list.add(pi);
 		}
-		System.out.println(date);
-	
+		
+		for(PayInfo pi2 : list) {
+			System.out.println(pi2);
+		}
+		
+		String page ="";
+		
+		if(mc != null && list != null) {
+			request.setAttribute("mc", mc);
+			request.setAttribute("list", list);
+			page = "/views/pay_5.jsp";
+		}else {
+			
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
+		
+		
 	}
 
 	/**
