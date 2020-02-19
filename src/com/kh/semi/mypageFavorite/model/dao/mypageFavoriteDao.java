@@ -1,5 +1,7 @@
 package com.kh.semi.mypageFavorite.model.dao;
 
+import static com.kh.semi.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,11 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.semi.member.model.dao.MemberDao;
-import com.kh.semi.member.model.vo.MemberReservationList;
 import com.kh.semi.mypageFavorite.model.vo.MypageFavorite;
 import com.kh.semi.shop.model.vo.Shop;
-import static com.kh.semi.common.JDBCTemplate.*;
 
 public class mypageFavoriteDao {
 	private Properties prop;
@@ -82,6 +81,7 @@ public class mypageFavoriteDao {
 	public int isExist(Connection con, MypageFavorite mf) {
 		int result = 0;
 		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String sql = prop.getProperty("isExist");
 		
 		try {
@@ -89,11 +89,16 @@ public class mypageFavoriteDao {
 			pstmt.setString(1, mf.getUserId());
 			pstmt.setString(2, mf.getShopPid());
 			
-			result = pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(rset);
 			close(pstmt);
 		}
 		
