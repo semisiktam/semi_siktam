@@ -26,19 +26,19 @@
     				var $recent = $('.recent');
     				var $ul = $('<ul>');
     				$.each(data,function(index,value){
-    				var $li = $('<li>');
-    				var $recentDiv = $('<div class="registStore2" id="recentDiv">');
-    				var $imgArea = $('<img src="" class="registStoreImg" alt="" width="170px" height="120px"><br>').text(value.shopImg);
-    				var $h4 = $('<h4 align="center">').text(value.shopName);
-    				var $p = $('<p align="center"><small>').text(value.sAddr);
+	    				var $li = $('<li>');
+	    				var $recentDiv = $('<div class="registStore2" id="recentDiv">');
+	    				var $imgArea = $('<img src="" class="registStoreImg" alt="" width="170px" height="120px"><br>').text(value.shopImg);
+	    				var $h4 = $('<h4 align="center">').text(value.shopName);
+	    				var $p = $('<p align="center"><small>').text(value.sAddr);
     				
-    				$content3.append($recent);
-    				$recent.append($ul);
-    				$ul.append($li);
-    				$li.append($recentDiv);
-    				$recentDiv.append($imgArea);
-    				$recentDiv.append($h4);
-    				$recentDiv.append($p);
+	    				$content3.append($recent);
+	    				$recent.append($ul);
+	    				$ul.append($li);
+	    				$li.append($recentDiv);
+	    				$recentDiv.append($imgArea);
+	    				$recentDiv.append($h4);
+	    				$recentDiv.append($p);
     				
     				});
     			},error:function(){

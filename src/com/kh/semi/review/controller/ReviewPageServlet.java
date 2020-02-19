@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.notice.model.vo.PageInfo;
+import com.kh.semi.review.model.vo.PageInfo;
 import com.kh.semi.review.model.service.ReviewService;
 import com.kh.semi.review.model.vo.Review;
+import com.kh.semi.review.model.vo.ReviewScore;
 import com.kh.semi.shop.model.vo.Shop;
 
 /**
@@ -33,11 +34,11 @@ public class ReviewPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 리뷰 리스트 받아오기
+		// 리뷰 리스트 받아오기 최신순
 		// 멤버(로그인정보)(헤더에 딸려온다) 와 가게 번호 받아오기 -> 가게 번호로 가게 정보 가져오는 기능
 		
 		String shopPid = request.getParameter("shopPid");
-		
+		ArrayList<Review> allReviewList = new ArrayList<Review>();
 		ArrayList<Review> rList = new ArrayList<Review>();
 		
 		ReviewService rs = new ReviewService();
@@ -57,6 +58,7 @@ public class ReviewPageServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
+		// 리뷰 전체 갯수
 		int listCount = rs.getListCount(shopPid);
 		
 		maxPage = (int)((double)listCount/limit+0.9);
@@ -71,10 +73,51 @@ public class ReviewPageServlet extends HttpServlet {
 		// 페이지 처리
 		
 		rList = rs.selectReviewList(shopPid,currentPage,limit);
+		allReviewList = rs.selectAllReviewList(shopPid);
+		
+		
 		
 		Shop s = new Shop();
 		
 		s = rs.selectShop(shopPid);
+		
+		// 점수 처리
+		// 각각 갯수
+		int five = 0;
+		int four = 0;
+		int three = 0;
+		int two = 0;
+		int one = 0;
+		// 총 점수
+		int total = 0;
+		for(Review rg : allReviewList ) {
+			switch(rg.getScore()) {
+				case 1 : one++; total+=1; break;
+				case 2 : two++; total+=2; break;
+				case 3 : three++; total+=3; break;
+				case 4 : four++; total+=4; break;
+				case 5 : five++; total+=5; break;
+			}
+		}
+		
+		double score = (double)total/(double)listCount;
+		int fScore = 0;
+		if(score < 1.5) {
+			fScore = 1;
+		}else if(score < 2.5) {
+			fScore = 2;
+		}else if(score < 3.5) {
+			fScore = 3;
+		}else if(score < 4.5) {
+			fScore = 4;
+		}else {
+			fScore = 5;
+		}
+		
+		score = Math.round(score*10)/10.0;
+		
+		
+		ReviewScore rScore = new ReviewScore(one,two,three,four,five,total,score,fScore);
 		
 		String page="";
 		
@@ -83,6 +126,8 @@ public class ReviewPageServlet extends HttpServlet {
 			page = "/views/productReviewPage_7.jsp";
 			request.setAttribute("reviewList", rList);
 			request.setAttribute("shop", s);
+			request.setAttribute("ReviewScore",rScore);
+			request.setAttribute("allReviewList", allReviewList);
 			
 			PageInfo pi = new PageInfo(currentPage, listCount,limit,maxPage,startPage,endPage);
 			request.setAttribute("pi", pi);
