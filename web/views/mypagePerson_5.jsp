@@ -285,12 +285,13 @@
                  <%for(Shop s : fsList){ %>
                     <li>
                         <div class="registStore2" onclick="location.href='productDetailPage_6.jsp'">
+                        	<input type="hidden" id="shopPid" value="<%= s.getShopPid() %>"/>
                             <img src="<%=s.getShopImg() %>" class="registStoreImg" alt="역전우동" width="170px" height="120px"><br>
                             <h4 align="center"><%=s.getShopName() %></h4>
                             <p align="center"><small><%=s.getsAddr() %></small></p>
                         </div>
                         <div class="bookmark">
-                        <p class="star">★</a>
+                        <p class="star" style="color:rgb(255, 184, 53)">★</a>
                         </div>                        
                     </li>
                     <%} %>
@@ -338,9 +339,35 @@
 			<script>
                   $(document).ready(function(){
                   	$('.star').toggle(function(){
-                      $(this).css({'color':'rgb(255, 184, 53)'});
+                      $(this).css({'color':'#eee'});
+                      $.ajax({
+                    	  	url:"/siktam/shopDeleteFavorite.si",
+              				type:"get",
+              				data:{
+              					shopPid : $('#shopPid').val()
+              				},
+              				success: function(data){
+              					console.log(data);
+              				},
+              				error: function(){
+              					console.log("결과 전송 실패");
+              				}
+                      });
                       },function(){
-                          $(this).css({'color':'#eee'});
+                          $(this).css({'color':'rgb(255, 184, 53)'});
+                          $.ajax({
+                      	  	url:"/siktam/shopInsertFavorite.si",
+  	          				type:"get",
+  	          				data:{
+  	          					shopPid : $('#shopPid').val()
+  	          				},
+  	          				success: function(data){
+  	          					console.log(data);
+  	          				},
+  	          				error: function(){
+  	          					console.log("결과 전송 실패");
+  	          				}
+                        });
                        });
                   });
             </script>

@@ -736,24 +736,59 @@ public class ShopDao {
 		return recordShop;
 	}
 
-	/*public int deleteShopRecentRecord(Connection con, String userId) {
+	/**
+	 * 즐겨찾기 등록하기
+	 * @param con
+	 * @param userId
+	 * @param shopPid
+	 * @return
+	 */
+	public int shopFavoriteInsert(Connection con, String userId, String shopPid) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("deleteShopRecentRecord");
+		String sql = prop.getProperty("shopFavoriteInsert");
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, userId);
+			
+			pstmt.setString(1,userId);
+			pstmt.setString(2, shopPid);
 			
 			result = pstmt.executeUpdate();
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
-			
 		}
 		return result;
-	}*/
+	}
+
+	/**
+	 * 즐겨찾기 삭제하기
+	 * @param con
+	 * @param userId
+	 * @param shopPid
+	 * @return
+	 */
+	public int shopFavoriteDelete(Connection con, String userId, String shopPid) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("shopFavoriteDelete");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1,userId);
+			pstmt.setString(2, shopPid);
+			
+			result = pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
 }
