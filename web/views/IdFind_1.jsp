@@ -69,7 +69,7 @@
 							<input type="text" class="text" name="phoneName" id="phoneName"
 								placeholder="이름을 입력해 주세요" required><br> <input type="text"
 								class="text" name="phoneNumber" id="phoneNumber" placeholder="가입했을때 등록된 핸드폰 번호" required>&nbsp;
-							<input type="button" id="idresult1" value="다음단계">
+							<input type="button" id="idresult1" value="찾기">
 
 						</div>
 					</form>
@@ -92,12 +92,13 @@
 							이름/생년월일/성별 찾기</label><br>
 						<div id="f2" class="radioDiv">
 							<input type="text" class="text" name="BirthName" id="BirthName"
-								placeholder="이름을 입력해 주세요" required>&nbsp; <input
+								placeholder="이름을 입력해 주세요" required>&nbsp;
+								<input
 								type="text" class="text" name="Birth" id="Birth"
 								placeholder="주민번호 앞자리를 입력하세요(900217형식으로 입력)" required>&nbsp;
 							<input type="text" class="text" name="Gender" id="Gender"
 								placeholder="성별을 입력해 주세요(남성/여성으로 입력)" required>&nbsp;
-								<input type="button" id="idresult2" value="다음단계">
+								<input type="button" id="idresult2" value="찾기">
 								
 							<!-- <input
 								type="date" name="Birth" id="Birth" class="text">&nbsp;
