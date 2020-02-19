@@ -10,7 +10,7 @@ import static com.kh.semi.common.JDBCTemplate.*;
 
 public class mypageFavoriteService {
 
-	private mypageFavoriteDao mfDao;
+	private mypageFavoriteDao mfDao = new mypageFavoriteDao();
 
 	public ArrayList<Shop> selectFavoriteShop(String userId) {
 		Connection con = getConnection();
