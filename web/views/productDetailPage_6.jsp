@@ -52,8 +52,70 @@
         	$(document).ready(function(){
         		if($('#fav').val()=='o'){
         			$('#star').css({'color':'rgb(255, 184, 53)'});
+        			$('#star').toggle(function(){
+        				$(this).css({'color':'#eee'});
+                        $.ajax({
+                    	  	url:"/siktam/shopDeleteFavorite.si",
+              				type:"get",
+              				data:{
+              					shopPid : $('#shopPid').val()
+              				},
+              				success: function(data){
+              					console.log(data);
+              				},
+              				error: function(){
+              					console.log("결과 전송 실패");
+              				}
+                      });
+                    },function(){
+                    	$(this).css({'color':'rgb(255, 184, 53)'});
+                        $.ajax({
+                    	  	url:"/siktam/shopInsertFavorite.si",
+              				type:"get",
+              				data:{
+              					shopPid : $('#shopPid').val()
+              				},
+              				success: function(data){
+              					console.log(data);
+              				},
+              				error: function(){
+              					console.log("결과 전송 실패");
+              				}
+                      });
+                    });
         		}else{
         			$('#star').css({'color':'#eee'});
+        			$('#star').toggle(function(){
+                        $(this).css({'color':'rgb(255, 184, 53)'});
+                        $.ajax({
+                    	  	url:"/siktam/shopInsertFavorite.si",
+              				type:"get",
+              				data:{
+              					shopPid : $('#shopPid').val()
+              				},
+              				success: function(data){
+              					console.log(data);
+              				},
+              				error: function(){
+              					console.log("결과 전송 실패");
+              				}
+                      });
+                    },function(){
+                        $(this).css({'color':'#eee'});
+                        $.ajax({
+                    	  	url:"/siktam/shopDeleteFavorite.si",
+              				type:"get",
+              				data:{
+              					shopPid : $('#shopPid').val()
+              				},
+              				success: function(data){
+              					console.log(data);
+              				},
+              				error: function(){
+              					console.log("결과 전송 실패");
+              				}
+                      });
+                    });
         		}
         	});
         	
