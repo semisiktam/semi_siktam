@@ -138,8 +138,8 @@ public int updateAdminMember(Member m, BlackList bl) {
 	
 	int result = mDao.updateAdminMember(con, m);
 	
-	int result2 = mDao.insertAdminBlack(con, bl);
-	
+	mDao.insertAdminBlack(con, bl);
+
 	if(result>0) commit(con);
 	else rollback(con);
 	
@@ -159,6 +159,23 @@ public int deleteMember(String userId, String password) {
 	
 	return result;
 	
+}
+
+public int updateAdminMember2(Member m) {
+	Connection con = getConnection();
+	
+	int result = mDao.updateAdminMember(con, m);
+	
+	String userId = m.getUserId();
+	
+	mDao.deleteAdminBlack(con, userId);
+
+	if(result>0) commit(con);
+	else rollback(con);
+	
+	close(con);
+	
+	return result;
 }
 
 

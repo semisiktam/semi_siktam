@@ -131,6 +131,12 @@ public class ShopService {
 		return result;
 	}
 
+	/**
+	 * 마이페이지(개인) 최근 들여다본 기록 넣기
+	 * @param userId
+	 * @param shopPid
+	 * @return
+	 */
 	public int shopRecordInsert(String userId, String shopPid) {
 		Connection con = getConnection();
 		
@@ -143,22 +149,50 @@ public class ShopService {
 		return result;
 	}
 
+	/**
+	 * 마이페이지(개인) 최근 들여다본 기록 갖고오기
+	 * @param userId
+	 * @return
+	 */
 	public ArrayList<Shop> SelectShopRecentRecord(String userId) {
 		Connection con = getConnection();
 		
 		ArrayList<Shop> recordShop = new ShopDao().SelectShopRecentRecord(con,userId);
 		
-		/*if(recordShop!=null) {
-			int result = new ShopDao().deleteShopRecentRecord(con,userId);
-			if(result>0) {
-				commit(con);
-			}else {
-				rollback(con);
-			}
-		}*/
-		
 		close(con);
 		return recordShop;
+	}
+
+	/**
+	 * 탐희 즐겨찾기 등록하기
+	 * @param userId
+	 * @param shopPid
+	 * @return
+	 */
+	public int shopFavoriteInsert(String userId, String shopPid) {
+		Connection con = getConnection();
+		
+		int result = new ShopDao().shopFavoriteInsert(con,userId,shopPid);
+		
+		if(result>0)commit(con);
+		else rollback(con);
+		return result;
+	}
+
+	/**
+	 * 탐희 즐겨찾기 삭제하기
+	 * @param userId
+	 * @param shopPid
+	 * @return
+	 */
+	public int shopFavoriteDelete(String userId, String shopPid) {
+		Connection con = getConnection();
+		
+		int result = new ShopDao().shopFavoriteDelete(con,userId,shopPid);
+		
+		if(result>0)commit(con);
+		else rollback(con);
+		return result;
 	}
 
 	

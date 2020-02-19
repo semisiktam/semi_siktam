@@ -59,55 +59,54 @@
         <input type="reset" class="btn" value="취소" onclick="location.href='selectList.me'">
 	</div>
 	
+	<input type="hidden" class="inputInfo" name="userId" value="<%= m.getUserId() %>">
+	<input type="hidden" class="inputInfo" name="password" value="<%= m.getPassword() %>">
+	<input type="hidden" class="inputInfo" name="enrolldate" value="<%= m.getEnrolldate() %>">
 	<div id="container2">
 		<table style='width: 500px; border-style: solid; border-width: 1px; left: 50%; position: absolute; height: 200px; text-align: center; margin: 0px 0pt 0pt -250px; border-color:gray' cellspacing="0" cellpadding="0">
 			<tr>
 				<td>아이디</td>
-				<td> <input type="text" class="inputInfo" name="userId" value="<%= m.getUserId() %>"></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td> <input type="text" class="inputInfo" name="password" value="<%= m.getPassword() %>"></td>
+				<td style="text-align: left"><%= m.getUserId() %></td>
 			</tr>
 			<tr>
 				<td>주소</td>
-				<td> <input type="text" class="inputInfo" name="addr" value="<%= m.getAddr() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="addr" value="<%= m.getAddr() %>"></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td> <input type="text" class="inputInfo" name="name" value="<%= m.getName() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="name" value="<%= m.getName() %>"></td>
 			</tr>
 			<tr>
 				<td>주민번호</td>
-				<td> <input type="text" class="inputInfo" name="pid" value="<%= m.getPid() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="pid" value="<%= m.getPid() %>"></td>
 			</tr>
 			<tr>
 				<td>전화번호</td>
-				<td> <input type="text" class="inputInfo" name="phone" value="<%= m.getPhone() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="phone" value="<%= m.getPhone() %>"></td>
 			</tr>
 			<tr>
 				<td>업체</td>
-				<td> <input type="text" class="inputInfo" name="shopyn" value="<%= m.getShopYN() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="shopyn" value="<%= m.getShopYN() %>"></td>
 			</tr>
 			<tr>
 				<td>마일리지</td>
-				<td> <input type="text" class="inputInfo" name="mileage" value="<%= m.getMileage() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="mileage" value="<%= m.getMileage() %>"></td>
 			</tr>
 			<tr>
 				<td>쿠폰</td>
-				<td> <input type="text" class="inputInfo" name="couponno" value="<%= m.getCouponNo() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="couponno" value="<%= m.getCouponNo() %>"></td>
 			</tr>
 			<tr>
 				<td>블랙리스트</td>
-				<td><input type="text" class="inputInfo" name="blackyn" value="<%= m.getBlackYN() %>"></td>
+				<td style="text-align: left"><input type="text" class="inputInfo" name="blackyn" value="<%= m.getBlackYN() %>"></td>
 			</tr>
 			<tr>
 				<td>회원탈퇴</td>
-				<td> <input type="text" class="inputInfo" name="outyn" value="<%= m.getOutYN() %>"></td>
+				<td style="text-align: left"> <input type="text" class="inputInfo" name="outyn" value="<%= m.getOutYN() %>"></td>
 			</tr>
 			<tr>
 				<td>가입일</td>
-				<td> <input type="text" class="inputInfo" name="enrolldate" value="<%= m.getEnrolldate() %>"></td>
+				<td style="text-align: left"><%= m.getEnrolldate() %></td>
 			</tr>
 		</table>
 	</div>
