@@ -486,5 +486,102 @@ public int deleteAdminBlack(Connection con, String userId) {
 	return result;
 }
 
+public int getListCount(Connection con, String category, String keyword) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = null;
+	
+	switch(category) {
+	case "userId":
+		sql = prop.getProperty("searchUserIdMember");
+		break;
+	case "name":
+		sql = prop.getProperty("searchNameMember");
+		break;
+	case "phone":
+		sql = prop.getProperty("searchPhoneMember");
+		break;
+	}
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, keyword);
+        
+        rset = pstmt.executeQuery();
+        
+        if(rset.next()) {
+           result = rset.getInt(1);
+        }
+        
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	
+	return result;
+}
+
+public ArrayList<Member> selectList(Connection con, String category, String keyword, int currentPage, int limit) {
+	ArrayList<Member> list = null;
+    PreparedStatement pstmt = null;
+    ResultSet rset = null;
+    
+    String sql = null;
+    
+    switch(category) {
+	case "userId":
+		sql = prop.getProperty("listSearchUserIdMember");
+		break;
+	case "name":
+		sql = prop.getProperty("listSearchNameMember");
+		break;
+	case "phone":
+		sql = prop.getProperty("listSearchPhoneMember");
+		break;
+	}
+    
+    try {
+       pstmt = con.prepareStatement(sql);
+       int startRow = (currentPage-1)*limit+1; // 1  11
+       int endRow = startRow + limit - 1;
+       
+       pstmt.setString(1, keyword);
+       pstmt.setInt(2, endRow);
+       pstmt.setInt(3, startRow);
+        
+       rset = pstmt.executeQuery();
+       
+       list = new ArrayList<Member>();
+       
+       while(rset.next()) {
+          Member m = new Member();
+          m.setUserId(rset.getString("userid"));
+          m.setPassword(rset.getString("password"));
+          m.setAddr(rset.getString("addr"));
+          m.setName(rset.getString("name"));
+          m.setPid(rset.getString("pid"));
+          m.setPhone(rset.getString("phone"));
+          m.setShopYN(rset.getString("shop_yn"));
+          m.setMileage(rset.getInt("mileage"));
+          m.setCouponNo(rset.getInt("coupon_no"));
+          m.setBlackYN(rset.getString("black_yn"));
+          m.setOutYN(rset.getString("out_yn"));
+          m.setEnrolldate(rset.getDate("enrolldate"));
+          
+          list.add(m);
+       }
+    }catch(SQLException e) {
+       e.printStackTrace();
+    }finally {
+       close(rset);
+       close(pstmt);
+    }
+    
+    return list;
+}
+
 
 }
