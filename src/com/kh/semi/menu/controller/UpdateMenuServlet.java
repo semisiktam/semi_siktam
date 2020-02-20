@@ -29,24 +29,31 @@ public class UpdateMenuServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String menuNo=request.getParameter("menuNo");
-		System.out.println("menuNo"+menuNo);
 		String shopPid=request.getParameter("shopPid");
-		System.out.println("shopPid"+shopPid);
 		String menuName=request.getParameter("menuName");
-		System.out.println("menuName"+menuName);
 		String menuImg=request.getParameter("menuImg");
-		System.out.println(menuImg+":menuImg");
 		int menuPrice=Integer.parseInt(request.getParameter("menuPrice"));
-		System.out.println(menuPrice+":menuPrice");
 		String menuInfo=request.getParameter("menuInfo");
-		System.out.println(menuInfo+":menuInfo");
+
 		Menu m=new Menu(menuNo,shopPid, menuName, menuImg, menuPrice, menuInfo);
-		System.out.println(m);
-		int result=new MenuService().updateMenu(m);
+		
+		System.out.println(menuNo);
+		System.out.println(shopPid);
+		System.out.println(menuName);
+		System.out.println(menuImg);
+		System.out.println(menuPrice);
+		System.out.println(menuInfo);
+	
+	
+		int result = new MenuService().updateMenu(m);
+		
+		
+		
+		
 		if(result>0) {
 			request.setAttribute("shopPid", shopPid);
-			request.getRequestDispatcher("/views/registerMenu_5.jsp").forward(request, response);
-			
+			request.getRequestDispatcher("/myMenulist.menu").forward(request, response);
+
 		}else {
 			
 		}
