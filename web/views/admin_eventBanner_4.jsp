@@ -146,7 +146,7 @@ $(function(){
 	}).click(function(){
 		//console.log($(this).parent().children().eq(0).text());
 		var eno = $(this).parent().children().eq(0).text();
-		location.href="<%=request.getContextPath()%>/eSelctOne.ev?eno=" + eno;
+		location.href="<%=request.getContextPath()%>/esList.es?eno=" + eno;
 	});
 });
 

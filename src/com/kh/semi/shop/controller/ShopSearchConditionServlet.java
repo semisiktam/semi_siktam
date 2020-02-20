@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.kh.semi.shop.model.service.ShopService;
@@ -36,13 +37,26 @@ public class ShopSearchConditionServlet extends HttpServlet {
 				request.setCharacterEncoding("UTF-8");
 				response.setContentType("application/json; charset=UTF-8");
 				
-				String keyword = request.getParameter("keyword");
+				String keyword = request.getParameter("key");
 				String[] tlist = request.getParameterValues("tlist");
 				String[] clist = request.getParameterValues("clist");
 				String[] plist = request.getParameterValues("plist");			
 				String line = request.getParameter("line");
+				
+				/*HttpSession session=request.getSession();
+				session.setAttribute("tlist", tlist);
+				session.setAttribute("tlist", clist);
+				session.setAttribute("tlist", plist);
+				session.setAttribute("tlist", line);
+				*/
+				
+				
 				System.out.println(keyword);
-				System.out.println(line);
+				
+				if(keyword.equals("null") || keyword == null) {
+					keyword = null;
+				}
+				
 				ArrayList<ShopSearch> list = new ShopService().SearchCondition(keyword,line,tlist,clist,plist);
 				
 				for(ShopSearch sc : list) {

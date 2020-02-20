@@ -195,6 +195,5 @@ public class ShopService {
 		return result;
 	}
 
-	
  
 } 
