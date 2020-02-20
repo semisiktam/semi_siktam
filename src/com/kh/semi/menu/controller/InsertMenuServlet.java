@@ -43,11 +43,13 @@ public class InsertMenuServlet extends HttpServlet {
 		
 		int result=new MenuService().insertMenu(m);
 		if(result>0) {
-			
+			request.setAttribute("shopPid", shopPid);
+			request.getRequestDispatcher("/myMenulist.menu").forward(request, response);
+
 		}else {
-			
+			request.setAttribute("msg", "추가실패!");
+			request.getRequestDispatcher("/views/common/errorPage.jsp");
 		}
-		
 	}
 
 	/**

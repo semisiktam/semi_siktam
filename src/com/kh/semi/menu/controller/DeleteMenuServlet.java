@@ -29,7 +29,17 @@ public class DeleteMenuServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String menuNo=request.getParameter("menuNo");
+		String shopPid=request.getParameter("shopPid");
 		int result=new MenuService().deleteMenu(menuNo);
+		
+		if(result>0) {
+			request.setAttribute("shopPid", shopPid);
+			request.getRequestDispatcher("/myMenulist.menu").forward(request, response);
+
+		}else {
+			request.setAttribute("msg", "삭제 실패!");
+			request.getRequestDispatcher("/views/common/errorPage.jsp");
+		}
 	}
 
 	/**
