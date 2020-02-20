@@ -5,6 +5,7 @@ import static com.kh.semi.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.semi.member.model.vo.MemberReservationList;
 import com.kh.semi.reservation.model.dao.ReservationDao;
 import com.kh.semi.reservation.model.vo.ReservationTest; 
 public class ReservationService {
@@ -18,6 +19,15 @@ public class ReservationService {
 		
 		close(con);
 		return list;
+	}
+
+	public ArrayList<MemberReservationList> reservationModify(String userid, String reserveNo) {
+		Connection con = getConnection();
+		
+		ArrayList<MemberReservationList> mrList = rDao.reservationModify(con,userid,reserveNo);
+		
+		close(con);
+		return mrList;
 	}
 
 }

@@ -261,6 +261,11 @@ public ArrayList<MemberReservationList> selectUserReserve(Connection con, String
 		while(rset.next()) {
 			MemberReservationList mrListVo = new MemberReservationList();
 			
+			mrListVo.setResNo(rset.getString("RESERVE_NO"));
+			mrListVo.setmNo(rset.getString("MENU_NO"));
+			mrListVo.setShopPid(rset.getString("SHOP_PID"));
+			mrListVo.setpNo(rset.getString("PAY_NO"));
+			mrListVo.setsAddr(rset.getString("SHOP_ADDR"));
 			mrListVo.setShopName(rset.getString("SHOP_NAME"));
 			mrListVo.setrDate(rset.getDate("RESERVE_DATE"));
 			mrListVo.setrTime(rset.getString("RESERVE_TIME"));
