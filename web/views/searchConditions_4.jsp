@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.shop.model.vo.*"%>
 	<%
 		ArrayList<ShopSearch> list = (ArrayList<ShopSearch>)request.getAttribute("list");
-		String keyword = (String)request.getAttribute("keyword");
+		String skeyword = (String)request.getAttribute("skeyword");
 	%>
 <!DOCTYPE html>
 <html>
@@ -147,12 +147,31 @@
 			var index = $('#line_up').children().index(this);
 			var line = $('#line_up').children().eq(index).text();
 			
+			 var key = '<%=skeyword%>'
+			 var tlist = [];
+		     var clist = [];
+		     var plist = [];
+		     
+		     $("input[name='table']:checked").each(function(i){
+		            tlist.push($(this).val());
+		     });
+		     $("input[name='category']:checked").each(function(i){
+		            clist.push($(this).val());
+		     });
+		     $("input[name='price']:checked").each(function(i){
+		            plist.push($(this).val());
+		     });
+			
 			$.ajax({
 				url:"/siktam/SearchCondition.sc",
 				type:"get",	
 				traditional : true, 
 		        data:{
-		        	"line" : line
+		        	"tlist" : tlist,
+		            "clist" : clist,
+		            "plist" : plist,
+		        	"line" : line,
+		        	"key" : key
 		        },success:function(data){
 		        	console.log(data);
 		            $('#tbl').find('tr').remove();
@@ -213,10 +232,20 @@
         } 
     </script> -->
     <script>
+    $(function(){
+    	
+    /* var line;
+    $('#line_up').children().click(function(){
+		var index = $('#line_up').children().index(this);
+		line = $('#line_up').children().eq(index).text();	
+    });	 */
     $('.table-check').click(function(){
         var tlist = [];
         var clist = [];
         var plist = [];
+        
+        var key = '<%=skeyword%>'
+        
         $("input[name='table']:checked").each(function(i){
             tlist.push($(this).val());
          });
@@ -227,6 +256,7 @@
             plist.push($(this).val());
          });
         <%-- location.href="<%=request.getContextPath()%>/SearchCondition.sc?tlist=" + tlist + "&clist=" + clist + "&plist=" +plist; --%>
+        
          $.ajax({
             url:"/siktam/SearchCondition.sc",
             type:"get",
@@ -235,6 +265,7 @@
                "tlist" : tlist,
                "clist" : clist,
                "plist" : plist,
+               "key" : key
             },success:function(data){
                console.log(data);
                $('#tbl').find('tr').remove();
@@ -274,6 +305,19 @@
             	   $tr.append($tdT);
             	   
             	   $('#tbl').append($tr);
+            	   
+            	   $(function(){
+           			
+           			$("#tbl td").mouseenter(function(){
+           				$(this).parent().css({"background":"lightgray", "cursor":"pointer"});
+           			}).mouseout(function(){
+           				$(this).parent().css({"background":"white"});
+           			}).click(function(){
+           				//console.log($(this).parent().children().eq(0).text());
+           				var shopPid = $(this).parent().children().eq(0).text();
+           				location.href="<%=request.getContextPath()%>/sSelect.so?shopPid=" + shopPid;
+           			});
+           		});
                } 
                	   	
             },error:function(){
@@ -281,6 +325,7 @@
             }
           }); 
      }); 
+    });
    
     </script>
     </div>

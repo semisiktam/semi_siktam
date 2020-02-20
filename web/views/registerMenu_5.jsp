@@ -154,8 +154,6 @@
             </div>
         </div>
         </div>
-    
-
     <!-- 푸터 시작 -->
     <%@ include file="common/footer.jsp" %>
 </body>

@@ -1,4 +1,4 @@
-package com.kh.semi.shop.controller;
+package com.kh.semi.reservation.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,20 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.semi.member.model.vo.Member;
-import com.kh.semi.shop.model.service.ShopService;
-import com.kh.semi.shop.model.vo.ShopSearch;
+import com.kh.semi.member.model.vo.MemberReservationList;
+import com.kh.semi.menu.model.sevice.MenuService;
+import com.kh.semi.menu.model.vo.Menu;
+import com.kh.semi.reservation.model.service.ReservationService;
 
 /**
- * Servlet implementation class ShopMainSearchServlet
+ * Servlet implementation class ReservationModifyServlet
  */
-@WebServlet("/searchMain.sc")
-public class ShopMainSearchServlet extends HttpServlet {
+@WebServlet("/reserveModify.rm")
+public class ReservationModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-        
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopMainSearchServlet() {
+    public ReservationModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,43 +35,33 @@ public class ShopMainSearchServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 2020-02-11 2020-02-11 현희 수정(서치기능)
+		HttpSession session = request.getSession();
+		Member m=(Member)session.getAttribute("member");
 		
-		// 검색
-		String keyword = request.getParameter("keyword");
+		String userid = m.getUserId();
+		String reserveNo = request.getParameter("reserveNo");
+		String shopPid = request.getParameter("shopPid");
 		
-		if(keyword == null || keyword =="") {
-			keyword = null;
-		}
+		ReservationService rs = new ReservationService();
+		ArrayList<MemberReservationList> mrList = rs.reservationModify(userid,reserveNo);
 		
-		System.out.print(keyword);
-		ArrayList<ShopSearch> list = new ArrayList<ShopSearch>();
+		ArrayList<Menu> list = new ArrayList<Menu>();
+		MenuService ms = new MenuService();
 		
-		ShopService ss = new ShopService();
-		
-		list = ss.searchMain(keyword);
-		
-		//--------------------------------------------------------------
+		list = ms.selectList(shopPid);
 		
 		String page = "";
 		
-//		System.out.println(list.isEmpty());
-		
-		if(list != null) { 
-			page = "views/searchConditions_4.jsp";
-			request.setAttribute("list", list);
-			request.setAttribute("skeyword", keyword);
+		if(mrList!=null) {
+			page="views/modify_3.jsp";
+			request.setAttribute("mrList", mrList);
+			request.setAttribute("mList",list);
 		}else {
-			page = "views/errorPage.jsp";
-			request.setAttribute("msg", "지역 검색에 실패했답니다~");
+			request.setAttribute("msg", "예약내역 불러오기 에러 ");
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		
-		// 2020-02-11 2020-02-11 현희 수정(서치기능)
-		
-		
-	
 	}
 
 	/**
