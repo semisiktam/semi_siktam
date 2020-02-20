@@ -29,7 +29,7 @@ public class ShopPidCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int searchPid = Integer.parseInt(request.getParameter("Shoppid")); 
+		String searchPid = request.getParameter("Shoppid"); 
 		String searchName = request.getParameter("Shopname");
 		
 	String address = "http://apis.data.go.kr/B552015/NpsBplcInfoInqireService/getBassInfoSearch?serviceKey=J7gW4zUA9N1YP74mfR%2BCv9bRE1jBZsjxpJoj1ASuF2ncC3aO2Yu7U7uirQTKxcGtSx5aV2WKmdZfAAO8hDHP6w%3D%3D&wkpl_nm="
@@ -38,7 +38,8 @@ public class ShopPidCheckServlet extends HttpServlet {
 	System.out.println(searchPid);
 	System.out.println(searchName);
 	System.out.println(address);
-		
+	
+	
 	}
 
 	/**

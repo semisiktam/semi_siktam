@@ -10,7 +10,7 @@
 <body>
 <div>
 <form action="/siktam/spc.me" method="post">
-사업자번호 : <input type="number" class="form-control" name="Shoppid">
+사업자번호 : <input type="text" class="form-control" name="Shoppid">
 사업장명 :<input type="text" class="form-control" name="Shopname">
                     <button id="shopNum">확인</button>
 </form>
