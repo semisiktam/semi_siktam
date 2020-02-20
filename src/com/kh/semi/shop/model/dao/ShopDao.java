@@ -117,8 +117,7 @@ public class ShopDao {
 		return result;
 	}
 
-	public ArrayList<ShopSearch> SearchCondition(Connection con, String keyword, String line, String[] tlist, String[] clist,
-			String[] plist) {
+	public ArrayList<ShopSearch> SearchCondition(Connection con, String keyword, String line, String[] tlist, String[] clist, String[] plist) {
 		ArrayList<ShopSearch> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -152,6 +151,7 @@ public class ShopDao {
 				}
 			}
 		}
+		
 		if(line != null) {
 			if(line.equals("리뷰 순")) {
 				line_up= "COUNT(RE.SHOP_PID)";
@@ -196,9 +196,10 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("AVG_PAY").inequalityRigth(avgPay1).enter().or()
-							.columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
-							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.where().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter()
 							
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -240,10 +241,11 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("MENU_CATEGORY").in().condition(clist).enter().and()
-							.columnName("AVG_PAY").inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY")
-							.betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
-							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.where().columnName("MENU_CATEGORY").in().condition(clist).enter()
+							.and().leftbracket().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter().rightbracket()
 							
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -285,10 +287,11 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("TABLE_TYPE").in().condition(tlist).enter().and().columnName("AVG_PAY")
-							.inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3)
-							.enter().or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter().or()
-							.columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+							.and().leftbracket().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter().rightbracket()
 							
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -309,9 +312,34 @@ public class ShopDao {
 						.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 						.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 						
-						.where().columnName("TABLE_TYPE").in().condition(tlist).enter().and()
-						.columnName("MENU_CATEGORY").in().condition(clist).enter()
+						.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+						.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
 						
+						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+						.column("S.MENU_CATEGORY").enter()
+						
+						.orderBy().columnName(line_up).desc()
+						
+						.build();
+			}else if(tlist != null && clist != null && plist != null) {
+				query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+						.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+						.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+						.column("S.MENU_CATEGORY").comma().column("ROUND(NVL(AVG(RE.SCORE),1),0)").comma()
+						.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+						
+						.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+						.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+						.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+						
+						.where().columnName("TABLE_TYPE").in().condition(tlist).enter()
+						.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+						.and().leftbracket().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+						.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+						.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+						.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter().rightbracket()
+				
 						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 						.column("S.MENU_CATEGORY").enter()
@@ -333,7 +361,7 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("SHOP_ADDR").like().bothPattern(keyword)
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
 					
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -354,10 +382,11 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
-							.columnName("AVG_PAY").inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY")
-							.betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
-							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
+							.and().leftbracket().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter().rightbracket()
 							
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -379,8 +408,8 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
-							.columnName("MENU_CATEGORY").in().condition(clist).enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
+							.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
 							
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -400,11 +429,12 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and()
-							.columnName("MENU_CATEGORY").in().condition(clist).enter().and().columnName("AVG_PAY")
-							.inequalityRigth(avgPay1).enter().or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3)
-							.enter().or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter().or()
-							.columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
+							.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+							.and().leftbracket().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter().rightbracket()
 					
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -427,8 +457,8 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and().columnName("TABLE_TYPE")
-							.in().condition(tlist).enter()
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
+							.and().columnName("TABLE_TYPE").in().condition(tlist).enter()
 							
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -448,10 +478,12 @@ public class ShopDao {
 							.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 							.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 							
-							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and().columnName("TABLE_TYPE")
-							.in().condition(tlist).enter().and().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
-							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter().or().columnName("AVG_PAY")
-							.betweenAnd(avgPay4, avgPay5).enter().or().columnName("AVG_PAY").inequalityLeft(avgPay6)
+							.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
+							.and().columnName("TABLE_TYPE").in().condition(tlist).enter()
+							.and().leftbracket().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+							.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+							.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter().rightbracket()
 							
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
@@ -472,9 +504,36 @@ public class ShopDao {
 						.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
 						.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
 						
-						.where().columnName("SHOP_ADDR").like().bothPattern(keyword).and().columnName("TABLE_TYPE").in()
-						.condition(tlist).enter().and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+						.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
+						.and().columnName("TABLE_TYPE").in().condition(tlist).enter()
+						.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
 						
+						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
+						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
+						.column("S.MENU_CATEGORY").enter()
+						
+						.orderBy().columnName(line_up).desc()
+						
+						.build();
+			}else if(tlist != null && clist != null && plist != null) {
+				query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
+						.column("S.SHOP_IMG").comma().column("S.SHOP_NAME").comma().column("S.SHOP_ADDR")
+						.comma().column("S.TABLE_TYPE").comma().column("S.MENU_CATEGORY").comma()
+						.column("S.MENU_CATEGORY").comma().column("ROUND(NVL(AVG(RE.SCORE),1),0)").comma()
+						.column("COUNT(RE.SHOP_PID)").comma().column("COUNT(RES.SHOP_PID)").enter()
+						
+						.from().tableName("Shop").as("S").Leftjoin().tableName("REVIEW").as("RE").on()
+						.equalCondition("S.SHOP_PID", "RE.SHOP_PID").Leftjoin().tableName("RESERVATION").as("RES")
+						.on().equalCondition("RE.SHOP_PID", "RES.SHOP_PID").enter()
+						
+						.where().columnName("SHOP_ADDR").like().bothPattern(keyword).enter()
+						.and().columnName("TABLE_TYPE").in().condition(tlist).enter()
+						.and().columnName("MENU_CATEGORY").in().condition(clist).enter()
+						.and().leftbracket().columnName("AVG_PAY").inequalityRigth(avgPay1).enter()
+						.or().columnName("AVG_PAY").betweenAnd(avgPay2, avgPay3).enter()
+						.or().columnName("AVG_PAY").betweenAnd(avgPay4, avgPay5).enter()
+						.or().columnName("AVG_PAY").inequalityLeft(avgPay6).enter().rightbracket()
+				
 						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 						.column("S.MENU_CATEGORY").enter()
