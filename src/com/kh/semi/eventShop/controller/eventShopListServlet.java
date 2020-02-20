@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.eventShop.model.service.EventShopService;
-import com.kh.semi.eventShop.model.vo.EventShop;
+import com.kh.semi.shop.model.vo.Shop;
 
 /**
  * Servlet implementation class eventShopListServlet
@@ -31,22 +31,25 @@ public class eventShopListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String eno = request.getParameter("eno");
 		
-		ArrayList<EventShop> list = new ArrayList<EventShop>();
+		ArrayList<Shop> list = new ArrayList<Shop>();
 
 		EventShopService ess = new EventShopService();
 		
-		list = ess.selectList();
+		list = ess.selectList(eno);
 		
 		String page = "";
 		
 		if(list != null) {
-			page = "views/admin_eventBanner_4.jsp";
+			page = "views/admin_eventBannerSelect.jsp";
 			request.setAttribute("list", list);
 			
 		}else {
 			request.setAttribute("msg", " 불러오기 에러 ");
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
