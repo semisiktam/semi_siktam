@@ -162,8 +162,6 @@
 	<script>
 		$(function() {
 			$('.bt_up').click(function() {
-				
-				var mlist = [];
 				var n = $('.bt_up').index(this);
 				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
 				num = $('#tbl tr:eq('+ n +')').children().eq(3).text(num * 1 + 1);
@@ -215,7 +213,6 @@
 			        	$total = $('<td>').text(data[data.length-1].total);
 			        	$hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
 			        }
-			           	$td.append($total);
 			        	$('#tblSum').append($total).append($hdTag);
 			        	  
 			           
@@ -225,7 +222,6 @@
 					
 			});
 			$('.bt_down').click(function() {
-				var mlist = [];
 				var n = $('.bt_down').index(this);
 				var num = $('#tbl tr:eq('+ n +')').children().eq(3).text();
 				if (parseInt(num) > 0) {
@@ -277,7 +273,6 @@
 				        	$total = $('<td>').text(data[data.length-1].total);
 				        	$hdTag = $('<input type="hidden" id="hdtotal" name="hdtotal" value="'+data[data.length-1].total+'">');
 				        }
-				           	$td.append($total);
 				        	$('#tblSum').append($total).append($hdTag);
  			         },error:function(){
  			        	 console.log("에러");

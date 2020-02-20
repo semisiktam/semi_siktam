@@ -26,6 +26,17 @@ public class SelectQueryMaker {
 			return this;
 		}
 		
+		public Builder leftbracket() {
+			query.append("(");
+			
+			return this;
+		}
+		public Builder rightbracket() {
+			query.append(")");
+			
+			return this;
+		}
+		
 		public Builder columns(List<String> columns) {
 			if(columns != null && columns.size() != 0) {
 				for(int i = 0; i < columns.size(); i++) {

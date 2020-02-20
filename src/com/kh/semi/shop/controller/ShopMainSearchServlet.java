@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.shop.model.service.ShopService;
 import com.kh.semi.shop.model.vo.ShopSearch;
 
@@ -35,7 +37,8 @@ public class ShopMainSearchServlet extends HttpServlet {
 		
 		// 검색
 		String keyword = request.getParameter("keyword");
-		if(keyword ==null||keyword =="") {
+		
+		if(keyword == null || keyword =="") {
 			keyword = null;
 		}
 		
@@ -48,14 +51,14 @@ public class ShopMainSearchServlet extends HttpServlet {
 		
 		//--------------------------------------------------------------
 		
-		String page ="";
+		String page = "";
 		
 //		System.out.println(list.isEmpty());
 		
 		if(list != null) { 
 			page = "views/searchConditions_4.jsp";
 			request.setAttribute("list", list);
-			request.setAttribute("keyword", keyword);
+			request.setAttribute("skeyword", keyword);
 		}else {
 			page = "views/errorPage.jsp";
 			request.setAttribute("msg", "지역 검색에 실패했답니다~");
