@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.kh.semi.shop.model.vo.*"%>
-	<%ArrayList<ShopSearch> list = (ArrayList<ShopSearch>)request.getAttribute("list");%>
+	<%
+		ArrayList<ShopSearch> list = (ArrayList<ShopSearch>)request.getAttribute("list");
+		String skeyword = (String)request.getAttribute("skeyword");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,10 +94,10 @@
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="sortbtn">정렬 방법
                 <span class="caret"></span></button>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#">예약 많은 순</a></li>
-                    <li><a href="#">방문 순</a></li>
-                    <li><a href="#">평점 순</a></li>
+                <ul id="line_up" class="dropdown-menu dropdown-menu-right">
+                    <li>리뷰 순</li>
+                    <li>방문 순</li>
+                    <li>평점 순</li>
                 </ul>
             </div>
         </div>
@@ -138,8 +141,85 @@
 			});
 		});
 	</script>
-    <script>
-       /*  function check(){
+	
+	<script>
+		$('#line_up').children().click(function(){
+			var index = $('#line_up').children().index(this);
+			var line = $('#line_up').children().eq(index).text();
+			
+			 var key = '<%=skeyword%>'
+			 var tlist = [];
+		     var clist = [];
+		     var plist = [];
+		     
+		     $("input[name='table']:checked").each(function(i){
+		            tlist.push($(this).val());
+		     });
+		     $("input[name='category']:checked").each(function(i){
+		            clist.push($(this).val());
+		     });
+		     $("input[name='price']:checked").each(function(i){
+		            plist.push($(this).val());
+		     });
+			
+			$.ajax({
+				url:"/siktam/SearchCondition.sc",
+				type:"get",	
+				traditional : true, 
+		        data:{
+		        	"tlist" : tlist,
+		            "clist" : clist,
+		            "plist" : plist,
+		        	"line" : line,
+		        	"key" : key
+		        },success:function(data){
+		        	console.log(data);
+		            $('#tbl').find('tr').remove();
+		            for(var i=0; i<data.length; i++){
+		           	   var $tr = $('<tr>');
+		           	   var $shopPid = $('<td style="display:none">').text(data[i].shopPid);
+		           	   var $tdI = $('<td id="img">');
+		           	   var $shopImg = $('<img src="/siktam/resources/images/'+data[i].shopImg+'"  style="width:100%" alt="Image" class="img-thumbnail">');
+		           	   var $tdT = $('<td id="txt"  style="word-break:break-all">');
+		           	   var $h4 = $('<h4>');
+		           	   var $shopName = $('<b>').text(data[i].shopName);
+		           	   var $ul = $('<ul>');
+		           	   var $li = $('<li>');
+		           	   var $li2 = $('<li>');
+		           	   var $star = $('<span class="star">').text("★" +data[i].star);
+		           	   var $reviewCount = $('<span class="review_num">').text("리뷰 " +data[i].reviewCount);
+		           	   var $reservationCount = $('<span class="reserve_num">').text("예약 " + data[i].reservationCount);
+		           	   var $shopAddr = $('<span class="area">').text(data[i].shopAddr);
+		           	   var $tableType = $('<span class="tableInfo">').text(data[i].tableType);
+		           	   var $MenuCategory = $('<span class="sectors">').text(data[i].MenuCategory);
+		           	   /* var $li3 = $('<li>');
+		           	   var $mainMenu = $('<span class="mainMenu">'); */
+		           	   $tdI.append($shopImg);
+		           	   
+		           	   $h4.append($shopName);
+		           	   
+		           	   $li.append($star).append($reviewCount).append($reservationCount);
+		           	   $li2.append($shopAddr).append($shopAddr).append($tableType).append($MenuCategory);
+		           	   $ul.append($li);
+		           	   $ul.append($li2);
+		           	   
+		           	   $tdT.append($h4);
+		           	   $tdT.append($ul);
+		           	   
+		           	   $tr.append($shopPid);
+		           	   $tr.append($tdI);
+		           	   $tr.append($tdT);
+		           	   
+		           	   $('#tbl').append($tr);
+		            } 
+		        },error:function(){
+	            	 console.log("에러");
+	            }
+			})
+		})
+	</script>
+   <!--  <script>
+         function check(){
             var result = document.getElementById('table-result');
             var tableCheck = document.getElementsByClassName("table-check");
             result.innerHTML = "";
@@ -149,13 +229,23 @@
                     result.innerHTML += "<label for='" + tableCheck[i].id + "'>" + tableCheck[i].value + "</label>&nbsp;&nbsp;&nbsp;&nbsp;";
                 }
             }            
-        } */
-    </script>
+        } 
+    </script> -->
     <script>
+    $(function(){
+    	
+    /* var line;
+    $('#line_up').children().click(function(){
+		var index = $('#line_up').children().index(this);
+		line = $('#line_up').children().eq(index).text();	
+    });	 */
     $('.table-check').click(function(){
         var tlist = [];
         var clist = [];
         var plist = [];
+        
+        var key = '<%=skeyword%>'
+        
         $("input[name='table']:checked").each(function(i){
             tlist.push($(this).val());
          });
@@ -166,6 +256,7 @@
             plist.push($(this).val());
          });
         <%-- location.href="<%=request.getContextPath()%>/SearchCondition.sc?tlist=" + tlist + "&clist=" + clist + "&plist=" +plist; --%>
+        
          $.ajax({
             url:"/siktam/SearchCondition.sc",
             type:"get",
@@ -173,7 +264,8 @@
             data:{
                "tlist" : tlist,
                "clist" : clist,
-               "plist" : plist
+               "plist" : plist,
+               "key" : key
             },success:function(data){
                console.log(data);
                $('#tbl').find('tr').remove();
@@ -187,6 +279,7 @@
             	   var $shopName = $('<b>').text(data[i].shopName);
             	   var $ul = $('<ul>');
             	   var $li = $('<li>');
+            	   var $li2 = $('<li>');
             	   var $star = $('<span class="star">').text("★" +data[i].star);
             	   var $reviewCount = $('<span class="review_num">').text("리뷰 " +data[i].reviewCount);
             	   var $reservationCount = $('<span class="reserve_num">').text("예약 " + data[i].reservationCount);
@@ -200,8 +293,9 @@
             	   $h4.append($shopName);
             	   
             	   $li.append($star).append($reviewCount).append($reservationCount);
-            	   $li.append($shopAddr).append($shopAddr).append($tableType).append($MenuCategory);
+            	   $li2.append($shopAddr).append($shopAddr).append($tableType).append($MenuCategory);
             	   $ul.append($li);
+            	   $ul.append($li2);
             	   
             	   $tdT.append($h4);
             	   $tdT.append($ul);
@@ -211,6 +305,19 @@
             	   $tr.append($tdT);
             	   
             	   $('#tbl').append($tr);
+            	   
+            	   $(function(){
+           			
+           			$("#tbl td").mouseenter(function(){
+           				$(this).parent().css({"background":"lightgray", "cursor":"pointer"});
+           			}).mouseout(function(){
+           				$(this).parent().css({"background":"white"});
+           			}).click(function(){
+           				//console.log($(this).parent().children().eq(0).text());
+           				var shopPid = $(this).parent().children().eq(0).text();
+           				location.href="<%=request.getContextPath()%>/sSelect.so?shopPid=" + shopPid;
+           			});
+           		});
                } 
                	   	
             },error:function(){
@@ -218,6 +325,7 @@
             }
           }); 
      }); 
+    });
    
     </script>
     </div>

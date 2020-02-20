@@ -45,23 +45,28 @@ public class ShopSelectOneServlet extends HttpServlet {
 		Shop s = ss.selectOne(shopPid);
 		
 		HttpSession session=request.getSession();
-		Member m=(Member)session.getAttribute("member"); 
+		Member m=(Member)session.getAttribute("member");
 		
-		System.out.println(m.getUserId());
+//		System.out.println(m.getUserId());
 		System.out.println(s.getShopPid());
-		
-		MypageFavorite mf = new MypageFavorite(m.getUserId(), s.getShopPid());
-		mypageFavoriteService mfs = new mypageFavoriteService();
-		int resultFavor = mfs.isExist(mf);
-		System.out.println("컨트롤러" + resultFavor);
 		
 		
 		String result2 ="";
-		if(resultFavor>0) {
-			result2="o";
-		}else {
-			result2="x";
+		// 조건문처리 해라 임마 (서지원) ↓ - 비회원일때 보면 안보이다 임뫄, 빵도 두개 가져간다 현희꺼
+		if(m!=null) {
+			MypageFavorite mf = new MypageFavorite(m.getUserId(), s.getShopPid());
+			mypageFavoriteService mfs = new mypageFavoriteService();
+			int resultFavor = mfs.isExist(mf);
+			System.out.println("컨트롤러" + resultFavor);
+			if(resultFavor>0) {
+				result2="o";
+			}else {
+				result2="x";
+			}
+			
 		}
+		
+		
 		
 		ArrayList<Menu> list = new ArrayList<Menu>();
 		

@@ -138,7 +138,8 @@ table thead tr{
 			}).mouseout(function(){
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
-				//console.log($(this).parent().children().eq(0).text());
+				console.log($(this).parent().children().eq(0).text());
+				alert("stop");
 				var userId = $(this).parent().children().eq(0).text();
 				location.href="<%=request.getContextPath()%>/selectOne.me?userId=" + userId;
 			});

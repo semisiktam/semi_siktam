@@ -178,6 +178,20 @@ public int updateAdminMember2(Member m) {
 	return result;
 }
 
+public ArrayList<Member> mAdminSearch(String category, String keyword) {
+	con = getConnection();
+	
+	ArrayList<Member> list = null;
+	
+	if(category.length() > 0) {
+		list = mDao.mAdminSearch(con, category, keyword);
+	}else {
+		list = mDao.selectList(con);
+	}
+	
+	return list;
+}
+
 
 
 }
