@@ -41,7 +41,7 @@ public class ShopDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = null;
-		if (keyword == "*") {
+		if (keyword == null) {
 			sql = prop.getProperty("searchAddrMain2");
 		} else {
 			sql = prop.getProperty("searchAddrMain");
@@ -50,9 +50,8 @@ public class ShopDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			if (keyword != "*") {
+			if (keyword != null) {
 				pstmt.setString(1, keyword);
-
 			}
 
 			rset = pstmt.executeQuery();

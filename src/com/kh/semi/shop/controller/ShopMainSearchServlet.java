@@ -36,7 +36,7 @@ public class ShopMainSearchServlet extends HttpServlet {
 		// 검색
 		String keyword = request.getParameter("keyword");
 		if(keyword ==null||keyword =="") {
-			keyword = "*";
+			keyword = null;
 		}
 		
 		System.out.print(keyword);
@@ -55,6 +55,7 @@ public class ShopMainSearchServlet extends HttpServlet {
 		if(list != null) { 
 			page = "views/searchConditions_4.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("keyword", keyword);
 		}else {
 			page = "views/errorPage.jsp";
 			request.setAttribute("msg", "지역 검색에 실패했답니다~");
