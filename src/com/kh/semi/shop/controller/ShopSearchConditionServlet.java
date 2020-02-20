@@ -40,9 +40,10 @@ public class ShopSearchConditionServlet extends HttpServlet {
 				String[] tlist = request.getParameterValues("tlist");
 				String[] clist = request.getParameterValues("clist");
 				String[] plist = request.getParameterValues("plist");			
-				
+				String line = request.getParameter("line");
 				System.out.println(keyword);
-				ArrayList<ShopSearch> list = new ShopService().SearchCondition(keyword,tlist,clist,plist);
+				System.out.println(line);
+				ArrayList<ShopSearch> list = new ShopService().SearchCondition(keyword,line,tlist,clist,plist);
 				
 				for(ShopSearch sc : list) {
 					System.out.println(sc);
