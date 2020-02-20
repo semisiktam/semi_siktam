@@ -121,9 +121,9 @@ table thead tr{
                 <label for="text"><input type="radio" name="search" value="text">내용</label>  -->
                 <select id="searchCondition">
                 	<option>---</option>
-                	<option value="writer">아이디</option>
-                	<option value="title">이름</option>
-                	<option value="context">전화번호</option>
+                	<option value="userId">아이디</option>
+                	<option value="name">이름</option>
+                	<option value="phone">전화번호</option>
                 </select>
                 <input type="text" id="keyword">
                 <input type="button" id="searchBtn" value="검색">
@@ -138,7 +138,8 @@ table thead tr{
 			}).mouseout(function(){
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
-				//console.log($(this).parent().children().eq(0).text());
+				console.log($(this).parent().children().eq(0).text());
+				alert("stop");
 				var userId = $(this).parent().children().eq(0).text();
 				location.href="<%=request.getContextPath()%>/selectOne.me?userId=" + userId;
 			});

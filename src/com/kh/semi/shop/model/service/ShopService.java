@@ -15,7 +15,7 @@ import com.kh.semi.shop.model.vo.ShopSearch;
 public class ShopService {
 	private ShopDao sDao;
 	public ShopService(){
-		sDao=new ShopDao();
+		sDao= new ShopDao();
 	}
 
 	/**
@@ -37,10 +37,10 @@ public class ShopService {
 		return list;
 	}
 
-	public ArrayList<ShopSearch> SearchCondition(String keyword,String[] tlist, String[] clist, String[] plist) {
+	public ArrayList<ShopSearch> SearchCondition(String keyword, String line, String[] tlist, String[] clist, String[] plist) {
 		Connection con = getConnection();
 		
-		ArrayList<ShopSearch> list = sDao.SearchCondition(con,keyword,tlist,clist,plist);
+		ArrayList<ShopSearch> list = sDao.SearchCondition(con,keyword,line,tlist,clist,plist);
 		
 		close(con);
 		return list;
@@ -195,6 +195,5 @@ public class ShopService {
 		return result;
 	}
 
-	
  
 } 

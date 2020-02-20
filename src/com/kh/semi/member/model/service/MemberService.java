@@ -178,6 +178,25 @@ public int updateAdminMember2(Member m) {
 	return result;
 }
 
+public int getListCount(String category, String keyword) {
+	Connection con = getConnection();
+    int listCount = mDao.getListCount(con, category, keyword);
+    
+    close(con);
+    return listCount;
+}
+
+public ArrayList<Member> mAdminSearch(String category, String keyword, int currentPage, int limit) {
+	Connection con = getConnection();
+    
+    ArrayList<Member> mlist = mDao.selectList(con, category, keyword, currentPage, limit);
+    
+    close(con);
+
+    return mlist;
+}
+
+
 
 
 }

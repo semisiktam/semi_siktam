@@ -91,7 +91,7 @@
             <br>
             <div id="select1"> <!-- 리뷰 시작 -->
                 <label>정렬방식</label> <!-- 리뷰 정렬 방식 선택-->
-                <select id="selectArray" name="selectArray" onchange="howSelect()"> <!-- TODO -->
+                <select id="selectArray" name="selectArray" > <!-- TODO -->
                     <option value="new">최신순</option>
                     <option value="rowScore">별점 낮은 순</option>
                     <option value="highScore">별점 높은 순</option>
@@ -120,7 +120,7 @@
                 <div>
                     <label>사진 등록 : </label>
                     <label>
-                        <input type="file" id="ex_file">
+                        <input type="file" id="ex_file" accept=".jpg,.jpeg,.png,.gif,.jfif">
                     </label>
                     <br><br>
                     <textarea name="review" id="reviewText" cols="105" rows="10" placeholder="리뷰를 작성해 주세요"></textarea>
@@ -238,82 +238,84 @@
 	      });
         <%}%>
         
-        function howSelect(){
-        	var selecthow = $('#selectArray').val();
-        	console.log(selecthow);
-        	$.ajax({
-        		url : "/siktam/review.do?shopPid=<%=s.getShopPid()%>&howSelect="+selecthow,
-        		type: "GET",
-        		data:{
-        			howSelect : selecthow
-        		}, success:function(data){
-        			console.log(data["rList"].length);
-        			
-                	$('#reviewReview').children().remove();
-                
-        			$.each(data["rList"],function(index,value){
-        				console.log(value);
-        				
-        				var $allDiv = $('#reviewReview');
-        				
-        				var $div1 = $('<div class="personInfo">');
-        				
-        				var $label1 = $('<label class="idLabel">').html(value.userId)
-        				// 아래 두개 묶음
-        				var $div2 = $('<div class="bottomBtn">');
-        				var $btn1 = $('<button id="btn1" class="reviewBtn">▼</button>▼');
-        				
-        				var $div3 = $('<div id="personReview1" class="personReview">');
-        				var $div4 = $('<div style="display : none;">').text(value.score);
-        				var $label2 = $('<label>별점 : ');
-        				// 아래  묶음
-        				var $label3 = $('<label id="star_view1">');
-        				var $a1 = $('<a href="#">★');
-        				var $a2 = $('<a href="#">★');
-        				var $a3 = $('<a href="#">★');
-        				var $a4 = $('<a href="#">★');
-        				var $a5 = $('<a href="#">★');
-        				var $br1 = $('<br><br>');
-        				// 아래 두개 묶음
-        				var $div5 = $('<div class="imgDiv">');
-        				var $img = $('<img src="/siktam/resources/images" class="reviewImg">');
-        				
-        				var $br2 = $('<br>');
-        				var $p = $('<p>').text(value.rContent);
-        				
-        				// div1 
-        				$div2.append($btn1);
-        				$div1.append($label1);
-        				$div1.append($div2);
-        				
-        				// div3
-        				$label3.append($a1);
-        				$label3.append($a2);
-        				$label3.append($a3);
-        				$label3.append($a4);
-        				$label3.append($a5);
-        				
-        				$div5.append($img);
-        				
-        				$div3.append($div4);
-        				$div3.append($label2);
-        				$div3.append($label3);
-        				$div3.append($br1);
-        				$div3.append($div5);
-        				$div3.append($br2);
-        				$div3.append($p);
-        				
-        				$allDiv.append($div1);
-        				$allDiv.append($div3);
-        				
-        			});
-        		}, error:function(){
-        			console.log("잘좀해라...");
-        		}
-        	});
-        };
         
-        
+        $("#select1").on({
+            click: function () {
+            	var selecthow = $('#selectArray').val();
+            	console.log(selecthow);
+            	$.ajax({
+            		url : "/siktam/review.do?shopPid=<%=s.getShopPid()%>&howSelect="+selecthow,
+            		type: "GET",
+            		data:{
+            			howSelect : selecthow
+            		}, success:function(data){
+            			console.log(data["rList"].length);
+            			
+                    	$('#reviewReview').children().remove();
+                    
+            			$.each(data["rList"],function(index,value){
+            				console.log(value);
+            				
+            				
+            				
+            				var $div1 = $('<div class="personInfo">');
+            				
+            				var $label1 = $('<label class="idLabel">').html(value.userId)
+            				// 아래 두개 묶음
+            				var $div2 = $('<div class="bottomBtn">');
+            				var $btn1 = $('<button id="btn1" class="reviewBtn">▼</button>▼');
+            				
+            				var $div3 = $('<div id="personReview1" class="personReview">');
+            				var $div4 = $('<div style="display : none;">').text(value.score);
+            				var $label2 = $('<label>별점 : ');
+            				// 아래  묶음
+            				var $label3 = $('<label id="star_view1">');
+            				var $a1 = $('<a href="#">★');
+            				var $a2 = $('<a href="#">★');
+            				var $a3 = $('<a href="#">★');
+            				var $a4 = $('<a href="#">★');
+            				var $a5 = $('<a href="#">★');
+            				var $br1 = $('<br><br>');
+            				// 아래 두개 묶음
+            				var $div5 = $('<div class="imgDiv">');
+            				var $img = $('<img src="/siktam/resources/images" class="reviewImg">');
+            				
+            				var $br2 = $('<br>');
+            				var $p = $('<p>').text(value.rContent);
+            				
+            				// div1 
+            				$div2.append($btn1);
+            				$div1.append($label1);
+            				$div1.append($div2);
+            				
+            				// div3
+            				$label3.append($a1);
+            				$label3.append($a2);
+            				$label3.append($a3);
+            				$label3.append($a4);
+            				$label3.append($a5);
+            				
+            				$div5.append($img);
+            				
+            				$div3.append($div4);
+            				$div3.append($label2);
+            				$div3.append($label3);
+            				$div3.append($br1);
+            				$div3.append($div5);
+            				$div3.append($br2);
+            				$div3.append($p);
+            	
+            				
+            			$('#reviewReview').append($div1).append($div3);
+            			});
+            			
+            		}, error:function(){
+            			console.log("잘좀해라...");
+            		}
+            	});
+            }
+        });
+
         </script>
 
     </div>
