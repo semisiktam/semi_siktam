@@ -35,9 +35,10 @@ public class ShopMainSearchServlet extends HttpServlet {
 		
 		// 검색
 		String keyword = request.getParameter("keyword");
-		if(keyword ==null||keyword =="") {
+		if(keyword == null || keyword =="") {
 			keyword = null;
 		}
+		
 		
 		System.out.print(keyword);
 		ArrayList<ShopSearch> list = new ArrayList<ShopSearch>();
@@ -48,7 +49,7 @@ public class ShopMainSearchServlet extends HttpServlet {
 		
 		//--------------------------------------------------------------
 		
-		String page ="";
+		String page = "";
 		
 //		System.out.println(list.isEmpty());
 		

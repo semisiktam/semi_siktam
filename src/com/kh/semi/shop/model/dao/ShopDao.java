@@ -117,7 +117,7 @@ public class ShopDao {
 		return result;
 	}
 
-	public ArrayList<ShopSearch> SearchCondition(Connection con, String keyword, String[] tlist, String[] clist,
+	public ArrayList<ShopSearch> SearchCondition(Connection con, String keyword, String line, String[] tlist, String[] clist,
 			String[] plist) {
 		ArrayList<ShopSearch> list = null;
 		PreparedStatement pstmt = null;
@@ -131,8 +131,9 @@ public class ShopDao {
 		String avgPay4 = "20000";
 		String avgPay5 = "30000";
 		String avgPay6 = "30000";
-
+		String line_up = "";
 		System.out.println(keyword);
+		
 		if (plist != null) {
 			for (int i = 0; i < plist.length; i++) {
 				if (!plist[i].equals("10000")) {
@@ -151,7 +152,19 @@ public class ShopDao {
 				}
 			}
 		}
-
+		if(line != null) {
+			if(line.equals("리뷰 순")) {
+				line_up= "COUNT(RE.SHOP_PID)";
+			}else if(line.equals("방문 순")) {
+				line_up = "COUNT(RES.SHOP_PID)";
+			}else if(line.equals("평점 순")){
+				line_up = "ROUND(NVL(AVG(RE.SCORE),1),0)";
+			}
+		}else {
+			line_up = "1";
+		}
+		
+		
 		if (keyword == null) {
 			if (tlist == null && clist == null) {
 				if (plist == null) {
@@ -168,6 +181,8 @@ public class ShopDao {
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
+							
+							.orderBy().columnName(line_up).desc()
 							
 							.build();
 				} else {
@@ -188,6 +203,9 @@ public class ShopDao {
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
+							
+							.orderBy().columnName(line_up).desc()
+							
 							.build();
 				}
 			} else if (tlist == null) {
@@ -207,6 +225,8 @@ public class ShopDao {
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
+							
+							.orderBy().columnName(line_up).desc()
 							
 							.build();
 				} else {
@@ -229,6 +249,8 @@ public class ShopDao {
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
 							
+							.orderBy().columnName(line_up).desc()
+							
 							.build();
 				}
 			} else if (clist == null) {
@@ -248,6 +270,8 @@ public class ShopDao {
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
+							
+							.orderBy().columnName(line_up).desc()
 							
 							.build();
 				} else {
@@ -270,6 +294,8 @@ public class ShopDao {
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
 							
+							.orderBy().columnName(line_up).desc()
+							
 							.build();
 				}
 			} else if (plist == null) {
@@ -289,6 +315,8 @@ public class ShopDao {
 						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 						.column("S.MENU_CATEGORY").enter()
+						
+						.orderBy().columnName(line_up).desc()
 						
 						.build();
 			}
@@ -310,6 +338,8 @@ public class ShopDao {
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
+							
+							.orderBy().columnName(line_up).desc()
 							
 							.build();
 					
@@ -333,6 +363,8 @@ public class ShopDao {
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
 							
+							.orderBy().columnName(line_up).desc()
+							
 							.build();
 				}
 			} else if (tlist == null) {
@@ -353,6 +385,8 @@ public class ShopDao {
 							.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
+							
+							.orderBy().columnName(line_up).desc()
 							
 							.build();
 				} else {
@@ -376,6 +410,8 @@ public class ShopDao {
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
 							
+							.orderBy().columnName(line_up).desc()
+							
 							.build();
 					
 				}
@@ -398,6 +434,8 @@ public class ShopDao {
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
 							
+							.orderBy().columnName(line_up).desc()
+							
 							.build();
 				} else {
 					query = new SelectQueryMaker.Builder().select().column("S.SHOP_PID").comma()
@@ -419,6 +457,8 @@ public class ShopDao {
 							.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 							.column("S.MENU_CATEGORY").enter()
 							
+							.orderBy().columnName(line_up).desc()
+							
 							.build();
 				}
 			} else if (plist == null) {
@@ -438,6 +478,8 @@ public class ShopDao {
 						.groupBy().column("RE.SHOP_PID").comma().column("S.SHOP_PID").comma().column("S.SHOP_IMG").comma()
 						.column("S.SHOP_NAME").comma().column("S.SHOP_ADDR").comma().column("S.TABLE_TYPE").comma()
 						.column("S.MENU_CATEGORY").enter()
+						
+						.orderBy().columnName(line_up).desc()
 						
 						.build();
 			}
