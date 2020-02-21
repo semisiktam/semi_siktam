@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.semi.shop.model.vo.*, com.kh.semi.menu.model.vo.*"%>
+<%
+	ArrayList<MemberReservationList> mr = (ArrayList<MemberReservationList>)request.getAttribute("mrList");
+	ArrayList<Menu> menu = (ArrayList<Menu>)request.getAttribute("mList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,8 +62,8 @@
             <img src="/siktam/resources/images/udon.png" alt="">
         </div>
         <div id="titleText">
-            <h1><b>역전우동</b>(예약변경)</h1>
-            <p>서울특별시 서초구 양재동 역전우동 양재점</p>
+            <h1><b><%=mr.get(0).getShopName() %></b>(예약변경)</h1>
+            <p><%=mr.get(0).getsAddr() %></p>
         </div>
     </div>
 
@@ -68,13 +72,13 @@
     <div id="date-time">
         <div id="date">
             <p><span class="glyphicon glyphicon-calendar"></span> 예약 일자</p>    
-            <p><input type="date" value="2020-01-16" min="2020-01-16" max="2020-03-31"></p>
+            <p><input type="date" value="<%=mr.get(0).getrDate() %>"></p>
             <!-- <input type="text" id="datepicker1" placeholder="예약 일자"> -->
         </div>
         
         <div id="time">
             <p><span class="glyphicon glyphicon-time"></span> 예약 시간</p>
-            <p><input type="time" value="14:00"></p>
+            <p><input type="time" value="<%=mr.get(0).getrTime()%>"></p>
             <!-- <input type="text" class='timepicker' placeholder="예약 시간"> -->
         </div>
     </div>
@@ -83,78 +87,24 @@
         <div id="menu1">
         <p><span class="glyphicon glyphicon-list-alt"></span> 메뉴</p>
         <div id="menuType">
-            <ul class="tabs">
-                <li class="tab-link current" data-tab="tab-1">치킨</li>
-                <li class="tab-link" data-tab="tab-2">피자</li>
-                <li class="tab-link" data-tab="tab-3">짜장면</li>
-            </ul>
+
         </div>
         <div id="tab-1" class="tab-content current">
             <table id="tbl">
+            <%for (Menu me : menu) {%> 
                 <tr>
                     <td><img src="/siktam/resources/images/03.png" style="width:100px" alt="Image" class="img-thumbnail"></td>
-                    <td>후라이드 치킨</td>
-                    <td>5000원</td>
+                    <td><%=me.getMenuName() %></td>
+                    <td><%=me.getMenuPrice() %></td>
                     <td>
                         <img src="/siktam/resources/images/leftArrow.png" alt="" width="10" height="10" class="bt_down" />
                         <input type="text" name="num" value="0" id="" class="num" size="1"/>
                         <img src="/siktam/resources/images/rightArrow.png" alt="" width="10" height="10" class="bt_up"/>
                     </td>
                 </tr>
-                <tr>
-                    <td><img src="/siktam/resources/images/03.png" style="width:100px" alt="Image" class="img-thumbnail"></td>
-                    <td>후라이드 치킨</td>
-                    <td>5000원</td>
-                    <td>
-                        <img src="/siktam/resources/images/leftArrow.png" alt="" width="10" height="10" class="bt_down" />
-                        <input type="text" name="num" value="0" id="" class="num" size="1"/>
-                        <img src="/siktam/resources/images/rightArrow.png" alt="" width="10" height="10" class="bt_up"/>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><img src="/siktam/resources/images/03.png" style="width:100px" alt="Image" class="img-thumbnail"></td>
-                    <td>후라이드 치킨</td>
-                    <td>5000원</td>
-                    <td>
-                        <img src="/siktam/resources/images/leftArrow.png" alt="" width="10" height="10" class="bt_down" />
-                        <input type="text" name="num" value="0" id="" class="num" size="1"/>
-                        <img src="/siktam/resources/images/rightArrow.png" alt="" width="10" height="10" class="bt_up"/>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><img src="/siktam/resources/images/03.png" style="width:100px" alt="Image" class="img-thumbnail"></td>
-                    <td>후라이드 치킨</td>
-                    <td>5000원</td>
-                    <td>
-                        <img src="/siktam/resources/images/leftArrow.png" alt="" width="10" height="10" class="bt_down" />
-                        <input type="text" name="num" value="0" id="" class="num" size="1"/>
-                        <img src="/siktam/resources/images/rightArrow.png" alt="" width="10" height="10" class="bt_up"/>
-                    </td>                   
-                </tr>
-
-                <tr>
-                    <td><img src="/siktam/resources/images/03.png" style="width:100px" alt="Image" class="img-thumbnail"></td>
-                    <td>후라이드 치킨</td>
-                    <td>5000원</td>
-                    <td>
-                        <img src="/siktam/resources/images/leftArrow.png" alt="" width="10" height="10" class="bt_down" />
-                        <input type="text" name="num" value="0" id="" class="num" size="1"/>
-                        <img src="/siktam/resources/images/rightArrow.png" alt="" width="10" height="10" class="bt_up"/>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><img src="/siktam/resources/images/03.png" style="width:100px" alt="Image" class="img-thumbnail"></td>
-                    <td>후라이드 치킨</td>
-                    <td>5000원</td>
-                    <td>
-                        <img src="/siktam/resources/images/leftArrow.png" alt="" width="10" height="10" class="bt_down" />
-                        <input type="text" name="num" value="0" id="" class="num" size="1"/>
-                        <img src="/siktam/resources/images/rightArrow.png" alt="" width="10" height="10" class="bt_up"/>
-                    </td>
-                </tr>
+                <%
+					}
+				%> 
             </table>
         </div>
 
