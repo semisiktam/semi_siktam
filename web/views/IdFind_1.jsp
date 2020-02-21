@@ -158,7 +158,11 @@
  				}, success:function(result){
  					 
  					if(!result==""){
+<<<<<<< HEAD
  						alert("찾으시는 아이디는 [ " + result + " ] 입니다.");
+=======
+ 						alert("찾으시는 아이디는 [ "+result+" ] 입니다.");
+>>>>>>> refs/remotes/origin/master
  					}else{
  						alert("해당하는 아이디가 없습니다");
  					}
@@ -184,7 +188,11 @@
 				}, success:function(result){
 					 
 					if(!result==""){
+<<<<<<< HEAD
 						alert("찾으시는 아이디는 [ " + result + " ] 입니다.");
+=======
+						alert("찾으시는 아이디는 [ "+result+" ] 입니다.");
+>>>>>>> refs/remotes/origin/master
 					}else{
 						alert("해당하는 아이디가 없습니다");
 					}

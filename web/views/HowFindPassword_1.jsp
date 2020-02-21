@@ -107,19 +107,22 @@
 				}, success:function(result){
 					 
 					if(!result==""){
+<<<<<<< HEAD
 						alert("찾으시는 비밀번호는 [ " + result + " ] 입니다.");
+=======
+						alert("찾으시는 비밀번호는 [ "+result+" ] 입니다.");
+						
+>>>>>>> refs/remotes/origin/master
 					}else{
 						alert("해당하는 비밀번호가 없습니다");
+			           document.getElementById('pphoneName').select()
 					}
 					
 				},error :  function(request,errorcode,error){
 					alert("페이지에러");
-
 				}
 			});
 		});
-
-
     </script>
 
         <div class="div3">
