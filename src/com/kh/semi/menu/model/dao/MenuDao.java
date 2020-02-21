@@ -76,7 +76,7 @@ public class MenuDao {
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, m.getShopPid());
 			pstmt.setString(2, m.getMenuName());
-			pstmt.setString(2, m.getMenuImg());
+			pstmt.setString(3, m.getMenuImg());
 			pstmt.setInt(4, m.getMenuPrice());
 			pstmt.setString(5, m.getMenuInfo());
 			
@@ -126,55 +126,4 @@ public class MenuDao {
 		return result;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
